@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 64640177602612840}
   - component: {fileID: 851549162194624132}
   m_Layer: 0
-  m_Name: Hex14
+  m_Name: JungleLake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,3 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181cb0d1b337252428f9f036d057073a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    type: 5
+    Position: {x: 0, y: 0, z: 0}
+    price: 3
+    shield: 10
+    resource: 1
+    attackPower: 0

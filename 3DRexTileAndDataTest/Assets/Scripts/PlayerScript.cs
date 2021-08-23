@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
-    List<TileDataScript> owningTiles = new List<TileDataScript>();
+    List<TileScript> owningTiles = new List<TileScript>();
 
     int resouceTank = 0;
 

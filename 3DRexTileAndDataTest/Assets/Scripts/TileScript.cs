@@ -3,10 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileDataScript : MonoBehaviour, ITurnFinishObj
+public class TileScript : MonoBehaviour, ITurnFinishObj
 {
 
-    [SerializeField] TileData data = new TileData();
+    [SerializeField] TileData data;
+
+    public TileData Data
+    {
+        get { return data; }
+        private set { }
+    }
+
     PlayerScript Owner = null;
 
     private event Action g;
@@ -18,6 +25,12 @@ public class TileDataScript : MonoBehaviour, ITurnFinishObj
         {
             Owner = null;
         }
+    }
+
+    public void SetPosition(Vector3 pos)
+    {
+        data.Position = pos;
+        gameObject.transform.position = pos;
     }
 
     public void ChangeOwner(PlayerScript newOwner)
@@ -43,7 +56,7 @@ public class TileDataScript : MonoBehaviour, ITurnFinishObj
         Owner.AddResource(-1);
     }
 
-    public void FireMissile(TileDataScript attackTile)
+    public void FireMissile(TileScript attackTile)
     {
         attackTile.Damage(data.attackPower);
     }

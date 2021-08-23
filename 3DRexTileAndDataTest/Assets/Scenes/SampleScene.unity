@@ -357,11 +357,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a1a8097ab247144b6c7b7da9e14d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundTiles:
+  type: 1
+  jungleGroundTileSet:
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
-  - {fileID: 1829116461306768, guid: cd4f2cbde7d033f45a5d96afb77a69e1, type: 3}
+  - {fileID: 1712155488500880, guid: 70c29577d2da5454bb823df8d1deaada, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1794535936301100, guid: 92b694c77a8f5d64eb88d747e08f1905, type: 3}
+  - {fileID: 1794535936301100, guid: 92b694c77a8f5d64eb88d747e08f1905, type: 3}
+  - {fileID: 1794535936301100, guid: 92b694c77a8f5d64eb88d747e08f1905, type: 3}
+  - {fileID: 1520068213326888, guid: c953bec8bbbdb12418233e9c77e0fa19, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  plainGroundTileSet: []
+  MountainGroundTileSet: []
+  beachTile: {fileID: 1829116461306768, guid: cd4f2cbde7d033f45a5d96afb77a69e1, type: 3}
 --- !u!4 &1000656166
 Transform:
   m_ObjectHideFlags: 0
@@ -394,5 +407,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1138943641434864, guid: d5537417fa62a0a4aad3eade94ed1a03, type: 3}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1879852619728524, guid: 30ce0138157d8e1489a8d2ec56035bb7, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1082868720469738, guid: 81d0b563b01a9e54da5fb7a2190d0dc1, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1879852619728524, guid: 30ce0138157d8e1489a8d2ec56035bb7, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1138943641434864, guid: d5537417fa62a0a4aad3eade94ed1a03, type: 3}
   - {fileID: 0}
   - {fileID: 0}

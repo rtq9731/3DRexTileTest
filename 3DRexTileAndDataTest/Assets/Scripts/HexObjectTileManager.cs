@@ -6,12 +6,7 @@ public class HexObjectTileManager : MonoBehaviour
 {
     [SerializeField] GameObject[] objects;
 
-    private void Start()
-    {
-        GenerateObjects(15, 15);
-    }
-
-    private void GenerateObjects(int width, int height)
+    public void GenerateObjects(int width, int height)
     {
         Vector3 tilePos = Vector3.zero;
         tilePos.z = -height / 2;
@@ -22,10 +17,14 @@ public class HexObjectTileManager : MonoBehaviour
             {
                 GameObject randObj = objects[Random.Range(1, objects.Length)];
 
-                if(randObj != null)
+                if (randObj != null)
                 {
-                    GameObject temp = Instantiate(randObj, this.gameObject.transform);
-                    temp.transform.position = tilePos;
+                    if (TileMapData.TileDatas[i,j].type == TileType.Plain) // 오브젝트 배치 불가능한 지형인지 체크
+                    {
+                        Debug.Log(TileMapData.TileDatas[i, j].type);
+                        GameObject temp = Instantiate(randObj, this.gameObject.transform);
+                        temp.transform.position = tilePos;
+                    }
                 }
 
                 tilePos.x += 1;
