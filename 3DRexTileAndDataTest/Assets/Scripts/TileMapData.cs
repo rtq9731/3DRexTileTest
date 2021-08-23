@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class TileMapData
 {
-    public static TileData[,] TileDatas;
+    public static TileScript[,] TileDatas;
 }
