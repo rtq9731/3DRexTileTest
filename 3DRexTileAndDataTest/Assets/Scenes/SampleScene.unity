@@ -401,22 +401,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2373e75305b65ff4f9858a4a0ffedcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects:
+  jungleGroundObjSet:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 1138943641434864, guid: d5537417fa62a0a4aad3eade94ed1a03, type: 3}
+  - {fileID: 100000, guid: 26be381455f4a274c8688dd8ff4f5893, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 1879852619728524, guid: 30ce0138157d8e1489a8d2ec56035bb7, type: 3}
+  - {fileID: 100000, guid: 30b8fddb9d59fdc4482ca80c2650ea55, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 1082868720469738, guid: 81d0b563b01a9e54da5fb7a2190d0dc1, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 1879852619728524, guid: 30ce0138157d8e1489a8d2ec56035bb7, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 1138943641434864, guid: d5537417fa62a0a4aad3eade94ed1a03, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 100000, guid: 86e82c81de2a4a74da13c3984957a116, type: 3}
+  plainGroundObjSet: []
+  MountainGroundObjSet: []
