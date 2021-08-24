@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671a3669d7108b649b81bdaf49b21cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.1
+  moveSpeed: 0.05
   zoomSpeed: 0.1
 --- !u!114 &963194230
 MonoBehaviour:
@@ -327,6 +327,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4af85a1313195b43a371a7e46822f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsTile:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1000656164
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a1a8097ab247144b6c7b7da9e14d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   jungleGroundTileSet:
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
@@ -372,7 +375,25 @@ MonoBehaviour:
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
-  plainGroundTileSet: []
+  plainGroundTileSet:
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1829116461306768, guid: f0fef356fed66e040b878c11289f26f2, type: 3}
+  - {fileID: 1829116461306768, guid: f0fef356fed66e040b878c11289f26f2, type: 3}
+  - {fileID: 1829116461306768, guid: f0fef356fed66e040b878c11289f26f2, type: 3}
+  - {fileID: 1712155488500880, guid: 70c29577d2da5454bb823df8d1deaada, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
   MountainGroundTileSet: []
   beachTile: {fileID: 1829116461306768, guid: cd4f2cbde7d033f45a5d96afb77a69e1, type: 3}
 --- !u!4 &1000656166
@@ -405,12 +426,31 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 100000, guid: 26be381455f4a274c8688dd8ff4f5893, type: 3}
+  - {fileID: 1110802649544280, guid: c391642000a26de49adf8033cc2ea6a4, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 100000, guid: 30b8fddb9d59fdc4482ca80c2650ea55, type: 3}
+  - {fileID: 1543334010308034, guid: 8eec938fdd1c8a34c8d4399b3e3de92d, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 100000, guid: 86e82c81de2a4a74da13c3984957a116, type: 3}
-  plainGroundObjSet: []
+  - {fileID: 1884904741310042, guid: 99903ff7f2c772241902437b5ea27a4f, type: 3}
+  plainGroundObjSet:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1884904741310042, guid: 99903ff7f2c772241902437b5ea27a4f, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1138943641434864, guid: ae22a1aea9ddeed44b5fac7562492b44, type: 3}
+  - {fileID: 1110802649544280, guid: c391642000a26de49adf8033cc2ea6a4, type: 3}
+  - {fileID: 1543334010308034, guid: 8eec938fdd1c8a34c8d4399b3e3de92d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   MountainGroundObjSet: []

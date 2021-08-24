@@ -6,7 +6,7 @@ public enum TileType
     Forest,
     DigSite,
     Plain,
-    Moutain,
+    Mountain,
     Rock
 }
 

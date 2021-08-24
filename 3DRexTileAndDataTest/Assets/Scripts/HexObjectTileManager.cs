@@ -29,11 +29,8 @@ public class HexObjectTileManager : MonoBehaviour
                 break;
         }
 
-        Vector3 tilePos = Vector3.zero;
-        tilePos.z = -height / 2;
         for (int i = 0; i < height; i++)
         {
-            tilePos.x = (i % 2 == 0) ? -width / 2 : -width / 2 + 0.5f;
             for (int j = 0; j < width; j++)
             {
                 GameObject randObj = objects[Random.Range(1, objects.Length)];
@@ -43,13 +40,25 @@ public class HexObjectTileManager : MonoBehaviour
                     if (TileMapData.TileDatas[i,j].Data.type == TileType.Plain) // 오브젝트 배치 불가능한 지형인지 체크
                     {
                         GameObject temp = Instantiate(randObj, TileMapData.TileDatas[i, j].transform);
-                        temp.transform.position = tilePos;
+
+                        switch (temp.GetComponent<ObjScript>().objType)
+                        {
+                            case ObjType.Tree:
+                                TileMapData.TileDatas[i, j].Data.SetDataToForest();
+                                break;
+                            case ObjType.Mountain:
+                                TileMapData.TileDatas[i, j].Data.SetDataToMountain();
+                                break;
+                            case ObjType.Rock:
+                                TileMapData.TileDatas[i, j].Data.SetDataToRock();
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
 
-                tilePos.x += 1;
             }
-            tilePos.z += 0.875f;
         }
     }
 }

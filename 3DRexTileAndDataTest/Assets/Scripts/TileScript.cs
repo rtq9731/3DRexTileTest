@@ -61,4 +61,20 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         attackTile.Damage(data.attackPower);
     }
 
+    public void SetType(ObjType objType)
+    {
+        switch (objType)
+        {
+            case ObjType.Tree:
+                
+                break;
+            case ObjType.Mountain:
+                break;
+            case ObjType.Rock:
+                break;
+            default:
+                break;
+        }
+    }
+
 }
