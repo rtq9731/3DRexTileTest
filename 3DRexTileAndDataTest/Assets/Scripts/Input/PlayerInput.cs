@@ -24,7 +24,6 @@ public class PlayerInput : MonoBehaviour
             if (nowData != lastTileData)
             {
                 isSimplePanelOn = false;
-                StopCoroutine(GetNextData());
                 panel.RemoveSimpleTileInfoPanel();
                 lastTileData = nowData;
             }
@@ -41,7 +40,7 @@ public class PlayerInput : MonoBehaviour
 
     IEnumerator GetNextData()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
         {
             lastTileData = hit.transform.GetComponent<TileScript>().Data;

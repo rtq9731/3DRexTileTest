@@ -16,19 +16,22 @@ public class SimpleTileInfoPanel : MonoBehaviour
 
     public void CallSimpleTileInfoPanel(TileScript tile)
     {
-        DOTween.Complete(this.gameObject);
-        gameObject.SetActive(true);
-
+        DOTween.Kill(this.gameObject.transform.GetComponent<Image>());
         gameObject.transform.position = Input.mousePosition;
-
         gameObject.transform.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+
+        gameObject.SetActive(true);
 
         TileData data = tile.Data;
 
         gameObject.transform.GetComponent<Image>().DOFade(1, 0.3f).SetEase(Ease.OutQuad);
-            // 키고나서 천천히 꺼줌.
 
-        //ownerText.text = $"소유자 : {tile.Owner.OwnerName}";
+        if (tile.Owner != null)
+            Debug.Log("주인 있는뎁쇼" + tile.Owner.OwnerName);
+        else
+            Debug.Log("주인이 없는뎁쇼");
+        string ownerName = tile.Owner != null ? tile.Owner.OwnerName : "None";
+        ownerText.text = $"소유자 : " + ownerName;
         groundTypeText.text = $"지형 : {data.type}";
         priceText.text = $"가격 : {data.price}";
         rangeText.text = $"사거리 : {data.range}";
