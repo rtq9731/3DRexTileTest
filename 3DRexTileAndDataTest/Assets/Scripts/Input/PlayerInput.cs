@@ -14,8 +14,6 @@ public class PlayerInput : MonoBehaviour
     TileData lastTileData;
     TileData nowData;
 
-    float infoTimer = 0f;
-
     void Update()
     {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
@@ -44,11 +42,10 @@ public class PlayerInput : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
         {
             lastTileData = hit.transform.GetComponent<TileScript>().Data;
-        }
-
-        if(lastTileData == nowData)
-        {
-            panel.CallSimpleTileInfoPanel(hit.transform.GetComponent<TileScript>());
+            if (lastTileData == nowData)
+            {
+                panel.CallSimpleTileInfoPanel(hit.transform.GetComponent<TileScript>());
+            }
         }
     }
 

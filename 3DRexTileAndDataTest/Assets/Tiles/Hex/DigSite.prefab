@@ -115,5 +115,5 @@ MonoBehaviour:
     range: 3
     price: 5
     shield: 1
-    resource: 2
+    resource: 4
     attackPower: 0
