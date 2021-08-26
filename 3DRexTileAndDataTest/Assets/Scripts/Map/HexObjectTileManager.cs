@@ -15,7 +15,7 @@ public class HexObjectTileManager : MonoBehaviour
     {
 
         switch (groundType)
-        {
+        {   
             case HexTilemapGenerator.GroundType.Jungle:
                 objects = jungleGroundObjSet;
                 break;

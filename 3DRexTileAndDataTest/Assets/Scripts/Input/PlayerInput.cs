@@ -10,28 +10,37 @@ public class PlayerInput : MonoBehaviour
     RaycastHit hit;
 
     bool isSimplePanelOn = false;
+    bool isInputSimplePanel = true;
 
     TileData lastTileData;
     TileData nowData;
 
     void Update()
     {
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
+        if(Input.GetMouseButtonDown(0))
         {
-            nowData = hit.transform.GetComponent<TileScript>().Data;
-            if (nowData != lastTileData)
-            {
-                isSimplePanelOn = false;
-                panel.RemoveSimpleTileInfoPanel();
-                lastTileData = nowData;
-            }
-            else
-            {
-                if (isSimplePanelOn)
-                    return;
 
-                isSimplePanelOn = true;
-                StartCoroutine(GetNextData());
+        }
+
+        if(isInputSimplePanel) // 다른 UI가 아무것도 올라가있지 않을 때.
+        {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
+            {
+                nowData = hit.transform.GetComponent<TileScript>().Data;
+                if (nowData != lastTileData)
+                {
+                    isSimplePanelOn = false;
+                    panel.RemoveSimpleTileInfoPanel();
+                    lastTileData = nowData;
+                }
+                else
+                {
+                    if (isSimplePanelOn)
+                        return;
+
+                    isSimplePanelOn = true;
+                    StartCoroutine(GetNextData());
+                }
             }
         }
     }
