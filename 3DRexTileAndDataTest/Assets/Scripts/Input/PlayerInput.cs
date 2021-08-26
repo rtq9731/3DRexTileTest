@@ -10,7 +10,7 @@ public class PlayerInput : MonoBehaviour
     RaycastHit hit;
 
     bool isSimplePanelOn = false;
-    bool isInputSimplePanel = true;
+    bool isUIOn = true;
 
     TileData lastTileData;
     TileData nowData;
@@ -19,10 +19,14 @@ public class PlayerInput : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
+            {
+                isUIOn = true;
 
+            }
         }
 
-        if(isInputSimplePanel) // 다른 UI가 아무것도 올라가있지 않을 때.
+        if(!isUIOn) // 다른 UI가 아무것도 올라가있지 않을 때.
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
             {
