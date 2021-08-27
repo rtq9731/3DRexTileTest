@@ -35,7 +35,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void SetPosition(Vector3 pos)
     {
-        data.Position = pos;
+        data.position = pos;
         gameObject.transform.position = pos;
     }
 

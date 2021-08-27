@@ -7,7 +7,7 @@ public class TileData
 {
     public TileType type = TileType.None;
 
-    public Vector3 Position = Vector3.zero;
+    public Vector3 position = Vector3.zero;
 
     public int range = 3;
     public int price = 5;

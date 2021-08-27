@@ -287,6 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 85600860}
   - component: {fileID: 85600861}
+  - component: {fileID: 85600862}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -320,6 +321,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8430caa02911643bc8b99a474d8791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &85600862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85600859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378db0fcdbd315e469e73e95cf1a3d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileList: []
 --- !u!1 &168718869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a1a8097ab247144b6c7b7da9e14d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 1
   jungleGroundTileSet:
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}

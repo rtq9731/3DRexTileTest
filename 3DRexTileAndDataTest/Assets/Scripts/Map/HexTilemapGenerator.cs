@@ -42,7 +42,6 @@ public class HexTilemapGenerator : MonoBehaviour
 
     private void GenerateTiles(int width, int height)
     {
-        TileMapData.TileDatas = new TileScript[height, width];
         Vector3 tilePos = Vector3.zero;
         tilePos.z = -height / 2;
         for (int i = 0; i < height; i++)
@@ -52,7 +51,7 @@ public class HexTilemapGenerator : MonoBehaviour
             {
                 GameObject temp = Instantiate(groundTiles[Random.Range(1, groundTiles.Length)], tilePos, Quaternion.Euler(Vector3.zero), this.gameObject.transform);
                 TileScript tempScirpt = temp.GetComponent<TileScript>();
-                TileMapData.TileDatas[i, j] = tempScirpt;
+                TileMapData.Instance.SetTileData(tempScirpt);
                 tempScirpt.SetPosition(tilePos);
                 tilePos.x += 1;
             }
