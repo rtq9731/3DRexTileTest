@@ -21,7 +21,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         get { return owner; }
     }
 
-    private event Action g;
+    private event Action TrunOverEvent;
 
 
     public void Damage(int damage)
@@ -46,11 +46,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void TurnFinish()
     {
-        if(g != null)
+        if(TrunOverEvent != null)
         {
-            g();
+            TrunOverEvent();
 
-            g = null;
+            TrunOverEvent = null;
         }
 
         Owner.AddResource(data.resource);
@@ -58,7 +58,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void UpgradeTileAttackPower()
     {
-        g += () => data.attackPower++;
+        TrunOverEvent += () => data.attackPower++;
         Owner.AddResource(-1);
     }
 

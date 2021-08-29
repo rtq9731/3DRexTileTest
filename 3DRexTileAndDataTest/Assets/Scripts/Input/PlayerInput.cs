@@ -10,7 +10,7 @@ public class PlayerInput : MonoBehaviour
     RaycastHit hit;
 
     bool isSimplePanelOn = false;
-    bool isUIOn = true;
+    bool isUIOn = false;
 
     TileData lastTileData;
     TileData nowData;
@@ -22,7 +22,6 @@ public class PlayerInput : MonoBehaviour
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
             {
                 isUIOn = true;
-
             }
         }
 

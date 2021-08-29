@@ -61,7 +61,7 @@ public class HexObjectTileManager : MonoBehaviour
                                 break;
                         }
                     }
-
+                                        
                 }
 
                 objNum++;
