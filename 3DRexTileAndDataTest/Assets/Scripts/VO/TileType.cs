@@ -7,7 +7,6 @@ public enum TileType
     DigSite,
     Plain,
     Mountain,
-    Rock
 }
 
 public enum ObjType
