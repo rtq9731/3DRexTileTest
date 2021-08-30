@@ -34,7 +34,5 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     {
         tile.Owner = this;
         owningTiles.Add(tile);
-        Debug.Log(tile.gameObject);
-        Debug.Log(tile.Owner);
     }
 }

@@ -69,8 +69,6 @@ public class HexObjectTileManager : MonoBehaviour
             }
         }
 
-
-        Debug.Log("하이 일까요?");
         GameManager.Instance.StartGame();
     }
 }
