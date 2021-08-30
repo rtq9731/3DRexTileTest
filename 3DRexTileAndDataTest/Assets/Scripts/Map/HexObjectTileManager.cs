@@ -40,7 +40,7 @@ public class HexObjectTileManager : MonoBehaviour
 
                 if (randObj != null)
                 {
-                    TileScript curTile = TileMapData.Instance.tileList[objNum];
+                    TileScript curTile = TileMapData.Instance.GetTile(objNum);
 
                     if (curTile.Data.type == TileType.Plain) // 오브젝트 배치 불가능한 지형인지 체크
                     {

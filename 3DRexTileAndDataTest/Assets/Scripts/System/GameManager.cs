@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    List<PlayerScript> players = new List<PlayerScript>();
+    public List<PlayerScript> Players { get { return players; } }
 
-    // Update is called once per frame
-    void Update()
+    public void StartGame(params PlayerScript[] players)
     {
-        
+        foreach (var item in players)
+        {
+            TileMapData.Instance.GetRandTile(item);
+        }
     }
 }

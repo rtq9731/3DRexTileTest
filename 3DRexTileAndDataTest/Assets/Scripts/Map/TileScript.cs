@@ -19,6 +19,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     public PlayerScript Owner
     {
         get { return owner; }
+        set { owner = value; }
     }
 
     private event Action TrunOverEvent;

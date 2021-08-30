@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
+public class MonoSingleton<GameManager> : MonoBehaviour where GameManager : MonoBehaviour
 {
     private static bool isShutDown = false;
 
     private static object locker = new object();
 
-    private static T instance;
-    public static T Instance
+    private static GameManager instance;
+    public static GameManager Instance
     {
         get
         {
@@ -23,11 +23,11 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             {
                 if (!instance)
                 {
-                    instance = (T)FindObjectOfType(typeof(T));
+                    instance = (GameManager)FindObjectOfType(typeof(GameManager));
                     if (!instance)
                     {
-                        GameObject temp = new GameObject(typeof(T).ToString());
-                        instance = temp.AddComponent<T>();
+                        GameObject temp = new GameObject(typeof(GameManager).ToString());
+                        instance = temp.AddComponent<GameManager>();
                     }
 
                     DontDestroyOnLoad(instance);

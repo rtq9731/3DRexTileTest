@@ -26,8 +26,8 @@ public class SimpleTileInfoPanel : MonoBehaviour
 
         gameObject.transform.GetComponent<Image>().DOFade(1, 0.3f).SetEase(Ease.OutQuad);
 
-        string ownerName = tile.Owner != null ? tile.Owner.OwnerName : "None";
-        ownerText.text = $"소유자 : " + ownerName;
+        string ownerName = tile.Owner != null ? tile.Owner.MyName : "None";
+        ownerText.text = $"소유자 : {ownerName}";
         groundTypeText.text = $"지형 : {data.type}";
         priceText.text = $"가격 : {data.price}";
         rangeText.text = $"사거리 : {data.range}";

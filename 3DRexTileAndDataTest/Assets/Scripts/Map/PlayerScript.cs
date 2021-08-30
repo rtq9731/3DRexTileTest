@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
-    private string ownerName = "None";
+    private string myName = "None";
 
-    public string OwnerName
+    public string MyName
     {
-        get { return ownerName; }
+        get { return myName; }
     }
 
     List<TileScript> owningTiles = new List<TileScript>();
 
     int resouceTank = 0;
+
+    private void Awake()
+    {
+        GameManager.Instance.Players.Add(this);
+    }
 
     public void AddResource(int resource)
     {
@@ -25,4 +30,8 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         owningTiles.ForEach(x => x.TurnFinish());
     }
 
+    public void AddTile(TileScript tile)
+    {
+        owningTiles.Add(tile);
+    }
 }
