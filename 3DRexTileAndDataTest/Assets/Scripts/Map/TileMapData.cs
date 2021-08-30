@@ -33,7 +33,7 @@ public class TileMapData : MonoBehaviour
         tileList.Add(item);
     }
 
-    public TileScript GetRandTile(PlayerScript player)
+    public TileScript GetRandTile()
     {
         TileScript result = tileList[Random.Range(0, tileList.Count)];
 
@@ -41,11 +41,10 @@ public class TileMapData : MonoBehaviour
         {
             if(result.Owner == null) // 주인 없는게 맞는지 체크
             {
-                result.Owner = player;
                 return result;
             }
         }
 
-        return GetRandTile(player);
+        return GetRandTile();   
     }
 }

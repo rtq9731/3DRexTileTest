@@ -5,13 +5,13 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     List<PlayerScript> players = new List<PlayerScript>();
-    public List<PlayerScript> Players { get { return players; } }
+    public List<PlayerScript> Players { get { return players; } set { players = value; } }
 
-    public void StartGame(params PlayerScript[] players)
+    public void StartGame()
     {
         foreach (var item in players)
         {
-            TileMapData.Instance.GetRandTile(item);
+            item.AddTile(TileMapData.Instance.GetRandTile());
         }
     }
 }
