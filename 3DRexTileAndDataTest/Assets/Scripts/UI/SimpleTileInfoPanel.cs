@@ -16,7 +16,7 @@ public class SimpleTileInfoPanel : MonoBehaviour
 
     public void CallSimpleTileInfoPanel(TileScript tile)
     {
-        DOTween.Kill(this.gameObject.transform.GetComponent<Image>());
+        DOTween.Kill(this.gameObject);
         gameObject.transform.position = Input.mousePosition;
         gameObject.transform.GetComponent<Image>().color = new Color(1, 1, 1, 0);
 
@@ -38,6 +38,9 @@ public class SimpleTileInfoPanel : MonoBehaviour
 
     public void RemoveSimpleTileInfoPanel()
     {
+        if (!gameObject.activeSelf)
+            return;
+
         gameObject.transform.GetComponent<Image>().DOFade(0, 0.3f).SetEase(Ease.InQuint).OnComplete(() => gameObject.SetActive(false));
     }
 }

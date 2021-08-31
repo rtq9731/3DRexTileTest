@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] LayerMask whatIsTile;
     [SerializeField] SimpleTileInfoPanel panel;
+    [SerializeField] GameObject GameExitPanel;
 
     RaycastHit hit;
 
@@ -19,13 +20,21 @@ public class PlayerInput : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
             {
-                isUIOn = true;
+                TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
             }
         }
 
-        if(!isUIOn) // 다른 UI가 아무것도 올라가있지 않을 때.
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(!UIStackManager.RemoveUIOnTop())
+            {
+                GameExitPanel.SetActive(true);
+            }
+        }
+
+        if(UIStackManager.IsUIStackEmpty()) // 다른 UI가 아무것도 올라가있지 않을 때.
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
             {
@@ -46,6 +55,11 @@ public class PlayerInput : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            isSimplePanelOn = false;
+            panel.RemoveSimpleTileInfoPanel();
+        }    
     }
 
     IEnumerator GetNextData()
