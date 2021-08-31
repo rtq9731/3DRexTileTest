@@ -8,6 +8,8 @@ public class TileInfoScript : MonoBehaviour
     [SerializeField] Text ownerText;
     [SerializeField] Text groundTypeText;
     [SerializeField] Text InfoText;
+    [SerializeField] Button btnBuy;
+    [SerializeField] Button btnMoreInfo;
 
     public static List<TileScript> tiles = new List<TileScript>();
 
@@ -34,7 +36,7 @@ public class TileInfoScript : MonoBehaviour
         switch (tile.Data.type)
         {
             case TileType.Ocean:
-                info = "그냥 물입니다.\n경치가 참 좋네요.\n 물고기도 잡힌다죠?";
+                info = "그냥 물입니다.\n경치가 참 좋네요.\n물고기도 잡힌다죠?";
                 break;
             case TileType.Lake:
                 info = "그냥 연못입니다.\n경치가 참 좋네요.\n앉아서 쉬고싶네요.";
@@ -58,10 +60,11 @@ public class TileInfoScript : MonoBehaviour
 
         InfoText.text = info;
 
+        tile.SelectTile(GameManager.Instance.tileVcam, this);
         gameObject.SetActive(true);
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         
     }

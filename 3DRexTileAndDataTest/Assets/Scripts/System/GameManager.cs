@@ -10,6 +10,12 @@ public class GameManager : MonoSingleton<GameManager>
     List<PlayerScript> players = new List<PlayerScript>();
     public List<PlayerScript> Players { get { return players; } set { players = value; } }
 
+    private void Awake()
+    {
+        InfoPanel = FindObjectOfType<TileInfoScript>();
+        UIStackManager.RemoveUIOnTopWithNoTime();
+    }
+
     public void StartGame()
     {
         foreach (var item in players)

@@ -69,12 +69,19 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         attackTile.Damage(data.attackPower);
     }
 
-    public void SelectTile(GameObject tileVcam)
+    public void SelectTile(GameObject tileVcam, TileInfoScript tileInfo)
     {
         this.transform.DOMoveY(this.transform.position.y + 0.3f, 0.5f);
         Vector3 camPos = tileVcam.transform.position;
         tileVcam.transform.position = new Vector3(camPos.x, camPos.y, transform.position.z - 5);
         tileVcam.SetActive(true);
+    }
+
+
+    public void RemoveSelect(GameObject tileVcam)
+    {
+        tileVcam.SetActive(false);
+        transform.position = data.position;
     }
     
     public void SetType(ObjType objType)

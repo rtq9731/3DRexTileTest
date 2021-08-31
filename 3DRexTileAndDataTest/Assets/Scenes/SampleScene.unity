@@ -607,7 +607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &252962069
 RectTransform:
   m_ObjectHideFlags: 0
@@ -687,6 +687,8 @@ MonoBehaviour:
   ownerText: {fileID: 11774699}
   groundTypeText: {fileID: 1263042525}
   InfoText: {fileID: 1051542557}
+  btnBuy: {fileID: 424986474}
+  btnMoreInfo: {fileID: 357267165}
 --- !u!114 &252962073
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,4 +48,14 @@ public class UIStackManager
         }
     }
 
+    public static void RemoveUIOnTopWithNoTime()
+    {
+        if (!IsUIStackEmpty())
+        {
+            GameObject obj = UIStack.Pop();
+            DOTween.Kill(obj);
+            obj.SetActive(false);
+        }
+    }
+
 }
