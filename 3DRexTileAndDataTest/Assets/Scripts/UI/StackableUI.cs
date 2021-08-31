@@ -6,6 +6,7 @@ public class StackableUI : MonoBehaviour
 {
     private void OnEnable()
     {
+        transform.localScale = Vector2.one;
         UIStackManager.AddUIToStack(this.gameObject);
     }
 }

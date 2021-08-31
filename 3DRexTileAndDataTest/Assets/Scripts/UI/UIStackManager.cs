@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIStackManager
 {
@@ -35,7 +37,9 @@ public class UIStackManager
     {
         if (!IsUIStackEmpty())
         {
-            UIStack.Pop().SetActive(false);
+            GameObject obj = UIStack.Pop();
+            DOTween.Kill(obj);
+            obj.transform.DOScale(0, 0.3f).OnComplete(() => obj.SetActive(false));
             return true;
         }
         else

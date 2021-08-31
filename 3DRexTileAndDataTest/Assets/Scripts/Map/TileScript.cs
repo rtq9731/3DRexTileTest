@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class TileScript : MonoBehaviour, ITurnFinishObj
 {
@@ -68,6 +69,14 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         attackTile.Damage(data.attackPower);
     }
 
+    public void SelectTile(GameObject tileVcam)
+    {
+        this.transform.DOMoveY(this.transform.position.y + 0.3f, 0.5f);
+        Vector3 camPos = tileVcam.transform.position;
+        tileVcam.transform.position = new Vector3(camPos.x, camPos.y, transform.position.z - 5);
+        tileVcam.SetActive(true);
+    }
+    
     public void SetType(ObjType objType)
     {
         switch (objType)

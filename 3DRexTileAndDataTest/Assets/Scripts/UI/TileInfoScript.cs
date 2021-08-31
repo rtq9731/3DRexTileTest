@@ -9,6 +9,8 @@ public class TileInfoScript : MonoBehaviour
     [SerializeField] Text groundTypeText;
     [SerializeField] Text InfoText;
 
+    public static List<TileScript> tiles = new List<TileScript>();
+
     public static void TurnOnTileInfoPanel(TileScript tile)
     {
         
@@ -57,5 +59,10 @@ public class TileInfoScript : MonoBehaviour
         InfoText.text = info;
 
         gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }
