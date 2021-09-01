@@ -18,14 +18,6 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
-            {
-                TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
-            }
-        }
-
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(!UIStackManager.RemoveUIOnTop())
@@ -36,6 +28,14 @@ public class PlayerInput : MonoBehaviour
 
         if(UIStackManager.IsUIStackEmpty()) // 다른 UI가 아무것도 올라가있지 않을 때.
         {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
+                {
+                    TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
+                }
+            }
+
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
             {
                 nowData = hit.transform.GetComponent<TileScript>().Data;

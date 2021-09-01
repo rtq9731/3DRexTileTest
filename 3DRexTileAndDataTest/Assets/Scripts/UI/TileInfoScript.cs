@@ -5,20 +5,22 @@ using UnityEngine.UI;
 
 public class TileInfoScript : MonoBehaviour
 {
-    [SerializeField] Text ownerText;
-    [SerializeField] Text groundTypeText;
-    [SerializeField] Text InfoText;
-    [SerializeField] Button btnBuy;
-    [SerializeField] Button btnMoreInfo;
+    [SerializeField] Text ownerText = null;
+    [SerializeField] Text groundTypeText = null;
+    [SerializeField] Text InfoText = null;
+    [SerializeField] Button btnBuy = null;
+    [SerializeField] Button btnMoreInfo = null;
 
     public static List<TileScript> tiles = new List<TileScript>();
+
+    public TileScript selectedTile = null;
 
     public static void TurnOnTileInfoPanel(TileScript tile)
     {
         
         if (GameManager.Instance.InfoPanel != null)
         {
-            GameManager.Instance.InfoPanel.TurnMe(tile);
+            GameManager.Instance.InfoPanel.TurnOnMe(tile);
         }
         else
         {
@@ -26,8 +28,15 @@ public class TileInfoScript : MonoBehaviour
         }
     }
 
-    private void TurnMe(TileScript tile)
+    private void TurnOnMe(TileScript tile)
     {
+        if (selectedTile != null)
+        selectedTile.RemoveSelect(GameManager.Instance.tileVcam);
+
+        FindObjectOfType<CameraMove>().enabled = false;
+        selectedTile = tile;
+        selectedTile.SelectTile(GameManager.Instance.tileVcam);
+
         string ownerName = tile.Owner != null ? tile.Owner.MyName : "None";
         ownerText.text = $"소유주 : {ownerName}";
         groundTypeText.text = $"지형 : {tile.Data.type}";
@@ -59,13 +68,15 @@ public class TileInfoScript : MonoBehaviour
         }
 
         InfoText.text = info;
-
-        tile.SelectTile(GameManager.Instance.tileVcam, this);
         gameObject.SetActive(true);
     }
 
-    public void OnDisable()
+    private void OnDisable()
     {
-        
+        if (selectedTile != null)
+        {
+            FindObjectOfType<CameraMove>().enabled = true;
+            selectedTile.RemoveSelect(GameManager.Instance.tileVcam);
+        }
     }
 }

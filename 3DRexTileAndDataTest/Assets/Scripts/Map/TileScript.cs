@@ -58,6 +58,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         Owner.AddResource(data.resource);
     }
 
+    public void BuyTile(PlayerScript Owner)
+    {
+        
+    }
+
     public void UpgradeTileAttackPower()
     {
         TrunOverEvent += () => data.attackPower++;
@@ -69,19 +74,26 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         attackTile.Damage(data.attackPower);
     }
 
-    public void SelectTile(GameObject tileVcam, TileInfoScript tileInfo)
+    public void SelectTile(GameObject tileVcam)
     {
+        if (data.position != transform.position)
+        {
+            UIStackManager.RemoveUIOnTop();
+            return;
+        }
+
+        DOTween.Complete(this.transform);
+        DOTween.Kill(tileVcam.transform);
         this.transform.DOMoveY(this.transform.position.y + 0.3f, 0.5f);
-        Vector3 camPos = tileVcam.transform.position;
-        tileVcam.transform.position = new Vector3(camPos.x, camPos.y, transform.position.z - 5);
+        this.transform.DORotate(new Vector3(0, 360, 0), 0.5f);
+        tileVcam.transform.DOMove(new Vector3(transform.position.x + 1, 2.5f, transform.position.z - 1), 0.3f);
         tileVcam.SetActive(true);
     }
-
 
     public void RemoveSelect(GameObject tileVcam)
     {
         tileVcam.SetActive(false);
-        transform.position = data.position;
+        transform.DOMove(data.position, 0.3f);
     }
     
     public void SetType(ObjType objType)

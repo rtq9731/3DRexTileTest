@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField] public TileInfoScript InfoPanel;
+    public TileInfoScript InfoPanel;
     [SerializeField] public GameObject tileVcam;
 
     List<PlayerScript> players = new List<PlayerScript>();
     public List<PlayerScript> Players { get { return players; } set { players = value; } }
 
-    private void Awake()
+    private void Start()
     {
         InfoPanel = FindObjectOfType<TileInfoScript>();
         UIStackManager.RemoveUIOnTopWithNoTime();
