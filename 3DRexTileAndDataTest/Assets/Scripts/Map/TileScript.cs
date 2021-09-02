@@ -78,14 +78,13 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     {
         if (data.position != transform.position)
         {
-            UIStackManager.RemoveUIOnTop();
             return;
         }
 
         DOTween.Complete(this.transform);
         DOTween.Kill(tileVcam.transform);
         this.transform.DOMoveY(this.transform.position.y + 0.3f, 0.5f);
-        this.transform.DORotate(new Vector3(0, 360, 0), 0.5f);
+        transform.DOLocalRotate(new Vector3(0, 360, 0), 0.3f);
         tileVcam.transform.DOMove(new Vector3(transform.position.x + 1, 2.5f, transform.position.z - 1), 0.3f);
         tileVcam.SetActive(true);
     }

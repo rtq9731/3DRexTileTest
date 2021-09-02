@@ -71,6 +71,11 @@ public class TileInfoScript : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    private void TurnOnBtns(TileScript tile)
+    {
+
+    }
+
     private void OnDisable()
     {
         if (selectedTile != null)
