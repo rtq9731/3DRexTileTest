@@ -45,21 +45,27 @@ public class TileInfoScript : MonoBehaviour
         switch (tile.Data.type)
         {
             case TileType.Ocean:
+                btnBuy.interactable = false;
                 info = "그냥 물입니다.\n경치가 참 좋네요.\n물고기도 잡힌다죠?";
                 break;
             case TileType.Lake:
+                btnBuy.interactable = false;
                 info = "그냥 연못입니다.\n경치가 참 좋네요.\n앉아서 쉬고싶네요.";
                 break;
             case TileType.Forest:
+                btnBuy.interactable = true;
                 info = "여러 나무들로 둘러싸인 지형입니다.\n사거리 - 1\n방어력 + 1";
                 break;
             case TileType.DigSite:
+                btnBuy.interactable = true;
                 info = "광산이 위치한 타일입니다.\n사거리 - 1\n자원 + 1";
                 break;
             case TileType.Plain:
+                btnBuy.interactable = true;
                 info = "별다른 특징이 없는 평지 타일입니다.\n특이사항 없음";
                 break;
             case TileType.Mountain:
+                btnBuy.interactable = true;
                 info = "산위에 올라갈 수 있는 언덕 타일입니다.\n사거리 + 1\n자원 - 1";
                 break;
             default:
@@ -67,13 +73,9 @@ public class TileInfoScript : MonoBehaviour
                 break;
         }
 
+        btnBuy.onClick.AddListener(() => tile.BuyTile(GameManager.Instance.Players.Find(x => x.name == "COCONUT")));
         InfoText.text = info;
         gameObject.SetActive(true);
-    }
-
-    private void TurnOnBtns(TileScript tile)
-    {
-
     }
 
     private void OnDisable()

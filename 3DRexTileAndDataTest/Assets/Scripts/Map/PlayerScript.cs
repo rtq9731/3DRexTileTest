@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
-    private string myName = "COCONUT";
+    private string myName = "NULL";
 
     public string MyName
     {
