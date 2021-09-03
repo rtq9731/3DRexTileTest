@@ -22,10 +22,6 @@ public class TileInfoScript : MonoBehaviour
         {
             GameManager.Instance.InfoPanel.TurnOnMe(tile);
         }
-        else
-        {
-            Debug.Log("정보창 감지 불가!");
-        }
     }
 
     private void TurnOnMe(TileScript tile)

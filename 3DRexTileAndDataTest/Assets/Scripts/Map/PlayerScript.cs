@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     public List<TileScript> owningTiles = new List<TileScript>();
 
     int resouceTank = 0;
+    public int ResourceTank { get { return resouceTank; } }
 
     private void Start()
     {

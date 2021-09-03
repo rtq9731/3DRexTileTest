@@ -67,6 +67,8 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 #endif
             return;
         }
+
+        
     }
 
     public void UpgradeTileAttackPower()
