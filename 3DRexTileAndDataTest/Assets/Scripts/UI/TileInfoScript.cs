@@ -73,7 +73,11 @@ public class TileInfoScript : MonoBehaviour
                 break;
         }
 
-        btnBuy.onClick.AddListener(() => tile.BuyTile(GameManager.Instance.Players.Find(x => x.name == "COCONUT")));
+        btnBuy.onClick.RemoveAllListeners();
+        btnBuy.onClick.AddListener(() => {
+            tile.BuyTile(GameManager.Instance.Players.Find(x => x.name == "COCONUT"));
+            btnBuy.onClick.RemoveAllListeners();
+            });
         InfoText.text = info;
         gameObject.SetActive(true);
     }

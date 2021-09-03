@@ -58,9 +58,15 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         Owner.AddResource(data.resource);
     }
 
-    public void BuyTile(PlayerScript Owner)
+    public void BuyTile(PlayerScript owner)
     {
-        
+        if(this.owner == owner)
+        {
+#if UNITY_EDITOR
+            Debug.Log("¿ÃπÃ ¡÷¿Œ¿Œµ™ºÓ");
+#endif
+            return;
+        }
     }
 
     public void UpgradeTileAttackPower()
