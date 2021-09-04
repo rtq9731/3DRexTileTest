@@ -7,6 +7,8 @@ public class GameManager : MonoSingleton<GameManager>
     public TileInfoScript InfoPanel;
     [SerializeField] public GameObject tileVcam;
 
+    public string PlayerName = "COCONUT";
+
     List<PlayerScript> players = new List<PlayerScript>();
     public List<PlayerScript> Players { get { return players; } set { players = value; } }
 

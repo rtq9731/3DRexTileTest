@@ -60,27 +60,23 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void BuyTile(PlayerScript owner)
     {
-        if(this.owner == owner)
+        if (this.owner == owner)
         {
 #if UNITY_EDITOR
             Debug.Log("ÀÌ¹Ì ÁÖÀÎÀÎµª¼î");
+            Debug.Log(this.owner.MyName);
 #endif
             return;
         }
 
-        
+        ChangeOwner(owner);
+        GameManager.Instance.InfoPanel.RefreshTexts(this);
     }
 
-    public void UpgradeTileAttackPower()
-    {
-        TrunOverEvent += () => data.attackPower++;
-        Owner.AddResource(-1);
-    }
-
-    public void FireMissile(TileScript attackTile)
-    {
-        attackTile.Damage(data.attackPower);
-    }
+    //public void FireMissile(TileScript attackTile)
+    //{
+    //    attackTile.Damage(data.attackPower);
+    //}
 
     public void SelectTile(GameObject tileVcam)
     {

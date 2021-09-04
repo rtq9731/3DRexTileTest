@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -256, y: 310}
+  m_AnchoredPosition: {x: -300, y: 310}
   m_SizeDelta: {x: 512, y: 124}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &11774699
@@ -184,7 +184,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 3bb0c42d2eb2b8241b5f95cbcab894c1, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 70
     m_Alignment: 0
@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InfoPanel: {fileID: 0}
   tileVcam: {fileID: 1566210787}
+  PlayerName: COCONUT
 --- !u!114 &85600862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1652,6 +1653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e900858c3f2f8949b632286116be779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myName: COCONUT
   owningTiles: []
 --- !u!1 &892071009
 GameObject:
@@ -2370,7 +2372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -256, y: 195}
+  m_AnchoredPosition: {x: -300, y: 195}
   m_SizeDelta: {x: 512, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1263042525
@@ -2397,7 +2399,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 3bb0c42d2eb2b8241b5f95cbcab894c1, type: 3}
     m_FontSize: 64
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 64
     m_Alignment: 0
