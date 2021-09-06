@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
-    [SerializeField] private string myName = "NULL";
+    [SerializeField] protected string myName = "NULL";
 
     public string MyName
     {
@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     int resouceTank = 0;
     public int ResourceTank { get { return resouceTank; } }
 
-    private void Start()
+    protected void Start()
     {
         GameManager.Instance.Players.Add(this);
     }

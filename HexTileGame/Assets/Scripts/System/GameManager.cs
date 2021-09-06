@@ -5,7 +5,12 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     public TileInfoScript InfoPanel;
+
     [SerializeField] public GameObject tileVcam;
+    [SerializeField] public TileChecker tileChecker;
+
+    public float TileZInterval = 0.875f;
+    public float TileXInterval = 1f;
 
     public string PlayerName = "COCONUT";
 
@@ -22,6 +27,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         foreach (var item in players)
         {
+            Debug.Log(item);
             item.AddTile(TileMapData.Instance.GetRandTile());
         }
     }

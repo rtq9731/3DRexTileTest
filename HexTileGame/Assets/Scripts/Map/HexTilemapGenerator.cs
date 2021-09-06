@@ -10,6 +10,9 @@ public class HexTilemapGenerator : MonoBehaviour
         Mountain
     }
 
+    float TileXInterval = 1f;
+    float TileZInterval = 0.875f;
+
     [SerializeField] GroundType type;
 
     [SerializeField] GameObject[] jungleGroundTileSet;
@@ -36,6 +39,9 @@ public class HexTilemapGenerator : MonoBehaviour
             default:
                 break;
         }
+
+        TileXInterval = GameManager.Instance.TileXInterval;
+        TileZInterval = GameManager.Instance.TileZInterval;
 
         GenerateTiles(15, 15);
     }

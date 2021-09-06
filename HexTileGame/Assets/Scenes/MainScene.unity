@@ -248,6 +248,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InfoPanel: {fileID: 0}
   tileVcam: {fileID: 1566210787}
+  tileChecker: {fileID: 974116145}
+  TileZInterval: 0.875
+  TileXInterval: 1
   PlayerName: COCONUT
 --- !u!114 &85600862
 MonoBehaviour:
@@ -1650,11 +1653,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 835838795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e900858c3f2f8949b632286116be779, type: 3}
+  m_Script: {fileID: 11500000, guid: ea3258f0e5bb63f479ad28fa7384e378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myName: COCONUT
+  myName: 
   owningTiles: []
+  playerName: COCONUT
 --- !u!1 &892071009
 GameObject:
   m_ObjectHideFlags: 3
@@ -1885,6 +1889,52 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &974116143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 974116144}
+  - component: {fileID: 974116145}
+  m_Layer: 0
+  m_Name: TileChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &974116144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974116143}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &974116145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974116143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d38ac93ab2a8e48b4b5d8d6edfb8ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsTile:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1000656164
 GameObject:
   m_ObjectHideFlags: 0
