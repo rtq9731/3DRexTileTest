@@ -40,8 +40,8 @@ public class HexTilemapGenerator : MonoBehaviour
                 break;
         }
 
-        TileXInterval = GameManager.Instance.TileXInterval;
-        TileZInterval = GameManager.Instance.TileZInterval;
+        TileXInterval = MainSceneManager.Instance.TileXInterval;
+        TileZInterval = MainSceneManager.Instance.TileZInterval;
 
         GenerateTiles(15, 15);
     }
@@ -49,7 +49,7 @@ public class HexTilemapGenerator : MonoBehaviour
     private void GenerateTiles(int width, int height)
     {
         Vector3 tilePos = Vector3.zero;
-        tilePos.z = -height / 2;
+        tilePos.z -= height / 2; // ¡ﬂæ”¿∏∑Œ Z¡¬«•∏¶ ∏¬√Á¡÷±‚ ¿ß«‘
         for (int i = 0; i < height; i++)
         {
             tilePos.x = (i % 2 == 0) ? -width / 2 : -width / 2 + 0.5f;
@@ -59,9 +59,9 @@ public class HexTilemapGenerator : MonoBehaviour
                 TileScript tempScirpt = temp.GetComponent<TileScript>();
                 TileMapData.Instance.SetTileData(tempScirpt);
                 tempScirpt.SetPosition(tilePos);
-                tilePos.x += 1;
+                tilePos.x += TileXInterval;
             }
-            tilePos.z += 0.875f;
+            tilePos.z += TileZInterval;
         }
 
         GetComponent<HexObjectTileManager>().GenerateObjects(width, height, type);

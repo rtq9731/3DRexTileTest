@@ -70,7 +70,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         }
 
         ChangeOwner(owner);
-        GameManager.Instance.InfoPanel.RefreshTexts(this);
+        MainSceneManager.Instance.InfoPanel.RefreshTexts(this);
     }
 
     //public void FireMissile(TileScript attackTile)

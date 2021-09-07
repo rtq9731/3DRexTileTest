@@ -8,7 +8,7 @@ public class PersonPlayer : PlayerScript
 
     private void Start()
     {
-        GameManager.Instance.PlayerName = playerName;
+        MainSceneManager.Instance.PlayerName = playerName;
         base.myName = playerName;
         base.Start();
     }

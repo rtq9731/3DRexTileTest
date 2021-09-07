@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     protected void Start()
     {
-        GameManager.Instance.Players.Add(this);
+        MainSceneManager.Instance.Players.Add(this);
     }
 
     public void AddResource(int resource)

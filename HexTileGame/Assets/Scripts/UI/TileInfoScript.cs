@@ -18,9 +18,9 @@ public class TileInfoScript : MonoBehaviour
     public static void TurnOnTileInfoPanel(TileScript tile)
     {
         
-        if (GameManager.Instance.InfoPanel != null)
+        if (MainSceneManager.Instance.InfoPanel != null)
         {
-            GameManager.Instance.InfoPanel.TurnOnMe(tile);
+            MainSceneManager.Instance.InfoPanel.TurnOnMe(tile);
         }
     }
 
@@ -68,11 +68,11 @@ public class TileInfoScript : MonoBehaviour
     private void TurnOnMe(TileScript tile)
     {
         if (selectedTile != null)
-        selectedTile.RemoveSelect(GameManager.Instance.tileVcam);
+        selectedTile.RemoveSelect(MainSceneManager.Instance.tileVcam);
 
         FindObjectOfType<CameraMove>().enabled = false;
         selectedTile = tile;
-        selectedTile.SelectTile(GameManager.Instance.tileVcam);
+        selectedTile.SelectTile(MainSceneManager.Instance.tileVcam);
 
         string ownerName = tile.Owner != null ? tile.Owner.MyName : "None";
         ownerText.text = $"¼ÒÀ¯ÁÖ : {ownerName}";
@@ -112,7 +112,7 @@ public class TileInfoScript : MonoBehaviour
 
         btnBuy.onClick.RemoveAllListeners();
         btnBuy.onClick.AddListener(() => {
-            tile.BuyTile(GameManager.Instance.Players.Find(x => x.MyName == GameManager.Instance.PlayerName));
+            tile.BuyTile(MainSceneManager.Instance.Players.Find(x => x.MyName == MainSceneManager.Instance.PlayerName));
             btnBuy.onClick.RemoveAllListeners();
             });
         InfoText.text = info;
@@ -124,7 +124,7 @@ public class TileInfoScript : MonoBehaviour
         if (selectedTile != null)
         {
             FindObjectOfType<CameraMove>().enabled = true;
-            selectedTile.RemoveSelect(GameManager.Instance.tileVcam);
+            selectedTile.RemoveSelect(MainSceneManager.Instance.tileVcam);
         }
     }
 }
