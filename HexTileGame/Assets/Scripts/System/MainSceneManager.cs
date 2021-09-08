@@ -43,10 +43,9 @@ public class MainSceneManager : MonoBehaviour
 #if UNITY_EDITOR
             TileScript temp = TileMapData.Instance.GetRandTile();
             item.AddTile(temp);
-            tileChecker.FindTilesInRange(temp, 1).ForEach(x => Debug.Log(x.gameObject));
+            tileChecker.FindTilesInRange(temp, 2).ForEach(x => Debug.Log(x.Data.type));
             return;
 #endif
-
             item.AddTile(TileMapData.Instance.GetRandTile());
         }
     }
