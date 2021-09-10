@@ -18,6 +18,11 @@ public class UIStackManager
         return UIStack.Count <= 0 ? true : false;
     }
 
+    public static GameObject GetTopUI()
+    {
+        return UIStack.Peek();
+    }
+
     public static bool RemoveUIOnTop()
     {
         if (!IsUIStackEmpty())
