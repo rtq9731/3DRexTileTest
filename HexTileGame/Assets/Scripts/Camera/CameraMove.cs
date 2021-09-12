@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraMove : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     [SerializeField] float zoomSpeed;
+    [SerializeField] CinemachineVirtualCamera cv;
 
     float wheelInput = 0;
 
