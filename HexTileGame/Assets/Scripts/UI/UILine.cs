@@ -17,12 +17,12 @@ public class UILine : MonoBehaviour
     {
         if(lr.isVisible && uiTr != null && whereIsLineEnd != null)
         {
-            Vector3 realUIVector = Camera.main.ScreenToWorldPoint(uiTr.position);
-            realUIVector.z = -1;
+            Vector3 realUIVector = uiTr.position;
+            realUIVector.z -= 1;
             lr.SetPosition(0, realUIVector);
 
-            Vector3 realLineEnd = Camera.main.ScreenToWorldPoint(whereIsLineEnd.position);  
-            realLineEnd.z = -1;
+            Vector3 realLineEnd = whereIsLineEnd.position;  
+            realLineEnd.z -= 1;
             lr.SetPosition(1, realLineEnd);
         }
     }

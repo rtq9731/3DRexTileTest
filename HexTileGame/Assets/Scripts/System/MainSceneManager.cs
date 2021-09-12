@@ -17,7 +17,11 @@ public class MainSceneManager : MonoBehaviour
 
     public TileInfoScript InfoPanel;
 
+    [SerializeField] GameObject vcamForUIMoving;
+    [SerializeField] GameObject CvsOtherUI;
+
     [SerializeField] public GameObject tileVcam;
+    [SerializeField] public GameObject techPanel;
     [SerializeField] public TileChecker tileChecker;
 
     public float TileZInterval = 0.875f;
@@ -43,4 +47,17 @@ public class MainSceneManager : MonoBehaviour
         }
     }
 
+    public void CallTechPanel()
+    {
+        ChangeCameraForUI();
+    }
+
+    private IEnumerator ChangeCameraForUI()
+    {
+        vcamForUIMoving.SetActive(true);
+        while (true)
+        {
+
+        }
+    }
 }

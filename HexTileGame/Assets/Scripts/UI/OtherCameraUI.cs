@@ -9,19 +9,17 @@ public class OtherCameraUI : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, Camera.main.transform.position) <= 0.0005f) // 화면전환이 끝났으면
+        if (transform.position == Camera.main.transform.position) // 화면전환이 끝났으면
         {
-            if(!gameObject.activeSelf)
+            if (!cvsOtherCamera.activeSelf)
             {
                 cvsOtherCamera.SetActive(true);
             }
         }
-        else
-        {
-            if (gameObject.activeSelf)
-            {
-                cvsOtherCamera.SetActive(false);
-            }
-        }
+    }
+
+    private void OnDisable()
+    {
+        cvsOtherCamera.SetActive(false);
     }
 }
