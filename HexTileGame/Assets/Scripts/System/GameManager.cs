@@ -4,5 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public void SaveData()
+    {
+
+    }
+
+    public void LoadData(int level)
+    {
+        
+    }
 
 }
