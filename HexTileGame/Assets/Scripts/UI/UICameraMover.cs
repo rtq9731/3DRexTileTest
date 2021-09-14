@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class UICameraMover : MonoBehaviour
 {
-
-
     void Update()
     {
         

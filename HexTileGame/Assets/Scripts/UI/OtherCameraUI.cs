@@ -6,6 +6,7 @@ using Cinemachine;
 public class OtherCameraUI : MonoBehaviour
 {
     [SerializeField] GameObject cvsOtherCamera = null;
+    [SerializeField] GameObject uiCam = null;
 
     private void Update()
     {
@@ -13,13 +14,9 @@ public class OtherCameraUI : MonoBehaviour
         {
             if (!cvsOtherCamera.activeSelf)
             {
+                uiCam.SetActive(true);
                 cvsOtherCamera.SetActive(true);
             }
         }
-    }
-
-    private void OnDisable()
-    {
-        cvsOtherCamera.SetActive(false);
     }
 }
