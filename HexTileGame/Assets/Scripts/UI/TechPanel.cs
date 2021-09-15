@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TechPanel : MonoBehaviour
 {
     [SerializeField] GameObject uiVcam = null;
+    [SerializeField] GameObject uiCam = null;
     [SerializeField] ScrollRect scrollView = null;
 
     private void OnEnable()
@@ -18,6 +19,11 @@ public class TechPanel : MonoBehaviour
         if(uiVcam != null)
         {
             uiVcam.SetActive(false);
+        }
+        
+        if(uiCam != null)
+        {
+            uiCam.SetActive(false);
         }
     }
 
