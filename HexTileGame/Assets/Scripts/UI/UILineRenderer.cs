@@ -5,15 +5,17 @@ using UnityEngine.UI;
 
 public class UILineRenderer : Graphic
 {
-    [SerializeField] Vector2Int gridSize;
-    [SerializeField] List<Vector2> points = new List<Vector2>();
+    public Vector2Int gridSize;
+    public UIGridRenderer grid;
+
+    public List<Vector2> points = new List<Vector2>();
 
     float width;
     float height;
     float unitWidth;
     float unitHeight;
 
-    [SerializeField] float thickness = 10f;
+    public float thickness = 10f;
 
     protected override void OnPopulateMesh(VertexHelper vh)
     {
@@ -52,10 +54,22 @@ public class UILineRenderer : Graphic
 
         vertex.position = new Vector3(-thickness / 2, 0);
         vertex.position += new Vector3(unitWidth * point.x, unitHeight * point.y);
-        vh.AddVert(vertex);
+        vh.AddVert(vertex); 
 
         vertex.position = new Vector3(thickness / 2, 0);
         vertex.position += new Vector3(unitWidth * point.x, unitHeight * point.y);
         vh.AddVert(vertex);
+    }   
+
+    private void Update()
+    {
+         if(grid != null)
+        {
+            if(gridSize != grid.gridSize)
+            {
+                gridSize = grid.gridSize;
+                SetVerticesDirty();
+            }
+        }
     }
 }

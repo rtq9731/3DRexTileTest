@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIGridRenderer : Graphic
 {
-    [SerializeField] Vector2Int gridSize = Vector2Int.one;
-    [SerializeField] float thinkness = 10f;
+    public Vector2Int gridSize = Vector2Int.one;
+    public float thinkness = 10f;
 
     float cellWidth;
     float cellHeight;
