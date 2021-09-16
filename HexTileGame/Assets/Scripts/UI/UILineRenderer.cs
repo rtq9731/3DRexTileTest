@@ -33,6 +33,7 @@ public class UILineRenderer : Graphic
         for (int i = 0; i < points.Count; i++)
         {
             Vector2 point = points[i];
+
             DrawVerticesForPoint(point, vh);    
         }
 
@@ -50,11 +51,11 @@ public class UILineRenderer : Graphic
         vertex.color = color;
 
         vertex.position = new Vector3(-thickness / 2, 0);
-        vertex.position = new Vector3(unitWidth * point.x, unitHeight * point.y);
+        vertex.position += new Vector3(unitWidth * point.x, unitHeight * point.y);
         vh.AddVert(vertex);
 
-        vertex.position = new Vector3(-thickness / 2, 0);
-        vertex.position = new Vector3(unitWidth * point.x, unitHeight * point.y);
+        vertex.position = new Vector3(thickness / 2, 0);
+        vertex.position += new Vector3(unitWidth * point.x, unitHeight * point.y);
         vh.AddVert(vertex);
     }
 }
