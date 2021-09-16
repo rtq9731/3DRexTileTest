@@ -9,7 +9,6 @@ public class TileInfoScript : MonoBehaviour
     [SerializeField] Text groundTypeText = null;
     [SerializeField] Text InfoText = null;
     [SerializeField] Button btnBuy = null;
-    [SerializeField] Button btnMoreInfo = null;
 
     public static List<TileScript> tiles = new List<TileScript>();
 
