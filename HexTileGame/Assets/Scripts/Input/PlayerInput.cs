@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] LayerMask whatIsTile;
     [SerializeField] SimpleTileInfoPanel panel;
     [SerializeField] GameObject GameExitPanel;
     [SerializeField] CameraMove cameraMoveScript;
@@ -39,15 +38,25 @@ public class PlayerInput : MonoBehaviour
             {
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane))
                 {
+                    Debug.Log(hit.transform.gameObject.name);
                     if(hit.transform.GetComponent<TileScript>() != null)
                     {
                         TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
                     }
+                    else if(hit.transform.parent.transform.GetComponent<TileScript>() != null)
+                    {
+                        TileInfoScript.TurnOnTileInfoPanel(hit.transform.parent.transform.GetComponent<TileScript>());
+                    }
                 }
             }
 
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane))
             {
+                if (hit.transform.GetComponent<TileScript>() == null)
+                {
+                    return;
+                }
+
                 nowData = hit.transform.GetComponent<TileScript>().Data;
                 if (nowData != lastTileData)
                 {
@@ -80,12 +89,15 @@ public class PlayerInput : MonoBehaviour
     IEnumerator GetNextData()
     {
         yield return new WaitForSeconds(0.5f);
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane))
         {
-            lastTileData = hit.transform.GetComponent<TileScript>().Data;
-            if (lastTileData == nowData)
+            if (hit.transform.GetComponent<TileScript>() != null)
             {
-                panel.CallSimpleTileInfoPanel(hit.transform.GetComponent<TileScript>());
+                lastTileData = hit.transform.GetComponent<TileScript>().Data;
+                if (lastTileData == nowData)
+                {
+                    panel.CallSimpleTileInfoPanel(hit.transform.GetComponent<TileScript>());
+                }
             }
         }
     }
