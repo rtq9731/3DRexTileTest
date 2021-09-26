@@ -38,7 +38,6 @@ public class MainSceneManager : MonoBehaviour
     {
         foreach (var item in players)
         {
-            Debug.Log(item);
             item.AddTile(TileMapData.Instance.GetRandTile());
         }
     }

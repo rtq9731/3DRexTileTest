@@ -111,9 +111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     type: 2
-    Position: {x: 0, y: 0, z: 0}
+    position: {x: 0, y: 0, z: 0}
     range: 0
     price: 0
     shield: 0
     resource: 0
     attackPower: 0
+  mat: {fileID: 2100000, guid: cf051fba995609b459f0eb4baf4bb478, type: 2}

@@ -7,6 +7,7 @@ using DG.Tweening;
 public class TileScript : MonoBehaviour, ITurnFinishObj
 {
     [SerializeField] TileData data;
+    [SerializeField] Material mat;
 
     public TileData Data
     {
@@ -40,7 +41,10 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void ChangeOwner(PlayerScript newOwner)
     {
-        
+        if(newOwner != null)
+        {
+            GetComponent<MeshRenderer>().material.color = newOwner.playerColor;
+        }
         owner = newOwner;
     }
 
