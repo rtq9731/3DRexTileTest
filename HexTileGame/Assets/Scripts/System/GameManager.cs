@@ -9,7 +9,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     }
 
-    public void LoadData(int level)
+    public void LoadData()
     {
         
     }
