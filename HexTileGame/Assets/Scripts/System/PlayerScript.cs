@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
     [SerializeField] protected string myName = "NULL";
+    public Color playerColor;
 
     public string MyName
     {
@@ -33,7 +34,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public void AddTile(TileScript tile)
     {
-        tile.Owner = this;
+        tile.ChangeOwner(this);
         owningTiles.Add(tile);
     }
 }
