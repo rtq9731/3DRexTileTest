@@ -7,11 +7,12 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] LayerMask whatIsTile;
     [SerializeField] SimpleTileInfoPanel panel;
     [SerializeField] GameObject GameExitPanel;
+    [SerializeField] CameraMove cameraMoveScript;
 
     RaycastHit hit;
 
     bool isSimplePanelOn = false;
-    bool isUIOn = false;
+    bool isUINotEmpty;
 
     TileData lastTileData;
     TileData nowData;
@@ -26,13 +27,22 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-        if(UIStackManager.IsUIStackEmpty()) // 다른 UI가 아무것도 올라가있지 않을 때.
+        isUINotEmpty = UIStackManager.IsUIStackEmpty();
+        if (isUINotEmpty) // 다른 UI가 아무것도 올라가있지 않을 때.
         {
+            if(!cameraMoveScript.enabled)
+            {
+                cameraMoveScript.enabled = isUINotEmpty;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whatIsTile))
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane))
                 {
-                    TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
+                    if(hit.transform.GetComponent<TileScript>() != null)
+                    {
+                        TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
+                    }
                 }
             }
 
@@ -59,6 +69,11 @@ public class PlayerInput : MonoBehaviour
         {
             isSimplePanelOn = false;
             panel.RemoveSimpleTileInfoPanel();
+
+            if (cameraMoveScript.enabled)
+            {
+                cameraMoveScript.enabled = isUINotEmpty;
+            }
         }    
     }
 
