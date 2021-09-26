@@ -6,13 +6,11 @@ using DG.Tweening;
 
 public class TileScript : MonoBehaviour, ITurnFinishObj
 {
-
     [SerializeField] TileData data;
 
     public TileData Data
     {
         get { return data; }
-        private set { }
     }
 
     PlayerScript owner = null;
@@ -20,7 +18,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     public PlayerScript Owner
     {
         get { return owner; }
-        set { owner = value; }
     }
 
     private event Action TrunOverEvent;
@@ -43,6 +40,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void ChangeOwner(PlayerScript newOwner)
     {
+        
         owner = newOwner;
     }
 
@@ -55,7 +53,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             TrunOverEvent = null;
         }
 
-        Owner.AddResource(data.resource);
+        owner.AddResource(data.resource);
     }
 
     public void BuyTile(PlayerScript owner)
