@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PersonPlayer : PlayerScript
 {
+    [Header("플레이어 정보 입력")]
     [SerializeField] string playerName;
     [SerializeField] Color color;
 
