@@ -5420,6 +5420,9 @@ MonoBehaviour:
   panel: {fileID: 649260665}
   GameExitPanel: {fileID: 842902936}
   cameraMoveScript: {fileID: 385465011}
+  whereIsTile:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6476,6 +6479,7 @@ GameObject:
   - component: {fileID: 1096757383}
   - component: {fileID: 1096757382}
   - component: {fileID: 1096757385}
+  - component: {fileID: 1096757386}
   m_Layer: 5
   m_Name: PanelExtension
   m_TagString: Untagged
@@ -6584,6 +6588,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnMissile: {fileID: 1027977753}
   panelMissile: {fileID: 1642626835}
+--- !u!225 &1096757386
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096757380}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1113051650
 GameObject:
   m_ObjectHideFlags: 0

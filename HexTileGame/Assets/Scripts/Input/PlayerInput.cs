@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] SimpleTileInfoPanel panel;
     [SerializeField] GameObject GameExitPanel;
     [SerializeField] CameraMove cameraMoveScript;
+    [SerializeField] LayerMask whereIsTile;
+
+    private int fingerID = -1;
 
     RaycastHit hit;
 
@@ -36,21 +40,21 @@ public class PlayerInput : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane))
+                if (EventSystem.current.IsPointerOverGameObject(fingerID))    // is the touch on the GUI
                 {
-                    Debug.Log(hit.transform.gameObject.name);
+                    return;
+                }
+
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
+                {
                     if(hit.transform.GetComponent<TileScript>() != null)
                     {
                         TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
                     }
-                    else if(hit.transform.parent.transform.GetComponent<TileScript>() != null)
-                    {
-                        TileInfoScript.TurnOnTileInfoPanel(hit.transform.parent.transform.GetComponent<TileScript>());
-                    }
                 }
             }
 
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
             {
                 if (hit.transform.GetComponent<TileScript>() == null)
                 {
@@ -89,14 +93,17 @@ public class PlayerInput : MonoBehaviour
     IEnumerator GetNextData()
     {
         yield return new WaitForSeconds(0.5f);
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
         {
-            if (hit.transform.GetComponent<TileScript>() != null)
+            if (!EventSystem.current.IsPointerOverGameObject(fingerID))    // is the touch on the GUI
             {
-                lastTileData = hit.transform.GetComponent<TileScript>().Data;
-                if (lastTileData == nowData)
+                if (hit.transform.GetComponent<TileScript>() != null)
                 {
-                    panel.CallSimpleTileInfoPanel(hit.transform.GetComponent<TileScript>());
+                    lastTileData = hit.transform.GetComponent<TileScript>().Data;
+                    if (lastTileData == nowData)
+                    {
+                        panel.CallSimpleTileInfoPanel(hit.transform.GetComponent<TileScript>());
+                    }
                 }
             }
         }

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PanelMissile : MonoBehaviour, ITurnFinishObj
 {
-    
+    private void OnEnable()
+    {
+        UIStackManager.RemoveUIOnTopWithNoTime();
+        Debug.Log(gameObject);
+    }
 
     public void TurnFinish()
     {
