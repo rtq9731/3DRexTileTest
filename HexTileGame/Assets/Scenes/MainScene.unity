@@ -6185,7 +6185,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC5EC\uB7EC \uB098\uBB34\uB4E4\uB85C \uB458\uB7EC\uC2F8\uC778 \uC9C0\uD615\uC774\uB2E4.\n\uC0AC\uAC70\uB9AC
+  m_Text: "\uC5EC\uB7EC \uB098\uBB34\uB4E4\uB85C \uB458\uB7EC\uC2F8\uC778 \uC9C0\uD615\uC785\uB2C8\uB2E4.\n\uC0AC\uAC70\uB9AC
     - 1\n\uBC29\uC5B4\uB825 + 1"
 --- !u!222 &1051542558
 CanvasRenderer:

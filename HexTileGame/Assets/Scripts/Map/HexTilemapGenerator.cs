@@ -50,6 +50,7 @@ public class HexTilemapGenerator : MonoBehaviour
     {
         Vector3 tilePos = Vector3.zero;
         tilePos.z -= height / 2; // ¡ﬂæ”¿∏∑Œ Z¡¬«•∏¶ ∏¬√Á¡÷±‚ ¿ß«‘
+        int cnt = 0;
         for (int i = 0; i < height; i++)
         {
             tilePos.x = (i % 2 == 0) ? -width / 2 : -width / 2 + 0.5f;
@@ -59,7 +60,10 @@ public class HexTilemapGenerator : MonoBehaviour
                 TileScript tempScirpt = temp.GetComponent<TileScript>();
                 TileMapData.Instance.SetTileData(tempScirpt);
                 tempScirpt.SetPosition(tilePos);
+                tempScirpt.Data.tileNum = cnt;
+                Debug.Log(tempScirpt.Data.tileNum);
                 tilePos.x += TileXInterval;
+                cnt++;
             }
             tilePos.z += TileZInterval;
         }
