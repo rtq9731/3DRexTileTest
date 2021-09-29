@@ -6,14 +6,23 @@ using UnityEngine;
 public class TileData
 {
     public TileType type = TileType.None;
+    public int tileNum = -1;
 
-    public Vector3 position = Vector3.zero;
+    Vector3 position = Vector3.zero;
 
-    public int range = 3;
-    public int price = 5;
-    public int shield = 1;
-    public int resource = 3;
-    public int attackPower = 0;
+    int range = 3;
+    int price = 5;
+    int shield = 1;
+    int resource = 3;
+    int attackPower = 0;
+
+    public int Range { get { return range; } set { range = value; } }
+    public int Price { get { return price; } set { price = value; } }
+    public int Shield { get { return shield; } set { shield = value; } }
+    public int Resource { get { return resource; } set { resource = value; } }
+    public int AttackPower { get { return attackPower; } set { attackPower = value; } }
+
+    public Vector3 Position { get { return position; } set { position = value; } }
 
     public void SetDataToForest()
     {

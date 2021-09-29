@@ -26,8 +26,8 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void Damage(int damage)
     {
-        data.shield -= damage;
-        if(data.shield < 0)
+        data.Shield -= damage;
+        if(data.Shield < 0)
         {
             owner = null;
         }
@@ -35,7 +35,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void SetPosition(Vector3 pos)
     {
-        data.position = pos;
+        data.Position = pos;
         gameObject.transform.position = pos;
     }
 
@@ -57,7 +57,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             TrunOverEvent = null;
         }
 
-        owner.AddResource(data.resource);
+        owner.AddResource(data.Resource);
     }
 
     public void BuyTile(PlayerScript owner)
@@ -82,7 +82,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void SelectTile(GameObject tileVcam)
     {
-        if (data.position != transform.position)
+        if (data.Position != transform.position)
         {
             return;
         }
@@ -98,7 +98,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     public void RemoveSelect(GameObject tileVcam)
     {
         tileVcam.SetActive(false);
-        transform.DOMove(data.position, 0.3f);
+        transform.DOMove(data.Position, 0.3f);
     }
     
     public void SetType(ObjType objType)

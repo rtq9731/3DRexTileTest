@@ -28,7 +28,7 @@ public class TileChecker : MonoBehaviour
 
         selectedTiles.RemoveRange(0, selectedTiles.Count);
 
-        this.transform.position = tile.Data.position;
+        this.transform.position = tile.Data.Position;
 
         TileScript result = null;
 
@@ -99,7 +99,7 @@ public class TileChecker : MonoBehaviour
 
         Vector3 curPos = Vector3.zero;
 
-        this.transform.position = tile.Data.position;
+        this.transform.position = tile.Data.Position;
         TileScript result = null;
 
         result = GetUnderTile(new Vector3(transform.position.x - TileXInterval, transform.position.y, transform.position.z)); // 9Ω√ πÊ«‚ (∫œ)

@@ -29,11 +29,11 @@ public class SimpleTileInfoPanel : MonoBehaviour
         string ownerName = tile.Owner != null ? tile.Owner.MyName : "None";
         ownerText.text = $"소유자 : {ownerName}";
         groundTypeText.text = $"지형 : {data.type}";
-        priceText.text = $"가격 : {data.price}";
-        rangeText.text = $"사거리 : {data.range}";
-        shieldText.text = $"방어력 : {data.shield}";
-        attackPowerText.text = $"공격력 : {data.attackPower}";
-        productText.text = $"생산 : {data.resource}";
+        priceText.text = $"가격 : {data.Price}";
+        rangeText.text = $"사거리 : {data.Range}";
+        shieldText.text = $"방어력 : {data.Shield}";
+        attackPowerText.text = $"공격력 : {data.AttackPower}";
+        productText.text = $"생산 : {data.Resource}";
     }
 
     public void RemoveSimpleTileInfoPanel()
