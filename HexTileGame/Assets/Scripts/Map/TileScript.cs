@@ -67,22 +67,24 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             return;
         }
 
-        if (this.owner == owner)
-        {
-#if UNITY_EDITOR
-            Debug.Log("이미 주인인뎁쇼");
-#endif
-            return;
-        }
-
         if (owner.ResourceTank >= data.Price)
         {
+
+            if (this.owner == owner)
+            {
+#if UNITY_EDITOR
+                Debug.Log("이미 주인인뎁쇼");
+#endif
+                return;
+            }
+
 #if UNITY_EDITOR
             Debug.Log($"{owner.name} 이 타일번호 {this.data.tileNum} 를! 구매합니다.");
+#endif
+
             ChangeOwner(owner);
             owner.AddResource(-data.Price);
             MainSceneManager.Instance.InfoPanel.RefreshTexts(this);
-#endif
         }
     }
 

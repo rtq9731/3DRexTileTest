@@ -15,6 +15,11 @@ public class PanelRightSide : MonoBehaviour
 
     public void FinishTurn()
     {
+        if(!UIStackManager.IsUIStackEmpty())
+        {
+            return;
+        }
+
         if(player == null)
         {
             player = MainSceneManager.Instance.Players.Find(x => x.MyName == MainSceneManager.Instance.PlayerName);
