@@ -52,7 +52,6 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         {
             isTurnFinish = true;
 
-            Debug.Log("¤¾¤·");
             owningTiles.ForEach(x => x.TurnFinish());
             MainSceneManager.Instance.CheckTurnFinish();
         }

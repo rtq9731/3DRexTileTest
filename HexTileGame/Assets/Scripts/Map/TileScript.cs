@@ -73,7 +73,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             return;
         }
 
-        if (owner.ResourceTank > 3)
+        if (owner.ResourceTank >= 3)
         {
 #if UNITY_EDITOR
             Debug.Log($"{owner.name} 이 {this.data.tileNum}을 구매합니다.");
