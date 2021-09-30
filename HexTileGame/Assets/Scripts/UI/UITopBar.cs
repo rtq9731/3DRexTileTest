@@ -12,14 +12,9 @@ public class UITopBar : MonoBehaviour
 
     PlayerScript player;
 
-    private void Start()
-    {
-        player = MainSceneManager.Instance.Players.Find(x => x.MyName == MainSceneManager.Instance.PlayerName);
-        UpdateTexts();
-    }
-
     public void UpdateTexts()
     {
+        player = MainSceneManager.Instance.Players.Find(x => x.MyName == MainSceneManager.Instance.PlayerName);
         resourceText.text = $"{player.ResourceTank}";
         turnCntText.text = $"ео : {MainSceneManager.Instance.turnCnt}";
         missileText.text = $"{player.missiles} / {player.owningTiles.Count}";

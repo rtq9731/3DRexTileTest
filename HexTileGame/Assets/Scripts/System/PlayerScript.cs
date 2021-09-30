@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     protected void Start()
     {
         MainSceneManager.Instance.Players.Add(this);
+        MainSceneManager.Instance.uiTopBar.UpdateTexts();
     }
 
     public void AddResource(int resource)

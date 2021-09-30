@@ -61,7 +61,6 @@ public class HexTilemapGenerator : MonoBehaviour
                 TileMapData.Instance.SetTileData(tempScirpt);
                 tempScirpt.SetPosition(tilePos);
                 tempScirpt.Data.tileNum = cnt;
-                Debug.Log(tempScirpt.Data.tileNum);
                 tilePos.x += TileXInterval;
                 cnt++;
             }
