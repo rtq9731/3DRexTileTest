@@ -19,9 +19,11 @@ public class MainSceneManager : MonoBehaviour
 
     [SerializeField] public GameObject tileVcam;
     [SerializeField] public TileChecker tileChecker;
+    [SerializeField] public UITopBar uiTopBar;
 
     public float TileZInterval = 0.875f;
     public float TileXInterval = 1f;
+    public uint turnCnt = 0;
 
     public string PlayerName = "COCONUT";
 
@@ -40,5 +42,10 @@ public class MainSceneManager : MonoBehaviour
         {
             item.AddTile(TileMapData.Instance.GetRandTile());
         }
+    }
+
+    public void LoadedGame()
+    {
+
     }
 }

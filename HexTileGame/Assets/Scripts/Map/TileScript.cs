@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
 public class TileScript : MonoBehaviour, ITurnFinishObj
 {
     [SerializeField] TileData data;
-    [SerializeField] Material mat;
 
     public TileData Data
     {
@@ -44,6 +44,10 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         if(newOwner != null)
         {
             GetComponent<MeshRenderer>().material.color = newOwner.playerColor;
+            foreach (var item in transform.GetComponentsInChildren<MeshRenderer>())
+            {
+                item.material.color = newOwner.playerColor;
+            }
         }
         owner = newOwner;
     }
@@ -71,8 +75,15 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             return;
         }
 
-        ChangeOwner(owner);
-        MainSceneManager.Instance.InfoPanel.RefreshTexts(this);
+        if (owner.ResourceTank > 3)
+        {
+#if UNITY_EDITOR
+            Debug.Log($"{owner.name} 이 {this.data.tileNum}을 구매합니다.");
+            ChangeOwner(owner);
+            owner.AddResource(-3);
+            MainSceneManager.Instance.InfoPanel.RefreshTexts(this);
+#endif
+        }
     }
 
     //public void FireMissile(TileScript attackTile)

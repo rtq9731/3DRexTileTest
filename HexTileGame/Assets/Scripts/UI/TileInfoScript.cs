@@ -118,6 +118,7 @@ public class TileInfoScript : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+
     private void OnDisable()
     {
         if (selectedTile != null)

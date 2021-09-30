@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     }
 
     public List<TileScript> owningTiles = new List<TileScript>();
+    public List<MissileData> missiles = new List<MissileData>();
 
     int resouceTank = 0;
     public int ResourceTank { get { return resouceTank; } }
@@ -25,6 +26,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     public void AddResource(int resource)
     {
         resouceTank += resource;
+        MainSceneManager.Instance.uiTopBar.UpdateTexts();
     }
 
     public void TurnFinish()
