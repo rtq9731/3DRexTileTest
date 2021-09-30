@@ -39,13 +39,15 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void ChangeOwner(PlayerScript newOwner)
     {
-        if(newOwner != null)
+        if(newOwner != null && newOwner != owner)
         {
             GetComponent<MeshRenderer>().material.color = newOwner.playerColor;
             foreach (var item in transform.GetComponentsInChildren<MeshRenderer>())
             {
                 item.material.color = newOwner.playerColor;
             }
+            owner = newOwner;
+            newOwner.AddTile(this);
         }
         owner = newOwner;
     }
@@ -73,12 +75,12 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             return;
         }
 
-        if (owner.ResourceTank >= 3)
+        if (owner.ResourceTank >= data.Price)
         {
 #if UNITY_EDITOR
-            Debug.Log($"{owner.name} 이 {this.data.tileNum}을 구매합니다.");
+            Debug.Log($"{owner.name} 이 타일번호 {this.data.tileNum} 를! 구매합니다.");
             ChangeOwner(owner);
-            owner.AddResource(-3);
+            owner.AddResource(-data.Price);
             MainSceneManager.Instance.InfoPanel.RefreshTexts(this);
 #endif
         }

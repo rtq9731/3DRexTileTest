@@ -59,7 +59,13 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public void AddTile(TileScript tile)
     {
-        tile.ChangeOwner(this);
+        if(tile.Owner != this)
+        {
+            tile.ChangeOwner(this);
+        }
+
+        // 중복 안되게 하기 위함.
+        owningTiles.Remove(tile);
         owningTiles.Add(tile);
     }
 }
