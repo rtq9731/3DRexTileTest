@@ -3192,7 +3192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2cfda1623bf0774cbb03794cfc3e06e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnFinishTurn: {fileID: 0}
+  btnFinishTurn: {fileID: 309682094}
 --- !u!1 &590983313
 GameObject:
   m_ObjectHideFlags: 0

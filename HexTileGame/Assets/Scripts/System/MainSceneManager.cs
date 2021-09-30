@@ -36,15 +36,19 @@ public class MainSceneManager : MonoBehaviour
         UIStackManager.RemoveUIOnTopWithNoTime();
     }
 
-    public void CheckTurnFinish()
+    public bool CheckTurnFinish()
     {
         if(players.Find(x => x.IsTurnFinish == false))
         {
-            return;
+            return false;
         }
         else
         {
-            players.ForEach(x => x.StartNewTurn());
+            players.ForEach(x => x.StartNewTurn()); // 다음 턴으로 넘기면서 True 반환
+            turnCnt++;
+            uiTopBar.UpdateTexts();
+
+            return true;
         }
     }
 

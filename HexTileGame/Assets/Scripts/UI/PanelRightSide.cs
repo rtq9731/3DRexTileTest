@@ -8,6 +8,11 @@ public class PanelRightSide : MonoBehaviour
     [SerializeField] Button btnFinishTurn;
     PlayerScript player = null;
 
+    private void Start()
+    {
+        btnFinishTurn.onClick.AddListener(() => FinishTurn());
+    }
+
     public void FinishTurn()
     {
         if(player == null)
@@ -15,6 +20,6 @@ public class PanelRightSide : MonoBehaviour
             player = MainSceneManager.Instance.Players.Find(x => x.MyName == MainSceneManager.Instance.PlayerName);
         }
 
-        player.FinishTurn();
+        player.TurnFinish();
     }
 }

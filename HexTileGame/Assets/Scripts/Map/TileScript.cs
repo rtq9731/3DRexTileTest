@@ -21,8 +21,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         get { return owner; }
     }
 
-    private event Action TrunOverEvent;
-
 
     public void Damage(int damage)
     {
@@ -54,13 +52,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void TurnFinish()
     {
-        if(TrunOverEvent != null)
-        {
-            TrunOverEvent();
-
-            TrunOverEvent = null;
-        }
-
         owner.AddResource(data.Resource);
     }
 

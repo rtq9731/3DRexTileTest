@@ -29,7 +29,6 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public void FinishTurn()
     {
-        isTurnFinish = true;
     }
 
     public void StartNewTurn()
@@ -45,7 +44,18 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public void TurnFinish()
     {
-        owningTiles.ForEach(x => x.TurnFinish());
+        if (isTurnFinish)
+        {
+            return;
+        }
+        else
+        {
+            isTurnFinish = true;
+
+            Debug.Log("¤¾¤·");
+            owningTiles.ForEach(x => x.TurnFinish());
+            MainSceneManager.Instance.CheckTurnFinish();
+        }
     }
 
     public void AddTile(TileScript tile)
