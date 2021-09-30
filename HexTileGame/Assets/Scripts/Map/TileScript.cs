@@ -66,11 +66,18 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void BuyTile(PlayerScript owner)
     {
+        if(owner.IsTurnFinish)
+        {
+#if UNITY_EDITOR
+            Debug.Log("«œ æÓµÙ ¿ÃπÃ ≈œ ≥°≥¬¿›æ∆ §ª§ª");
+#endif
+            return;
+        }
+
         if (this.owner == owner)
         {
 #if UNITY_EDITOR
             Debug.Log("¿ÃπÃ ¡÷¿Œ¿Œµ™ºÓ");
-            Debug.Log(this.owner.MyName);
 #endif
             return;
         }

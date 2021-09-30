@@ -15,6 +15,9 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     public List<TileScript> owningTiles = new List<TileScript>();
     public List<MissileData> missiles = new List<MissileData>();
 
+    bool isTurnFinish = false;
+    public bool IsTurnFinish { get { return isTurnFinish; } }
+
     int resouceTank = 0;
     public int ResourceTank { get { return resouceTank; } }
 
@@ -22,6 +25,16 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     {
         MainSceneManager.Instance.Players.Add(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
+    }
+
+    public void FinishTurn()
+    {
+        isTurnFinish = true;
+    }
+
+    public void StartNewTurn()
+    {
+        isTurnFinish = false;
     }
 
     public void AddResource(int resource)

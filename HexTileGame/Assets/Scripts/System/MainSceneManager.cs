@@ -36,6 +36,18 @@ public class MainSceneManager : MonoBehaviour
         UIStackManager.RemoveUIOnTopWithNoTime();
     }
 
+    public void CheckTurnFinish()
+    {
+        if(players.Find(x => x.IsTurnFinish == false))
+        {
+            return;
+        }
+        else
+        {
+            players.ForEach(x => x.StartNewTurn());
+        }
+    }
+
     public void StartGame()
     {
         foreach (var item in players)
