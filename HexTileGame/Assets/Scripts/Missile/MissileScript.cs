@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,21 +8,47 @@ public class MissileScript
     MissileData data = null;
     PlayerScript player = null;
 
-    public void Start()
+    private PanelMissileQueueElement linkedUI;
+    public PanelMissileQueueElement LinkedUI
     {
-        MainSceneManager.Instance.Players.Find(x => x.MyName == MainSceneManager.Instance.PlayerName);
-        player.missileInMaking.Add(this);
-
-        player.TurnFinishAction += () => turnFinishAct();
+        get { return linkedUI; }
+        set
+        {
+            linkedUI = value;
+            value.SetData(data);
+        }
     }
 
+    public void Start()
+    {
+        player = MainSceneManager.Instance.GetPlayer();
+        player.missileInMaking.Add(this);
+
+        player.TurnFinishAction += turnFinishAct;
+        Debug.Log(player.TurnFinishAction);
+    }
+
+    public MissileData GetData()
+    {
+        return data;
+    }
+
+    /// <summary>
+    /// 생산 대기중인 미사일이 턴이 끝나면 해야할 행동
+    /// </summary>
     public void turnFinishAct()
     {
-        this.data.TurnForMissileReady--;
-        if(data.TurnForMissileReady == 0)
+        this.data.turnForMissileReady--;
+        linkedUI.SetData(data);
+        if (data.turnForMissileReady == 0)
         {
             player.missileInMaking.Remove(this);
             player.missileReadyToShoot.Add(this);
+
+            linkedUI.gameObject.SetActive(false);
+            linkedUI = null;
+
+            player.TurnFinishAction -= turnFinishAct;
         }
     }
 
@@ -30,4 +57,9 @@ public class MissileScript
         player.missileReadyToShoot.Remove(this);
     }
     
+    public MissileScript(MissileData data)
+    {
+        this.data = data;
+        Start();
+    }
 }

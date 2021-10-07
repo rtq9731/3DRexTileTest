@@ -6,30 +6,18 @@ using UnityEngine;
 [Serializable]
 public class MissileData
 {
-    public int WarHeadDamage
-    {
-        get { return WarHeadDamage; } set { WarHeadDamage = value; }
-    }
+    public int warHeadDamage;
 
-    public int TurnForMissileReady
-    {
-        get { return TurnForMissileReady; } set { TurnForMissileReady = value; }
-    }
+    public int turnForMissileReady;
 
-    public MissileTypes.MissileEngineType EngineTier
-    {
-        get { return EngineTier; } set { EngineTier = value; }
-    }
+    public MissileTypes.MissileEngineType engineTier;
 
-    public MissileTypes.MissileWarheadType WarheadType
-    {
-        get { return WarheadType; } set { WarheadType = value; }
-    }
+    public MissileTypes.MissileWarheadType warheadType;
 
     public MissileData(int turn, MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType)
     {
-        TurnForMissileReady = turn;
-        EngineTier = engine;
-        WarheadType = warheadType;
+        this.turnForMissileReady = turn;
+        this.engineTier = engine;
+        this.warheadType = warheadType;
     }
 }

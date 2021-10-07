@@ -28,7 +28,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     private void Awake()
     {
-        TurnFinishAction = null;
+        TurnFinishAction = () => { }; // 액션 초기화
     }
 
     protected void Start()

@@ -36,6 +36,11 @@ public class MainSceneManager : MonoBehaviour
         UIStackManager.RemoveUIOnTopWithNoTime();
     }
 
+    public PlayerScript GetPlayer()
+    {
+        return players.Find(x => x.MyName == PlayerName);
+    }
+
     public bool CheckTurnFinish()
     {
         if(players.Find(x => x.IsTurnFinish == false))

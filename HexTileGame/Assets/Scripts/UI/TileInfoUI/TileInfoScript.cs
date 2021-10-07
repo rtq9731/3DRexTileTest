@@ -83,9 +83,6 @@ public class TileInfoScript : MonoBehaviour
         ownerText.text = $"소유주 : {ownerName}";
         groundTypeText.text = $"지형 : {tile.Data.type}";
 
-        var a = Resources.Load<Sprite>("TileIcon/WaterIcon");
-        Debug.Log(a);
-
         string info;
         switch (tile.Data.type)
         {
