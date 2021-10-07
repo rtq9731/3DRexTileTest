@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanelMissile : MonoBehaviour, ITurnFinishObj
+public class PanelMissile : MonoBehaviour
 {
     private void OnEnable()
     {
@@ -10,8 +10,4 @@ public class PanelMissile : MonoBehaviour, ITurnFinishObj
         Debug.Log(gameObject);
     }
 
-    public void TurnFinish()
-    {
-        throw new System.NotImplementedException();
-    }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,12 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         get { return myName; }
     }
 
+    public Action TurnFinishAction;
+
     public List<TileScript> owningTiles = new List<TileScript>();
-    public List<MissileData> missiles = new List<MissileData>();
+
+    public List<MissileScript> missileInMaking = new List<MissileScript>();
+    public List<MissileScript> missileReadyToShoot = new List<MissileScript>();
 
     bool isTurnFinish = false;
     public bool IsTurnFinish { get { return isTurnFinish; } }
@@ -21,14 +26,15 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     int resouceTank = 0;
     public int ResourceTank { get { return resouceTank; } }
 
+    private void Awake()
+    {
+        TurnFinishAction = null;
+    }
+
     protected void Start()
     {
         MainSceneManager.Instance.Players.Add(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
-    }
-
-    public void FinishTurn()
-    {
     }
 
     public void StartNewTurn()
@@ -52,6 +58,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         {
             isTurnFinish = true;
 
+            TurnFinishAction();
             owningTiles.ForEach(x => x.TurnFinish());
             MainSceneManager.Instance.CheckTurnFinish();
         }

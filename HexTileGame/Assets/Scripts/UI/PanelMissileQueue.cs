@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class PanelMissileQueue : MonoBehaviour
 {
-    [SerializeField] Text textMissileName;
+    [SerializeField] Text textMissileWarhead;
     [SerializeField] Text textMissileMakeTime;
     
-    public void SetData()
+    public void SetData(MissileData data)
     {
-
+        
     }
 }

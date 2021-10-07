@@ -21,6 +21,6 @@ public class UITopBar : MonoBehaviour
 
         resourceText.text = $"{player.ResourceTank}";
         turnCntText.text = $"ео : {MainSceneManager.Instance.turnCnt}";
-        missileText.text = $"{player.missiles.Count} / {player.owningTiles.Count}";
+        missileText.text = $"{player.missileInMaking.Count + player.missileReadyToShoot.Count} / {player.owningTiles.Count}";
     }
 }
