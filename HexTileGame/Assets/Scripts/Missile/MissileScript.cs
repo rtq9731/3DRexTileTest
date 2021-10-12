@@ -8,17 +8,6 @@ public class MissileScript
     MissileData data = null;
     PlayerScript player = null;
 
-    private PanelMissileQueueElement linkedUI;
-    public PanelMissileQueueElement LinkedUI
-    {
-        get { return linkedUI; }
-        set
-        {
-            linkedUI = value;
-            value.SetData(data);
-        }
-    }
-
     public void Start()
     {
         player = MainSceneManager.Instance.GetPlayer();
@@ -39,15 +28,8 @@ public class MissileScript
     public void turnFinishAct()
     {
         this.data.turnForMissileReady--;
-        linkedUI.SetData(data);
         if (data.turnForMissileReady == 0)
         {
-            player.missileInMaking.Remove(this);
-            player.missileReadyToShoot.Add(this);
-
-            linkedUI.gameObject.SetActive(false);
-            linkedUI = null;
-
             player.TurnFinishAction -= turnFinishAct;
         }
     }
