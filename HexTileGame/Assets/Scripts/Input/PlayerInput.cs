@@ -10,8 +10,6 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] CameraMove cameraMoveScript;
     [SerializeField] LayerMask whereIsTile;
 
-    private int fingerID = -1;
-
     RaycastHit hit;
 
     bool isSimplePanelOn = false;
@@ -31,16 +29,16 @@ public class PlayerInput : MonoBehaviour
         }
 
         isUINotEmpty = UIStackManager.IsUIStackEmpty();
-        if (isUINotEmpty) // 다른 UI가 아무것도 올라가있지 않을 때.
+        if (isUINotEmpty && Camera.main.transform.position == cameraMoveScript.transform.position) // 다른 UI가 아무것도 올라가있지 않을 때 / 카메라 애니메이션이 끝났을 때
         {
             if(!cameraMoveScript.enabled)
             {
-                cameraMoveScript.enabled = isUINotEmpty;
+                cameraMoveScript.enabled = isUINotEmpty; // 원래카메라를 움직일 수 없게 만들어줌
             }
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (EventSystem.current.IsPointerOverGameObject(fingerID))    // is the touch on the GUI
+                if (EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
                 {
                     return;
                 }
@@ -95,7 +93,7 @@ public class PlayerInput : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
         {
-            if (!EventSystem.current.IsPointerOverGameObject(fingerID))    // is the touch on the GUI
+            if (!EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
             {
                 if (hit.transform.GetComponent<TileScript>() != null)
                 {

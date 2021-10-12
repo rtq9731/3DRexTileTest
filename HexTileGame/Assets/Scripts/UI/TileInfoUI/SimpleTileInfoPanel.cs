@@ -12,19 +12,28 @@ public class SimpleTileInfoPanel : MonoBehaviour
     [SerializeField] Text rangeText;
     [SerializeField] Text shieldText;
     [SerializeField] Text attackPowerText;
-    [SerializeField] Text productText;    
+    [SerializeField] Text productText;
+
+    private Image myImage = null;
+
 
     public void CallSimpleTileInfoPanel(TileScript tile)
     {
-        DOTween.Kill(this.gameObject);
+        if(myImage == null)
+        {
+            myImage = GetComponent<Image>();
+        }
+
+        DOTween.Kill(myImage);
         gameObject.transform.position = Input.mousePosition;
-        gameObject.transform.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        gameObject.transform.position += new Vector3(0.5f, 0, 0);
+        myImage.color = new Color(1, 1, 1, 0);
 
         gameObject.SetActive(true);
 
         TileData data = tile.Data;
 
-        gameObject.transform.GetComponent<Image>().DOFade(1, 0.3f).SetEase(Ease.OutQuad);
+        myImage.DOFade(1, 0.3f).SetEase(Ease.OutQuad);
 
         string ownerName = tile.Owner != null ? tile.Owner.MyName : "None";
         ownerText.text = $"¼ÒÀ¯ÀÚ : {ownerName}";
@@ -41,6 +50,6 @@ public class SimpleTileInfoPanel : MonoBehaviour
         if (!gameObject.activeSelf)
             return;
 
-        gameObject.transform.GetComponent<Image>().DOFade(0, 0.3f).SetEase(Ease.InQuint).OnComplete(() => gameObject.SetActive(false));
+        myImage.DOFade(0, 0.3f).SetEase(Ease.InQuint).OnComplete(() => gameObject.SetActive(false));
     }
 }
