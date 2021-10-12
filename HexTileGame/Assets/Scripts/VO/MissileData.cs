@@ -6,13 +6,41 @@ using UnityEngine;
 [Serializable]
 public class MissileData
 {
-    public int warHeadDamage;
+    [SerializeField]
+    int warHeadDamage;
 
-    public int turnForMissileReady;
+    public int WarHeadDamage
+    {
+        get { return warHeadDamage; }
+        set { warHeadDamage = value; }
+    }
 
-    public MissileTypes.MissileEngineType engineTier;
+    [SerializeField]
+    int turnForMissileReady;
+    
+    public int TurnForMissileReady
+    {
+        get { return turnForMissileReady; }
+        set { turnForMissileReady = value; }
+    }
 
-    public MissileTypes.MissileWarheadType warheadType;
+    [SerializeField]
+    MissileTypes.MissileEngineType engineTier;
+
+    public MissileTypes.MissileEngineType EngineTier
+    {
+        get { return engineTier; }
+        set { engineTier = value; }
+    }
+
+    [SerializeField]
+    MissileTypes.MissileWarheadType warheadType;
+
+    public MissileTypes.MissileWarheadType WarheadType
+    {
+        get { return warheadType; }
+        set { warheadType = value; }
+    }
 
     public MissileData(int turn, MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType)
     {

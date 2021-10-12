@@ -17,10 +17,10 @@ public class PanelMissileQueue : MonoBehaviour
 
     public void RefreshMissileQueue(List<MissileData> missiles)
     {
-        queuePanelPool.ForEach(x => x.gameObject.SetActive(false));
-
+        queuePanelPool.ForEach(x => x.SetActive(false));
         foreach (var item in missiles)
         {
+            Debug.Log(item);
             GetQueuePanel(out MissileMakeInfo info).SetActive(true);
             info.SetData(item);
         }
@@ -39,13 +39,15 @@ public class PanelMissileQueue : MonoBehaviour
             }
             else
             {
-                result = Instantiate(missileQueuePanelPrefab, transform);
+                result = Instantiate(missileQueuePanelPrefab, infoPanelParent);
+                queuePanelPool.Add(result);
                 info = result.GetComponent<MissileMakeInfo>();
             }
         }
         else
         {
-            result = Instantiate(missileQueuePanelPrefab, transform);
+            result = Instantiate(missileQueuePanelPrefab, infoPanelParent);
+            queuePanelPool.Add(result);
             info = result.GetComponent<MissileMakeInfo>();
         }
 

@@ -29,6 +29,9 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     private void Awake()
     {
         TurnFinishAction = () => { }; // 액션 초기화
+        TurnFinishAction += () => {
+            missileInMaking.ForEach(x => x.TurnForMissileReady--);
+            };
     }
 
     protected void Start()

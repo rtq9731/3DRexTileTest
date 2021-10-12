@@ -10,7 +10,7 @@ public class MissileMakeInfo : MonoBehaviour
 
     public void SetData(MissileData data)
     {
-        textMissileWarhead.text = $"{data.warheadType} 생산 중";
-        textMissileMakeTime.text = $"{data.turnForMissileReady} 턴 뒤에 생산";
+        textMissileWarhead.text = $"{data.WarheadType} 생산 중";
+        textMissileMakeTime.text = $"{data.TurnForMissileReady} 턴 뒤에 생산";
     }
 }
