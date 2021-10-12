@@ -17,8 +17,8 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public List<TileScript> owningTiles = new List<TileScript>();
 
-    public List<MissileScript> missileInMaking = new List<MissileScript>();
-    public List<MissileScript> missileReadyToShoot = new List<MissileScript>();
+    public List<MissileData> missileInMaking = new List<MissileData>();
+    public List<MissileData> missileReadyToShoot = new List<MissileData>();
 
     bool isTurnFinish = false;
     public bool IsTurnFinish { get { return isTurnFinish; } }

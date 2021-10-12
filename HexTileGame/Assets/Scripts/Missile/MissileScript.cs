@@ -11,7 +11,6 @@ public class MissileScript
     public void Start()
     {
         player = MainSceneManager.Instance.GetPlayer();
-        player.missileInMaking.Add(this);
 
         player.TurnFinishAction += turnFinishAct;
         Debug.Log(player.TurnFinishAction);
@@ -36,7 +35,7 @@ public class MissileScript
 
     public void Fire(TileScript targetTile) // TODO : 미사일 오브젝트 풀에서 하나 뽑아와서 쏘도록 만드셈.
     {
-        player.missileReadyToShoot.Remove(this);
+
     }
     
     public MissileScript(MissileData data)
