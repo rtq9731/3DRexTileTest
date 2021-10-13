@@ -31,6 +31,10 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         TurnFinishAction = () => { }; // 액션 초기화
         TurnFinishAction += () => {
             missileInMaking.ForEach(x => x.TurnForMissileReady--);
+            missileInMaking.FindAll(x => x.TurnForMissileReady <= 0).ForEach(x => {
+                missileInMaking.Remove(x);
+                missileReadyToShoot.Add(x);
+                });
             };
     }
 
