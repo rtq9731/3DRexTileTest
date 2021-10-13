@@ -4,7 +4,5 @@ using UnityEngine;
 
 public class MissilePool
 {
-    static Queue<MissileScript> missileQueue = new Queue<MissileScript>();
-
 
 }

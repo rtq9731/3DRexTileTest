@@ -1134,85 +1134,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206406732}
   m_CullTransparentMesh: 1
---- !u!1 &235647675
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 235647676}
-  - component: {fileID: 235647678}
-  - component: {fileID: 235647677}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &235647676
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235647675}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 309682093}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &235647677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235647675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 3bb0c42d2eb2b8241b5f95cbcab894c1, type: 3}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\uD134 \uB05D\uB0B4\uAE30"
---- !u!222 &235647678
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235647675}
-  m_CullTransparentMesh: 1
 --- !u!1 &252962068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1173,7 @@ RectTransform:
   - {fileID: 1273997093}
   - {fileID: 424986473}
   m_Father: {fileID: 2078170048}
-  m_RootOrder: 1
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1369,8 +1290,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 235647676}
+  m_Children: []
   m_Father: {fileID: 587044496}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1443,8 +1363,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 5007cac7c2cfbfc4986a6e4ad92dbe3f, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1895,7 +1815,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 424986475}
   m_OnClick:
     m_PersistentCalls:
@@ -3150,7 +3070,7 @@ RectTransform:
   - {fileID: 370204486}
   - {fileID: 1559425525}
   m_Father: {fileID: 2078170048}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3630,6 +3550,8 @@ MonoBehaviour:
   myName: 
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   owningTiles: []
+  missileInMaking: []
+  missileReadyToShoot: []
   playerName: COCONUT
   color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &837855647
@@ -3780,7 +3702,7 @@ RectTransform:
   - {fileID: 73704570}
   - {fileID: 102793051}
   m_Father: {fileID: 2078170048}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6201,6 +6123,7 @@ GameObject:
   - component: {fileID: 1246954981}
   - component: {fileID: 1246954980}
   - component: {fileID: 1246954979}
+  - component: {fileID: 1246954982}
   m_Layer: 5
   m_Name: PanelMissileQueue
   m_TagString: Untagged
@@ -6296,6 +6219,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246954977}
   m_CullTransparentMesh: 1
+--- !u!114 &1246954982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246954977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd494a383d49d034695d95a31470750f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missileQueuePanelPrefab: {fileID: 4432764156953882345, guid: f0e35cefb970f924aa8a1ed52c587500, type: 3}
+  infoPanelParent: {fileID: 950575985}
 --- !u!1 &1248353366
 GameObject:
   m_ObjectHideFlags: 0
@@ -6329,7 +6266,7 @@ RectTransform:
   - {fileID: 1091954268}
   - {fileID: 859355666}
   m_Father: {fileID: 2078170048}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8067,7 +8004,7 @@ RectTransform:
   - {fileID: 1855598949}
   - {fileID: 1246954978}
   m_Father: {fileID: 2078170048}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8133,12 +8070,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1642626835}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f816aa3f3b150974d816528956d83d77, type: 3}
+  m_Script: {fileID: 11500000, guid: fc92ca3ed8897db418f26fb42e1f59a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelMissileQueue: {fileID: 1246954982}
   btnMakeMissile: {fileID: 461995345}
-  panelMissileQueueElementPrefab: {fileID: 4432764156953882345, guid: f0e35cefb970f924aa8a1ed52c587500, type: 3}
-  PanelMissileQueue: {fileID: 950575984}
 --- !u!1 &1688460735
 GameObject:
   m_ObjectHideFlags: 0
@@ -9396,7 +9332,7 @@ RectTransform:
   - {fileID: 1041886265}
   - {fileID: 1096757381}
   m_Father: {fileID: 2078170048}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -9650,12 +9586,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 587044496}
-  - {fileID: 252962069}
   - {fileID: 649260660}
   - {fileID: 2064198105}
   - {fileID: 842902937}
   - {fileID: 1248353367}
   - {fileID: 1642626836}
+  - {fileID: 252962069}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
