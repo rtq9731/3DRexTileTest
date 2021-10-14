@@ -382,7 +382,6 @@ GameObject:
   - component: {fileID: 25290182}
   - component: {fileID: 25290184}
   - component: {fileID: 25290183}
-  - component: {fileID: 25290186}
   - component: {fileID: 25290185}
   m_Layer: 5
   m_Name: PanelSelectMissilePart
@@ -466,25 +465,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlockedPartParent: {fileID: 1304655196}
   infoPanelPrefab: {fileID: 4114191597541617180, guid: 53d36f6635ce75a46a47088389dfc2cb, type: 3}
-  btnOk: {fileID: 0}
+  btnOk: {fileID: 1231269646}
+  panelMissileMaker: {fileID: 1642626840}
   partIcon: {fileID: 942872596}
   textPartName: {fileID: 1784966231}
   textPartATK: {fileID: 1019947761}
   textMakeTurn: {fileID: 138683496}
   textWeight: {fileID: 1414802561}
   textPartInfo: {fileID: 508499424}
---- !u!114 &25290186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25290181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 919ea34b703cee94f8f5c31f06629de2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  player: {fileID: 835838797}
 --- !u!1 &26485760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,7 +1429,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3bb0c42d2eb2b8241b5f95cbcab894c1, type: 3}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -3787,7 +3776,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3bb0c42d2eb2b8241b5f95cbcab894c1, type: 3}
-    m_FontSize: 14
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -7950,7 +7939,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3bb0c42d2eb2b8241b5f95cbcab894c1, type: 3}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -8933,6 +8922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa7510f7ac216b4da08667b30596554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missileWarhead: {fileID: 11400000, guid: 69129ba1da86ee64a92484892dc55dda, type: 2}
+  missileEngine: {fileID: 11400000, guid: 5579cbf8b3bc5714fb791ec5ab4dfbab, type: 2}
   InfoPanel: {fileID: 252962072}
   tileVcam: {fileID: 1566210787}
   tileChecker: {fileID: 974116145}
@@ -8941,6 +8932,7 @@ MonoBehaviour:
   TileXInterval: 1
   turnCnt: 0
   PlayerName: COCONUT
+  player: {fileID: 835838797}
 --- !u!114 &1113051653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10809,6 +10801,7 @@ GameObject:
   - component: {fileID: 1366990040}
   - component: {fileID: 1366990042}
   - component: {fileID: 1366990041}
+  - component: {fileID: 1366990043}
   m_Layer: 5
   m_Name: PanelSelectMissilePartBG
   m_TagString: Untagged
@@ -10874,6 +10867,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366990039}
   m_CullTransparentMesh: 1
+--- !u!114 &1366990043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366990039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919ea34b703cee94f8f5c31f06629de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1369930772
 GameObject:
   m_ObjectHideFlags: 0
@@ -11137,7 +11142,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3bb0c42d2eb2b8241b5f95cbcab894c1, type: 3}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -12623,9 +12628,16 @@ MonoBehaviour:
   panelMissileQueue: {fileID: 1246954982}
   btnMakeMissile: {fileID: 461995345}
   selector: {fileID: 25290185}
-  btnSelectWarhead: {fileID: 0}
-  btnSelectMaterial: {fileID: 0}
-  btnSelectEngine: {fileID: 0}
+  btnSelectWarhead: {fileID: 1842882749}
+  btnSelectMaterial: {fileID: 1112670168}
+  btnSelectEngine: {fileID: 1771734715}
+  missileBluePrint:
+    missileRange: 0
+    warHeadDamage: 0
+    turnForMissileReady: 0
+    engineTier: 0
+    warheadType: 0
+    missileInfo: 
 --- !u!1 &1667062866
 GameObject:
   m_ObjectHideFlags: 0

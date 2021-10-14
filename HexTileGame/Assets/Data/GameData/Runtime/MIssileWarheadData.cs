@@ -25,12 +25,12 @@ public class MissileWarheadData
   public int Makingtime { get {return makingtime; } set { this.makingtime = value;} }
   
   [SerializeField]
-  int weight;
-  public int Weight { get {return weight; } set { this.weight = value;} }
-  
-  [SerializeField]
   int atk;
   public int Atk { get {return atk; } set { this.atk = value;} }
+  
+  [SerializeField]
+  int weight;
+  public int Weight { get {return weight; } set { this.weight = value;} }
   
   [SerializeField]
   string info;

@@ -13,7 +13,7 @@ public class SelectedMissileInfo : MonoBehaviour
 
     public void RefreshTexts(MissileData data)
     {
-        MissileWarheadData warheadData = MissileWarhead.GetWarheadData(data.WarheadType);
+        MissileWarheadData warheadData = MainSceneManager.Instance.GetWarheadData(data.WarheadType);
         textMissileWarheadType.text = $"장착된 미사일 탄두 : {warheadData.Name}";
         textMissileRange.text = $"미사일의 사거리 : { data.MissileRange }";
         textInfoWarheadName.text = $"{warheadData.Name}의 특징 : ";

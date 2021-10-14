@@ -41,8 +41,8 @@ public class MissileData
         get { return engineTier; }
         set { 
             engineTier = value;
-            missileRange = MissileEngine.GetEngineData(engineTier).Weight - MissileWarhead.GetWarheadData(warheadType).Weight;
-            turnForMissileReady = MissileEngine.GetEngineData(engineTier).Makingtime + MissileWarhead.GetWarheadData(warheadType).Makingtime;
+            missileRange = MainSceneManager.Instance.GetEngineData(engineTier).Weight - MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
+            turnForMissileReady = MainSceneManager.Instance.GetEngineData(engineTier).Makingtime + MainSceneManager.Instance.GetWarheadData(warheadType).Makingtime;
         }
     }
 
@@ -53,9 +53,9 @@ public class MissileData
         get { return warheadType; }
         set { 
             warheadType = value;
-            warHeadDamage = MissileWarhead.GetWarheadData(warheadType).Atk;
-            missileRange = MissileEngine.GetEngineData(engineTier).Weight - MissileWarhead.GetWarheadData(warheadType).Weight;
-            turnForMissileReady = MissileEngine.GetEngineData(engineTier).Makingtime + MissileWarhead.GetWarheadData(warheadType).Makingtime;
+            warHeadDamage = MainSceneManager.Instance.GetWarheadData(warheadType).Atk;
+            missileRange = MainSceneManager.Instance.GetEngineData(engineTier).Weight - MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
+            turnForMissileReady = MainSceneManager.Instance.GetEngineData(engineTier).Makingtime + MainSceneManager.Instance.GetWarheadData(warheadType).Makingtime;
         }
     }
 

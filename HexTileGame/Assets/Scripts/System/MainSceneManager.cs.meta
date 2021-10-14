@@ -3,7 +3,13 @@ guid: baa7510f7ac216b4da08667b30596554
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - missileWarhead: {instanceID: 0}
+  - missileEngine: {fileID: 11400000, guid: 5579cbf8b3bc5714fb791ec5ab4dfbab, type: 2}
+  - InfoPanel: {instanceID: 0}
+  - tileVcam: {instanceID: 0}
+  - tileChecker: {instanceID: 0}
+  - uiTopBar: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

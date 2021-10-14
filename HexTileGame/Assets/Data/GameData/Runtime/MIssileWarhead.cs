@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,9 +11,7 @@ using System.Collections.Generic;
 /// 
 [System.Serializable]
 public class MissileWarhead : ScriptableObject 
-{
-    static MissileWarhead instance = null;
-
+{	
     [HideInInspector] [SerializeField] 
     public string SheetName = "";
     
@@ -23,17 +20,7 @@ public class MissileWarhead : ScriptableObject
     
     // Note: initialize in OnEnable() not here.
     public MissileWarheadData[] dataArray;
-    private List<MissileWarheadData> dataList = new List<MissileWarheadData>();
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
-    private void OnDestroy()
-    {
-        instance = null;
-    }
+    public List<MissileWarheadData> dataList = new List<MissileWarheadData>();
 
     void OnEnable()
     {		
@@ -52,21 +39,10 @@ public class MissileWarhead : ScriptableObject
         {
             dataList.Add(dataArray[i]);
         }
-
     }
     
     //
     // Highly recommand to use LINQ to query the data sources.
     //
-
-    public static MissileWarheadData GetWarheadData(MissileTypes.MissileWarheadType type)
-    {
-        return instance.dataList.Find(x => x.TYPE == type);
-    }
-
-    public static MissileWarheadData GetWarheadByIdx(int idx)
-    {
-        return instance.dataArray[idx];
-    }
 
 }

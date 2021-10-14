@@ -6,6 +6,29 @@ public class MainSceneManager : MonoBehaviour
 {
     public static MainSceneManager Instance = null;
 
+    [SerializeField] MissileWarhead missileWarhead;
+    [SerializeField] MissileEngine missileEngine;
+
+    public MissileWarheadData GetWarheadData(MissileTypes.MissileWarheadType type)
+    {
+        return missileWarhead.dataList.Find(x => x.TYPE == type);
+    }
+
+    public MissileWarheadData GetWarheadByIdx(int idx)
+    {
+        return missileWarhead.dataArray[idx];
+    }
+
+    public MissileEngineData GetEngineData(MissileTypes.MissileEngineType type)
+    {
+        return missileEngine.dataList.Find(x => x.TYPE == type);
+    }
+
+    public MissileWarheadData GetEngineDataByIdx(int idx)
+    {
+        return missileWarhead.dataArray[idx];
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -30,6 +53,8 @@ public class MainSceneManager : MonoBehaviour
     List<PlayerScript> players = new List<PlayerScript>();
     public List<PlayerScript> Players { get { return players; } set { players = value; } }
 
+    [SerializeField] PersonPlayer player = null;
+
     private void Start()
     {
         InfoPanel = FindObjectOfType<TileInfoScript>();
@@ -38,7 +63,7 @@ public class MainSceneManager : MonoBehaviour
 
     public PlayerScript GetPlayer()
     {
-        return players.Find(x => x.MyName == PlayerName);
+        return player;
     }
 
     public bool CheckTurnFinish()

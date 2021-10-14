@@ -21,18 +21,10 @@ public class PanelPartSelector : MonoBehaviour
     [SerializeField] Text textWeight = null;
     [SerializeField] Text textPartInfo = null;
 
-    private PlayerScript player;
-    private void OnEnable()
-    {
-        if(player == null)
-        {
-            MainSceneManager.Instance.GetPlayer();
-        }
-    }
+    [SerializeField] private PlayerScript player = null;
 
     public void InitPanelInNull(PanelMissileMaker.partType part)
     {
-        Debug.Log(transform.parent.gameObject);
         transform.parent.gameObject.SetActive(true);
 
         partPanelPool.ForEach(x => x.gameObject.SetActive(false));
@@ -44,15 +36,19 @@ public class PanelPartSelector : MonoBehaviour
             case PanelMissileMaker.partType.Engine:
                 foreach (var item in player.UnlockedEngineIdx)
                 {
-                    GetNewInfoPanel(out PanelPartinfo info);
-                    info.InitPanelPartInfo(MissileEngine.GetMissileDataByIdx(item));
+                    GetNewInfoPanel(out PanelPartinfo element);
+                    Debug.Log(element);
+                    element.partSelector = this;
+                    element.InitPanelPartInfo(MainSceneManager.Instance.GetEngineDataByIdx(item));
                 }
                 break;
             case PanelMissileMaker.partType.Warhead:
                 foreach (var item in player.unlockedWarheadIdx)
                 {
-                    GetNewInfoPanel(out PanelPartinfo info);
-                    info.InitPanelPartInfo(MissileWarhead.GetWarheadByIdx(item));
+                    GetNewInfoPanel(out PanelPartinfo element);
+                    Debug.Log(element);
+                    element.partSelector = this;
+                    element.InitPanelPartInfo(MainSceneManager.Instance.GetWarheadByIdx(item));
 
                 }
                 break;
@@ -61,6 +57,7 @@ public class PanelPartSelector : MonoBehaviour
         }
 
         textPartName.text = "선택된 부품 없음";
+        textPartATK.text = "";
         textWeight.text = "";
         textMakeTurn.text = "";
         textPartInfo.text = "";
@@ -77,8 +74,9 @@ public class PanelPartSelector : MonoBehaviour
         textPartATK.transform.parent.gameObject.SetActive(true);
 
         textPartName.text = warhead.Name;
-        textWeight.text = $"{warhead.Weight}";
-        textMakeTurn.text = $"{warhead.Makingtime}";
+        textPartATK.text = $"탄두의 공격력 : {warhead.Atk}";
+        textWeight.text = $"탄두의 무게 : {warhead.Weight}";
+        textMakeTurn.text = $"제작에 걸리는 시간 : {warhead.Makingtime} 턴";
         textPartInfo.text = warhead.Info;
     }
 
@@ -93,7 +91,7 @@ public class PanelPartSelector : MonoBehaviour
         textPartATK.transform.parent.gameObject.SetActive(false);
 
         textPartName.text = engine.Name;
-        textMakeTurn.text = $"{engine.Makingtime}";
+        textMakeTurn.text = $"제작에 걸리는 시간 : {engine.Makingtime} 턴";
         textPartInfo.text = engine.Info;
     }
 
@@ -122,6 +120,7 @@ public class PanelPartSelector : MonoBehaviour
             element = result.GetComponent<PanelPartinfo>();
         }
 
+        result.SetActive(true);
         return result;
     }
 }
