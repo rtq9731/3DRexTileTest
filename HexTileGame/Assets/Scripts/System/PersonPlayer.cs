@@ -8,9 +8,6 @@ public class PersonPlayer : PlayerScript
     [SerializeField] string playerName;
     [SerializeField] Color color;
 
-    List<int> unlockedWarheadIdx = new List<int>();
-    List<int> unlockedEngineIdx = new List<int>();
-
     private void Start()
     {
         MainSceneManager.Instance.PlayerName = playerName;

@@ -11,6 +11,7 @@ public class PanelMissileMaker : MonoBehaviour
     [SerializeField] Button btnMakeMissile = null;
 
     [Header("About Parts")]
+    [SerializeField] PanelPartSelector selector;
     [SerializeField] Button btnSelectWarhead;
     [SerializeField] Button btnSelectMaterial;
     [SerializeField] Button btnSelectEngine;
@@ -29,12 +30,23 @@ public class PanelMissileMaker : MonoBehaviour
         }
 
         panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
+
+        btnSelectMaterial.onClick.AddListener(() => OnClickSelectpart(partType.Material));
+        btnSelectEngine.onClick.AddListener(() => OnClickSelectpart(partType.Engine));
+        btnSelectWarhead.onClick.AddListener(() => OnClickSelectpart(partType.Warhead));
     }
 
-    public void OnClickSelectPart(MissileData data)
+    public void OnClickSelectpart(partType part)
     {
-
+        selector.InitPanelInNull(part);
     }
+
+    public enum partType
+    {
+        Material,
+        Engine,
+        Warhead
+    };
 
     public void OnClickMakeMissile()
     {

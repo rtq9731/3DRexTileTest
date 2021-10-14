@@ -19,7 +19,7 @@ public class PanelPartinfo : MonoBehaviour
         {
             if (isOn)
             {
-                partSelector.InitPartSelector(warhead);
+                partSelector.InitPartText(warhead);
             }
         });
     }
@@ -27,14 +27,14 @@ public class PanelPartinfo : MonoBehaviour
     public void InitPanelPartInfo(MissileEngineData engine)
     {
         textName.text = engine.Name;
-        partSelector.InitPartSelector(engine);
+        partSelector.InitPartText(engine);
 
         myToggle.onValueChanged.RemoveAllListeners();
         myToggle.onValueChanged.AddListener(isOn =>
         {
             if (isOn)
             {
-                partSelector.InitPartSelector(engine);
+                partSelector.InitPartText(engine);
             }
         });
     }

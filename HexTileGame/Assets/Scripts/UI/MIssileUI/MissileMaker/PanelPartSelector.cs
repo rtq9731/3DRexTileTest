@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class PanelPartSelector : MonoBehaviour
 {
     [SerializeField] Transform unlockedPartParent = null;
-    [SerializeField] PanelPartinfo infoPanelPrefab = null;
+    [SerializeField] GameObject infoPanelPrefab = null;
+
+    List<GameObject> partPanelPool = new List<GameObject>();
 
     [Header("About MissilePart Info")]
     [SerializeField] Image partIcon = null;
@@ -25,7 +27,7 @@ public class PanelPartSelector : MonoBehaviour
         }
     }
 
-    public void InitPanelInNull()
+    public void InitPanelInNull(PanelMissileMaker.partType part)
     {
         textPartName.text = "선택된 부품 없음";
         textWeight.text = "";
@@ -33,7 +35,7 @@ public class PanelPartSelector : MonoBehaviour
         textPartInfo.text = "";
     }
 
-    public void InitPartSelector(MissileWarheadData warhead)
+    public void InitPartText(MissileWarheadData warhead)
     {
         textPartATK.transform.parent.gameObject.SetActive(true);
 
@@ -43,7 +45,7 @@ public class PanelPartSelector : MonoBehaviour
         textPartInfo.text = warhead.Info;
     }
 
-    public void InitPartSelector(MissileEngineData engine)
+    public void InitPartText(MissileEngineData engine)
     {
         textPartATK.transform.parent.gameObject.SetActive(false);
 
@@ -52,8 +54,31 @@ public class PanelPartSelector : MonoBehaviour
         textPartInfo.text = engine.Info;
     }
 
-    private GameObject GetNewInfoPanel(out PanelPartinfo info)
+    private GameObject GetNewInfoPanel(out PanelPartinfo element)
     {
+        GameObject result = null;
+        element = null;
+        if (partPanelPool.Count > 1)
+        {
+            result = partPanelPool.Find(x => !x.activeSelf);
+            if (result != null)
+            {
+                element = result.GetComponent<PanelPartinfo>();
+            }
+            else
+            {
+                result = Instantiate(infoPanelPrefab, unlockedPartParent);
+                partPanelPool.Add(result);
+                element = result.GetComponent<PanelPartinfo>();
+            }
+        }
+        else
+        {
+            result = Instantiate(infoPanelPrefab, unlockedPartParent);
+            partPanelPool.Add(result);
+            element = result.GetComponent<PanelPartinfo>();
+        }
 
+        return result;
     }
 }
