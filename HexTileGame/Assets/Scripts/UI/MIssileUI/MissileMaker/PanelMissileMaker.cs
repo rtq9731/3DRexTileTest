@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PanelMissile : MonoBehaviour
+public class PanelMissileMaker : MonoBehaviour
 {
     private PlayerScript player = null;
 
     [SerializeField] PanelMissileQueue panelMissileQueue = null;
     [SerializeField] Button btnMakeMissile = null;
 
+    [Header("About Parts")]
+    [SerializeField] Button btnSelectWarhead;
+    [SerializeField] Button btnSelectMaterial;
+    [SerializeField] Button btnSelectEngine;
 
 
     private void Start()
@@ -27,6 +31,10 @@ public class PanelMissile : MonoBehaviour
         panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
     }
 
+    public void OnClickSelectPart(MissileData data)
+    {
+
+    }
 
     public void OnClickMakeMissile()
     {

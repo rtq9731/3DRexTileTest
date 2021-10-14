@@ -5,6 +5,18 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
+    public List<int> unlockedWarheadIdx = new List<int>();
+    List<int> UnlockedWarheadIdx
+    {
+        get { return unlockedWarheadIdx; }
+    }
+
+    List<int> unlockedEngineIdx = new List<int>();
+    public List<int> UnlockedEngineIdx
+    {
+        get { return unlockedEngineIdx; }
+    }
+
     [SerializeField] protected string myName = "NULL";
     public Color playerColor;
 
