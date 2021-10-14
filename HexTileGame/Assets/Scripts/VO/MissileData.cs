@@ -35,12 +35,21 @@ public class MissileData
 
     [SerializeField]
     MissileTypes.MissileWarheadType warheadType;
-
     public MissileTypes.MissileWarheadType WarheadType
     {
         get { return warheadType; }
         set { warheadType = value; }
     }
+
+    [SerializeField]
+    string missileInfo;
+    public string MissileInfo
+    {
+        get { return missileInfo; }
+        set { missileInfo = value; }
+    }
+
+
 
     public MissileData(int turn, MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType)
     {

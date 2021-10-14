@@ -6,13 +6,19 @@ using UnityEngine.UI;
 public class UITopExtension : MonoBehaviour
 {
     [Header("연결 해야하는 버튼")]
-    [SerializeField] Button btnMissile;   
+    [SerializeField] Button btnFireMissile;
+    [SerializeField] Button btnReserchMissile;
+    [SerializeField] Button btnMakeMissile;
 
     [Header("연결 되는 패널")]
-    [SerializeField] GameObject panelMissile;
+    [SerializeField] GameObject panelFireMissile;
+    [SerializeField] GameObject panelReserchMissile;
+    [SerializeField] GameObject panelMakeMissile;
 
     private void Awake()
     {
-        btnMissile.onClick.AddListener(() => panelMissile.SetActive(true));
+        btnFireMissile.onClick.AddListener(() => panelFireMissile.SetActive(true));
+        btnReserchMissile.onClick.AddListener(() => panelReserchMissile.SetActive(true));
+        btnMakeMissile.onClick.AddListener(() => panelMakeMissile.SetActive(true));
     }
 }

@@ -38,7 +38,7 @@ public class PlayerInput : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
+                if (EventSystem.current.IsPointerOverGameObject())
                 {
                     return;
                 }
