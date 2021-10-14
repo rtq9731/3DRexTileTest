@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f75662a54ccdd4fac555acce15d166, type: 3}
   m_Name: ExcelTemplate
   m_EditorClassIdentifier: 
-  TemplatePath: QuickSheet/ExcelPlugin/Templates
-  RuntimePath: Data/Runtime
-  EditorPath: Data/Editor
+  TemplatePath: Data/QuickSheet/ExcelPlugin/Templates
+  RuntimePath: Data/GameData/Runtime
+  EditorPath: Data/GameData/Editor

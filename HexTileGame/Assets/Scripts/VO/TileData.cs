@@ -11,8 +11,8 @@ public class TileData
     Vector3 position = Vector3.zero;
 
     int range = 3;
-    int price = 5;
-    int shield = 1;
+    int price = 20;
+    int shield = 100;
     int resource = 3;
     int attackPower = 0;
 
@@ -28,7 +28,7 @@ public class TileData
     {
         SetDataToPlain();
         type = TileType.Forest;
-        shield += 1;
+        shield += 10;
         range -= 1;
     }
 
@@ -50,7 +50,7 @@ public class TileData
 
     public void SetDataToRock()
     {
-        shield += 3;
+        shield += 30;
         attackPower -= 1;
     }
 
@@ -58,6 +58,6 @@ public class TileData
     {
         range = 3;
         resource = 3;
-        shield = 1;
+        shield = 100;
     }
 }

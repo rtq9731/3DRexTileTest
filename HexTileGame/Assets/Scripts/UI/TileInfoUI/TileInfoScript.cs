@@ -45,7 +45,7 @@ public class TileInfoScript : MonoBehaviour
             case TileType.Forest:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/ForestIcon");
                 btnBuy.interactable = true;
-                info = "여러 나무들로 둘러싸인 지형입니다.\n사거리 - 1\n방어력 + 1";
+                info = "여러 나무들로 둘러싸인 지형입니다.\n사거리 - 1\n방어력 + 10";
                 break;
             case TileType.DigSite:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/MineIcon");
@@ -98,7 +98,7 @@ public class TileInfoScript : MonoBehaviour
             case TileType.Forest:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/ForestIcon");
                 btnBuy.interactable = true;
-                info = "여러 나무들로 둘러싸인 지형입니다.\n사거리 - 1\n방어력 + 1";
+                info = "여러 나무들로 둘러싸인 지형입니다.\n사거리 - 1\n방어력 + 10";
                 break;
             case TileType.DigSite:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/MineIcon");

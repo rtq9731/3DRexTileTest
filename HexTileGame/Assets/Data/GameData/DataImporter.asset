@@ -12,13 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e14a72067f1ad408ec8d661bc560ce, type: 3}
   m_Name: DataImporter
   m_EditorClassIdentifier: 
-  templatePath: QuickSheet/ExcelPlugin/Templates
-  scriptFilePath: 
-  editorScriptFilePath: 
-  sheetName: 
-  workSheetName: 
-  columnHeaderList: []
-  excelFilePath: 
+  templatePath: Data/QuickSheet/ExcelPlugin/Templates
+  scriptFilePath: Data/GameData/Runtime
+  editorScriptFilePath: Data/GameData/Editor
+  sheetName: Missiles.xlsx
+  workSheetName: MIssileWarhead
+  columnHeaderList:
+  - type: 2
+    name: idx
+    isEnable: 0
+    isArray: 0
+  - type: 1
+    name: name
+    isEnable: 0
+    isArray: 0
+  - type: 7
+    name: type
+    isEnable: 0
+    isArray: 0
+  - type: 3
+    name: MakingTime
+    isEnable: 0
+    isArray: 0
+  - type: 3
+    name: weight
+    isEnable: 0
+    isArray: 0
+  - type: 0
+    name: atk
+    isEnable: 0
+    isArray: 0
+  - type: 1
+    name: info
+    isEnable: 0
+    isArray: 0
+  excelFilePath: Assets/Data/GameData/Missiles.xlsx
   SheetNames:
-  - 
-  currentSelectedSheet: 0
+  - MissileEngine
+  - MIssileWarhead
+  currentSelectedSheet: 1
