@@ -10,6 +10,8 @@ public class PanelMissile : MonoBehaviour
     [SerializeField] PanelMissileQueue panelMissileQueue = null;
     [SerializeField] Button btnMakeMissile = null;
 
+
+
     private void Start()
     {
         btnMakeMissile.onClick.AddListener(OnClickMakeMissile);
@@ -22,13 +24,13 @@ public class PanelMissile : MonoBehaviour
             player = MainSceneManager.Instance.GetPlayer();
         }
 
-        panelMissileQueue.RefreshMissileQueue(player.missileInMaking);
+        panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
     }
 
 
     public void OnClickMakeMissile()
     {
-        player.missileInMaking.Add(new MissileData(10, MissileTypes.MissileEngineType.commonEngine, MissileTypes.MissileWarheadType.CommonTypeWarhead));
-        panelMissileQueue.RefreshMissileQueue(player.missileInMaking);
+        player.MissileInMaking.Add(new MissileData(10, MissileTypes.MissileEngineType.commonEngine, MissileTypes.MissileWarheadType.CommonTypeWarhead));
+        panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
     }
 }

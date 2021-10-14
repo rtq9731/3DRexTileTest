@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,8 +11,10 @@ using System.Collections.Generic;
 /// can be serialized onto an asset data file.
 /// 
 [System.Serializable]
-public class MIssileWarhead : ScriptableObject 
-{	
+public class MissileWarhead : ScriptableObject 
+{
+    static MissileWarhead instance = null;
+
     [HideInInspector] [SerializeField] 
     public string SheetName = "";
     
@@ -19,8 +22,19 @@ public class MIssileWarhead : ScriptableObject
     public string WorksheetName = "";
     
     // Note: initialize in OnEnable() not here.
-    public MIssileWarheadData[] dataArray;
-    
+    public MissileWarheadData[] dataArray;
+    private List<MissileWarheadData> dataList = new List<MissileWarheadData>();
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        instance = null;
+    }
+
     void OnEnable()
     {		
 //#if UNITY_EDITOR
@@ -32,12 +46,22 @@ public class MIssileWarhead : ScriptableObject
         //    because OnEnable is called whenever Unity builds.
         // 		
         if (dataArray == null)
-            dataArray = new MIssileWarheadData[0];
+            dataArray = new MissileWarheadData[0];
+
+        for (int i = 0; i < dataArray.Length; i++)
+        {
+            dataList.Add(dataArray[i]);
+        }
 
     }
     
     //
     // Highly recommand to use LINQ to query the data sources.
     //
+
+    public static MissileWarheadData GetWarheadData(MissileTypes.MissileWarheadType type)
+    {
+        return instance.dataList.Find(x => x.TYPE == type);
+    }
 
 }

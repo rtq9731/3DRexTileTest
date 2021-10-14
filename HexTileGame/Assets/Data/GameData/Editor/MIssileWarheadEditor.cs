@@ -9,12 +9,12 @@ using UnityQuickSheet;
 ///
 /// !!! Machine generated code !!!
 ///
-[CustomEditor(typeof(MIssileWarhead))]
-public class MIssileWarheadEditor : BaseExcelEditor<MIssileWarhead>
+[CustomEditor(typeof(MissileWarhead))]
+public class MissileWarheadEditor : BaseExcelEditor<MissileWarhead>
 {	    
     public override bool Load()
     {
-        MIssileWarhead targetData = target as MIssileWarhead;
+        MissileWarhead targetData = target as MissileWarhead;
 
         string path = targetData.SheetName;
         if (!File.Exists(path))
@@ -25,7 +25,7 @@ public class MIssileWarheadEditor : BaseExcelEditor<MIssileWarhead>
         ExcelQuery query = new ExcelQuery(path, sheet);
         if (query != null && query.IsValid())
         {
-            targetData.dataArray = query.Deserialize<MIssileWarheadData>().ToArray();
+            targetData.dataArray = query.Deserialize<MissileWarheadData>().ToArray();
             EditorUtility.SetDirty(targetData);
             AssetDatabase.SaveAssets();
             return true;

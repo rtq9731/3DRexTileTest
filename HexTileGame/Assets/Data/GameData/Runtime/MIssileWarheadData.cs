@@ -6,7 +6,7 @@ using System.Collections;
 /// !!! DO NOT CHANGE Tabs to Spaces !!!
 /// 
 [System.Serializable]
-public class MIssileWarheadData
+public class MissileWarheadData
 {
   [SerializeField]
   short idx;

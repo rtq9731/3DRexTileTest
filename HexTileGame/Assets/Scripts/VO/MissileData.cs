@@ -7,6 +7,15 @@ using UnityEngine;
 public class MissileData
 {
     [SerializeField]
+    int missileRange = 0;
+    
+    public int MissileRange
+    {
+        get { return missileRange; }
+        set { missileRange = value; }
+    }
+
+    [SerializeField]
     int warHeadDamage;
 
     public int WarHeadDamage
@@ -56,5 +65,7 @@ public class MissileData
         this.turnForMissileReady = turn;
         this.engineTier = engine;
         this.warheadType = warheadType;
+        missileRange = MissileEngine.GetEngineData(engineTier).Weight - MissileWarhead.GetWarheadData(warheadType).Weight;
+        warHeadDamage = MissileWarhead.GetWarheadData(warheadType).Atk;
     }
 }

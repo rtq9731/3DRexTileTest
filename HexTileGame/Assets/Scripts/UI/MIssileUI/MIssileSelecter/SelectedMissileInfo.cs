@@ -13,9 +13,10 @@ public class SelectedMissileInfo : MonoBehaviour
 
     public void RefreshTexts(MissileData data)
     {
-        textMissileWarheadType.text = $"장착된 미사일 탄두 : {data.WarheadType}";
-        textMissileRange.text = $"미사일의 사거리 : { data.EngineTier }";
-        textInfoWarheadName.text = $"{data.WarheadType}의 특징 : ";
-        textMissileInfo.text = data.MissileInfo;
+        MissileWarheadData warheadData = MissileWarhead.GetWarheadData(data.WarheadType);
+        textMissileWarheadType.text = $"장착된 미사일 탄두 : {warheadData.Name}";
+        textMissileRange.text = $"미사일의 사거리 : { data.MissileRange }";
+        textInfoWarheadName.text = $"{warheadData.Name}의 특징 : ";
+        textMissileInfo.text = warheadData.Info;
     }
 }

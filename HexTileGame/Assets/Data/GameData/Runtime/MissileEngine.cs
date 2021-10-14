@@ -11,7 +11,9 @@ using System.Collections.Generic;
 /// 
 [System.Serializable]
 public class MissileEngine : ScriptableObject 
-{	
+{
+    private static MissileEngine instance = null;
+
     [HideInInspector] [SerializeField] 
     public string SheetName = "";
     
@@ -20,7 +22,19 @@ public class MissileEngine : ScriptableObject
     
     // Note: initialize in OnEnable() not here.
     public MissileEngineData[] dataArray;
-    
+
+    private List<MissileEngineData> dataList = new List<MissileEngineData>();
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        instance = null;
+    }
+
     void OnEnable()
     {		
 //#if UNITY_EDITOR
@@ -35,9 +49,14 @@ public class MissileEngine : ScriptableObject
             dataArray = new MissileEngineData[0];
 
     }
-    
+
     //
     // Highly recommand to use LINQ to query the data sources.
     //
+
+    public static MissileEngineData GetEngineData(MissileTypes.MissileEngineType type)
+    {
+        return instance.dataList.Find(x => x.TYPE == type);
+    }
 
 }

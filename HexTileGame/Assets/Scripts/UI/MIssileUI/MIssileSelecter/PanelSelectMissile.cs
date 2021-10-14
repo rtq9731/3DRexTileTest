@@ -21,14 +21,19 @@ public class PanelSelectMissile : MonoBehaviour
 
     private void Awake()
     {
-        btnOk.onClick.AddListener(FinishSelect);
+        btnOk.onClick.AddListener(OnClickFinishSelect);
     }
 
-    private void FinishSelect()
+    private void OnClickFinishSelect()
     {
         if(fireReadyMissiles.Count < 1)
         {
             return;
+        }
+
+        foreach (var item in fireReadyMissiles)
+        {
+            player.MissileReadyToShoot.Remove(item);
         }
 
         gameObject.SetActive(false);
@@ -41,7 +46,7 @@ public class PanelSelectMissile : MonoBehaviour
             player = MainSceneManager.Instance.GetPlayer();
         }
 
-        waitingMissiles = player.missileReadyToShoot;
+        waitingMissiles = player.MissileReadyToShoot;
         fireReadyMissiles = new List<MissileData>();
 
         missilePanelPool.ForEach(x => x.SetActive(false));

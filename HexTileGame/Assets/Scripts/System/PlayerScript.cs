@@ -15,10 +15,23 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public Action TurnFinishAction;
 
-    public List<TileScript> owningTiles = new List<TileScript>();
+    private List<TileScript> owningTiles = new List<TileScript>();
+    public List<TileScript> OwningTiles
+    {
+        get { return owningTiles; }
+    }
 
-    public List<MissileData> missileInMaking = new List<MissileData>();
-    public List<MissileData> missileReadyToShoot = new List<MissileData>();
+    private List<MissileData> missileInMaking = new List<MissileData>();
+    public  List<MissileData> MissileInMaking
+    {
+        get { return missileInMaking; }
+    }
+
+    private List<MissileData> missileReadyToShoot = new List<MissileData>();
+    public List<MissileData> MissileReadyToShoot
+    {
+        get { return missileReadyToShoot; }
+    }
 
     bool isTurnFinish = false;
     public bool IsTurnFinish { get { return isTurnFinish; } }
