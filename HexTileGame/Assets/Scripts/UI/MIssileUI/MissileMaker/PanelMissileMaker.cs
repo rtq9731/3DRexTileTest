@@ -16,22 +16,29 @@ public class PanelMissileMaker : MonoBehaviour
     [SerializeField] Button btnSelectMaterial;
     [SerializeField] Button btnSelectEngine;
 
+    public MissileData missileBluePrint = null;
 
     private void Start()
     {
+        selector.panelMissileMaker = this;
         btnMakeMissile.onClick.AddListener(OnClickMakeMissile);
     }
 
+    
+
     private void OnEnable()
     {
-        if(player == null)
+        missileBluePrint = new MissileData(MissileTypes.MissileEngineType.commonEngine, MissileTypes.MissileWarheadType.CommonTypeWarhead);
+
+        if (player == null)
         {
             player = MainSceneManager.Instance.GetPlayer();
         }
 
         panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
 
-        btnSelectMaterial.onClick.AddListener(() => OnClickSelectpart(partType.Material));
+        // btnSelectMaterial.onClick.AddListener(() => OnClickSelectpart(partType.Material)); 재질 개발 예정
+        btnSelectMaterial.interactable = false;
         btnSelectEngine.onClick.AddListener(() => OnClickSelectpart(partType.Engine));
         btnSelectWarhead.onClick.AddListener(() => OnClickSelectpart(partType.Warhead));
     }
@@ -50,7 +57,7 @@ public class PanelMissileMaker : MonoBehaviour
 
     public void OnClickMakeMissile()
     {
-        player.MissileInMaking.Add(new MissileData(10, MissileTypes.MissileEngineType.commonEngine, MissileTypes.MissileWarheadType.CommonTypeWarhead));
+        player.MissileInMaking.Add(missileBluePrint);
         panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
     }
 }

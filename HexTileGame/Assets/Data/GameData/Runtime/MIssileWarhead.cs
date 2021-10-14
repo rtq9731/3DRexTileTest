@@ -64,4 +64,9 @@ public class MissileWarhead : ScriptableObject
         return instance.dataList.Find(x => x.TYPE == type);
     }
 
+    public static MissileWarheadData GetWarheadByIdx(int idx)
+    {
+        return instance.dataArray[idx];
+    }
+
 }

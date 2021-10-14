@@ -39,7 +39,11 @@ public class MissileData
     public MissileTypes.MissileEngineType EngineTier
     {
         get { return engineTier; }
-        set { engineTier = value; }
+        set { 
+            engineTier = value;
+            missileRange = MissileEngine.GetEngineData(engineTier).Weight - MissileWarhead.GetWarheadData(warheadType).Weight;
+            turnForMissileReady = MissileEngine.GetEngineData(engineTier).Makingtime + MissileWarhead.GetWarheadData(warheadType).Makingtime;
+        }
     }
 
     [SerializeField]
@@ -47,7 +51,12 @@ public class MissileData
     public MissileTypes.MissileWarheadType WarheadType
     {
         get { return warheadType; }
-        set { warheadType = value; }
+        set { 
+            warheadType = value;
+            warHeadDamage = MissileWarhead.GetWarheadData(warheadType).Atk;
+            missileRange = MissileEngine.GetEngineData(engineTier).Weight - MissileWarhead.GetWarheadData(warheadType).Weight;
+            turnForMissileReady = MissileEngine.GetEngineData(engineTier).Makingtime + MissileWarhead.GetWarheadData(warheadType).Makingtime;
+        }
     }
 
     [SerializeField]
@@ -60,12 +69,11 @@ public class MissileData
 
 
 
-    public MissileData(int turn, MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType)
+    public MissileData(MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType)
     {
-        this.turnForMissileReady = turn;
         this.engineTier = engine;
         this.warheadType = warheadType;
-        missileRange = MissileEngine.GetEngineData(engineTier).Weight - MissileWarhead.GetWarheadData(warheadType).Weight;
-        warHeadDamage = MissileWarhead.GetWarheadData(warheadType).Atk;
+        EngineTier = engine;
+        WarheadType = warheadType;
     }
 }

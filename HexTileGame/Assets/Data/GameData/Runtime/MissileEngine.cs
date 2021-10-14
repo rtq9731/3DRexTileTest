@@ -59,4 +59,9 @@ public class MissileEngine : ScriptableObject
         return instance.dataList.Find(x => x.TYPE == type);
     }
 
+    public static MissileEngineData GetMissileDataByIdx(int idx)
+    {
+        return instance.dataArray[idx];
+    }
+
 }

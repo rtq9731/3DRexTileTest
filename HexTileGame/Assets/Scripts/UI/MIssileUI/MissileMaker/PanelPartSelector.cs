@@ -7,6 +7,9 @@ public class PanelPartSelector : MonoBehaviour
 {
     [SerializeField] Transform unlockedPartParent = null;
     [SerializeField] GameObject infoPanelPrefab = null;
+    [SerializeField] Button btnOk = null;
+
+    public PanelMissileMaker panelMissileMaker;
 
     List<GameObject> partPanelPool = new List<GameObject>();
 
@@ -29,6 +32,34 @@ public class PanelPartSelector : MonoBehaviour
 
     public void InitPanelInNull(PanelMissileMaker.partType part)
     {
+        Debug.Log(transform.parent.gameObject);
+        transform.parent.gameObject.SetActive(true);
+
+        partPanelPool.ForEach(x => x.gameObject.SetActive(false));
+
+        switch (part)
+        {
+            case PanelMissileMaker.partType.Material:
+                break;
+            case PanelMissileMaker.partType.Engine:
+                foreach (var item in player.UnlockedEngineIdx)
+                {
+                    GetNewInfoPanel(out PanelPartinfo info);
+                    info.InitPanelPartInfo(MissileEngine.GetMissileDataByIdx(item));
+                }
+                break;
+            case PanelMissileMaker.partType.Warhead:
+                foreach (var item in player.unlockedWarheadIdx)
+                {
+                    GetNewInfoPanel(out PanelPartinfo info);
+                    info.InitPanelPartInfo(MissileWarhead.GetWarheadByIdx(item));
+
+                }
+                break;
+            default:
+                break;
+        }
+
         textPartName.text = "선택된 부품 없음";
         textWeight.text = "";
         textMakeTurn.text = "";
@@ -37,6 +68,12 @@ public class PanelPartSelector : MonoBehaviour
 
     public void InitPartText(MissileWarheadData warhead)
     {
+        btnOk.onClick.AddListener(() =>
+        {
+            panelMissileMaker.missileBluePrint.WarheadType = warhead.TYPE;
+            btnOk.onClick.RemoveAllListeners();
+        });
+
         textPartATK.transform.parent.gameObject.SetActive(true);
 
         textPartName.text = warhead.Name;
@@ -47,6 +84,12 @@ public class PanelPartSelector : MonoBehaviour
 
     public void InitPartText(MissileEngineData engine)
     {
+        btnOk.onClick.AddListener(() =>
+        {
+            panelMissileMaker.missileBluePrint.EngineTier = engine.TYPE;
+            btnOk.onClick.RemoveAllListeners();
+        });
+
         textPartATK.transform.parent.gameObject.SetActive(false);
 
         textPartName.text = engine.Name;
