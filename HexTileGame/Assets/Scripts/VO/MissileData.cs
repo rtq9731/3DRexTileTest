@@ -11,7 +11,11 @@ public class MissileData
     
     public int MissileRange
     {
-        get { return missileRange; }
+        get {
+            missileRange = MainSceneManager.Instance.GetEngineData(engineTier).Weight - MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
+            Debug.Log(missileRange);
+            return missileRange; 
+        }
         set { missileRange = value; }
     }
 

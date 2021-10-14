@@ -24,9 +24,9 @@ public class MainSceneManager : MonoBehaviour
         return missileEngine.dataList.Find(x => x.TYPE == type);
     }
 
-    public MissileWarheadData GetEngineDataByIdx(int idx)
+    public MissileEngineData GetEngineDataByIdx(int idx)
     {
-        return missileWarhead.dataArray[idx];
+        return missileEngine.dataArray[idx];
     }
 
     private void Awake()

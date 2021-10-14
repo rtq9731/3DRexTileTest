@@ -65,9 +65,13 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     protected void Start()
     {
+        unlockedWarheadIdx.Add(0);
         unlockedWarheadIdx.Add(1);
         unlockedWarheadIdx.Add(2);
-        unlockedWarheadIdx.Add(3);
+
+        unlockedEngineIdx.Add(0);
+        unlockedEngineIdx.Add(1);
+
         MainSceneManager.Instance.Players.Add(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
     }

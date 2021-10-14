@@ -39,7 +39,7 @@ public class PanelPartSelector : MonoBehaviour
                     GetNewInfoPanel(out PanelPartinfo element);
                     Debug.Log(element);
                     element.partSelector = this;
-                    element.InitPanelPartInfo(MainSceneManager.Instance.GetEngineDataByIdx(item));
+                    element.InitPanelPartInfo(MainSceneManager.Instance.GetEngineDataByIdx(item), unlockedPartParent.GetComponent<ToggleGroup>());
                 }
                 break;
             case PanelMissileMaker.partType.Warhead:
@@ -48,7 +48,7 @@ public class PanelPartSelector : MonoBehaviour
                     GetNewInfoPanel(out PanelPartinfo element);
                     Debug.Log(element);
                     element.partSelector = this;
-                    element.InitPanelPartInfo(MainSceneManager.Instance.GetWarheadByIdx(item));
+                    element.InitPanelPartInfo(MainSceneManager.Instance.GetWarheadByIdx(item), unlockedPartParent.GetComponent<ToggleGroup>());
 
                 }
                 break;
@@ -68,6 +68,7 @@ public class PanelPartSelector : MonoBehaviour
         btnOk.onClick.AddListener(() =>
         {
             panelMissileMaker.missileBluePrint.WarheadType = warhead.TYPE;
+            transform.parent.gameObject.SetActive(false);
             btnOk.onClick.RemoveAllListeners();
         });
 
@@ -85,6 +86,7 @@ public class PanelPartSelector : MonoBehaviour
         btnOk.onClick.AddListener(() =>
         {
             panelMissileMaker.missileBluePrint.EngineTier = engine.TYPE;
+            transform.parent.gameObject.SetActive(false);
             btnOk.onClick.RemoveAllListeners();
         });
 

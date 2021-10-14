@@ -10,10 +10,11 @@ public class PanelPartinfo : MonoBehaviour
     [SerializeField] Text textName;
     [SerializeField] Toggle myToggle;
 
-    public void InitPanelPartInfo(MissileWarheadData warhead)
+    public void InitPanelPartInfo(MissileWarheadData warhead, ToggleGroup tg)
     {
         textName.text = warhead.Name;
 
+        myToggle.group = tg;
         myToggle.onValueChanged.RemoveAllListeners();
         myToggle.onValueChanged.AddListener( isOn =>
         {
@@ -24,11 +25,12 @@ public class PanelPartinfo : MonoBehaviour
         });
     }
 
-    public void InitPanelPartInfo(MissileEngineData engine)
+    public void InitPanelPartInfo(MissileEngineData engine, ToggleGroup tg)
     {
         textName.text = engine.Name;
         partSelector.InitPartText(engine);
 
+        myToggle.group = tg;
         myToggle.onValueChanged.RemoveAllListeners();
         myToggle.onValueChanged.AddListener(isOn =>
         {

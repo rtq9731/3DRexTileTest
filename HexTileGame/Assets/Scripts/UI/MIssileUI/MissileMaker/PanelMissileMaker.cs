@@ -57,7 +57,12 @@ public class PanelMissileMaker : MonoBehaviour
 
     public void OnClickMakeMissile()
     {
-        player.MissileInMaking.Add(missileBluePrint);
-        panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
+        Debug.Log(missileBluePrint.MissileRange);
+        if(missileBluePrint.MissileRange > 1)
+        {
+            player.MissileInMaking.Add(missileBluePrint);
+            Debug.Log(player.MissileInMaking.Count);
+            panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
+        }
     }
 }

@@ -4702,7 +4702,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 249.34386, y: -8.740952}
+  m_AnchoredPosition: {x: 249.34386, y: -8.740967}
   m_SizeDelta: {x: 485, y: 49.1765}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &610039393
@@ -15398,6 +15398,7 @@ GameObject:
   - component: {fileID: 2082596719}
   - component: {fileID: 2082596721}
   - component: {fileID: 2082596720}
+  - component: {fileID: 2082596722}
   m_Layer: 5
   m_Name: PanelMissileInfo
   m_TagString: Untagged
@@ -15465,6 +15466,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082596718}
   m_CullTransparentMesh: 1
+--- !u!114 &2082596722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082596718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbc2a8e12df01ff46b5caa62dc51f9cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  textMissileWarheadType: {fileID: 1254269479}
+  textMissileRange: {fileID: 1286078177}
+  textInfoWarheadName: {fileID: 524983600}
+  textMissileInfo: {fileID: 1993877766}
 --- !u!1 &2090331650
 GameObject:
   m_ObjectHideFlags: 0
