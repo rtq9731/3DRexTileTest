@@ -123,4 +123,12 @@ public class PanelPartSelector : MonoBehaviour
         result.SetActive(true);
         return result;
     }
+
+    private void OnDisable()
+    {
+        if (UIStackManager.GetTopUI() == transform.parent.gameObject)
+        {
+            UIStackManager.RemoveUIOnTop();
+        }
+    }
 }

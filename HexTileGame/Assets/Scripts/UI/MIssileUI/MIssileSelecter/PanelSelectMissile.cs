@@ -48,7 +48,8 @@ public class PanelSelectMissile : MonoBehaviour
             player = MainSceneManager.Instance.GetPlayer();
         }
 
-        waitingMissiles = player.MissileReadyToShoot;
+        waitingMissiles = new List<MissileData>();
+        player.MissileReadyToShoot.ForEach(x => waitingMissiles.Add(x));
         fireReadyMissiles = new List<MissileData>();
 
         missilePanelPool.ForEach(x => x.SetActive(false));
@@ -79,6 +80,15 @@ public class PanelSelectMissile : MonoBehaviour
             };
         }
     }
+
+    private void OnDisable()
+    {
+        if(fireReadyMissiles.Count > 0)
+        {
+
+        }
+    }
+
 
     public GameObject GetNewMissilePanel(out PanelSelecterElement element)
     {
