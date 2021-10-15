@@ -37,19 +37,16 @@ public class PanelPartSelector : MonoBehaviour
                 foreach (var item in player.UnlockedEngineIdx)
                 {
                     GetNewInfoPanel(out PanelPartinfo element);
-                    Debug.Log(element);
                     element.partSelector = this;
-                    element.InitPanelPartInfo(MainSceneManager.Instance.GetEngineDataByIdx(item), unlockedPartParent.GetComponent<ToggleGroup>());
+                    element.InitPanelPartInfo(MainSceneManager.Instance.GetEngineDataByIdx(item));
                 }
                 break;
             case PanelMissileMaker.partType.Warhead:
                 foreach (var item in player.unlockedWarheadIdx)
                 {
                     GetNewInfoPanel(out PanelPartinfo element);
-                    Debug.Log(element);
                     element.partSelector = this;
-                    element.InitPanelPartInfo(MainSceneManager.Instance.GetWarheadByIdx(item), unlockedPartParent.GetComponent<ToggleGroup>());
-
+                    element.InitPanelPartInfo(MainSceneManager.Instance.GetWarheadByIdx(item));
                 }
                 break;
             default:
@@ -67,7 +64,7 @@ public class PanelPartSelector : MonoBehaviour
     {
         btnOk.onClick.AddListener(() =>
         {
-            panelMissileMaker.missileBluePrint.WarheadType = warhead.TYPE;
+            panelMissileMaker.SetMissileBluePrintPart(warhead.TYPE);
             transform.parent.gameObject.SetActive(false);
             btnOk.onClick.RemoveAllListeners();
         });
@@ -85,7 +82,7 @@ public class PanelPartSelector : MonoBehaviour
     {
         btnOk.onClick.AddListener(() =>
         {
-            panelMissileMaker.missileBluePrint.EngineTier = engine.TYPE;
+            panelMissileMaker.SetMissileBluePrintPart(engine.TYPE);
             transform.parent.gameObject.SetActive(false);
             btnOk.onClick.RemoveAllListeners();
         });
@@ -94,6 +91,7 @@ public class PanelPartSelector : MonoBehaviour
 
         textPartName.text = engine.Name;
         textMakeTurn.text = $"제작에 걸리는 시간 : {engine.Makingtime} 턴";
+        textWeight.text = $"감당 가능한 무게 : {engine.Weight}";
         textPartInfo.text = engine.Info;
     }
 

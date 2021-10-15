@@ -13,7 +13,6 @@ public class MissileData
     {
         get {
             missileRange = MainSceneManager.Instance.GetEngineData(engineTier).Weight - MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
-            Debug.Log(missileRange);
             return missileRange; 
         }
         set { missileRange = value; }
@@ -70,8 +69,6 @@ public class MissileData
         get { return missileInfo; }
         set { missileInfo = value; }
     }
-
-
 
     public MissileData(MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType)
     {

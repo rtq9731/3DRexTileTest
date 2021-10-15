@@ -12,6 +12,8 @@ public class PanelSelectMissile : MonoBehaviour
     [SerializeField] Transform unselectedMissilePanel = null;
     [SerializeField] Transform selectedMissilePanel = null;
 
+    [SerializeField] SelectedMissileInfo SelectedMissileInfo = null;
+
     private List<MissileData> waitingMissiles = new List<MissileData>();
     private List<MissileData> fireReadyMissiles = new List<MissileData>();
 
@@ -36,7 +38,7 @@ public class PanelSelectMissile : MonoBehaviour
             player.MissileReadyToShoot.Remove(item);
         }
 
-        gameObject.SetActive(false);
+        UIStackManager.RemoveUIOnTop();
     }
 
     private void OnEnable()
@@ -55,15 +57,15 @@ public class PanelSelectMissile : MonoBehaviour
         {
             GetNewMissilePanel(out PanelSelecterElement element);
             element.InitPanelSelecterElement(selectedMissilePanel, unselectedMissilePanel, item);
-            Debug.Log(element.onClickBtnSelect);
             element.onClickBtnSelect += () =>
             {
-                if (element.IsSeleted)
+                if (element.IsSelected)
                 {
                     if (waitingMissiles.Contains(item))
                     {
                         waitingMissiles.Remove(item);
                         fireReadyMissiles.Add(item);
+                        SelectedMissileInfo.RefreshTexts(item);
                     }
                 }
                 else

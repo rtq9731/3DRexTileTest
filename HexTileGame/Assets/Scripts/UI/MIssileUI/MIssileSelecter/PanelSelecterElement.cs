@@ -24,7 +24,7 @@ public class PanelSelecterElement : MonoBehaviour
     Button btnSelectMissile;
 
     bool isSelected = false;
-    public bool IsSeleted
+    public bool IsSelected
     {
         get { return isSelected; }
     }

@@ -16,7 +16,7 @@ public class UITopBar : MonoBehaviour
     {
         if(player == null)
         {
-            player = MainSceneManager.Instance.Players.Find(x => x.MyName == MainSceneManager.Instance.PlayerName);
+            player = MainSceneManager.Instance.GetPlayer();
         }
 
         resourceText.text = $"{player.ResourceTank}";

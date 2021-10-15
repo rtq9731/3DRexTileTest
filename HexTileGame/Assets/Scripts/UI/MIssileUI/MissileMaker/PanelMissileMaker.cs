@@ -9,6 +9,7 @@ public class PanelMissileMaker : MonoBehaviour
 
     [SerializeField] PanelMissileQueue panelMissileQueue = null;
     [SerializeField] Button btnMakeMissile = null;
+    [SerializeField] MakeMissileInfo makeMissileInfo = null;
 
     [Header("About Parts")]
     [SerializeField] PanelPartSelector selector;
@@ -16,12 +17,41 @@ public class PanelMissileMaker : MonoBehaviour
     [SerializeField] Button btnSelectMaterial;
     [SerializeField] Button btnSelectEngine;
 
-    public MissileData missileBluePrint = null;
+    [Header("About MissileInfo")]
+    [SerializeField] Text textATK = null;
+    [SerializeField] Text textRange = null;
+    [SerializeField] Text textTurn = null;
+    [SerializeField] Text textMissilesInMake = null;
+
+    private MissileData missileBluePrint = null;
+
+    public void SetMissileBluePrintPart(MissileTypes.MissileEngineType engine)
+    {
+        missileBluePrint.EngineTier = engine;
+        RefreshMissileInfoTexts();
+    }
+
+    public void SetMissileBluePrintPart(MissileTypes.MissileWarheadType warhead)
+    {
+        missileBluePrint.WarheadType = warhead;
+        RefreshMissileInfoTexts();
+    }
+
+    private void RefreshMissileInfoTexts()
+    {
+        makeMissileInfo.InitPanelMissileInfo(missileBluePrint);
+        textMissilesInMake.text = $"{ player.MissileInMaking.Count + player.MissileReadyToShoot.Count } / { player.OwningTiles.Count }";
+    }
 
     private void Start()
     {
         selector.panelMissileMaker = this;
         btnMakeMissile.onClick.AddListener(OnClickMakeMissile);
+
+        // btnSelectMaterial.onClick.AddListener(() => OnClickSelectpart(partType.Material)); 재질 개발 예정
+        btnSelectMaterial.interactable = false;
+        btnSelectEngine.onClick.AddListener(() => OnClickSelectpart(partType.Engine));
+        btnSelectWarhead.onClick.AddListener(() => OnClickSelectpart(partType.Warhead));
     }
 
     
@@ -35,12 +65,10 @@ public class PanelMissileMaker : MonoBehaviour
             player = MainSceneManager.Instance.GetPlayer();
         }
 
+        textMissilesInMake.text = $"{ player.MissileInMaking.Count + player.MissileReadyToShoot.Count } / { player.OwningTiles.Count }";
         panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
+        RefreshMissileInfoTexts();
 
-        // btnSelectMaterial.onClick.AddListener(() => OnClickSelectpart(partType.Material)); 재질 개발 예정
-        btnSelectMaterial.interactable = false;
-        btnSelectEngine.onClick.AddListener(() => OnClickSelectpart(partType.Engine));
-        btnSelectWarhead.onClick.AddListener(() => OnClickSelectpart(partType.Warhead));
     }
 
     public void OnClickSelectpart(partType part)
@@ -57,12 +85,11 @@ public class PanelMissileMaker : MonoBehaviour
 
     public void OnClickMakeMissile()
     {
-        Debug.Log(missileBluePrint.MissileRange);
-        if(missileBluePrint.MissileRange > 1)
+        if(missileBluePrint.MissileRange > 0 && player.MissileInMaking.Count + player.MissileReadyToShoot.Count < player.OwningTiles.Count)
         {
             player.MissileInMaking.Add(missileBluePrint);
-            Debug.Log(player.MissileInMaking.Count);
             panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
+            textMissilesInMake.text = $"{ player.MissileInMaking.Count + player.MissileReadyToShoot.Count } / { player.OwningTiles.Count }";
         }
     }
 }

@@ -8,36 +8,28 @@ public class PanelPartinfo : MonoBehaviour
     public PanelPartSelector partSelector;
 
     [SerializeField] Text textName;
-    [SerializeField] Toggle myToggle;
+    [SerializeField] Button btn;
 
-    public void InitPanelPartInfo(MissileWarheadData warhead, ToggleGroup tg)
+    public void InitPanelPartInfo(MissileWarheadData warhead)
     {
         textName.text = warhead.Name;
 
-        myToggle.group = tg;
-        myToggle.onValueChanged.RemoveAllListeners();
-        myToggle.onValueChanged.AddListener( isOn =>
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener( () =>
         {
-            if (isOn)
-            {
-                partSelector.InitPartText(warhead);
-            }
+            partSelector.InitPartText(warhead);
         });
     }
 
-    public void InitPanelPartInfo(MissileEngineData engine, ToggleGroup tg)
+    public void InitPanelPartInfo(MissileEngineData engine)
     {
         textName.text = engine.Name;
         partSelector.InitPartText(engine);
 
-        myToggle.group = tg;
-        myToggle.onValueChanged.RemoveAllListeners();
-        myToggle.onValueChanged.AddListener(isOn =>
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(() =>
         {
-            if (isOn)
-            {
-                partSelector.InitPartText(engine);
-            }
+            partSelector.InitPartText(engine);
         });
     }
 }

@@ -11,6 +11,19 @@ public class SelectedMissileInfo : MonoBehaviour
     [SerializeField] Text textInfoWarheadName;
     [SerializeField] Text textMissileInfo;
 
+    private void OnEnable()
+    {
+        RefreshTextsToNull();
+    }
+
+    private void RefreshTextsToNull()
+    {
+        textMissileWarheadType.text = "선택된 미사일 없음";
+        textMissileRange.text = "";
+        textInfoWarheadName.text = "";
+        textMissileInfo.text = "";
+    }
+
     public void RefreshTexts(MissileData data)
     {
         MissileWarheadData warheadData = MainSceneManager.Instance.GetWarheadData(data.WarheadType);

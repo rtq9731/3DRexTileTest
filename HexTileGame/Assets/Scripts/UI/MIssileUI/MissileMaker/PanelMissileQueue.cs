@@ -17,10 +17,10 @@ public class PanelMissileQueue : MonoBehaviour
 
     public void RefreshMissileQueue(List<MissileData> missiles)
     {
+        MainSceneManager.Instance.uiTopBar.UpdateTexts();
         queuePanelPool.ForEach(x => x.SetActive(false));
         foreach (var item in missiles)
         {
-            Debug.Log(item);
             GetQueuePanel(out MissileMakeInfo info).SetActive(true);
             info.SetData(item);
         }
