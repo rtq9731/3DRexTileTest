@@ -84,9 +84,7 @@ public class TileChecker : MonoBehaviour
 
             selectedTiles.Remove(tile); // 자기 자신 제거
 
-            Debug.Log(selectedTiles.Count);
-
-            return selectedTiles.Distinct().ToList();
+            return selectedTiles.Distinct().ToList(); // 다시 한번 중복된것 제거해서 반환
         }
     }
 

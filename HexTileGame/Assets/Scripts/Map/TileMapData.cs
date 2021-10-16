@@ -33,6 +33,19 @@ public class TileMapData : MonoBehaviour
         tileList.Add(item);
     }
 
+    public List<TileScript> GetAllTiles()
+    {
+        return tileList;
+    }
+
+    public void ResetColorAllTile()
+    {
+        foreach (var item in tileList)
+        {
+            item.GetComponent<MeshRenderer>().material.color = item.Owner.playerColor;
+        }
+    }
+
     public TileScript GetRandTile()
     {
         TileScript result = tileList[Random.Range(0, tileList.Count)];

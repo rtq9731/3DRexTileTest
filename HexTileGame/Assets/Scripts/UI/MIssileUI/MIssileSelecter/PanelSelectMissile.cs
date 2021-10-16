@@ -13,6 +13,7 @@ public class PanelSelectMissile : MonoBehaviour
     [SerializeField] Transform selectedMissilePanel = null;
 
     [SerializeField] SelectedMissileInfo SelectedMissileInfo = null;
+    [SerializeField] PanelMissileFireSelect fireSelect = null;
 
     private List<MissileData> waitingMissiles = new List<MissileData>();
     private List<MissileData> fireReadyMissiles = new List<MissileData>();

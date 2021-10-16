@@ -1546,6 +1546,7 @@ MonoBehaviour:
   unselectedMissilePanel: {fileID: 384255269}
   selectedMissilePanel: {fileID: 1279529229}
   SelectedMissileInfo: {fileID: 2082596722}
+  fireSelect: {fileID: 0}
 --- !u!1 &168718869
 GameObject:
   m_ObjectHideFlags: 0
@@ -3078,7 +3079,7 @@ Transform:
   m_Children:
   - {fileID: 190617378}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &385465011
 MonoBehaviour:
@@ -4733,7 +4734,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &575409337
 MonoBehaviour:
@@ -4757,18 +4758,20 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3bb0c42d2eb2b8241b5f95cbcab894c1, type: 3}
-    m_FontSize: 32
+    m_FontSize: 36
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 40
+    m_BestFit: 1
+    m_MinSize: 24
+    m_MaxSize: 36
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBBF8\uC0AC\uC77C \uBC1C\uC0AC\uC9C0\uC810\uC744 \uC120\uD0DD\uD574\uC8FC\uC138\uC694!"
+  m_Text: "\uD0C0\uACA9 \uC9C0\uC810\uC744 \uC9C0\uC815\uD574\uC8FC\uC138\uC694!\n\uCD08\uB85D\uC0C9
+    : \uD0C0\uACA9 \uAC00\uB2A5 \uC9C0\uC810\n\uBE68\uAC04\uC0C9 : \uD0C0\uACA9 \uBD88\uAC00\uB2A5
+    \uC9C0\uC810\n\uB178\uB780\uC0C9 : \uCD9C\uBC1C \uC9C0\uC810"
 --- !u!222 &575409338
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5406,7 +5409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7908,7 +7911,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &974116145
 MonoBehaviour:
@@ -14976,7 +14979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1861340633
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15009,8 +15012,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9560adc4eec98d14987d7d58cb59e9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whereIsTile:
+    serializedVersion: 2
+    m_Bits: 64
+  text: {fileID: 575409337}
   vcamFireMissile: {fileID: 1987251587}
-  missilesToFire: []
+  vcamMain: {fileID: 385465008}
 --- !u!222 &1861340635
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15453,13 +15460,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1987251589}
   - component: {fileID: 1987251588}
+  - component: {fileID: 1987251590}
   m_Layer: 0
   m_Name: VcamSelectFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1987251588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15508,8 +15516,22 @@ Transform:
   m_Children:
   - {fileID: 289956263}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+--- !u!114 &1987251590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987251587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 671a3669d7108b649b81bdaf49b21cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0.05
+  zoomSpeed: 0.1
 --- !u!1 &1993877764
 GameObject:
   m_ObjectHideFlags: 0
