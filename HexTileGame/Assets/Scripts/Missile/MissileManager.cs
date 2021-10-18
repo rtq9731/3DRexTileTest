@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissilePool: MonoBehaviour
+public class MissileManager: MonoBehaviour
 {
     GameObject missileObject = null;
 
     int missileHeight = 5;
 
-    public void fireMissileFromStartToTarget(TileScript start, MissileData missile, TileScript target)
+    public void fireMissileFromStartToTarget(TileScript start, MissileData missile, TileScript target, out GameObject missileObj)
     {
 
         Vector3 midPoint = new Vector3(
@@ -17,7 +17,16 @@ public class MissilePool: MonoBehaviour
             start.transform.position.z + target.transform.position.z);
         // 두 벡터 사이의 중점을 구함 ( 높이는 따로 지정 )
 
-        StartCoroutine(FireCoroutine(start.transform.position, midPoint, target.transform.position, missileObject));
+        missileObj = this.missileObject;
+
+        Vector3 startPoint = start.transform.position;
+        startPoint.y += 0.5f; // 미사일이 땅에서 나오면 안되니까.
+
+        Vector3 targetPoint = target.transform.position;
+        targetPoint.y += 0.5f;
+
+        missileObj.SetActive(true);
+        StartCoroutine(FireCoroutine(startPoint, midPoint, targetPoint, missileObject));
     }
 
     IEnumerator FireCoroutine(Vector3 startPoint, Vector3 midPoint, Vector3 targetPoint, GameObject missile)
@@ -31,5 +40,6 @@ public class MissilePool: MonoBehaviour
             yield return null;
         }
 
+        missile.SetActive(false);
     }
 }

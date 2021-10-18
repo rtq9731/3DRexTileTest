@@ -42,7 +42,7 @@ public class TileMapData : MonoBehaviour
     {
         foreach (var item in tileList)
         {
-            item.GetComponent<MeshRenderer>().material.color = item.Owner.playerColor;
+            item.GetComponent<MeshRenderer>().material.color = item.Owner != null ? item.Owner.playerColor  : Color.white;
         }
     }
 

@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Cinemachine;
 
 public class PanelMissileFireSelect : MonoBehaviour
 {
     [SerializeField] LayerMask whereIsTile;
     [SerializeField] Text text; 
-    [SerializeField] GameObject vcamFireMissile = null;
-    [SerializeField] GameObject vcamMain = null; // 처음에 비활성화, 꺼질때 활성화
+    [SerializeField] CinemachineVirtualCamera vcamFireMissile = null;
+
+    [SerializeField] PlayerInput mainInput = null;
+    [SerializeField] GameObject vcamMain = null; // 둘 전부 처음에 비활성화, 꺼질때 활성화
 
     RaycastHit hit;
 
@@ -23,7 +26,7 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     private List<TileScript> tilesInRange = new List<TileScript>();
 
-    bool isOnFireMissile = false; // 추가입력 방지용 플래그
+    bool bStopGetInput = false; // 추가입력 방지용 플래그
 
     private void OnDisable()
     {
@@ -35,44 +38,21 @@ public class PanelMissileFireSelect : MonoBehaviour
                 MainSceneManager.Instance.GetPlayer().MissileReadyToShoot.Add(item);
             }
         }
+
+        vcamMain.SetActive(true);
+
+        if(mainInput != null)
+        {
+            mainInput.enabled = true;
+        }
     }
 
     private void Update()
     {
-        if(!isOnFireMissile)
+        if(bStopGetInput)
         {
             return;
         }
-
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
-        {
-            TileScript tile = hit.transform.GetComponent<TileScript>();
-            if (tile != null)
-            {
-                switch (state)
-                {
-                    case InputState.None:
-                        break;
-                    case InputState.SelectStartTile:
-                        startedTile = tile;
-                        tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
-                        tile.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                        FireReady(fireMissiles[0]);
-                        return;
-                    case InputState.SelectTargetTile:
-                        if(tilesInRange.Contains(tile)) // 만약 선택한 곳이 사거리 내라면
-                        {
-                            SetTargetAndFire(fireMissiles[0], tile);
-                        }
-                        return;
-                    case InputState.Finish:
-                        return;
-                    default:
-                        break;
-                }
-            }
-        }
-
 
         switch (state)
         {
@@ -89,9 +69,38 @@ public class PanelMissileFireSelect : MonoBehaviour
             default:
                 break;
         }
+
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
+        {
+            TileScript tile = hit.transform.GetComponent<TileScript>();
+            if (tile != null)
+            {
+                switch (state)
+                {
+                    case InputState.None:
+                        break;
+                    case InputState.SelectStartTile:
+                        startedTile = tile;
+                        tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
+                        tile.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                        FireReady(fireMissiles[0]);
+                        break;
+                    case InputState.SelectTargetTile:
+                        if(tilesInRange.Contains(tile)) // 만약 선택한 곳이 사거리 내라면
+                        {
+                            SetTargetAndFire(fireMissiles[0], tile);
+                        }
+                        break;
+                    case InputState.Finish:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
-    public void InitPanelMissileFire(TileScript tile, List<MissileData> fireMissiles)
+    public void InitPanelMissileFire(List<MissileData> fireMissiles)
     {
         state = InputState.SelectStartTile;
 
@@ -101,15 +110,10 @@ public class PanelMissileFireSelect : MonoBehaviour
 
         fireMissiles.Sort((x, y) => -x.MissileRange.CompareTo(y.MissileRange));
 
-        startedTile = tile;
-
+        mainInput.enabled = false;
         vcamMain.SetActive(false);
-        vcamFireMissile.SetActive(true);
-
-        foreach (var item in fireMissiles)
-        {
-            MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, item.MissileRange);
-        }
+        gameObject.SetActive(true);
+        vcamFireMissile.gameObject.SetActive(true);
     }
 
     // 미사일 쏠 준비를 해줌
@@ -139,7 +143,27 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     private void SetTargetAndFire(MissileData missile, TileScript target)
     {
+        fireMissiles.Remove(missile);
+        MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(startedTile, missile, target, out GameObject missileObj);
+        vcamFireMissile.m_LookAt = missileObj.transform;
+        StartCoroutine(LookMissileUntailImpact(missileObj, target.transform.position));
+    }
 
+    IEnumerator LookMissileUntailImpact(GameObject Missile, Vector3 targetPos)
+    {
+        while(Missile.transform.position != targetPos)
+        {
+            yield return null;
+        }
+
+        if (fireMissiles.Count >= 1)
+        {
+            state = InputState.SelectTargetTile;
+        }
+        else
+        {
+            state = InputState.Finish;
+        }
     }
 
     enum InputState

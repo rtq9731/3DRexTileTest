@@ -40,6 +40,7 @@ public class PanelSelectMissile : MonoBehaviour
         }
 
         UIStackManager.RemoveUIOnTop();
+        fireSelect.InitPanelMissileFire(fireReadyMissiles);
     }
 
     private void OnEnable()
@@ -79,14 +80,6 @@ public class PanelSelectMissile : MonoBehaviour
                     }
                 }
             };
-        }
-    }
-
-    private void OnDisable()
-    {
-        if(fireReadyMissiles.Count > 0)
-        {
-
         }
     }
 
