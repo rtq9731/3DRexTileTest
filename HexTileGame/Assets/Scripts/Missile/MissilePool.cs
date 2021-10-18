@@ -6,7 +6,7 @@ public class MissilePool: MonoBehaviour
 {
     GameObject missileObject = null;
 
-    int missileHeight = 0;
+    int missileHeight = 5;
 
     public void fireMissileFromStartToTarget(TileScript start, MissileData missile, TileScript target)
     {
@@ -25,9 +25,9 @@ public class MissilePool: MonoBehaviour
 
         while (missile.transform.position != targetPoint)
         {
-            Vector3 A = Vector3.Lerp(startPoint, midPoint, Time.deltaTime);
-            Vector3 B = Vector3.Lerp(midPoint, targetPoint, Time.deltaTime);
-            missile.transform.position = Vector3.Lerp(A, B, Time.deltaTime);
+            Vector3 p1 = Vector3.Lerp(startPoint, midPoint, Time.deltaTime);
+            Vector3 p2 = Vector3.Lerp(midPoint, targetPoint, Time.deltaTime);
+            missile.transform.position = Vector3.Lerp(p1, p2, Time.deltaTime);
             yield return null;
         }
 

@@ -21,7 +21,9 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     private List<MissileData> fireMissiles = new List<MissileData>(); // 발사 대기중인 미사일 ( 선택 X )
 
-    bool isGetInput = false; // 추가입력 방지용 플래그
+    private List<TileScript> tilesInRange = new List<TileScript>();
+
+    bool isOnFireMissile = false; // 추가입력 방지용 플래그
 
     private void OnDisable()
     {
@@ -37,7 +39,7 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     private void Update()
     {
-        if(!isGetInput)
+        if(!isOnFireMissile)
         {
             return;
         }
@@ -55,9 +57,13 @@ public class PanelMissileFireSelect : MonoBehaviour
                         startedTile = tile;
                         tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
                         tile.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                        FireMissile(fireMissiles[0]);
+                        FireReady(fireMissiles[0]);
                         return;
                     case InputState.SelectTargetTile:
+                        if(tilesInRange.Contains(tile)) // 만약 선택한 곳이 사거리 내라면
+                        {
+                            SetTargetAndFire(fireMissiles[0], tile);
+                        }
                         return;
                     case InputState.Finish:
                         return;
@@ -89,9 +95,11 @@ public class PanelMissileFireSelect : MonoBehaviour
     {
         state = InputState.SelectStartTile;
 
+        tilesInRange = new List<TileScript>();
+
         this.fireMissiles = fireMissiles;
 
-        fireMissiles.Sort((x, y) => x.MissileRange.CompareTo(y.MissileRange));
+        fireMissiles.Sort((x, y) => -x.MissileRange.CompareTo(y.MissileRange));
 
         startedTile = tile;
 
@@ -104,7 +112,8 @@ public class PanelMissileFireSelect : MonoBehaviour
         }
     }
 
-    private void FireMissile(MissileData missile)
+    // 미사일 쏠 준비를 해줌
+    private void FireReady(MissileData missile)
     {
         TileMapData.Instance.ResetColorAllTile();
 
@@ -113,7 +122,7 @@ public class PanelMissileFireSelect : MonoBehaviour
             fireMissiles.Remove(missile);
         }
 
-        List<TileScript> tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(startedTile, missile.MissileRange);
+        tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(startedTile, missile.MissileRange);
 
         var tilesCantFire = from item in TileMapData.Instance.GetAllTiles()
                           where !tilesInRange.Contains(item)
@@ -126,6 +135,11 @@ public class PanelMissileFireSelect : MonoBehaviour
         
         tilesInRange.ForEach(x => x.GetComponent<MeshRenderer>().material.color = Color.green);
         state = InputState.SelectTargetTile;
+    }
+
+    private void SetTargetAndFire(MissileData missile, TileScript target)
+    {
+
     }
 
     enum InputState
