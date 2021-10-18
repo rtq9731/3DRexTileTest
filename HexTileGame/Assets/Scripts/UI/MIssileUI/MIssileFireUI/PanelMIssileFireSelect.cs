@@ -39,7 +39,10 @@ public class PanelMissileFireSelect : MonoBehaviour
             }
         }
 
-        vcamMain.SetActive(true);
+        if(vcamMain != null)
+        {
+            vcamMain.SetActive(true);
+        }
 
         if(mainInput != null)
         {
@@ -70,31 +73,34 @@ public class PanelMissileFireSelect : MonoBehaviour
                 break;
         }
 
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
+        if(Input.GetMouseButtonDown(0))
         {
-            TileScript tile = hit.transform.GetComponent<TileScript>();
-            if (tile != null)
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
             {
-                switch (state)
+                TileScript tile = hit.transform.GetComponent<TileScript>();
+                if (tile != null)
                 {
-                    case InputState.None:
-                        break;
-                    case InputState.SelectStartTile:
-                        startedTile = tile;
-                        tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
-                        tile.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                        FireReady(fireMissiles[0]);
-                        break;
-                    case InputState.SelectTargetTile:
-                        if(tilesInRange.Contains(tile)) // 만약 선택한 곳이 사거리 내라면
-                        {
-                            SetTargetAndFire(fireMissiles[0], tile);
-                        }
-                        break;
-                    case InputState.Finish:
-                        break;
-                    default:
-                        break;
+                    switch (state)
+                    {
+                        case InputState.None:
+                            break;
+                        case InputState.SelectStartTile:
+                            startedTile = tile;
+                            tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
+                            tile.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                            FireReady(fireMissiles[0]);
+                            break;
+                        case InputState.SelectTargetTile:
+                            if (tilesInRange.Contains(tile)) // 만약 선택한 곳이 사거리 내라면
+                            {
+                                SetTargetAndFire(fireMissiles[0], tile);
+                            }
+                            break;
+                        case InputState.Finish:
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -121,11 +127,6 @@ public class PanelMissileFireSelect : MonoBehaviour
     {
         TileMapData.Instance.ResetColorAllTile();
 
-        if (fireMissiles.Contains(missile))
-        {
-            fireMissiles.Remove(missile);
-        }
-
         tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(startedTile, missile.MissileRange);
 
         var tilesCantFire = from item in TileMapData.Instance.GetAllTiles()
@@ -143,15 +144,21 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     private void SetTargetAndFire(MissileData missile, TileScript target)
     {
+        if (fireMissiles.Contains(missile))
+        {
+            fireMissiles.Remove(missile);
+        }
+
         fireMissiles.Remove(missile);
         MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(startedTile, missile, target, out GameObject missileObj);
         vcamFireMissile.m_LookAt = missileObj.transform;
-        StartCoroutine(LookMissileUntailImpact(missileObj, target.transform.position));
+
+        StartCoroutine(LookMissileUntailImpact(missileObj));
     }
 
-    IEnumerator LookMissileUntailImpact(GameObject Missile, Vector3 targetPos)
+    IEnumerator LookMissileUntailImpact(GameObject Missile)
     {
-        while(Missile.transform.position != targetPos)
+        while(Missile.activeSelf)
         {
             yield return null;
         }
