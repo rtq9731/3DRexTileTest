@@ -68,6 +68,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                 text.text = "타격 지점을 지정해주세요!\n초록색 : 타격 가능 지점\n빨간색 : 타격 불가능 지점\n노란색 : 출발 지점";
                 break;
             case InputState.Finish:
+                gameObject.SetActive(false);
                 break;
             default:
                 break;
@@ -85,6 +86,19 @@ public class PanelMissileFireSelect : MonoBehaviour
                         case InputState.None:
                             break;
                         case InputState.SelectStartTile:
+
+                            if (tile.Owner == MainSceneManager.Instance.GetPlayer() || tile.Data.type == (TileType.Ocean | TileType.Lake))
+                            {
+                                gameObject.SetActive(false);
+                                return;
+                            }
+
+                            if(MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, fireMissiles[0].MissileRange).Find(x => x.Owner != MainSceneManager.Instance.GetPlayer()) == null)
+                            {
+                                gameObject.SetActive(false);
+                                return;
+                            }
+
                             startedTile = tile;
                             tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
                             tile.GetComponent<MeshRenderer>().material.color = Color.yellow;
@@ -158,6 +172,8 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     IEnumerator LookMissileUntailImpact(GameObject Missile)
     {
+        
+        bStopGetInput = true;
         while(Missile.activeSelf)
         {
             yield return null;
@@ -171,6 +187,7 @@ public class PanelMissileFireSelect : MonoBehaviour
         {
             state = InputState.Finish;
         }
+        bStopGetInput = false;
     }
 
     enum InputState
