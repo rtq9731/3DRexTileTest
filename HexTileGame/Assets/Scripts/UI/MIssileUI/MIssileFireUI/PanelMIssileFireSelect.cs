@@ -20,7 +20,6 @@ public class PanelMissileFireSelect : MonoBehaviour
     InputState state = InputState.None;
 
     private TileScript startedTile = null;
-    private TileScript selectedTile = null;
 
     private List<MissileData> fireMissiles = new List<MissileData>(); // 발사 대기중인 미사일 ( 선택 X )
 
@@ -39,7 +38,9 @@ public class PanelMissileFireSelect : MonoBehaviour
             }
         }
 
-        if(vcamMain != null)
+        TileMapData.Instance.ResetColorAllTile();
+
+        if (vcamMain != null)
         {
             vcamMain.SetActive(true);
         }
@@ -47,6 +48,11 @@ public class PanelMissileFireSelect : MonoBehaviour
         if(mainInput != null)
         {
             mainInput.enabled = true;
+        }
+
+        if(startedTile != null)
+        {
+            startedTile.transform.position = startedTile.Data.Position;
         }
     }
 
@@ -65,7 +71,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                 text.text = "미사일의 출발 지점을 정해주세요.\n만약 근처에 적 타일이 없다면\n자동으로 취소됩니다.";
                 break;
             case InputState.SelectTargetTile:
-                text.text = "타격 지점을 지정해주세요!\n초록색 : 타격 가능 지점\n빨간색 : 타격 불가능 지점\n노란색 : 출발 지점";
+                text.text = "타격 지점을 지정해주세요!\n초록색 : 타격 가능 지점\n빨간색 : 타격 불가능 지점\n파란색 : 출발 지점";
                 break;
             case InputState.Finish:
                 gameObject.SetActive(false);
@@ -86,14 +92,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                         case InputState.None:
                             break;
                         case InputState.SelectStartTile:
-
-                            if (tile.Owner == MainSceneManager.Instance.GetPlayer() || tile.Data.type == (TileType.Ocean | TileType.Lake))
-                            {
-                                gameObject.SetActive(false);
-                                return;
-                            }
-
-                            if(MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, fireMissiles[0].MissileRange).Find(x => x.Owner != MainSceneManager.Instance.GetPlayer()) == null)
+                            if(MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, fireMissiles[0].MissileRange).Find(x => isTileCanFire(x)) == null)
                             {
                                 gameObject.SetActive(false);
                                 return;
@@ -102,10 +101,13 @@ public class PanelMissileFireSelect : MonoBehaviour
                             startedTile = tile;
                             tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
                             tile.GetComponent<MeshRenderer>().material.color = Color.yellow;
+
+                            vcamFireMissile.transform.position = vcamMain.transform.position;
+
                             FireReady(fireMissiles[0]);
                             break;
                         case InputState.SelectTargetTile:
-                            if (tilesInRange.Contains(tile)) // 만약 선택한 곳이 사거리 내라면
+                            if (isTileCanFire(tile)) // 만약 선택한 곳이 사거리 내라면
                             {
                                 SetTargetAndFire(fireMissiles[0], tile);
                             }
@@ -118,6 +120,15 @@ public class PanelMissileFireSelect : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool isTileCanFire(TileScript tile)
+    {
+        return tilesInRange.Contains(tile)
+            && tile.Owner != MainSceneManager.Instance.GetPlayer()
+            && tile.Owner != null
+            && tile.Data.type != TileType.Ocean 
+            && tile.Data.type != TileType.Lake;
     }
 
     public void InitPanelMissileFire(List<MissileData> fireMissiles)
@@ -133,35 +144,61 @@ public class PanelMissileFireSelect : MonoBehaviour
         mainInput.enabled = false;
         vcamMain.SetActive(false);
         gameObject.SetActive(true);
-        vcamFireMissile.gameObject.SetActive(true);
+        vcamFireMissile.gameObject.SetActive(true); 
     }
 
     // 미사일 쏠 준비를 해줌
     private void FireReady(MissileData missile)
     {
         TileMapData.Instance.ResetColorAllTile();
+        
+        startedTile.GetComponent<MeshRenderer>().material.color = Color.blue;
 
+        SetCanFireTile(startedTile, missile);
+        SetCantFireTile();
+
+        state = InputState.SelectTargetTile;
+
+    }
+
+    /// <summary>
+    /// 사거리안에 있는 타일을 업데이트 및 색칠 해줍니다.
+    /// </summary>
+    /// <param name="startedTile"></param>
+    /// <param name="missile"></param>
+    private void SetCanFireTile(TileScript startedTile, MissileData missile)
+    {
         tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(startedTile, missile.MissileRange);
+        tilesInRange.ForEach(x =>
+        {
+            x.GetComponent<MeshRenderer>().material.color = Color.green;
+        });
+    }
 
+    /// <summary>
+    /// 사격 불가능한 타일을 골라줍니다.
+    /// SetCanFireTile() 다음에 실행되는 것이 좋습니다.
+    /// </summary>
+    private void SetCantFireTile()
+    {
         var tilesCantFire = from item in TileMapData.Instance.GetAllTiles()
-                          where !tilesInRange.Contains(item)
-                          select item;
+                            where !isTileCanFire(item)
+                            select item;
 
         foreach (var item in tilesCantFire)
         {
             item.GetComponent<MeshRenderer>().material.color = Color.red;
         }
-        
-        tilesInRange.ForEach(x => x.GetComponent<MeshRenderer>().material.color = Color.green);
-        state = InputState.SelectTargetTile;
     }
 
     private void SetTargetAndFire(MissileData missile, TileScript target)
     {
+
         if (fireMissiles.Contains(missile))
         {
             fireMissiles.Remove(missile);
         }
+
 
         fireMissiles.Remove(missile);
         MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(startedTile, missile, target, out GameObject missileObj);
@@ -182,6 +219,10 @@ public class PanelMissileFireSelect : MonoBehaviour
         if (fireMissiles.Count >= 1)
         {
             state = InputState.SelectTargetTile;
+
+            TileMapData.Instance.ResetColorAllTile();
+            SetCanFireTile(startedTile, fireMissiles[0]);
+            SetCantFireTile();
         }
         else
         {

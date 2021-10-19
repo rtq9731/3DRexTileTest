@@ -87,7 +87,7 @@ public class PanelMissileMaker : MonoBehaviour
     {
         if(missileBluePrint.MissileRange > 0 && player.MissileInMaking.Count + player.MissileReadyToShoot.Count < player.OwningTiles.Count)
         {
-            player.MissileInMaking.Add(missileBluePrint);
+            player.MissileInMaking.Add(new MissileData(missileBluePrint.EngineTier, missileBluePrint.WarheadType));
             panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
             textMissilesInMake.text = $"{ player.MissileInMaking.Count + player.MissileReadyToShoot.Count } / { player.OwningTiles.Count }";
         }

@@ -60,6 +60,7 @@ public class PanelSelectMissile : MonoBehaviour
         {
             GetNewMissilePanel(out PanelSelecterElement element);
             element.InitPanelSelecterElement(selectedMissilePanel, unselectedMissilePanel, item);
+            element.Deselect();
             element.onClickBtnSelect += () =>
             {
                 if (element.IsSelected)

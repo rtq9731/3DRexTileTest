@@ -37,6 +37,7 @@ public class PanelSelecterElement : MonoBehaviour
 
     public void InitPanelSelecterElement(Transform selectedParent, Transform unSelectedParent, MissileData data)
     {
+        transform.localScale = Vector3.one;
         this.selectedParent = selectedParent;
         this.unSelectedParent = unSelectedParent;
 
@@ -53,8 +54,8 @@ public class PanelSelecterElement : MonoBehaviour
     
     public void SetData() 
     {
-        textMissileWarhead.text = data.WarheadType.ToString();
-        textMissileRange.text = data.EngineTier.ToString();
+        textMissileWarhead.text = MainSceneManager.Instance.GetWarheadData(data.WarheadType).Name;
+        textMissileRange.text = MainSceneManager.Instance.GetEngineData(data.EngineTier).Name;
     }
     
     public void Select()

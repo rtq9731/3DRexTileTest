@@ -20,6 +20,10 @@ public class UIStackManager
 
     public static GameObject GetTopUI()
     {
+        if(UIStack.Count <= 0)
+        {
+            return null;
+        }
         return UIStack.Peek();
     }
 
