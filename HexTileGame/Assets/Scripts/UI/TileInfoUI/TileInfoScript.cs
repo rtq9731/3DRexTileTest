@@ -128,6 +128,11 @@ public class TileInfoScript : MonoBehaviour
             btnBuy.interactable = false;
             return;
         }
+        else if(tile.Owner != null)
+        {
+            btnBuy.interactable = false;
+            return;
+        }
 
         btnBuy.onClick.RemoveAllListeners();
         btnBuy.onClick.AddListener(() => {
