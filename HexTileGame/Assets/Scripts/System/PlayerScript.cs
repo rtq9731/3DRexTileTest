@@ -93,6 +93,11 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public void TurnFinish()
     {
+        List<TileScript> lostTiles = new List<TileScript>();
+        lostTiles = owningTiles.FindAll(x => x.Owner != this);
+
+        lostTiles.ForEach(x => owningTiles.Remove(x));
+
         if (isTurnFinish)
         {
             return;
