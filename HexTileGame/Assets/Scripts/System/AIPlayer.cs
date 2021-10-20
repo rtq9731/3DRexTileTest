@@ -11,7 +11,7 @@ public class AIPlayer : PlayerScript
         if (isTurnFinish)
             return;
         
-        if(resouceTank > tilePrice)
+        if(resouceTank >= tilePrice)
         {
             BuyTile();
         }
