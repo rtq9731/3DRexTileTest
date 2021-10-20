@@ -7,7 +7,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
     protected Action start = () => { };
 
-    protected List<TileScript> tilesInSight = new List<TileScript>();
+    protected List<TileScript> tileInSight = new List<TileScript>();
 
     protected List<int> unlockedWarheadIdx = new List<int>();
     public List<int> UnlockedWarheadIdx
@@ -37,25 +37,25 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         get { return owningTiles; }
     }
 
-    private List<MissileData> missileInMaking = new List<MissileData>();
+    protected List<MissileData> missileInMaking = new List<MissileData>();
     public  List<MissileData> MissileInMaking
     {
         get { return missileInMaking; }
     }
 
-    private List<MissileData> missileReadyToShoot = new List<MissileData>();
+    protected List<MissileData> missileReadyToShoot = new List<MissileData>();
     public List<MissileData> MissileReadyToShoot
     {
         get { return missileReadyToShoot; }
     }
 
-    bool isTurnFinish = false;
+    protected bool isTurnFinish = false;
     public bool IsTurnFinish { get { return isTurnFinish; } }
 
-    int resouceTank = 0;
+    protected int resouceTank = 0;
     public int ResourceTank { get { return resouceTank; } }
 
-    private void Awake()
+    protected void Awake()
     {
         TurnFinishAction = () => { }; // 액션 초기화
         TurnFinishAction += () => {
@@ -114,7 +114,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
             tile.ChangeOwner(this);
         }
 
-        if(MainSceneManager.Instance.GetPlayer() == this)
+        if (MainSceneManager.Instance.GetPlayer() == this)
         {
             MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(tile);
             MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, 1).ForEach(x => MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x));

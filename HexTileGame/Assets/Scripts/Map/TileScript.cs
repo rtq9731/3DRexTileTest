@@ -22,12 +22,40 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     }
 
 
-    public void Damage(int damage)
+    public void Damage(MissileTypes.MissileWarheadType warhead)
     {
-        data.Shield -= damage;
-        if(data.Shield < 0)
+        DoMissileHitAct(warhead);
+        data.Shield -= MainSceneManager.Instance.GetWarheadData(warhead).Atk;
+        
+        if(data.Shield <= 0)
         {
-            owner = null;
+            ChangeOwner(null);
+            data.Shield = data.MaxShield;
+        }
+    }
+
+    private void DoMissileHitAct(MissileTypes.MissileWarheadType warhead)
+    {
+        switch (warhead)
+        {
+            case MissileTypes.MissileWarheadType.WideDamageTypeWarhead1:
+                break;
+            case MissileTypes.MissileWarheadType.WideDamageTypeWarhead2:
+                break;
+            case MissileTypes.MissileWarheadType.ContinuousTypeWarhead1:
+                break;
+            case MissileTypes.MissileWarheadType.ContinuousTypeWarhead2:
+                break;
+            case MissileTypes.MissileWarheadType.MoreWideTypeWarhead:
+                break;
+            case MissileTypes.MissileWarheadType.WideContinuousTypeWarhead:
+                break;
+            case MissileTypes.MissileWarheadType.DamageContinousTypeWarhead:
+                break;
+            case MissileTypes.MissileWarheadType.HellFireTypeWarhead:
+                break;
+            default:
+                break;
         }
     }
 
@@ -44,7 +72,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             GetComponent<MeshRenderer>().material.color = newOwner.playerColor;
             foreach (var item in transform.GetComponentsInChildren<MeshRenderer>())
             {
-                if(item.GetComponent<CloudObject>() == null)
+                if(item.transform.parent.GetComponent<CloudObject>() == null)
                 {
                     item.material.color = newOwner.playerColor;
                 }
@@ -52,6 +80,18 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             owner = newOwner;
             newOwner.AddTile(this);
         }
+        else if(newOwner == null)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.white;
+            foreach (var item in transform.GetComponentsInChildren<MeshRenderer>())
+            {
+                if (item.transform.parent.GetComponent<CloudObject>() == null)
+                {
+                    item.material.color = Color.white;
+                }
+            }
+        }
+
         owner = newOwner;
     }
 

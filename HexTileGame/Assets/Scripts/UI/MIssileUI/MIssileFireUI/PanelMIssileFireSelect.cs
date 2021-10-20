@@ -29,7 +29,7 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     private void OnDisable()
     {
-        if(fireMissiles.Count > 1)
+        if(fireMissiles.Count >= 1)
         {
             foreach (var item in fireMissiles)
             {
@@ -229,7 +229,8 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     IEnumerator LookMissileUntailImpact(GameObject Missile)
     {
-        
+
+        vcamFireMissile.GetComponent<CameraMove>().enabled = false;
         bStopGetInput = true;
         while(Missile.activeSelf)
         {
@@ -249,6 +250,7 @@ public class PanelMissileFireSelect : MonoBehaviour
             state = InputState.Finish;
         }
         bStopGetInput = false;
+        vcamFireMissile.GetComponent<CameraMove>().enabled = true;
     }
 
     enum InputState
