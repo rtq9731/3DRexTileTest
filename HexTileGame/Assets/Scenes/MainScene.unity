@@ -6587,6 +6587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: 
   playerColor: {r: 1, g: 1, b: 1, a: 1}
+  vacmMain: {fileID: 0}
   playerName: COCONUT
   color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &837855647
@@ -8007,7 +8008,7 @@ MonoBehaviour:
   cameraMoveScript: {fileID: 385465011}
   whereIsTile:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0

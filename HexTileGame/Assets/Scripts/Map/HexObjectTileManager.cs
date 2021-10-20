@@ -14,8 +14,8 @@ public class HexObjectTileManager : LoadingObj
 
     private void Awake()
     {
-        start = x => { x = "구름과 오브젝트 생성 중..."; };
-        finish = x => { x = "구름과 오브젝트 생성 완료!"; };
+        start = x => { };
+        finish = x => { };
     }
 
     public void GenerateObjects(int width, int height, HexTilemapGenerator.GroundType groundType)

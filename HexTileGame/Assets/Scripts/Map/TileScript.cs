@@ -44,7 +44,10 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             GetComponent<MeshRenderer>().material.color = newOwner.playerColor;
             foreach (var item in transform.GetComponentsInChildren<MeshRenderer>())
             {
-                item.material.color = newOwner.playerColor;
+                if(item.GetComponent<CloudObject>() == null)
+                {
+                    item.material.color = newOwner.playerColor;
+                }
             }
             owner = newOwner;
             newOwner.AddTile(this);

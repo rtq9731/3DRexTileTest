@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
+    protected Action start = () => { };
+
     protected List<int> unlockedWarheadIdx = new List<int>();
     public List<int> UnlockedWarheadIdx
     {
@@ -108,6 +110,12 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         if(tile.Owner != this)
         {
             tile.ChangeOwner(this);
+        }
+
+        if(MainSceneManager.Instance.GetPlayer() == this)
+        {
+            MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(tile);
+            MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, 1).ForEach(x => MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x));
         }
 
         // 중복 안되게 하기 위함.

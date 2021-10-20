@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class PersonPlayer : PlayerScript
 {
+    [SerializeField] GameObject vacmMain;
+
     [Header("플레이어 정보 입력")]
     [SerializeField] string playerName;
     [SerializeField] Color color;
 
     private void Start()
     {
-        Debug.Log("ㅎㅇ");
         MainSceneManager.Instance.PlayerName = playerName;
         base.playerColor = color;
         base.myName = playerName;

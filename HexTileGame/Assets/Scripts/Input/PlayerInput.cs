@@ -44,14 +44,17 @@ public class PlayerInput : MonoBehaviour
                 {
                     if(hit.transform.GetComponent<TileScript>() != null)
                     {
-                        TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
+                        if(hit.transform.GetComponentInChildren<CloudObject>() == null)
+                        {
+                            TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
+                        }
                     }
                 }
             }
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
             {
-                if (hit.transform.GetComponent<TileScript>() == null)
+                if (hit.transform.GetComponent<TileScript>() == null || hit.transform.GetComponentInChildren<CloudObject>() != null)
                 {
                     return;
                 }
