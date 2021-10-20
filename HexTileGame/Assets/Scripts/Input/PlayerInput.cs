@@ -13,7 +13,7 @@ public class PlayerInput : MonoBehaviour
     RaycastHit hit;
 
     bool isSimplePanelOn = false;
-    bool isUINotEmpty;
+    bool isUIEmpty;
 
     TileData lastTileData;
     TileData nowData;
@@ -28,13 +28,10 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-        isUINotEmpty = UIStackManager.IsUIStackEmpty();
-        if (isUINotEmpty && Camera.main.transform.position == cameraMoveScript.transform.position) // 다른 UI가 아무것도 올라가있지 않을 때 / 카메라 애니메이션이 끝났을 때
+        isUIEmpty = UIStackManager.IsUIStackEmpty();
+        if (isUIEmpty && Camera.main.transform.position == cameraMoveScript.transform.position) // 다른 UI가 아무것도 올라가있지 않을 때 / 카메라 애니메이션이 끝났을 때
         {
-            if(!cameraMoveScript.enabled)
-            {
-                cameraMoveScript.enabled = isUINotEmpty; // 원래카메라를 움직일 수 없게 만들어줌
-            }
+            cameraMoveScript.enabled = isUIEmpty;
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -83,7 +80,7 @@ public class PlayerInput : MonoBehaviour
 
             if (cameraMoveScript.enabled)
             {
-                cameraMoveScript.enabled = isUINotEmpty;
+                cameraMoveScript.enabled = isUIEmpty;
             }
         }    
     }

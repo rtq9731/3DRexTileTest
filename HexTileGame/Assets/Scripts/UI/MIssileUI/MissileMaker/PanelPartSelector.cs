@@ -42,7 +42,7 @@ public class PanelPartSelector : MonoBehaviour
                 }
                 break;
             case PanelMissileMaker.partType.Warhead:
-                foreach (var item in player.unlockedWarheadIdx)
+                foreach (var item in player.UnlockedWarheadIdx)
                 {
                     GetNewInfoPanel(out PanelPartinfo element);
                     element.partSelector = this;

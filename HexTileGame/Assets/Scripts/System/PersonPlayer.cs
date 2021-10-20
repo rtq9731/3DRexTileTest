@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class PersonPlayer : PlayerScript
 
     private void Start()
     {
+        Debug.Log("¤¾¤·");
         MainSceneManager.Instance.PlayerName = playerName;
         base.playerColor = color;
         base.myName = playerName;

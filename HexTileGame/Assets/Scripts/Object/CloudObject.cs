@@ -24,5 +24,7 @@ public class CloudObject : MonoBehaviour
 
         sequence.Join(cloud3.transform.DOMove(new Vector3(cloud3.transform.position.x - 0.25f, cloud3.transform.position.y, cloud3.transform.position.z + 0.25f), removeTime)).SetEase(Ease.OutQuart);
         sequence.Join(cloud3.transform.DOScale(Vector3.zero, removeTime));
+
+        sequence.OnComplete(() => gameObject.SetActive(false));
     }
 }

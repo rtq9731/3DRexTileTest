@@ -41,6 +41,7 @@ public class MainSceneManager : MonoBehaviour
     public TileInfoScript InfoPanel;
 
     [SerializeField] public MissileManager missileManager;
+    [SerializeField] public FogOfWarManager fogOfWarManager;
     [SerializeField] public GameObject tileVcam;
     [SerializeField] public TileChecker tileChecker;
     [SerializeField] public UITopBar uiTopBar;

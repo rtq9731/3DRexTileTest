@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class HexTilemapGenerator : MonoBehaviour
@@ -9,6 +10,9 @@ public class HexTilemapGenerator : MonoBehaviour
         Plain,
         Mountain
     }
+
+    Func<string> start = () => { return "오브젝트 생성중.."; };
+    Func<string> finish = () => { return "오브젝트 생성 완료!"; };
 
     float TileXInterval = 1f;
     float TileZInterval = 0.875f;
@@ -56,7 +60,7 @@ public class HexTilemapGenerator : MonoBehaviour
             tilePos.x = (i % 2 == 0) ? -width / 2 : -width / 2 + 0.5f;
             for (int j = 0; j < width; j++)
             {
-                GameObject temp = Instantiate(groundTiles[Random.Range(1, groundTiles.Length)], tilePos, Quaternion.Euler(Vector3.zero), this.gameObject.transform);
+                GameObject temp = Instantiate(groundTiles[UnityEngine.Random.Range(1, groundTiles.Length)], tilePos, Quaternion.Euler(Vector3.zero), this.gameObject.transform);
                 TileScript tempScirpt = temp.GetComponent<TileScript>();
                 TileMapData.Instance.SetTileData(tempScirpt);
                 tempScirpt.SetPosition(tilePos);

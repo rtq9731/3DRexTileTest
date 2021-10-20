@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
-    public List<int> unlockedWarheadIdx = new List<int>();
-    List<int> UnlockedWarheadIdx
+    protected List<int> unlockedWarheadIdx = new List<int>();
+    public List<int> UnlockedWarheadIdx
     {
         get { return unlockedWarheadIdx; }
     }
 
-    List<int> unlockedEngineIdx = new List<int>();
+    protected List<int> unlockedEngineIdx = new List<int>();
     public List<int> UnlockedEngineIdx
     {
         get { return unlockedEngineIdx; }
@@ -27,7 +27,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public Action TurnFinishAction;
 
-    private List<TileScript> owningTiles = new List<TileScript>();
+    protected List<TileScript> owningTiles = new List<TileScript>();
     public List<TileScript> OwningTiles
     {
         get { return owningTiles; }
