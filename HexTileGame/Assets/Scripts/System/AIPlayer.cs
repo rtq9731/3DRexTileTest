@@ -30,7 +30,14 @@ public class AIPlayer : PlayerScript
             buyTile = MainSceneManager.Instance.tileChecker.FindTilesInRange(item, 1).Find(x => isCanBuy(x));
         }
 
-        buyTile.BuyTile(this);
+        if(buyTile != null)
+        {
+            buyTile.BuyTile(this);
+        }
+        else
+        {
+            TurnFinish();
+        }
     }
 
     private bool isCanBuy(TileScript tile)

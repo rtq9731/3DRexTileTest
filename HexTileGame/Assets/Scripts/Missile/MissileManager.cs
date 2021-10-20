@@ -35,20 +35,21 @@ public class MissileManager: MonoBehaviour
         timer = 0f;
 
         missileObj.transform.position = startPoint;
-        StartCoroutine(FireCoroutine(startPoint, midPoint, targetPoint, missileObj));
+        StartCoroutine(FireCoroutine(startPoint, midPoint, targetPoint, missileObj, target, missile));
     }
 
-    IEnumerator FireCoroutine(Vector3 startPoint, Vector3 midPoint, Vector3 targetPoint, GameObject missile)
+    IEnumerator FireCoroutine(Vector3 startPoint, Vector3 midPoint, Vector3 targetPoint, GameObject missileObj, TileScript targetTile, MissileData missileData)
     {
-        while (missile.transform.position != targetPoint)
+        while (missileObj.transform.position != targetPoint)
         {
             timer += Time.deltaTime * 0.5f;
             Vector3 p1 = Vector3.Lerp(startPoint, midPoint, timer);
             Vector3 p2 = Vector3.Lerp(midPoint, targetPoint, timer);
-            missile.transform.position = Vector3.Lerp(p1, p2, timer);
+            missileObj.transform.position = Vector3.Lerp(p1, p2, timer);
             yield return null;
         }
 
-        missile.SetActive(false);
+        targetTile.Damage(missileData.WarheadType);
+        missileObj.SetActive(false);
     }
 }

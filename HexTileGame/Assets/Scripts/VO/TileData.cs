@@ -10,12 +10,14 @@ public class TileData
 
     Vector3 position = Vector3.zero;
 
+    int maxShield = 100;
     int range = 3;
     int price = 20;
     int shield = 100;
     int resource = 3;
     int attackPower = 0;
 
+    public int MaxShield { get { return maxShield; } set { maxShield = value; } }
     public int Range { get { return range; } set { range = value; } }
     public int Price { get { return price; } set { price = value; } }
     public int Shield { get { return shield; } set { shield = value; } }
@@ -28,7 +30,8 @@ public class TileData
     {
         SetDataToPlain();
         type = TileType.Forest;
-        shield += 10;
+        maxShield += 10;
+        shield = maxShield;
         range -= 1;
     }
 
@@ -50,7 +53,8 @@ public class TileData
 
     public void SetDataToRock()
     {
-        shield += 30;
+        maxShield += 30;
+        shield = maxShield;
         attackPower -= 1;
     }
 
