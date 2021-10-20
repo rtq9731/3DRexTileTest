@@ -38,7 +38,10 @@ public class PanelMissileFireSelect : MonoBehaviour
             }
         }
 
-        TileMapData.Instance.ResetColorAllTile();
+        if(TileMapData.Instance != null)
+        {
+            TileMapData.Instance.ResetColorAllTile();
+        }
 
         if (vcamMain != null)
         {
@@ -92,7 +95,8 @@ public class PanelMissileFireSelect : MonoBehaviour
                         case InputState.None:
                             break;
                         case InputState.SelectStartTile:
-                            if(MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, fireMissiles[0].MissileRange).Find(x => isTileCanFire(x)) == null)
+                            Debug.Log(!isCanStartTile(tile, fireMissiles[0]));
+                            if(!isCanStartTile(tile, fireMissiles[0]))
                             {
                                 gameObject.SetActive(false);
                                 return;
@@ -122,13 +126,27 @@ public class PanelMissileFireSelect : MonoBehaviour
         }
     }
 
+    public bool isCanStartTile(TileScript tile, MissileData missile)
+    {
+        return MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, missile.MissileRange).Find( x => 
+        {
+            return x.Owner != MainSceneManager.Instance.GetPlayer() // 주인이 플레이어가 아니어야함
+            // && tile.Owner != null 주인 없는 땅은 못때리게 하는 코드 / 근데 잠시 비활성화
+            && !x.transform.GetComponentInChildren<CloudObject>()// 시야밖의 타일 타격 불가
+            && x.Data.type != TileType.Ocean
+            && x.Data.type != TileType.Lake; // 물타일 타격 불가
+        }) != null; // 타격 가능한 타일이 있는지 검사
+    }
+
     public bool isTileCanFire(TileScript tile)
     {
-        return tilesInRange.Contains(tile)
-            && tile.Owner != MainSceneManager.Instance.GetPlayer()
-            && tile.Owner != null
-            && tile.Data.type != TileType.Ocean 
-            && tile.Data.type != TileType.Lake;
+        return 
+            tilesInRange.Contains(tile)
+            && tile.Owner != MainSceneManager.Instance.GetPlayer() // 주인이 플레이어가 아니어야함
+            // && tile.Owner != null 주인 없는 땅은 못때리게 하는 코드 / 근데 잠시 비활성화
+            && !tile.transform.GetComponentInChildren<CloudObject>()// 시야밖의 타일 타격 불가
+            && tile.Data.type != TileType.Ocean  
+            && tile.Data.type != TileType.Lake; // 물타일 타격 불가
     }
 
     public void InitPanelMissileFire(List<MissileData> fireMissiles)
@@ -142,6 +160,8 @@ public class PanelMissileFireSelect : MonoBehaviour
         fireMissiles.Sort((x, y) => -x.MissileRange.CompareTo(y.MissileRange));
 
         mainInput.enabled = false;
+
+        vcamFireMissile.transform.position = vcamMain.transform.position;
         vcamMain.SetActive(false);
         gameObject.SetActive(true);
         vcamFireMissile.gameObject.SetActive(true); 

@@ -7,6 +7,8 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
     protected Action start = () => { };
 
+    protected List<TileScript> tilesInSight = new List<TileScript>();
+
     protected List<int> unlockedWarheadIdx = new List<int>();
     public List<int> UnlockedWarheadIdx
     {
