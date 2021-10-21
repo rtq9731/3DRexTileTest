@@ -49,7 +49,9 @@ public class MissileManager: MonoBehaviour
             yield return null;
         }
 
+        
         targetTile.Damage(missileData.WarheadType);
+        MainSceneManager.Instance.effectPool.PlayEffectOnTile(targetTile);
         missileObj.SetActive(false);
     }
 }

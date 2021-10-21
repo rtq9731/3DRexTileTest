@@ -45,6 +45,7 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] public GameObject tileVcam;
     [SerializeField] public TileChecker tileChecker;
     [SerializeField] public UITopBar uiTopBar;
+    [SerializeField] public MissileEffectPool effectPool;
 
     public float TileZInterval = 0.875f;
     public float TileXInterval = 1f;

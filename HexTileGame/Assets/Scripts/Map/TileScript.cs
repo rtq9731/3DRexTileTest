@@ -24,7 +24,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void Damage(MissileTypes.MissileWarheadType warhead)
     {
-        DoMissileHitAct(warhead);
+        DoMissileHitAct(warhead, this);
         data.Shield -= MainSceneManager.Instance.GetWarheadData(warhead).Atk;
         
         if(data.Shield <= 0)
@@ -33,14 +33,43 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             data.Shield = data.MaxShield;
         }
     }
-
-    private void DoMissileHitAct(MissileTypes.MissileWarheadType warhead)
+    public void Damage(int damage)
     {
+        data.Shield -= damage;
+
+        if (data.Shield <= 0)
+        {
+            ChangeOwner(null);
+            data.Shield = data.MaxShield;
+        }
+    }
+
+    private void DoMissileHitAct(MissileTypes.MissileWarheadType warhead, TileScript hitTile)
+    {
+        List<TileScript> tilesInMoreHitRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(hitTile, 1);
         switch (warhead)
         {
             case MissileTypes.MissileWarheadType.WideDamageTypeWarhead1:
+                for (int i = 0; i < 2; i++)
+                {
+                    if(tilesInMoreHitRange.Count >= 1)
+                    {
+                        TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
+                        tilesInMoreHitRange.Remove(randTile);
+                        randTile.Damage(MainSceneManager.Instance.GetWarheadData(warhead).Atk - 20);
+                    }
+                }
                 break;
             case MissileTypes.MissileWarheadType.WideDamageTypeWarhead2:
+                for (int i = 0; i < 4; i++)
+                {
+                    if (tilesInMoreHitRange.Count >= 1)
+                    {
+                        TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
+                        tilesInMoreHitRange.Remove(randTile);
+                        randTile.Damage(MainSceneManager.Instance.GetWarheadData(warhead).Atk - 10);
+                    }
+                }
                 break;
             case MissileTypes.MissileWarheadType.ContinuousTypeWarhead1:
                 break;
@@ -90,6 +119,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
                     item.material.color = Color.white;
                 }
             }
+            owner.OwningTiles.Remove(this);
         }
 
         owner = newOwner;
