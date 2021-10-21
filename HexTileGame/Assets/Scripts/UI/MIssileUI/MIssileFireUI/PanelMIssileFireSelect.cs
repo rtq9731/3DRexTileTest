@@ -95,7 +95,6 @@ public class PanelMissileFireSelect : MonoBehaviour
                         case InputState.None:
                             break;
                         case InputState.SelectStartTile:
-                            Debug.Log(!isCanStartTile(tile, fireMissiles[0]));
                             if(!isCanStartTile(tile, fireMissiles[0]))
                             {
                                 gameObject.SetActive(false);
@@ -131,7 +130,7 @@ public class PanelMissileFireSelect : MonoBehaviour
         return MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, missile.MissileRange).Find( x => 
         {
             return x.Owner != MainSceneManager.Instance.GetPlayer() // 주인이 플레이어가 아니어야함
-            // && tile.Owner != null 주인 없는 땅은 못때리게 하는 코드 / 근데 잠시 비활성화
+            && tile.Owner != null // 주인 없는 땅은 못때리게
             && !x.transform.GetComponentInChildren<CloudObject>()// 시야밖의 타일 타격 불가
             && x.Data.type != TileType.Ocean
             && x.Data.type != TileType.Lake; // 물타일 타격 불가
@@ -143,7 +142,7 @@ public class PanelMissileFireSelect : MonoBehaviour
         return 
             tilesInRange.Contains(tile)
             && tile.Owner != MainSceneManager.Instance.GetPlayer() // 주인이 플레이어가 아니어야함
-            // && tile.Owner != null 주인 없는 땅은 못때리게 하는 코드 / 근데 잠시 비활성화
+            && tile.Owner != null // 주인 없는 땅은 못때리게
             && !tile.transform.GetComponentInChildren<CloudObject>()// 시야밖의 타일 타격 불가
             && tile.Data.type != TileType.Ocean  
             && tile.Data.type != TileType.Lake; // 물타일 타격 불가
