@@ -10,7 +10,8 @@ public class PanelMissileFireSelect : MonoBehaviour
 {
     [SerializeField] LayerMask whereIsTile;
     [SerializeField] Text text; 
-    [SerializeField] CinemachineVirtualCamera vcamFireMissile = null;
+    [SerializeField] CinemachineVirtualCamera vcamLookMissile = null;
+    [SerializeField] GameObject vcamSelectFire = null;
 
     [SerializeField] PlayerInput mainInput = null;
     [SerializeField] GameObject vcamMain = null; // 둘 전부 처음에 비활성화, 꺼질때 활성화
@@ -43,6 +44,11 @@ public class PanelMissileFireSelect : MonoBehaviour
             TileMapData.Instance.ResetColorAllTile();
         }
 
+        if(vcamSelectFire != null)
+        {
+            vcamSelectFire.gameObject.SetActive(false);
+        }
+
         if (vcamMain != null)
         {
             vcamMain.SetActive(true);
@@ -66,6 +72,11 @@ public class PanelMissileFireSelect : MonoBehaviour
             return;
         }
 
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIStackManager.RemoveUIOnTop();
+        }
+
         switch (state)
         {
             case InputState.None:
@@ -77,7 +88,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                 text.text = "타격 지점을 지정해주세요!\n초록색 : 타격 가능 지점\n빨간색 : 타격 불가능 지점\n파란색 : 출발 지점";
                 break;
             case InputState.Finish:
-                gameObject.SetActive(false);
+                UIStackManager.RemoveUIOnTop();
                 break;
             default:
                 break;
@@ -97,7 +108,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                         case InputState.SelectStartTile:
                             if(!isCanStartTile(tile, fireMissiles[0]))
                             {
-                                gameObject.SetActive(false);
+                                UIStackManager.RemoveUIOnTop();
                                 return;
                             }
 
@@ -105,7 +116,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                             tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
                             tile.GetComponent<MeshRenderer>().material.color = Color.yellow;
 
-                            vcamFireMissile.transform.position = vcamMain.transform.position;
+                            vcamSelectFire.transform.position = vcamMain.transform.position;
 
                             FireReady(fireMissiles[0]);
                             break;
@@ -116,6 +127,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                             }
                             break;
                         case InputState.Finish:
+                            UIStackManager.RemoveUIOnTop();
                             break;
                         default:
                             break;
@@ -127,14 +139,13 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     public bool isCanStartTile(TileScript tile, MissileData missile)
     {
-        return MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, missile.MissileRange).Find( x => 
-        {
-            return x.Owner != MainSceneManager.Instance.GetPlayer() // 주인이 플레이어가 아니어야함
+        return 
+            MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, missile.MissileRange).Contains(tile)
+            && tile.Owner != MainSceneManager.Instance.GetPlayer() // 주인이 플레이어가 아니어야함
             && tile.Owner != null // 주인 없는 땅은 못때리게
-            && !x.transform.GetComponentInChildren<CloudObject>()// 시야밖의 타일 타격 불가
-            && x.Data.type != TileType.Ocean
-            && x.Data.type != TileType.Lake; // 물타일 타격 불가
-        }) != null; // 타격 가능한 타일이 있는지 검사
+            && !tile.transform.GetComponentInChildren<CloudObject>()// 시야밖의 타일 타격 불가
+            && tile.Data.type != TileType.Ocean
+            && tile.Data.type != TileType.Lake; // 물타일 타격 불가
     }
 
     public bool isTileCanFire(TileScript tile)
@@ -160,10 +171,10 @@ public class PanelMissileFireSelect : MonoBehaviour
 
         mainInput.enabled = false;
 
-        vcamFireMissile.transform.position = vcamMain.transform.position;
+        vcamSelectFire.transform.position = vcamMain.transform.position;
         vcamMain.SetActive(false);
         gameObject.SetActive(true);
-        vcamFireMissile.gameObject.SetActive(true); 
+        vcamSelectFire.gameObject.SetActive(true); 
     }
 
     // 미사일 쏠 준비를 해줌
@@ -221,7 +232,7 @@ public class PanelMissileFireSelect : MonoBehaviour
 
         fireMissiles.Remove(missile);
         MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(startedTile, missile, target, out GameObject missileObj);
-        vcamFireMissile.m_LookAt = missileObj.transform;
+        vcamLookMissile.m_LookAt = missileObj.transform;
 
         StartCoroutine(LookMissileUntailImpact(missileObj));
     }
@@ -229,7 +240,7 @@ public class PanelMissileFireSelect : MonoBehaviour
     IEnumerator LookMissileUntailImpact(GameObject Missile)
     {
 
-        vcamFireMissile.GetComponent<CameraMove>().enabled = false;
+        vcamSelectFire.GetComponent<CameraMove>().enabled = false;
         bStopGetInput = true;
         while(Missile.activeSelf)
         {
@@ -249,7 +260,13 @@ public class PanelMissileFireSelect : MonoBehaviour
             state = InputState.Finish;
         }
         bStopGetInput = false;
-        vcamFireMissile.GetComponent<CameraMove>().enabled = true;
+
+        vcamLookMissile.m_LookAt = null;
+        vcamLookMissile.gameObject.SetActive(false);
+        vcamLookMissile.transform.rotation = vcamSelectFire.transform.rotation;
+        vcamLookMissile.transform.position = vcamSelectFire.transform.position;
+
+        vcamSelectFire.GetComponent<CameraMove>().enabled = true;
     }
 
     enum InputState

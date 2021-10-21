@@ -15363,6 +15363,7 @@ GameObject:
   - component: {fileID: 1861340633}
   - component: {fileID: 1861340635}
   - component: {fileID: 1861340634}
+  - component: {fileID: 1861340636}
   m_Layer: 5
   m_Name: PanelFireSelect
   m_TagString: Untagged
@@ -15406,7 +15407,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   text: {fileID: 575409337}
-  vcamFireMissile: {fileID: 1987251588}
+  vcamLookMissile: {fileID: 447459995}
+  vcamSelectFire: {fileID: 1987251587}
   mainInput: {fileID: 963194229}
   vcamMain: {fileID: 385465008}
 --- !u!222 &1861340635
@@ -15417,6 +15419,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861340632}
   m_CullTransparentMesh: 1
+--- !u!114 &1861340636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861340632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919ea34b703cee94f8f5c31f06629de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1880694171
 GameObject:
   m_ObjectHideFlags: 0
