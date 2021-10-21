@@ -9,6 +9,8 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 {
     [SerializeField] TileData data;
 
+    List<TileEffectClass> turnFinishEffects = new List<TileEffectClass>();
+
     public TileData Data
     {
         get { return data; }
@@ -20,7 +22,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     {
         get { return owner; }
     }
-
 
     public void Damage(MissileTypes.MissileWarheadType warhead)
     {
@@ -35,7 +36,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     }
     public void Damage(int damage)
     {
+        if (this.data.type == (TileType.Lake | TileType.Lake))
+            return;
+
         data.Shield -= damage;
+        MainSceneManager.Instance.effectPool.PlayEffectOnTile(this);
 
         if (data.Shield <= 0)
         {
@@ -50,41 +55,74 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         switch (warhead)
         {
             case MissileTypes.MissileWarheadType.WideDamageTypeWarhead1:
-                for (int i = 0; i < 2; i++)
-                {
-                    if(tilesInMoreHitRange.Count >= 1)
-                    {
-                        TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
-                        tilesInMoreHitRange.Remove(randTile);
-                        randTile.Damage(MainSceneManager.Instance.GetWarheadData(warhead).Atk - 20);
-                    }
-                }
+                DamageMoreTile(tilesInMoreHitRange, 2, MainSceneManager.Instance.GetWarheadData(warhead).Atk);
                 break;
             case MissileTypes.MissileWarheadType.WideDamageTypeWarhead2:
-                for (int i = 0; i < 4; i++)
-                {
-                    if (tilesInMoreHitRange.Count >= 1)
-                    {
-                        TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
-                        tilesInMoreHitRange.Remove(randTile);
-                        randTile.Damage(MainSceneManager.Instance.GetWarheadData(warhead).Atk - 10);
-                    }
-                }
+                DamageMoreTile(tilesInMoreHitRange, 4, MainSceneManager.Instance.GetWarheadData(warhead).Atk);
                 break;
             case MissileTypes.MissileWarheadType.ContinuousTypeWarhead1:
+                turnFinishEffects.Add(new TileEffectClass(() => this.data.Resource = data.MaxResource - 1, 2, () => this.data.Resource = this.data.MaxResource));
                 break;
             case MissileTypes.MissileWarheadType.ContinuousTypeWarhead2:
+                turnFinishEffects.Add(new TileEffectClass(() => this.data.Resource = data.MaxResource - 3, 3, () => this.data.Resource = this.data.MaxResource));
                 break;
             case MissileTypes.MissileWarheadType.MoreWideTypeWarhead:
+                DamageMoreTile(tilesInMoreHitRange, 6, MainSceneManager.Instance.GetWarheadData(warhead).Atk);
                 break;
             case MissileTypes.MissileWarheadType.WideContinuousTypeWarhead:
+                turnFinishEffects.Add(new TileEffectClass(() => this.data.Resource = data.MaxResource - 3, 3, () => this.data.Resource = this.data.MaxResource));
+                EffectMoreTile(tilesInMoreHitRange, 3, 2, 3);
                 break;
-            case MissileTypes.MissileWarheadType.DamageContinousTypeWarhead:
+            case MissileTypes.MissileWarheadType.WideDamageTypeWarhead:
+                DamageMoreTile(tilesInMoreHitRange, 3, MainSceneManager.Instance.GetWarheadData(warhead).Atk);
                 break;
             case MissileTypes.MissileWarheadType.HellFireTypeWarhead:
+                DamageMoreTile(tilesInMoreHitRange, 5, MainSceneManager.Instance.GetWarheadData(warhead).Atk);
+                EffectMoreTile(tilesInMoreHitRange, 5, 2, 2);
                 break;
             default:
                 break;
+        }
+    }
+
+    public void DamageMoreTile(List<TileScript> tilesInMoreHitRange, int moreHitTileCnt, int damage)
+    {
+        if (tilesInMoreHitRange.Find(x => x.owner != this.owner) == null)
+        {
+            return;
+        } // 내가 주인이 아닌 땅이 주변에 없으면 리턴
+
+        for (int i = 0; i < moreHitTileCnt; i++)
+        {
+            TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
+
+            tilesInMoreHitRange.Remove(randTile); // 중복 타격을 막기 위함
+
+            if (randTile.owner == null || randTile.owner == this.owner) // 주인 없는 땅 / 내 땅 이면 타격 X
+                return;
+
+            randTile.Damage(damage);
+        }
+    }
+
+    public void EffectMoreTile(List<TileScript> tilesInMoreHitRange, int moreHitTileCnt, int resouceLoss, int turnForFinish)
+    {
+        if (tilesInMoreHitRange.Find(x => x.owner != this.owner) == null)
+        {
+            return;
+        } // 내가 주인이 아닌 땅이 주변에 없으면 리턴
+
+        for (int i = 0; i < moreHitTileCnt; i++)
+        {
+            int a = i;
+            TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
+
+            tilesInMoreHitRange.Remove(randTile); // 중복 효과 적용을 막기 위함
+
+            if (randTile.owner == null || randTile.owner == this.owner) // 주인 없는 땅 / 내 땅 이면 타격 X
+                return;
+
+            randTile.turnFinishEffects.Add(new TileEffectClass(() => tilesInMoreHitRange[a].data.Resource = data.MaxResource - resouceLoss, turnForFinish, () => tilesInMoreHitRange[a].data.Resource = this.data.MaxResource));
         }
     }
 
