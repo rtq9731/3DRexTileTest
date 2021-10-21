@@ -85,12 +85,9 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         }
     }
 
-    public void DamageMoreTile(List<TileScript> tilesInMoreHitRange, int moreHitTileCnt, int damage)
+    private void DamageMoreTile(List<TileScript> tilesInMoreHitRange, int moreHitTileCnt, int damage)
     {
-        if (tilesInMoreHitRange.Find(x => x.owner != this.owner) == null)
-        {
-            return;
-        } // 내가 주인이 아닌 땅이 주변에 없으면 리턴
+        tilesInMoreHitRange = GetTilesCanFire(tilesInMoreHitRange);
 
         for (int i = 0; i < moreHitTileCnt; i++)
         {
@@ -98,19 +95,13 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
             tilesInMoreHitRange.Remove(randTile); // 중복 타격을 막기 위함
 
-            if (randTile.owner == null || randTile.owner == this.owner) // 주인 없는 땅 / 내 땅 이면 타격 X
-                return;
-
             randTile.Damage(damage);
         }
     }
 
-    public void EffectMoreTile(List<TileScript> tilesInMoreHitRange, int moreHitTileCnt, int resouceLoss, int turnForFinish)
+    private void EffectMoreTile(List<TileScript> tilesInMoreHitRange, int moreHitTileCnt, int resouceLoss, int turnForFinish)
     {
-        if (tilesInMoreHitRange.Find(x => x.owner != this.owner) == null)
-        {
-            return;
-        } // 내가 주인이 아닌 땅이 주변에 없으면 리턴
+        tilesInMoreHitRange = GetTilesCanFire(tilesInMoreHitRange);
 
         for (int i = 0; i < moreHitTileCnt; i++)
         {
@@ -119,11 +110,26 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
             tilesInMoreHitRange.Remove(randTile); // 중복 효과 적용을 막기 위함
 
-            if (randTile.owner == null || randTile.owner == this.owner) // 주인 없는 땅 / 내 땅 이면 타격 X
-                return;
-
             randTile.turnFinishEffects.Add(new TileEffectClass(() => tilesInMoreHitRange[a].data.Resource = data.MaxResource - resouceLoss, turnForFinish, () => tilesInMoreHitRange[a].data.Resource = this.data.MaxResource));
         }
+    }
+
+    private List<TileScript> GetTilesCanFire(List<TileScript> tiles)
+    {
+        List<TileScript> results = new List<TileScript>();
+        tiles.FindAll(x =>
+        {
+            if (x.owner == null || x.owner == this.owner || x.data.type == (TileType.Ocean | TileType.Lake))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }).ForEach(x => results.Add(x));
+
+        return results;
     }
 
     public void SetPosition(Vector3 pos)
