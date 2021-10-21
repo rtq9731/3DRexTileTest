@@ -16,9 +16,9 @@ MonoBehaviour:
   scriptFilePath: Data/GameData/Runtime
   editorScriptFilePath: Data/GameData/Editor
   sheetName: Missiles.xlsx
-  workSheetName: MissileWarhead
+  workSheetName: MissileEngine
   columnHeaderList:
-  - type: 2
+  - type: 3
     name: idx
     isEnable: 0
     isArray: 0
@@ -35,10 +35,6 @@ MonoBehaviour:
     isEnable: 0
     isArray: 0
   - type: 3
-    name: atk
-    isEnable: 0
-    isArray: 0
-  - type: 3
     name: weight
     isEnable: 0
     isArray: 0
@@ -50,4 +46,4 @@ MonoBehaviour:
   SheetNames:
   - MissileEngine
   - MissileWarhead
-  currentSelectedSheet: 1
+  currentSelectedSheet: 0
