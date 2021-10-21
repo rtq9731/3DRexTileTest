@@ -15,7 +15,7 @@ public class MissileTypes : MonoBehaviour
         DamageTypeWarhead2,
         MoreWideTypeWarhead,
         WideContinuousTypeWarhead,
-        DamageContinousTypeWarhead,
+        WideDamageTypeWarhead,
         HellFireTypeWarhead
     }
 
