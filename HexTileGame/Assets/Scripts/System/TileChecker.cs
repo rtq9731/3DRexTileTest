@@ -24,48 +24,53 @@ public class TileChecker : MonoBehaviour
             return null;
         }
 
-        Vector3 curPos = Vector3.zero;
-
-        selectedTiles.RemoveRange(0, selectedTiles.Count);
+        selectedTiles = new List<TileScript>();
 
         this.transform.position = tile.Data.Position;
 
-        TileScript result = null;
+        TileScript result;
+        List<TileScript> selectedTileOnMyMethod = new List<TileScript>();
 
         result = GetUnderTile(new Vector3(transform.position.x - TileXInterval, transform.position.y, transform.position.z)); // 9시 방향 (북)
         if (result != null)
         {
             selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x + TileXInterval, transform.position.y, transform.position.z)); // 3시 방향 (남)
-        if(result != null)
+        if (result != null)
         {
             selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 1시 반 방향 (북동)
         if (result != null)
         {
             selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 10시 반 방향 (북서)
         if (result != null)
         {
             selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 1시 반 방향 (남동)
         if (result != null)
         {
             selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 7시 반 방향 (남서)
         if (result != null)
         {
             selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         range--;
@@ -75,81 +80,83 @@ public class TileChecker : MonoBehaviour
         }
         else
         {
-            List<TileScript> resultList = new List<TileScript>();
-            foreach (var item in selectedTiles)
+            foreach (var item in selectedTileOnMyMethod)
             {
-                FindTilesInRange(item, range, resultList);
+                FindTilesInMoreRange(item, range);
             };
-            resultList.ForEach(x => selectedTiles.Add(x)); // 중복된것 제거
 
             selectedTiles.Remove(tile); // 자기 자신 제거
+            Debug.Log(selectedTiles.Count);
 
-            return selectedTiles.Distinct().ToList(); // 다시 한번 중복된것 제거해서 반환
+            return selectedTiles.Distinct().ToList(); // 중복된것 제거해서 반환
         }
     }
 
-    private List<TileScript> FindTilesInRange(TileScript tile, int range, List<TileScript> tileList) // 내부 반복용 함수
+    private void FindTilesInMoreRange(TileScript tile, int range) // 내부 반복용 함수
     {
         if (range <= 0)
         {
-            return null;
+            return;
         }
 
-        Vector3 curPos = Vector3.zero;
-
         this.transform.position = tile.Data.Position;
-        TileScript result = null;
+        TileScript result;
+
+        List<TileScript> selectedTileOnMyMethod = new List<TileScript>();
 
         result = GetUnderTile(new Vector3(transform.position.x - TileXInterval, transform.position.y, transform.position.z)); // 9시 방향 (북)
         if (result != null)
         {
-            tileList.Add(result);
+            selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x + TileXInterval, transform.position.y, transform.position.z)); // 3시 방향 (남)
         if (result != null)
         {
-            tileList.Add(result);
+            selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 1시 반 방향 (북동)
         if (result != null)
         {
-            tileList.Add(result);
+            selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 10시 반 방향 (북서)
         if (result != null)
         {
-            tileList.Add(result);
+            selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 1시 반 방향 (남동)
         if (result != null)
         {
-            tileList.Add(result);
+            selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         result = GetUnderTile(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 7시 반 방향 (남서)
         if (result != null)
         {
-            tileList.Add(result);
+            selectedTiles.Add(result);
+            selectedTileOnMyMethod.Add(result);
         }
 
         range--;
         if (range <= 0)
         {
-            return tileList;
+            return;
         }
         else
         {
-            Debug.Log(tileList.Count);
-            foreach (var item in tileList)
+            foreach (var item in selectedTileOnMyMethod)
             {
-                FindTilesInRange(item, range, tileList);
+                FindTilesInRange(item, range);
             };
-
-            return selectedTiles.Distinct().ToList();
         }
     }
 
