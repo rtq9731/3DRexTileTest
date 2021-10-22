@@ -2,20 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Clock : MonoBehaviour
+using UnityEngine.EventSystems;
+
+public class Clock : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] RectTransform longHand;
     [SerializeField] RectTransform shrotHand;
+     
+    PointerEventData eventData;
 
-    float longHandZRotation;
-    float shrotHandZRotation;
+    float longHandRotation = 0;
+    float shortHandRotation = 0;
 
-    private void OnMouseOver()
+    bool isPointerOn = false;
+
+    private void Start()
     {
-        longHandZRotation = longHand.rotation.z - Time.deltaTime / 5;
-        longHand.rotation = Quaternion.Euler(new Vector3(0, 0, longHandZRotation));
+        Button btn = GetComponent<Button>();
+        btn.OnSelect(eventData);
+    }
 
-        shrotHandZRotation = longHand.rotation.z - Time.deltaTime * 12;
-        shrotHand.rotation = Quaternion.Euler(new Vector3(0, 0, shrotHandZRotation));
+    private void Update()
+    {
+        if(isPointerOn)
+        {
+            longHandRotation -= Time.deltaTime * 240;
+            longHand.rotation = Quaternion.Euler(new Vector3(0, 0, longHandRotation));
+            shortHandRotation -= Time.deltaTime * 20;
+            shrotHand.rotation = Quaternion.Euler(new Vector3(0, 0, shortHandRotation));
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        isPointerOn = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        isPointerOn = false;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        isPointerOn = false;
     }
 }
