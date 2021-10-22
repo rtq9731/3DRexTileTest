@@ -10,6 +10,9 @@ public class SkillTreeNode
     ResearchType type;
 
     [SerializeField]
+    int resarchThingIdx = 0;
+
+    [SerializeField]
     int idx = -1;
 
     [SerializeField]
@@ -20,6 +23,14 @@ public class SkillTreeNode
 
     [SerializeField]
     int[] requireResearches;
+
+    [SerializeField]
+    string researchInfo = "";
+
+    public SkillTreeNode()
+    {
+
+    }
 }
 
 enum ResearchType
