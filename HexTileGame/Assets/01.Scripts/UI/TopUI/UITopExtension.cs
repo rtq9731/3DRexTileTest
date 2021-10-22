@@ -17,8 +17,22 @@ public class UITopExtension : MonoBehaviour
 
     private void Awake()
     {
-        btnFireMissile.onClick.AddListener(() => panelFireMissile.SetActive(true));
-        btnReserchMissile.onClick.AddListener(() => panelReserchMissile.SetActive(true));
-        btnMakeMissile.onClick.AddListener(() => panelMakeMissile.SetActive(true));
+        btnFireMissile.onClick.AddListener(() =>
+        {
+            if(UIStackManager.IsUIStackEmpty())
+                panelFireMissile.SetActive(true);
+            });
+
+        btnReserchMissile.onClick.AddListener(() => 
+        {
+            if (UIStackManager.IsUIStackEmpty())
+                panelReserchMissile.SetActive(true);
+        });
+
+        btnMakeMissile.onClick.AddListener(() => 
+        {
+            if (UIStackManager.IsUIStackEmpty())
+                panelMakeMissile.SetActive(true);
+        });
     }
 }

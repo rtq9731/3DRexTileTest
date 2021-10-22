@@ -25,8 +25,6 @@ public class CloudObject : MonoBehaviour
         seq.Join(cloud3.transform.DOScale(Vector3.zero, removeTime));
 
         seq.OnComplete(() => gameObject.SetActive(false));
-        Debug.Log("구름 치워 임마!!");
-
         // 모든 구름들을 각자의 방향으로 움직이고 줄여줌
     }
 }
