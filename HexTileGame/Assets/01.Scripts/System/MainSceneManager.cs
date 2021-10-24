@@ -1,5 +1,3 @@
-using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +7,6 @@ public class MainSceneManager : MonoBehaviour
 
     [SerializeField] MissileWarhead missileWarhead;
     [SerializeField] MissileEngine missileEngine;
-
-    private string filePath = "";
-    private string fileName = "TestData.txt";
-
     public MissileWarheadData GetWarheadData(MissileTypes.MissileWarheadType type)
     {
         return missileWarhead.dataList.Find(x => x.TYPE == type);
@@ -36,16 +30,6 @@ public class MainSceneManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        Debug.Log(Application.dataPath);
-        filePath = Application.dataPath + "/" + fileName;
-
-        SkillTreeNode skillTreeNode = new SkillTreeNode();
-        string dataString = JsonUtility.ToJson(skillTreeNode);
-
-        StreamWriter sw = new StreamWriter(filePath);
-        sw.Write(dataString);
-        sw.Close();
     }
 
     private void OnDestroy()
