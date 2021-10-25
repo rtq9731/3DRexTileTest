@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class TechNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] int researchIdx;
     [SerializeField] Button myBtn = null;
     [SerializeField] GameObject myPanelPos = null;
 
@@ -13,12 +14,12 @@ public class TechNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void Start()
     {
-        
+            
     }
 
     private void OnClickCallPanelInput()
     {
-
+        
     }
 
     public void OnPointerEnter(PointerEventData eventData)
