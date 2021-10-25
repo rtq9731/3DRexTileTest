@@ -8,7 +8,6 @@ public class TechNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] int researchIdx;
     [SerializeField] Button myBtn = null;
-    [SerializeField] GameObject myPanelPos = null;
 
     SkillTreeNode data = null;
 
