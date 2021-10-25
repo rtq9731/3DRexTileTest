@@ -9,11 +9,16 @@ public class TechNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Button myBtn = null;
     [SerializeField] GameObject myPanelPos = null;
 
-    [SerializeField] string myInfo = "";
+    SkillTreeNode data = null;
 
     private void Start()
     {
         
+    }
+
+    private void OnClickCallPanelInput()
+    {
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
