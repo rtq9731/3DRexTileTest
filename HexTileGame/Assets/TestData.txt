@@ -1,1 +1,103 @@
-{"skillTreeNodes":[{"type":0,"resarchThingIdx":0,"idx":-1,"turnForResearch":0,"researchResource":0,"requireResearches":[],"researchInfo":""},{"type":0,"resarchThingIdx":0,"idx":-1,"turnForResearch":0,"researchResource":0,"requireResearches":[],"researchInfo":""}]}
+{
+  "skillTreeNodes": [
+    {
+      "type": 0,
+      "resarchThingIdx": 0,
+      "idx": 0,
+      "turnForResearch": 0,
+      "researchResource": 0,
+      "requireResearches": [],
+      "researchInfo": "기본적인 형태의 탄두 연구입니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 1,
+      "idx": 1,
+      "turnForResearch": 1,
+      "researchResource": 1,
+      "requireResearches": [0],
+      "researchInfo": "방사형으로 퍼지는 탄두를 연구합니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 2,
+      "idx": 2,
+      "turnForResearch": 3,
+      "researchResource": 3,
+      "requireResearches": [0, 1],
+      "researchInfo": "방사형으로 퍼지는 탄두를 연구합니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 3,
+      "idx": 3,
+      "turnForResearch": 1,
+      "researchResource": 1,
+      "requireResearches": [0],
+      "researchInfo": "지속효과를 남기는 탄두를 연구합니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 4,
+      "idx": 4,
+      "turnForResearch": 3,
+      "researchResource": 3,
+      "requireResearches": [0, 3],
+      "researchInfo": "지속효과를 남기는 탄두를 연구합니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 5,
+      "idx": 5,
+      "turnForResearch": 1,
+      "researchResource": 1,
+      "requireResearches": [0],
+      "researchInfo": "화력이 향상된 탄두를 연구합니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 6,
+      "idx": 6,
+      "turnForResearch": 3,
+      "researchResource": 3,
+      "requireResearches": [0, 5],
+      "researchInfo": "화력이 향상된 탄두를 연구합니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 7,
+      "idx": 7,
+      "turnForResearch": 5,
+      "researchResource": 5,
+      "requireResearches": [0, 1, 2],
+      "researchInfo": "더 큰 지역에 피해를 주는 탄두를 연구합니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 8,
+      "idx": 8,
+      "turnForResearch": 7,
+      "researchResource": 7,
+      "requireResearches": [0, 1, 2, 3, 4],
+      "researchInfo": "많은 지역에 지속효과를 남기는 탄두를 연구합니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 9,
+      "idx": 9,
+      "turnForResearch": 7,
+      "researchResource": 7,
+      "requireResearches": [0, 1, 2, 5, 6],
+      "researchInfo": "더 큰 지역에 피해를 주는 탄두를 연구합니다."
+    },
+    {
+      "type": 0,
+      "resarchThingIdx": 10,
+      "idx": 10,
+      "turnForResearch": 7,
+      "researchResource": 7,
+      "requireResearches": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "researchInfo": "최종적인 미사일의 탄두를 연구합니다."
+    }
+  ]
+}
