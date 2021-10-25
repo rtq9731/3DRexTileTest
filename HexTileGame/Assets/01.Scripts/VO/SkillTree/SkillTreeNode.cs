@@ -26,11 +26,6 @@ public class SkillTreeNode
 
     [SerializeField]
     string researchInfo = "";
-
-    public SkillTreeNode()
-    {
-
-    }
 }
 
 enum ResearchType

@@ -1,1 +1,1 @@
-{"type":0,"idx":-1,"turnForResearch":0,"researchResource":0,"requireResearches":[],"researchInfo":""}
+{"skillTreeNodes":[{"type":0,"resarchThingIdx":0,"idx":-1,"turnForResearch":0,"researchResource":0,"requireResearches":[],"researchInfo":""},{"type":0,"resarchThingIdx":0,"idx":-1,"turnForResearch":0,"researchResource":0,"requireResearches":[],"researchInfo":""}]}

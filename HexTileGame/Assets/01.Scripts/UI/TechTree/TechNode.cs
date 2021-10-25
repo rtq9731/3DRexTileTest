@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class TechNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Button myBtn = null;
+    [SerializeField] GameObject myPanelPos = null;
+
+    [SerializeField] string myInfo = "";
 
     private void Start()
     {
