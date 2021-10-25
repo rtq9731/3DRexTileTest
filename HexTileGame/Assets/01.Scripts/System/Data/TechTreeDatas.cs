@@ -22,6 +22,11 @@ public class TechTreeDatas : MonoBehaviour
             string dataString = sr.ReadToEnd();
             JsonUtility.FromJsonOverwrite(dataString, this);
 
+#if UNITY_EDITOR
+            Debug.Log(skillTreeNodes.Length);
+            Debug.Log(dataString);
+#endif
+
             for (int i = 0; i < skillTreeNodes.Length; i++)
             {
                 dataList.Add(skillTreeNodes[i]);
