@@ -14,10 +14,10 @@ public class SkillTreeNode
     }
 
     [SerializeField]
-    int researchIdx = 0;
-    public int ResearchIdx
+    int researchThingIdx = 0;
+    public int ResearchThingIdx
     {
-        get { return researchIdx; }
+        get { return researchThingIdx; }
     }
 
     [SerializeField]

@@ -5,8 +5,11 @@ public class MainSceneManager : MonoBehaviour
 {
     public static MainSceneManager Instance = null;
 
+    [Header("데이터 관련")]
     [SerializeField] MissileWarhead missileWarhead;
     [SerializeField] MissileEngine missileEngine;
+    [SerializeField] public TechTreeDatas techTreeDatas;
+
     public MissileWarheadData GetWarheadData(MissileTypes.MissileWarheadType type)
     {
         return missileWarhead.dataList.Find(x => x.TYPE == type);
@@ -37,14 +40,17 @@ public class MainSceneManager : MonoBehaviour
         Instance = null;
     }
 
-    public TileInfoScript InfoPanel;
+     
 
+    [Header("외부 참조용")]
+    [SerializeField] public TileInfoScript InfoPanel;
     [SerializeField] public MissileManager missileManager;
     [SerializeField] public FogOfWarManager fogOfWarManager;
     [SerializeField] public GameObject tileVcam;
     [SerializeField] public TileChecker tileChecker;
     [SerializeField] public UITopBar uiTopBar;
     [SerializeField] public MissileEffectPool effectPool;
+    [SerializeField] public PanelResearchInput researchInputPanel;
 
     public float TileZInterval = 0.875f;
     public float TileXInterval = 1f;
@@ -56,12 +62,6 @@ public class MainSceneManager : MonoBehaviour
     public List<PlayerScript> Players { get { return players; } set { players = value; } }
 
     [SerializeField] PersonPlayer player = null;
-
-    private void Start()
-    {
-        InfoPanel = FindObjectOfType<TileInfoScript>();
-        UIStackManager.RemoveUIOnTopWithNoTime();
-    }
 
     public PlayerScript GetPlayer()
     {

@@ -23,15 +23,20 @@ public class TechTreeDatas : MonoBehaviour
             JsonUtility.FromJsonOverwrite(dataString, this);
 
 #if UNITY_EDITOR
-            Debug.Log(skillTreeNodes.Length);
             Debug.Log(dataString);
 #endif
 
             for (int i = 0; i < skillTreeNodes.Length; i++)
             {
+                Debug.Log(skillTreeNodes[i].ResearchThingIdx);
                 dataList.Add(skillTreeNodes[i]);
             }
         }
+    }
+
+    public SkillTreeNode GetDataByIdx(int idx)
+    {
+        return dataList.Find(x => x.Idx == idx);
     }
 
     /* 접근만 하면 되니까 주석.

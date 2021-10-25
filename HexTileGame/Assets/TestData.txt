@@ -2,7 +2,7 @@
   "skillTreeNodes": [
     {
       "type": 0,
-      "resarchThingIdx": 0,
+      "researchThingIdx": 0,
       "idx": 0,
       "turnForResearch": 0,
       "researchResource": 0,
@@ -11,7 +11,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 1,
+      "researchThingIdx": 1,
       "idx": 1,
       "turnForResearch": 1,
       "researchResource": 1,
@@ -20,7 +20,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 2,
+      "researchThingIdx": 2,
       "idx": 2,
       "turnForResearch": 3,
       "researchResource": 3,
@@ -29,7 +29,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 3,
+      "researchThingIdx": 3,
       "idx": 3,
       "turnForResearch": 1,
       "researchResource": 1,
@@ -38,7 +38,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 4,
+      "researchThingIdx": 4,
       "idx": 4,
       "turnForResearch": 3,
       "researchResource": 3,
@@ -47,7 +47,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 5,
+      "researchThingIdx": 5,
       "idx": 5,
       "turnForResearch": 1,
       "researchResource": 1,
@@ -56,7 +56,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 6,
+      "researchThingIdx": 6,
       "idx": 6,
       "turnForResearch": 3,
       "researchResource": 3,
@@ -65,7 +65,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 7,
+      "researchThingIdx": 7,
       "idx": 7,
       "turnForResearch": 5,
       "researchResource": 5,
@@ -74,7 +74,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 8,
+      "researchThingIdx": 8,
       "idx": 8,
       "turnForResearch": 7,
       "researchResource": 7,
@@ -83,7 +83,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 9,
+      "researchThingIdx": 9,
       "idx": 9,
       "turnForResearch": 7,
       "researchResource": 7,
@@ -92,7 +92,7 @@
     },
     {
       "type": 0,
-      "resarchThingIdx": 10,
+      "researchThingIdx": 10,
       "idx": 10,
       "turnForResearch": 7,
       "researchResource": 7,

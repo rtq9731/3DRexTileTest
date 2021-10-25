@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
-    protected Action start = () => { };
-
     protected List<TileScript> tileInSight = new List<TileScript>();
 
     protected List<int> unlockedWarheadIdx = new List<int>();
@@ -49,6 +47,22 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         get { return missileReadyToShoot; }
     }
 
+    protected int researchFinishTurn = 0;
+
+    protected SkillTreeNode curResearchData = null;
+    public SkillTreeNode CurResearchData
+    {
+        get { return curResearchData; }
+        set 
+        { 
+            curResearchData = value;
+            researchFinishTurn = value.TrunForResearch;
+
+            TurnFinishAction -= ResearchOnTurnFinish;
+            TurnFinishAction += ResearchOnTurnFinish;
+        }
+    }
+
     protected bool isTurnFinish = false;
     public bool IsTurnFinish { get { return isTurnFinish; } }
 
@@ -69,15 +83,8 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     protected void Start()
     {
-        for (int i = 0; i < 11; i++)
-        {
-            unlockedWarheadIdx.Add(i);
-        }
-
-        for (int i = 0; i < 5; i++)
-        {
-            unlockedEngineIdx.Add(i);
-        }
+        unlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작
+        unlockedWarheadIdx.Add(0);
 
         MainSceneManager.Instance.Players.Add(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
@@ -107,6 +114,30 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
             TurnFinishAction();
             owningTiles.ForEach(x => x.TurnFinish());
             MainSceneManager.Instance.CheckTurnFinish();
+        }
+    }
+
+    private void ResearchOnTurnFinish()
+    {
+        researchFinishTurn--;
+        if(researchFinishTurn <= 0)
+        {
+            switch (curResearchData.Type)
+            {
+                case ResearchType.Warhead:
+                    unlockedWarheadIdx.Add(curResearchData.ResearchThingIdx);
+                    break;
+                case ResearchType.Engine:
+                    unlockedEngineIdx.Add(curResearchData.ResearchThingIdx);
+                    break;
+                case ResearchType.Material:
+                    break;
+                default:
+                    break;
+            }
+
+            curResearchData = null;
+            return;
         }
     }
 
