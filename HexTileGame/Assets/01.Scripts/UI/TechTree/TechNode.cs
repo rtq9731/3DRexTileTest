@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TechNode : MonoBehaviour
 {
     [SerializeField] int idx;
+    [SerializeField] Sprite mySprite = null;
     [SerializeField] Button myBtn = null;
 
     SkillTreeNode data = null;
@@ -35,14 +36,18 @@ public class TechNode : MonoBehaviour
                 foreach (var item in data.RequireResearches)
                 {
                     if (!player.UnlockedWarheadIdx.Contains(item))
+                    {
                         myBtn.interactable = false;
+                    }
                 }
                 break;
             case ResearchType.Engine:
                 foreach (var item in data.RequireResearches)
                 {
                     if (!player.UnlockedEngineIdx.Contains(item))
+                    {
                         myBtn.interactable = false;
+                    }
                 }
                 break;
             case ResearchType.Material:

@@ -56,7 +56,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         set 
         { 
             curResearchData = value;
-            researchFinishTurn = value.TrunForResearch;
+            researchFinishTurn = curResearchData.TrunForResearch;
 
             TurnFinishAction -= ResearchOnTurnFinish;
             TurnFinishAction += ResearchOnTurnFinish;
@@ -119,6 +119,11 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     private void ResearchOnTurnFinish()
     {
+        if (curResearchData == null)
+        {
+            return;
+        }
+
         researchFinishTurn--;
         if(researchFinishTurn <= 0)
         {
