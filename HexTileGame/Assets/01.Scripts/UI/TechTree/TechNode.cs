@@ -37,6 +37,8 @@ public class TechNode : MonoBehaviour
                 {
                     if (!player.UnlockedWarheadIdx.Contains(item))
                     {
+                        Debug.Log(data.RequireResearches + " " + item);
+                        Debug.Log(player.UnlockedWarheadIdx.Contains(item));
                         myBtn.interactable = false;
                     }
                 }

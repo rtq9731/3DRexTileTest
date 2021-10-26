@@ -9,7 +9,6 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] MissileWarhead missileWarhead;
     [SerializeField] MissileEngine missileEngine;
     [SerializeField] public TechTreeDatas techTreeDatas;
-
     public MissileWarheadData GetWarheadData(MissileTypes.MissileWarheadType type)
     {
         return missileWarhead.dataList.Find(x => x.TYPE == type);
@@ -51,6 +50,7 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] public UITopBar uiTopBar;
     [SerializeField] public MissileEffectPool effectPool;
     [SerializeField] public PanelResearchInput researchInputPanel;
+    [SerializeField] public PanelCurrentResearch curResearchPanel;
 
     public float TileZInterval = 0.875f;
     public float TileXInterval = 1f;

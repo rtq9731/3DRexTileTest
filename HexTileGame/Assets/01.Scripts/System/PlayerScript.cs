@@ -48,18 +48,39 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     }
 
     protected int researchFinishTurn = 0;
+    public int ResearchFinishTurn
+    {
+        get { return researchFinishTurn; }
+    }
 
     protected SkillTreeNode curResearchData = null;
     public SkillTreeNode CurResearchData
     {
         get { return curResearchData; }
         set 
-        { 
+        {
+            switch (value.Type)
+            {
+                case ResearchType.Warhead:
+                    if (UnlockedWarheadIdx.Contains(value.ResearchThingIdx))
+                        return;
+                    break;
+                case ResearchType.Engine:
+                    if (UnlockedEngineIdx.Contains(value.ResearchThingIdx))
+                        return;
+                    break;
+                case ResearchType.Material:
+                    break;
+                default:
+                    break;
+            }
+
             curResearchData = value;
             researchFinishTurn = curResearchData.TrunForResearch;
 
             TurnFinishAction -= ResearchOnTurnFinish;
             TurnFinishAction += ResearchOnTurnFinish;
+            MainSceneManager.Instance.curResearchPanel.UpdateTexts(this);
         }
     }
 
@@ -129,6 +150,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         {
             switch (curResearchData.Type)
             {
+
                 case ResearchType.Warhead:
                     unlockedWarheadIdx.Add(curResearchData.ResearchThingIdx);
                     break;
@@ -142,8 +164,8 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
             }
 
             curResearchData = null;
-            return;
         }
+        MainSceneManager.Instance.curResearchPanel.UpdateTexts(this);
     }
 
     public void AddTile(TileScript tile)

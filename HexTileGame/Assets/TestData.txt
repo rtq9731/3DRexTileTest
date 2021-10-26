@@ -7,7 +7,7 @@
       "turnForResearch": 0,
       "researchResource": 0,
       "requireResearches": [],
-      "researchInfo": "기본적인 형태의 탄두 연구입니다."
+      "researchInfo": "기본적인 탄두 연구."
     },
     {
       "type": 0,
@@ -16,7 +16,7 @@
       "turnForResearch": 1,
       "researchResource": 1,
       "requireResearches": [0],
-      "researchInfo": "방사형으로 퍼지는 탄두를 연구합니다."
+      "researchInfo": "방사형 탄두 1단계"
     },
     {
       "type": 0,
@@ -25,7 +25,7 @@
       "turnForResearch": 3,
       "researchResource": 3,
       "requireResearches": [0, 1],
-      "researchInfo": "방사형으로 퍼지는 탄두를 연구합니다."
+      "researchInfo": "방사형 탄두 2단계"
     },
     {
       "type": 0,
@@ -34,7 +34,7 @@
       "turnForResearch": 1,
       "researchResource": 1,
       "requireResearches": [0],
-      "researchInfo": "지속효과를 남기는 탄두를 연구합니다."
+      "researchInfo": "지속형 탄두 1단계"
     },
     {
       "type": 0,
@@ -43,7 +43,7 @@
       "turnForResearch": 3,
       "researchResource": 3,
       "requireResearches": [0, 3],
-      "researchInfo": "지속효과를 남기는 탄두를 연구합니다."
+      "researchInfo": "지속형 탄두 2단계"
     },
     {
       "type": 0,
@@ -52,7 +52,7 @@
       "turnForResearch": 1,
       "researchResource": 1,
       "requireResearches": [0],
-      "researchInfo": "화력이 향상된 탄두를 연구합니다."
+      "researchInfo": "고화력 탄두 1단계"
     },
     {
       "type": 0,
@@ -61,7 +61,7 @@
       "turnForResearch": 3,
       "researchResource": 3,
       "requireResearches": [0, 5],
-      "researchInfo": "화력이 향상된 탄두를 연구합니다."
+      "researchInfo": "고화력 탄두 2단계"
     },
     {
       "type": 0,
@@ -70,7 +70,7 @@
       "turnForResearch": 5,
       "researchResource": 5,
       "requireResearches": [0, 1, 2],
-      "researchInfo": "더 큰 지역에 피해를 주는 탄두를 연구합니다."
+      "researchInfo": "방사형 탄두 3단계"
     },
     {
       "type": 0,
@@ -79,7 +79,7 @@
       "turnForResearch": 7,
       "researchResource": 7,
       "requireResearches": [0, 1, 2, 3, 4],
-      "researchInfo": "많은 지역에 지속효과를 남기는 탄두를 연구합니다."
+      "researchInfo": "방사형 지속 탄두"
     },
     {
       "type": 0,
@@ -88,7 +88,7 @@
       "turnForResearch": 7,
       "researchResource": 7,
       "requireResearches": [0, 1, 2, 5, 6],
-      "researchInfo": "더 큰 지역에 피해를 주는 탄두를 연구합니다."
+      "researchInfo": "방사형 고화력 탄두"
     },
     {
       "type": 0,
@@ -97,7 +97,7 @@
       "turnForResearch": 7,
       "researchResource": 7,
       "requireResearches": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      "researchInfo": "최종적인 미사일의 탄두를 연구합니다."
+      "researchInfo": "불지옥 탄두"
     }
   ]
 }
