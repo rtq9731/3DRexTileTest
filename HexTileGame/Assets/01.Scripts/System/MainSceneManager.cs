@@ -8,8 +8,19 @@ public class MainSceneManager : MonoBehaviour
     [Header("데이터 관련")]
     [SerializeField] MissileWarhead missileWarhead;
     [SerializeField] MissileEngine missileEngine;
+    [SerializeField] Body missileBody;
     [SerializeField] public TechTreeDatas techTreeDatas;
-    [SerializeField] public Material missileMaterial;
+
+    public BodyData GetMissileBodyData(MissileTypes.MissileBody type)
+    {
+        return missileBody.dataList.Find(x => x.TYPE == type);
+    }
+
+    public BodyData GetMissileBodyByIdx(int idx)
+    {
+        return missileBody.dataArray[idx];
+    }
+
     public MissileWarheadData GetWarheadData(MissileTypes.MissileWarheadType type)
     {
         return missileWarhead.dataList.Find(x => x.TYPE == type);

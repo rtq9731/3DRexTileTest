@@ -6,7 +6,7 @@ using System.Collections;
 /// !!! DO NOT CHANGE Tabs to Spaces !!!
 /// 
 [System.Serializable]
-public class MaterialData
+public class BodyData
 {
   [SerializeField]
   int idx;
@@ -17,8 +17,8 @@ public class MaterialData
   public string Name { get {return name; } set { this.name = value;} }
   
   [SerializeField]
-  MissileTypes.MissileMaterial type;
-  public MissileTypes.MissileMaterial TYPE { get {return type; } set { this.type = value;} }
+  MissileTypes.MissileBody type;
+  public MissileTypes.MissileBody TYPE { get {return type; } set { this.type = value;} }
   
   [SerializeField]
   int makingtime;

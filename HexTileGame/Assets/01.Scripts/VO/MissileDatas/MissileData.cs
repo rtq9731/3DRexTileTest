@@ -7,12 +7,21 @@ using UnityEngine;
 public class MissileData
 {
     [SerializeField]
+    int missilePrice = 0;
+    public int MissilePrice
+    {
+        get { return missilePrice; }
+        set { missilePrice = value; }
+    }
+
+    [SerializeField]
     int missileRange = 0;
-    
+
     public int MissileRange
     {
-        get {
-            missileRange = MainSceneManager.Instance.GetEngineData(engineTier).Weight - MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
+        get
+        {
+            UpdateRange(MainSceneManager.Instance.GetEngineData(engineTier).Weight, MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
             return missileRange; 
         }
         set { missileRange = value; }
@@ -37,43 +46,85 @@ public class MissileData
     }
 
     [SerializeField]
+    MissileTypes.MissileBody bodyType;
+
+    public MissileTypes.MissileBody BodyType
+    {
+        get { return bodyType; }
+        set
+        {
+            bodyType = value;
+            UpdateRange(MainSceneManager.Instance.GetEngineData(engineTier).Weight, MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
+            UpdateTurnForFinish(MainSceneManager.Instance.GetMissileBodyData(bodyType).Makingtime);
+        }
+    }
+
+    [SerializeField]
     MissileTypes.MissileEngineType engineTier;
 
     public MissileTypes.MissileEngineType EngineTier
     {
         get { return engineTier; }
-        set { 
+        set
+        {
+            MissileTypes.MissileEngineType tmp = engineTier;
+
             engineTier = value;
-            missileRange = MainSceneManager.Instance.GetEngineData(engineTier).Weight - MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
-            turnForMissileReady = MainSceneManager.Instance.GetEngineData(engineTier).Makingtime + MainSceneManager.Instance.GetWarheadData(warheadType).Makingtime;
+            UpdateRange(MainSceneManager.Instance.GetEngineData(engineTier).Weight, MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
+            UpdateTurnForFinish(MainSceneManager.Instance.GetEngineData(engineTier).Makingtime);
+
+            if (!CanMakeIt())
+            {
+                PanelException.CallExecptionPanel("미사일의 무게가 초과하여 날아갈수 없습니다!\n제작 할 수 없을 것입니다!\n계속하시겠습니까?", () => { }, "계속", () => engineTier = tmp, "취소");
+            }
         }
     }
 
     [SerializeField]
     MissileTypes.MissileWarheadType warheadType;
+
     public MissileTypes.MissileWarheadType WarheadType
     {
         get { return warheadType; }
-        set { 
+        set {
+            MissileTypes.MissileWarheadType tmp = warheadType;
+
             warheadType = value;
             warHeadDamage = MainSceneManager.Instance.GetWarheadData(warheadType).Atk;
-            missileRange = MainSceneManager.Instance.GetEngineData(engineTier).Weight - MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
-            turnForMissileReady = MainSceneManager.Instance.GetEngineData(engineTier).Makingtime + MainSceneManager.Instance.GetWarheadData(warheadType).Makingtime;
+            UpdateRange(MainSceneManager.Instance.GetEngineData(engineTier).Weight, MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
+            UpdateTurnForFinish(MainSceneManager.Instance.GetWarheadData(warheadType).Makingtime);
+
+            if(!CanMakeIt())
+            {
+                PanelException.CallExecptionPanel("미사일의 무게가 초과하여 날아갈수 없습니다!\n제작 할 수 없을 것입니다!\n계속하시겠습니까?", () => { }, "계속", () => warheadType = tmp, "취소");
+            }
         }
     }
 
-    [SerializeField]
-    string missileInfo;
-    public string MissileInfo
+    public bool CanMakeIt()
     {
-        get { return missileInfo; }
-        set { missileInfo = value; }
+        return MainSceneManager.Instance.GetEngineData(engineTier).Weight > MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
     }
 
-    public MissileData(MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType)
+    private void UpdateRange(int engineWeight, int warheadWeight)
+    {
+        missileRange = engineWeight - warheadWeight;
+        missileRange += MainSceneManager.Instance.GetMissileBodyData(bodyType).Morerange;
+    }
+
+    private void UpdateTurnForFinish(int makeTime)
+    {
+        if(TurnForMissileReady < makeTime)
+        {
+            TurnForMissileReady = makeTime;
+        }
+    }
+
+    public MissileData(MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType, MissileTypes.MissileBody body)
     {
         this.engineTier = engine;
         this.warheadType = warheadType;
+        this.bodyType = body;
         EngineTier = engine;
         WarheadType = warheadType;
     }

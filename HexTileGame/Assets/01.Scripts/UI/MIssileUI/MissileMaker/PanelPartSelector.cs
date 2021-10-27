@@ -31,7 +31,13 @@ public class PanelPartSelector : MonoBehaviour
 
         switch (part)
         {
-            case PanelMissileMaker.partType.Material:
+            case PanelMissileMaker.partType.Body:
+                foreach (var item in player.UnlockedBodyIdx)
+                {
+                    GetNewInfoPanel(out PanelPartinfo element);
+                    element.partSelector = this;
+                    element.InitPanelPartInfo(MainSceneManager.Instance.GetMissileBodyByIdx(item));
+                }
                 break;
             case PanelMissileMaker.partType.Engine:
                 foreach (var item in player.UnlockedEngineIdx)
@@ -93,6 +99,23 @@ public class PanelPartSelector : MonoBehaviour
         textMakeTurn.text = $"제작에 걸리는 시간 : {engine.Makingtime} 턴";
         textWeight.text = $"감당 가능한 무게 : {engine.Weight}";
         textPartInfo.text = engine.Info;
+    }
+
+    public void InitPartText(BodyData body)
+    {
+        btnOk.onClick.AddListener(() =>
+        {
+            panelMissileMaker.SetMissileBluePrintPart(body.TYPE);
+            transform.parent.gameObject.SetActive(false);
+            btnOk.onClick.RemoveAllListeners();
+        });
+
+        textPartATK.transform.parent.gameObject.SetActive(false);
+
+        textPartName.text = body.Name;
+        textMakeTurn.text = $"제작에 걸리는 시간 : {body.Makingtime} 턴";
+        textWeight.text = $"추가 사거리 : {body.Morerange}";
+        textPartInfo.text = body.Info;
     }
 
     private GameObject GetNewInfoPanel(out PanelPartinfo element)

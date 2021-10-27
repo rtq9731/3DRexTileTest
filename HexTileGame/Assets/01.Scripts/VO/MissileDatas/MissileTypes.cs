@@ -1,12 +1,12 @@
 
 public class MissileTypes 
 {
-    public enum MissileMaterial
+    public enum MissileBody
     {
-        Aluminum,
-        Stainless,
-        Titanium,
-        Carbon
+        Orign,
+        Wing1,
+        Wing2,
+        Final
     }
 
     public enum MissileWarheadType

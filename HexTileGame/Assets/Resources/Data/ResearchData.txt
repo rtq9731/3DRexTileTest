@@ -24,7 +24,7 @@
       "idx": 2,
       "turnForResearch": 3,
       "researchResource": 3,
-      "requireResearches": [0, 1],
+      "requireResearches": [1],
       "researchInfo": "방사형 탄두 2단계"
     },
     {
@@ -42,7 +42,7 @@
       "idx": 4,
       "turnForResearch": 3,
       "researchResource": 3,
-      "requireResearches": [0, 3],
+      "requireResearches": [3],
       "researchInfo": "지속형 탄두 2단계"
     },
     {
@@ -60,7 +60,7 @@
       "idx": 6,
       "turnForResearch": 3,
       "researchResource": 3,
-      "requireResearches": [0, 5],
+      "requireResearches": [5],
       "researchInfo": "고화력 탄두 2단계"
     },
     {
@@ -69,7 +69,7 @@
       "idx": 7,
       "turnForResearch": 5,
       "researchResource": 5,
-      "requireResearches": [0, 1, 2],
+      "requireResearches": [2],
       "researchInfo": "방사형 탄두 3단계"
     },
     {
@@ -78,7 +78,7 @@
       "idx": 8,
       "turnForResearch": 7,
       "researchResource": 7,
-      "requireResearches": [0, 1, 2, 3, 4],
+      "requireResearches": [2, 4],
       "researchInfo": "방사형 지속 탄두"
     },
     {
@@ -87,7 +87,7 @@
       "idx": 9,
       "turnForResearch": 7,
       "researchResource": 7,
-      "requireResearches": [0, 1, 2, 5, 6],
+      "requireResearches": [2, 6],
       "researchInfo": "방사형 고화력 탄두"
     },
     {
@@ -96,7 +96,7 @@
       "idx": 10,
       "turnForResearch": 7,
       "researchResource": 7,
-      "requireResearches": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "requireResearches": [7, 8, 9],
       "researchInfo": "불지옥 탄두"
     },
     {
@@ -242,6 +242,87 @@
       "researchResource": 8,
       "requireResearches": [21, 22],
       "researchInfo": "엔진 4단계 연구"
+    },
+    {
+      "type": 2,
+      "researchThingIdx": -1,
+      "idx": 27,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [],
+      "researchInfo": "합성 재질"
+    },
+    {
+      "type": 2,
+      "researchThingIdx": -1,
+      "idx": 28,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [],
+      "researchInfo": "무게 경량화"
+    },
+    {
+      "type": 2,
+      "researchThingIdx": 1,
+      "idx": 29,
+      "turnForResearch": 3,
+      "researchResource": 3,
+      "requireResearches": [27, 28],
+      "researchInfo": "기초적 날개형 선체"
+    },
+    {
+      "type": 2,
+      "researchThingIdx": -1,
+      "idx": 30,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [27],
+      "researchInfo": "합성 재질"
+    },
+    {
+      "type": 2,
+      "researchThingIdx": -1,
+      "idx": 31,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [28],
+      "researchInfo": "무게 경량화"
+    },
+    {
+      "type": 2,
+      "researchThingIdx": 2,
+      "idx": 32,
+      "turnForResearch": 4,
+      "researchResource": 4,
+      "requireResearches": [30, 31],
+      "researchInfo": "발전된 날개형 선체"
+    },
+    {
+      "type": 2,
+      "researchThingIdx": -1,
+      "idx": 33,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [30],
+      "researchInfo": "합성 재질"
+    },
+    {
+      "type": 2,
+      "researchThingIdx": -1,
+      "idx": 34,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [31],
+      "researchInfo": "무게 경량화"
+    },
+    {
+      "type": 2,
+      "researchThingIdx": 3,
+      "idx": 35,
+      "turnForResearch": 5,
+      "researchResource": 5,
+      "requireResearches": [33, 34],
+      "researchInfo": "초경량 날개형 선체"
     }
   ]
 }

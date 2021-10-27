@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class TechNode : MonoBehaviour
 {
+    [SerializeField] Image icon;
     [SerializeField] int idx;
     [SerializeField] Button myBtn = null;
 
@@ -54,7 +55,16 @@ public class TechNode : MonoBehaviour
                     }
                 }
                 break;
-            case ResearchType.Material:
+            case ResearchType.Body:
+                myBtn.interactable = true;
+
+                foreach (var item in data.RequireResearches)
+                {
+                    if (!player.ResearchedBodyResearch.Contains(item))
+                    {
+                        myBtn.interactable = false;
+                    }
+                }
                 break;
             default:
                 break;
@@ -63,7 +73,7 @@ public class TechNode : MonoBehaviour
 
     private void OnClickCallPanelInput()
     {
-        MainSceneManager.Instance.researchInputPanel.InitPanelInput(data, ResearchStart);
+        MainSceneManager.Instance.researchInputPanel.InitPanelInput(data, ResearchStart, icon.sprite);
     }
 
     private void ResearchStart()

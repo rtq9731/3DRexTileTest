@@ -32,4 +32,15 @@ public class PanelPartinfo : MonoBehaviour
             partSelector.InitPartText(engine);
         });
     }
+    public void InitPanelPartInfo(BodyData body)
+    {
+        textName.text = body.Name;
+
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(() =>
+        {
+            partSelector.InitPartText(body);
+        });
+    }
+
 }

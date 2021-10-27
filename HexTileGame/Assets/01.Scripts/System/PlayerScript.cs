@@ -4,17 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
     protected List<PlayerScript> contactPlayers = new List<PlayerScript>();
 
     protected List<TileScript> tileInSight = new List<TileScript>();
-
-    protected List<int> researchedEngineResearch = new List<int>();
-    public List<int> ResearchedEngineResearch
-    {
-        get { return researchedEngineResearch; }
-    }
 
     protected List<int> unlockedWarheadIdx = new List<int>();
     public List<int> UnlockedWarheadIdx
@@ -26,6 +21,26 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     public List<int> UnlockedEngineIdx
     {
         get { return unlockedEngineIdx; }
+    }
+
+    protected List<int> unlockedBodyIdx = new List<int>();
+    public List<int> UnlockedBodyIdx
+    {
+        get { return unlockedBodyIdx; }
+    }
+
+
+
+    protected List<int> researchedBodyResearch = new List<int>();
+    public List<int> ResearchedBodyResearch
+    {
+        get { return researchedBodyResearch; }
+    }
+
+    protected List<int> researchedEngineResearch = new List<int>();
+    public List<int> ResearchedEngineResearch
+    {
+        get { return researchedEngineResearch; }
     }
 
     [SerializeField] protected string myName = "NULL";
@@ -71,14 +86,16 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
             switch (value.Type)
             {
                 case ResearchType.Warhead:
-                    if (UnlockedWarheadIdx.Contains(value.ResearchThingIdx))
+                    if (unlockedEngineIdx.Contains(value.ResearchThingIdx))
                         return;
                     break;
                 case ResearchType.Engine:
-                    if (UnlockedEngineIdx.Contains(value.ResearchThingIdx))
+                    if (researchedEngineResearch.Contains(value.Idx) || unlockedEngineIdx.Contains(value.ResearchThingIdx))
                         return;
                     break;
-                case ResearchType.Material:
+                case ResearchType.Body:
+                    if (researchedBodyResearch.Contains(value.Idx) || unlockedBodyIdx.Contains(value.ResearchThingIdx))
+                        return;
                     break;
                 default:
                     break;
@@ -115,6 +132,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     {
         unlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작
         unlockedWarheadIdx.Add(0);
+        unlockedBodyIdx.Add(0);
 
         MainSceneManager.Instance.Players.Add(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
@@ -174,7 +192,13 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
                     ResearchedEngineResearch.Add(curResearchData.Idx);
                     break;
-                case ResearchType.Material:
+                case ResearchType.Body:
+                    if(curResearchData.ResearchThingIdx != -1)
+                    {
+                        unlockedBodyIdx.Add(curResearchData.ResearchThingIdx);
+                    }
+
+                    ResearchedBodyResearch.Add(curResearchData.Idx);
                     break;
                 default:
                     break;

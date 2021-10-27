@@ -60,5 +60,5 @@ public enum ResearchType
 {
     Warhead,
     Engine,
-    Material
+    Body
 }
