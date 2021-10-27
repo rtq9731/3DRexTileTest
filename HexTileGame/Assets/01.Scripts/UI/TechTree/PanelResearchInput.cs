@@ -41,6 +41,7 @@ public class PanelResearchInput : MonoBehaviour
             case ResearchType.Engine:
                 if (data.ResearchInfo.Contains("단계")) // 만약 진짜 엔진 연구면
                 {
+                    Debug.Log(data.ResearchThingIdx);
                     MissileEngineData engineData = MainSceneManager.Instance.GetEngineDataByIdx(data.ResearchThingIdx);
                     textResearchName.text = engineData.Name;
                     textWeight.text = $"감당 가능한 무게 : {engineData.Weight}";
@@ -48,11 +49,17 @@ public class PanelResearchInput : MonoBehaviour
                 }
                 else if (data.ResearchInfo.Contains("연료")) // 엔진 선행 연구중 연료 연구면
                 {
-
+                    textResearchName.text = "효율적인 연료";
+                    textWeight.gameObject.SetActive(false);
+                    textDamage.gameObject.SetActive(false);
+                    textResearchInfo.text = "미사일이 더 긴 거리에 있는 적을 타격 할 수 있도록,\n현재 연료로 사용되고 있는 화합물의 배합을 이리저리 바꿔봅니다.\n바꿔보는 과정에서 더욱 효율적인 연료가 만들어지면,\n우리 연구원들이 차세대 미사일 엔진에 적용해 줄 것입니다.";
                 }
                 else if(data.ResearchInfo.Contains("엔진")) // 엔진 선행 연구중 효율 연구면
                 {
-
+                    textResearchName.text = "효율적인 엔진";
+                    textWeight.gameObject.SetActive(false);
+                    textDamage.gameObject.SetActive(false);
+                    textResearchInfo.text = "미사일이 더 긴 거리에 있는 적을 타격 할 수 있도록,\n현재 엔진에 사용되고 있는 기술들을 차세대 기술로 바꾸어봅니다.\n프로토타입을 제작하는 과정에서 더욱 효율적인 엔진이 만들어지면,\n우리 연구원들이 차세대 미사일 엔진에 적용해 줄 것입니다.";
                 }
                 break;
             case ResearchType.Material:
