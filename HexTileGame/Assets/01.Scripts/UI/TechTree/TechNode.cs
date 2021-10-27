@@ -48,7 +48,7 @@ public class TechNode : MonoBehaviour
 
                 foreach (var item in data.RequireResearches)
                 {
-                    if (!player.UnlockedEngineIdx.Contains(item))
+                    if (!player.ResearchedEngineResearch.Contains(item))
                     {
                         myBtn.interactable = false;
                     }
