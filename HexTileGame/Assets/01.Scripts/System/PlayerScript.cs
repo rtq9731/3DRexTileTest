@@ -1,11 +1,20 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
+    protected List<PlayerScript> contactPlayers = new List<PlayerScript>();
+
     protected List<TileScript> tileInSight = new List<TileScript>();
+
+    protected List<int> researchedEngineResearch = new List<int>();
+    public List<int> ResearchedEngineResearch
+    {
+        get { return researchedEngineResearch; }
+    }
 
     protected List<int> unlockedWarheadIdx = new List<int>();
     public List<int> UnlockedWarheadIdx
@@ -109,6 +118,8 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
         MainSceneManager.Instance.Players.Add(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
+
+        TurnFinishAction += () => contactPlayers.ForEach(x => x.owningTiles.ForEach(x => MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x)));
     }
 
     public void StartNewTurn()
@@ -155,7 +166,13 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
                     unlockedWarheadIdx.Add(curResearchData.ResearchThingIdx);
                     break;
                 case ResearchType.Engine:
-                    unlockedEngineIdx.Add(curResearchData.ResearchThingIdx);
+
+                    if(curResearchData.ResearchThingIdx != -1)
+                    {
+                        unlockedEngineIdx.Add(curResearchData.ResearchThingIdx);
+                    }
+
+                    ResearchedEngineResearch.Add(curResearchData.Idx);
                     break;
                 case ResearchType.Material:
                     break;
@@ -178,7 +195,28 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         if (MainSceneManager.Instance.GetPlayer() == this)
         {
             MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(tile);
-            MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, 1).ForEach(x => MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x));
+            List<TileScript> tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, 1);
+            tilesInRange.ForEach(x => MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x));
+
+            var otherPlayers = from item in tilesInRange
+                                            where item.Owner != this && item.Owner != null
+                                            select item.Owner;
+            if(otherPlayers.Count() >= 1)
+            {
+                foreach (var item in otherPlayers)
+                {
+                    if(!contactPlayers.Contains(item))
+                    {
+                        contactPlayers.Add(item);
+                        item.owningTiles.ForEach(x => MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x));
+
+                        if(!item.contactPlayers.Contains(this))
+                        {
+                            item.contactPlayers.Add(this);
+                        }    
+                    }
+                }
+            }
         }
 
         // 중복 안되게 하기 위함.

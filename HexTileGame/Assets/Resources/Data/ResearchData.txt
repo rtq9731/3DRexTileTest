@@ -98,6 +98,150 @@
       "researchResource": 7,
       "requireResearches": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
       "researchInfo": "불지옥 탄두"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 11,
+      "turnForResearch": 1,
+      "researchResource": 1,
+      "requireResearches": [],
+      "researchInfo": "더 효율적인 연료"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 12,
+      "turnForResearch": 1,
+      "researchResource": 1,
+      "requireResearches": [],
+      "researchInfo": "더 효율적인 엔진"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": 1,
+      "idx": 13,
+      "turnForResearch": 3,
+      "researchResource": 3,
+      "requireResearches": [11, 12],
+      "researchInfo": "엔진 1단계 연구"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 14,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [13],
+      "researchInfo": "더 효율적인 연료"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 15,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [13],
+      "researchInfo": "더 효율적인 엔진"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 16,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [14],
+      "researchInfo": "더 효율적인 연료"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 17,
+      "turnForResearch": 2,
+      "researchResource": 2,
+      "requireResearches": [15],
+      "researchInfo": "더 효율적인 엔진"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": 2,
+      "idx": 18,
+      "turnForResearch": 5,
+      "researchResource": 5,
+      "requireResearches": [16, 17],
+      "researchInfo": "엔진 2단계 연구"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 19,
+      "turnForResearch": 4,
+      "researchResource": 4,
+      "requireResearches": [18],
+      "researchInfo": "더 효율적인 연료"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 20,
+      "turnForResearch": 4,
+      "researchResource": 4,
+      "requireResearches": [18],
+      "researchInfo": "더 효율적인 엔진"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 21,
+      "turnForResearch": 4,
+      "researchResource": 4,
+      "requireResearches": [19],
+      "researchInfo": "더 효율적인 연료"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 22,
+      "turnForResearch": 4,
+      "researchResource": 4,
+      "requireResearches": [20],
+      "researchInfo": "더 효율적인 엔진"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": 3,
+      "idx": 23,
+      "turnForResearch": 7,
+      "researchResource": 7,
+      "requireResearches": [21, 22],
+      "researchInfo": "엔진 3단계 연구"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 24,
+      "turnForResearch": 6,
+      "researchResource": 6,
+      "requireResearches": [23],
+      "researchInfo": "더 효율적인 연료"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": -1,
+      "idx": 25,
+      "turnForResearch": 6,
+      "researchResource": 6,
+      "requireResearches": [23],
+      "researchInfo": "더 효율적인 엔진"
+    },
+    {
+      "type": 1,
+      "researchThingIdx": 4,
+      "idx": 26,
+      "turnForResearch": 8,
+      "researchResource": 8,
+      "requireResearches": [21, 22],
+      "researchInfo": "엔진 4단계 연구"
     }
   ]
 }
