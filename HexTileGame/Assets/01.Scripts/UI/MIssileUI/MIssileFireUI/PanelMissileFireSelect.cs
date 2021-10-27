@@ -1,4 +1,4 @@
-using System.Linq;
+ï»¿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +14,7 @@ public class PanelMissileFireSelect : MonoBehaviour
     [SerializeField] GameObject vcamSelectFire = null;
 
     [SerializeField] PlayerInput mainInput = null;
-    [SerializeField] GameObject vcamMain = null; // µÑ ÀüºÎ Ã³À½¿¡ ºñÈ°¼ºÈ­, ²¨Áú¶§ È°¼ºÈ­
+    [SerializeField] GameObject vcamMain = null; // ë‘˜ ì „ë¶€ ì²˜ìŒì— ë¹„í™œì„±í™”, êº¼ì§ˆë•Œ í™œì„±í™”
 
     RaycastHit hit;
 
@@ -22,11 +22,11 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     private TileScript startedTile = null;
 
-    private List<MissileData> fireMissiles = new List<MissileData>(); // ¹ß»ç ´ë±âÁßÀÎ ¹Ì»çÀÏ ( ¼±ÅÃ X )
+    private List<MissileData> fireMissiles = new List<MissileData>(); // ë°œì‚¬ ëŒ€ê¸°ì¤‘ì¸ ë¯¸ì‚¬ì¼ ( ì„ íƒ X )
 
     private List<TileScript> tilesInRange = new List<TileScript>();
 
-    bool bStopGetInput = false; // Ãß°¡ÀÔ·Â ¹æÁö¿ë ÇÃ·¡±×
+    bool bStopGetInput = false; // ì¶”ê°€ì…ë ¥ ë°©ì§€ìš© í”Œë˜ê·¸
 
     private void OnDisable()
     {
@@ -82,10 +82,10 @@ public class PanelMissileFireSelect : MonoBehaviour
             case InputState.None:
                 break;
             case InputState.SelectStartTile:
-                text.text = "¹Ì»çÀÏÀÇ Ãâ¹ß ÁöÁ¡À» Á¤ÇØÁÖ¼¼¿ä.\n¸¸¾à ±ÙÃ³¿¡ Àû Å¸ÀÏÀÌ ¾ø´Ù¸é\nÀÚµ¿À¸·Î Ãë¼ÒµË´Ï´Ù.";
+                text.text = "ë¯¸ì‚¬ì¼ì˜ ì¶œë°œ ì§€ì ì„ ì •í•´ì£¼ì„¸ìš”.\në§Œì•½ ê·¼ì²˜ì— ì  íƒ€ì¼ì´ ì—†ë‹¤ë©´\nìë™ìœ¼ë¡œ ì·¨ì†Œë©ë‹ˆë‹¤.";
                 break;
             case InputState.SelectTargetTile:
-                text.text = "Å¸°İ ÁöÁ¡À» ÁöÁ¤ÇØÁÖ¼¼¿ä!\nÃÊ·Ï»ö : Å¸°İ °¡´É ÁöÁ¡\n»¡°£»ö : Å¸°İ ºÒ°¡´É ÁöÁ¡\nÆÄ¶õ»ö : Ãâ¹ß ÁöÁ¡";
+                text.text = "íƒ€ê²© ì§€ì ì„ ì§€ì •í•´ì£¼ì„¸ìš”!\nì´ˆë¡ìƒ‰ : íƒ€ê²© ê°€ëŠ¥ ì§€ì \në¹¨ê°„ìƒ‰ : íƒ€ê²© ë¶ˆê°€ëŠ¥ ì§€ì \níŒŒë€ìƒ‰ : ì¶œë°œ ì§€ì ";
                 break;
             case InputState.Finish:
                 UIStackManager.RemoveUIOnTop();
@@ -121,7 +121,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                             FireReady(fireMissiles[0]);
                             break;
                         case InputState.SelectTargetTile:
-                            if (isTileCanFire(tile)) // ¸¸¾à ¼±ÅÃÇÑ °÷ÀÌ »ç°Å¸® ³»¶ó¸é
+                            if (isTileCanFire(tile)) // ë§Œì•½ ì„ íƒí•œ ê³³ì´ ì‚¬ê±°ë¦¬ ë‚´ë¼ë©´
                             {
                                 SetTargetAndFire(fireMissiles[0], tile);
                             }
@@ -139,24 +139,14 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     public bool isCanStartTile(TileScript tile, MissileData missile)
     {
-        return 
-            MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, missile.MissileRange).Contains(tile)
-            && tile.Owner != MainSceneManager.Instance.GetPlayer() // ÁÖÀÎÀÌ ÇÃ·¹ÀÌ¾î°¡ ¾Æ´Ï¾î¾ßÇÔ
-            && tile.Owner != null // ÁÖÀÎ ¾ø´Â ¶¥Àº ¸ø¶§¸®°Ô
-            && !tile.transform.GetComponentInChildren<CloudObject>()// ½Ã¾ß¹ÛÀÇ Å¸ÀÏ Å¸°İ ºÒ°¡
+        return MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, missile.MissileRange).Find(tile =>
+        {
+            return tile.Owner != MainSceneManager.Instance.GetPlayer() // ì£¼ì¸ì´ í”Œë ˆì´ì–´ê°€ ì•„ë‹ˆì–´ì•¼í•¨
+            && tile.Owner != null // ì£¼ì¸ ì—†ëŠ” ë•…ì€ ëª»ë•Œë¦¬ê²Œ
+            && !tile.transform.GetComponentInChildren<CloudObject>()// ì‹œì•¼ë°–ì˜ íƒ€ì¼ íƒ€ê²© ë¶ˆê°€
             && tile.Data.type != TileType.Ocean
-            && tile.Data.type != TileType.Lake; // ¹°Å¸ÀÏ Å¸°İ ºÒ°¡
-    }
-
-    public bool isTileCanFire(TileScript tile)
-    {
-        return 
-            tilesInRange.Contains(tile)
-            && tile.Owner != MainSceneManager.Instance.GetPlayer() // ÁÖÀÎÀÌ ÇÃ·¹ÀÌ¾î°¡ ¾Æ´Ï¾î¾ßÇÔ
-            && tile.Owner != null // ÁÖÀÎ ¾ø´Â ¶¥Àº ¸ø¶§¸®°Ô
-            && !tile.transform.GetComponentInChildren<CloudObject>()// ½Ã¾ß¹ÛÀÇ Å¸ÀÏ Å¸°İ ºÒ°¡
-            && tile.Data.type != TileType.Ocean  
-            && tile.Data.type != TileType.Lake; // ¹°Å¸ÀÏ Å¸°İ ºÒ°¡
+            && tile.Data.type != TileType.Lake; // ë¬¼íƒ€ì¼ íƒ€ê²© ë¶ˆê°€
+        }) != null && tile.Owner == MainSceneManager.Instance.GetPlayer();
     }
 
     public void InitPanelMissileFire(List<MissileData> fireMissiles)
@@ -177,7 +167,7 @@ public class PanelMissileFireSelect : MonoBehaviour
         vcamSelectFire.gameObject.SetActive(true); 
     }
 
-    // ¹Ì»çÀÏ ½ò ÁØºñ¸¦ ÇØÁÜ
+    // ë¯¸ì‚¬ì¼ ì  ì¤€ë¹„ë¥¼ í•´ì¤Œ
     private void FireReady(MissileData missile)
     {
         TileMapData.Instance.ResetColorAllTile();
@@ -192,7 +182,7 @@ public class PanelMissileFireSelect : MonoBehaviour
     }
 
     /// <summary>
-    /// »ç°Å¸®¾È¿¡ ÀÖ´Â Å¸ÀÏÀ» ¾÷µ¥ÀÌÆ® ¹× »öÄ¥ ÇØÁİ´Ï´Ù.
+    /// ì‚¬ê±°ë¦¬ì•ˆì— ìˆëŠ” íƒ€ì¼ì„ ì—…ë°ì´íŠ¸ ë° ìƒ‰ì¹  í•´ì¤ë‹ˆë‹¤.
     /// </summary>
     /// <param name="startedTile"></param>
     /// <param name="missile"></param>
@@ -206,8 +196,8 @@ public class PanelMissileFireSelect : MonoBehaviour
     }
 
     /// <summary>
-    /// »ç°İ ºÒ°¡´ÉÇÑ Å¸ÀÏÀ» °ñ¶óÁİ´Ï´Ù.
-    /// SetCanFireTile() ´ÙÀ½¿¡ ½ÇÇàµÇ´Â °ÍÀÌ ÁÁ½À´Ï´Ù.
+    /// ì‚¬ê²© ë¶ˆê°€ëŠ¥í•œ íƒ€ì¼ì„ ê³¨ë¼ì¤ë‹ˆë‹¤.
+    /// SetCanFireTile() ë‹¤ìŒì— ì‹¤í–‰ë˜ëŠ” ê²ƒì´ ì¢‹ìŠµë‹ˆë‹¤.
     /// </summary>
     private void SetCantFireTile()
     {
@@ -219,6 +209,17 @@ public class PanelMissileFireSelect : MonoBehaviour
         {
             item.GetComponent<MeshRenderer>().material.color = Color.red;
         }
+    }
+
+    public bool isTileCanFire(TileScript tile)
+    {
+        return
+            tilesInRange.Contains(tile)
+            && tile.Owner != MainSceneManager.Instance.GetPlayer() // ì£¼ì¸ì´ í”Œë ˆì´ì–´ê°€ ì•„ë‹ˆì–´ì•¼í•¨
+            && tile.Owner != null // ì£¼ì¸ ì—†ëŠ” ë•…ì€ ëª»ë•Œë¦¬ê²Œ
+            && !tile.transform.GetComponentInChildren<CloudObject>()// ì‹œì•¼ë°–ì˜ íƒ€ì¼ íƒ€ê²© ë¶ˆê°€
+            && tile.Data.type != TileType.Ocean
+            && tile.Data.type != TileType.Lake; // ë¬¼íƒ€ì¼ íƒ€ê²© ë¶ˆê°€
     }
 
     private void SetTargetAndFire(MissileData missile, TileScript target)

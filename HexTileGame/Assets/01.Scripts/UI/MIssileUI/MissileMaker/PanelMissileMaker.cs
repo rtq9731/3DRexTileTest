@@ -18,9 +18,6 @@ public class PanelMissileMaker : MonoBehaviour
     [SerializeField] Button btnSelectEngine;
 
     [Header("About MissileInfo")]
-    [SerializeField] Text textATK = null;
-    [SerializeField] Text textRange = null;
-    [SerializeField] Text textTurn = null;
     [SerializeField] Text textMissilesInMake = null;
 
     private MissileData missileBluePrint = null;
