@@ -9,6 +9,7 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] MissileWarhead missileWarhead;
     [SerializeField] MissileEngine missileEngine;
     [SerializeField] public TechTreeDatas techTreeDatas;
+    [SerializeField] public Material missileMaterial;
     public MissileWarheadData GetWarheadData(MissileTypes.MissileWarheadType type)
     {
         return missileWarhead.dataList.Find(x => x.TYPE == type);

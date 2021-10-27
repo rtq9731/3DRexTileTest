@@ -1,9 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class MissileTypes : MonoBehaviour
+public class MissileTypes 
 {
+    public enum MissileMaterial
+    {
+        Aluminum,
+        Stainless,
+        Titanium,
+        Carbon
+    }
+
     public enum MissileWarheadType
     {
         CommonTypeWarhead,
