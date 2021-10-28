@@ -72,38 +72,26 @@ public class MainSceneManager : MonoBehaviour
 
     [Header("About Player")]
     public string PlayerName = "COCONUT";
+    public int AIPlayerCount = 3;
 
     List<PlayerScript> players = new List<PlayerScript>();
     public List<PlayerScript> Players { get { return players; } set { players = value; } }
 
+    public List<AIPlayer> AIPlayers = new List<AIPlayer>();
+
     [SerializeField] PersonPlayer player = null;
 
-    public PlayerScript GetPlayer()
+    public PersonPlayer GetPlayer()
     {
         return player;
     }
 
-    public bool CheckTurnFinish()
-    {
-        if(players.Find(x => x.IsTurnFinish == false))
-        {
-            return false;
-        }
-        else
-        {
-            players.ForEach(x => x.StartNewTurn()); // 다음 턴으로 넘기면서 True 반환
-            turnCnt++;
-            uiTopBar.UpdateTexts();
-
-            return true;
-        }
-    }
-
     public void StartGame()
     {
+        TileMapData.Instance.GetAllTiles().ForEach(x => x.ChangeOwner(null));
+
         foreach (var item in players)
         {
-            TileScript tile = TileMapData.Instance.GetRandTile();
             if(item == player)
             {
                 item.AddTile(TileMapData.Instance.GetTile(0));
@@ -111,11 +99,16 @@ public class MainSceneManager : MonoBehaviour
                 continue;
             }
 
-            if (tile != null)
+            if (AIPlayers.FindAll(x => x.OwningTiles.Count >= 1).Count >= AIPlayerCount)
             {
-                item.AddTile(tile);
+                return;
             }
-        }
+
+            List<TileScript> tiles = TileMapData.Instance.GetEndTile(6);
+            tiles = tiles.FindAll(x => x.Owner == null);
+            item.gameObject.SetActive(true);
+            item.AddTile(tiles[Random.Range(0, tiles.Count)]);
+        } 
     }
 
     public void LoadedGame()

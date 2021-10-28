@@ -21,7 +21,7 @@ public class PanelPartSelector : MonoBehaviour
     [SerializeField] Text textWeight = null;
     [SerializeField] Text textPartInfo = null;
 
-    [SerializeField] private PlayerScript player = null;
+    [SerializeField] private PersonPlayer player = null;
 
     public void InitPanelInNull(PanelMissileMaker.partType part)
     {

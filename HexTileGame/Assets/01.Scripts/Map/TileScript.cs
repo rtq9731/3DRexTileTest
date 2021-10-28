@@ -169,6 +169,8 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
                     item.material.color = Color.white;
                 }
             }
+
+            if(owner != null)
             owner.OwningTiles.Remove(this);
         }
 
@@ -182,14 +184,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void BuyTile(PlayerScript owner)
     {
-        if(owner.IsTurnFinish)
-        {
-#if UNITY_EDITOR
-            Debug.Log("ÇÏ ¾îµô ÀÌ¹Ì ÅÏ ³¡³ÂÀÝ¾Æ ¤»¤»");
-#endif
-            return;
-        }
-
         if (owner.ResourceTank >= data.Price)
         {
 

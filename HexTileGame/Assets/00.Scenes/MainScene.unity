@@ -3057,7 +3057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5c08529b732674db954c73a1750bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOut: 0
   myName: AI 3
   playerColor: {r: 0.8352941, g: 0.043137256, b: 0.043137256, a: 0}
   owningTiles: []
@@ -3388,7 +3387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5c08529b732674db954c73a1750bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOut: 0
   myName: AI 5
   playerColor: {r: 0.8352941, g: 0.33333334, b: 0.043137256, a: 0}
   owningTiles: []
@@ -4136,7 +4134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5c08529b732674db954c73a1750bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOut: 0
   myName: AI 6
   playerColor: {r: 0.101960786, g: 0.29411766, b: 0.8235294, a: 0}
   owningTiles: []
@@ -5090,7 +5087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5c08529b732674db954c73a1750bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOut: 0
   myName: AI 2
   playerColor: {r: 0.9372549, g: 0.8392157, b: 0.2, a: 0}
   owningTiles: []
@@ -8264,7 +8260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3258f0e5bb63f479ad28fa7384e378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOut: 0
   myName: 
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   owningTiles: []
@@ -12121,6 +12116,7 @@ MonoBehaviour:
   TileXInterval: 1
   turnCnt: 0
   PlayerName: COCONUT
+  AIPlayerCount: 3
   player: {fileID: 835838797}
 --- !u!114 &1113051653
 MonoBehaviour:
@@ -17588,7 +17584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5c08529b732674db954c73a1750bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOut: 0
   myName: AI 4
   playerColor: {r: 0.70980394, g: 0.20392157, b: 0.8352941, a: 0}
   owningTiles: []
@@ -19678,9 +19673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5c08529b732674db954c73a1750bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOut: 0
   myName: AI 1
-  playerColor: {r: 0.39215687, g: 0.7294118, b: 0.6509804, a: 1}
+  playerColor: {r: 0.39215687, g: 0.7294118, b: 0.6509804, a: 0}
   owningTiles: []
 --- !u!1 &1859868436
 GameObject:

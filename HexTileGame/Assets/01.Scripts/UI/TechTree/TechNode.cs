@@ -11,7 +11,7 @@ public class TechNode : MonoBehaviour
     [SerializeField] Button myBtn = null;
 
     SkillTreeNode data = null;
-    PlayerScript player = null;
+    PersonPlayer player = null;
 
     private void Start()
     {

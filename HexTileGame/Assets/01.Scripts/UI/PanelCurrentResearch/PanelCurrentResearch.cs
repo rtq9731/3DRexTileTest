@@ -29,7 +29,7 @@ public class PanelCurrentResearch : MonoBehaviour
         UpdateTexts(null);
     }
 
-    public void UpdateTexts(PlayerScript player)
+    public void UpdateTexts(PersonPlayer player)
     {
         if(player == null || player.CurResearchData == null)
         {

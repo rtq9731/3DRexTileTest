@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class AIPlayer : PlayerScript
 {
-
+    private void Start()
+    {
+        base.Start();
+        MainSceneManager.Instance.AIPlayers.Add(this);
+    }
 }

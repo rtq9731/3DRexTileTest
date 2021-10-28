@@ -33,6 +33,11 @@ public class TileMapData : MonoBehaviour
         return tileList[num];
     }
 
+    public void RemoveTileOnList(TileScript item)
+    {
+        tileList.Remove(item);
+    }
+
     public void SetTileData(TileScript item)
     {
         tileList.Add(item);
@@ -51,18 +56,17 @@ public class TileMapData : MonoBehaviour
         }
     }
 
-    public TileScript GetRandTile()
+    public List<TileScript> GetEndTile(int size)
     {
-        TileScript result = tileList[Random.Range(0, tileList.Count)];
-
-        if(result.Data.type != (TileType.Ocean | TileType.Lake | TileType.None)) // 오브젝트 놓는게 불가능한 지형인지 체크
+        List<TileScript> result = new List<TileScript>();
+        for (int i = 0; i < size; i++)
         {
-            if(result.Owner == null) // 주인 없는게 맞는지 체크
-            {
-                return result;
-            }
+            result.Add(tileList.Find(x => 
+            x.Data.type != (TileType.Ocean | TileType.Lake | TileType.None)
+            && !result.Contains(x)
+            && MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Count == 3));
         }
 
-        return GetRandTile();
+        return result;
     }
 }

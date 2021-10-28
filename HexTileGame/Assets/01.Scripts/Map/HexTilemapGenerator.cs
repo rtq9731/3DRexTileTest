@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class HexTilemapGenerator : MonoBehaviour
 {
+    Stack<Action> actionStack = new Stack<Action>();
+
     public enum GroundType
     {
         None,
@@ -107,25 +109,49 @@ public class HexTilemapGenerator : MonoBehaviour
 
     private void GenerateTiles(int size)
     {
-        List<Vector3> tiles = MainSceneManager.Instance.tileChecker.MakeTilesPos(size);
+        List<Vector3> tilePos = MainSceneManager.Instance.tileChecker.MakeTilesPos(size);
+        List<TileScript> Tiles = new List<TileScript>();
 
-        for (int cnt = 0; cnt < tiles.Count; cnt++)
+        for (int cnt = 0; cnt < tilePos.Count; cnt++)
         {
             GameObject temp = null;
 
             if (cnt == 0)
             {
-                temp = Instantiate(groundTiles[0], tiles[cnt], Quaternion.Euler(Vector3.zero), tileParent);
+                temp = Instantiate(groundTiles[0], tilePos[cnt], Quaternion.Euler(Vector3.zero), tileParent);
             }
             else
             {
-                temp = Instantiate(groundTiles[UnityEngine.Random.Range(1, groundTiles.Length)], tiles[cnt], Quaternion.Euler(Vector3.zero), tileParent);
+                temp = Instantiate(groundTiles[UnityEngine.Random.Range(1, groundTiles.Length)], tilePos[cnt], Quaternion.Euler(Vector3.zero), tileParent);
             }
 
             TileScript tempScirpt = temp.GetComponent<TileScript>();
             TileMapData.Instance.SetTileData(tempScirpt);
-            tempScirpt.SetPosition(tiles[cnt]);
+            tempScirpt.SetPosition(tilePos[cnt]);
             tempScirpt.Data.tileNum = cnt;
+
+            Tiles.Add(tempScirpt);
+        }
+
+        List<TileScript> endTiles = Tiles.FindAll(x => MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Count == 3);
+        foreach (var item in endTiles)
+        {
+            actionStack.Push(() =>
+            {
+                GameObject temp = Instantiate(groundTiles[0], item.Data.Position, Quaternion.Euler(Vector3.zero), tileParent);
+                TileScript tempScirpt = temp.GetComponent<TileScript>();
+                TileMapData.Instance.SetTileData(tempScirpt);
+                tempScirpt.SetPosition(item.Data.Position);
+                tempScirpt.Data.tileNum = item.Data.tileNum;
+
+                TileMapData.Instance.RemoveTileOnList(item);
+                Destroy(item.gameObject);
+            });
+        }
+
+        while(actionStack.Count >= 1)
+        {
+            actionStack.Pop()();
         }
 
         GetComponent<HexObjectTileManager>().GenerateObjects(size, type);
