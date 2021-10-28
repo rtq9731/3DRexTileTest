@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class HexTilemapGenerator : MonoBehaviour
 {
@@ -25,6 +28,11 @@ public class HexTilemapGenerator : MonoBehaviour
 
     [SerializeField] GameObject beachTile;
 
+    [SerializeField] GameObject parentObj = null;
+    [SerializeField] Transform tileParent = null;
+
+    int mapSize = 3;
+
     GameObject[] groundTiles;
 
     private void Start()
@@ -47,31 +55,76 @@ public class HexTilemapGenerator : MonoBehaviour
         TileXInterval = MainSceneManager.Instance.TileXInterval;
         TileZInterval = MainSceneManager.Instance.TileZInterval;
 
-        GenerateTiles(15, 15);
+        GenerateTiles(3);
     }
 
-    private void GenerateTiles(int width, int height)
+    public void GenerateNewTile()
     {
-        Vector3 tilePos = Vector3.zero;
-        tilePos.z -= height / 2; // ¡ﬂæ”¿∏∑Œ Z¡¬«•∏¶ ∏¬√Á¡÷±‚ ¿ß«‘
-        int cnt = 0;
-        for (int i = 0; i < height; i++)
+        DOTween.CompleteAll();
+        while(!UIStackManager.IsUIStackEmpty())
         {
-            tilePos.x = (i % 2 == 0) ? -width / 2 : -width / 2 + 0.5f;
-            for (int j = 0; j < width; j++)
-            {
-                GameObject temp = Instantiate(groundTiles[UnityEngine.Random.Range(1, groundTiles.Length)], tilePos, Quaternion.Euler(Vector3.zero), this.gameObject.transform);
-                TileScript tempScirpt = temp.GetComponent<TileScript>();
-                TileMapData.Instance.SetTileData(tempScirpt);
-                tempScirpt.SetPosition(tilePos);
-                tempScirpt.Data.tileNum = cnt;
-                tilePos.x += TileXInterval;
-                cnt++;
-            }
-            tilePos.z += TileZInterval;
+            UIStackManager.RemoveUIOnTopWithNoTime();
         }
 
-        GetComponent<HexObjectTileManager>().GenerateObjects(width, height, type);
+        MainSceneManager.Instance.fogOfWarManager.ResetCloudList();
+        TileMapData.Instance.ResetTileList();
+        MainSceneManager.Instance.Players.ForEach(x => x.ResetPlayer());
+
+        Destroy(tileParent.gameObject);
+        tileParent = Instantiate(parentObj, transform).transform;
+
+        mapSize++;
+        GenerateTiles(mapSize);
+    }
+
+    public void GenerateNewTileWihtNoExtension()
+    {
+        DOTween.CompleteAll();
+        while (!UIStackManager.IsUIStackEmpty())
+        {
+            UIStackManager.RemoveUIOnTopWithNoTime();
+        }
+
+        MainSceneManager.Instance.fogOfWarManager.ResetCloudList();
+        TileMapData.Instance.ResetTileList();
+        MainSceneManager.Instance.Players.ForEach(x => x.ResetPlayer());
+
+        Destroy(tileParent.gameObject);
+        tileParent = Instantiate(parentObj, transform).transform;
+        
+
+        GenerateTiles(mapSize);
+    }
+
+    IEnumerator ReGenerateTiles()
+    {
+        yield return null;
+    }
+
+    private void GenerateTiles(int size)
+    {
+        List<Vector3> tiles = MainSceneManager.Instance.tileChecker.MakeTilesPos(size);
+
+        for (int cnt = 0; cnt < tiles.Count; cnt++)
+        {
+            GameObject temp = null;
+
+            if (cnt == 0)
+            {
+                temp = Instantiate(groundTiles[0], tiles[cnt], Quaternion.Euler(Vector3.zero), tileParent);
+            }
+            else
+            {
+                temp = Instantiate(groundTiles[UnityEngine.Random.Range(1, groundTiles.Length)], tiles[cnt], Quaternion.Euler(Vector3.zero), tileParent);
+            }
+
+            TileScript tempScirpt = temp.GetComponent<TileScript>();
+            TileMapData.Instance.SetTileData(tempScirpt);
+            tempScirpt.SetPosition(tiles[cnt]);
+            tempScirpt.Data.tileNum = cnt;
+        }
+
+        GetComponent<HexObjectTileManager>().GenerateObjects(size, type);
     }
 
 }

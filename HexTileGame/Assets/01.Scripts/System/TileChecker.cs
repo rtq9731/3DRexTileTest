@@ -16,6 +16,97 @@ public class TileChecker : MonoBehaviour
         TileZInterval = MainSceneManager.Instance.TileZInterval;
     }
 
+    List<Vector3> tilesPos = new List<Vector3>();
+    public List<Vector3> MakeTilesPos(int range)
+    {
+        transform.position = Vector3.zero;
+
+        if (range <= 0)
+        {
+            return null;
+        }
+
+        List<Vector3> selectedTileOnMyMethod = new List<Vector3>();
+
+        tilesPos = new List<Vector3>();
+
+        tilesPos.Add(transform.position);
+
+        tilesPos.Add(new Vector3(transform.position.x - TileXInterval, transform.position.y, transform.position.z)); // 9시 방향 (북)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x - TileXInterval, transform.position.y, transform.position.z)); // 9시 방향 (북)
+
+        tilesPos.Add(new Vector3(transform.position.x + TileXInterval, transform.position.y, transform.position.z)); // 3시 방향 (남)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x + TileXInterval, transform.position.y, transform.position.z)); // 3시 방향 (남)
+
+        tilesPos.Add(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 1시 반 방향 (북동)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 1시 반 방향 (북동)
+
+        tilesPos.Add(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 10시 반 방향 (북서)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 10시 반 방향 (북서)
+
+        tilesPos.Add(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 1시 반 방향 (남동)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 1시 반 방향 (남동)
+
+        tilesPos.Add(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 7시 반 방향 (남서)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 7시 반 방향 (남서)
+
+        range--;
+        if (range <= 0)
+        {
+            return tilesPos;
+        }
+        else
+        {
+            foreach (var item in selectedTileOnMyMethod)
+            {
+                GetTilePosMore(item, range);
+            };
+
+            return tilesPos.Distinct().ToList(); // 중복된것 제거해서 반환
+        }
+    }
+
+    public List<Vector3> GetTilePosMore(Vector3 pos, int range)
+    {
+
+        List<Vector3> selectedTileOnMyMethod = new List<Vector3>();
+
+        transform.position = pos;
+
+        tilesPos.Add(new Vector3(transform.position.x - TileXInterval, transform.position.y, transform.position.z)); // 9시 방향 (북)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x - TileXInterval, transform.position.y, transform.position.z)); // 9시 방향 (북)
+
+        tilesPos.Add(new Vector3(transform.position.x + TileXInterval, transform.position.y, transform.position.z)); // 3시 방향 (남)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x + TileXInterval, transform.position.y, transform.position.z)); // 3시 방향 (남)
+
+        tilesPos.Add(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 1시 반 방향 (북동)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 1시 반 방향 (북동)
+
+        tilesPos.Add(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 10시 반 방향 (북서)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z + TileZInterval)); // 10시 반 방향 (북서)
+
+        tilesPos.Add(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 1시 반 방향 (남동)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 1시 반 방향 (남동)
+
+        tilesPos.Add(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 7시 반 방향 (남서)
+        selectedTileOnMyMethod.Add(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z - TileZInterval)); // 7시 반 방향 (남서)
+
+        range--;
+        if (range <= 0)
+        {
+            return tilesPos;
+        }
+        else
+        {
+            foreach (var item in selectedTileOnMyMethod)
+            {
+                GetTilePosMore(item, range);
+            };
+
+            return tilesPos.Distinct().ToList(); // 중복된것 제거해서 반환
+        }
+    }
+
     List<TileScript> selectedTiles = new List<TileScript>();
     public List<TileScript> FindTilesInRange(TileScript tile, int range)
     {
@@ -26,7 +117,14 @@ public class TileChecker : MonoBehaviour
 
         selectedTiles = new List<TileScript>();
 
-        this.transform.position = tile.Data.Position;
+        if(tile != null)
+        {
+            this.transform.position = tile.Data.Position;
+        }
+        else
+        {
+            this.transform.position = Vector3.zero;
+        }
 
         TileScript result;
         List<TileScript> selectedTileOnMyMethod = new List<TileScript>();
@@ -83,10 +181,12 @@ public class TileChecker : MonoBehaviour
             foreach (var item in selectedTileOnMyMethod)
             {
                 FindTilesInMoreRange(item, range);
-            };
+            }
 
-            selectedTiles.Remove(tile); // 자기 자신 제거
-            Debug.Log(selectedTiles.Count);
+            if(tile != null)
+            {
+                selectedTiles.Remove(tile); // 자기 자신 제거
+            }
 
             return selectedTiles.Distinct().ToList(); // 중복된것 제거해서 반환
         }
@@ -155,7 +255,7 @@ public class TileChecker : MonoBehaviour
         {
             foreach (var item in selectedTileOnMyMethod)
             {
-                FindTilesInRange(item, range);
+                FindTilesInMoreRange(item, range);
             };
         }
     }

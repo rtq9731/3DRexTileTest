@@ -103,7 +103,18 @@ public class MainSceneManager : MonoBehaviour
     {
         foreach (var item in players)
         {
-            item.AddTile(TileMapData.Instance.GetRandTile());
+            TileScript tile = TileMapData.Instance.GetRandTile();
+            if(item == player)
+            {
+                item.AddTile(TileMapData.Instance.GetTile(0));
+                fogOfWarManager.RemoveCloudOnTile(TileMapData.Instance.GetTile(0));
+                continue;
+            }
+
+            if (tile != null)
+            {
+                item.AddTile(tile);
+            }
         }
     }
 

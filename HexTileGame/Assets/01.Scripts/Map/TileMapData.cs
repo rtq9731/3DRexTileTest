@@ -23,6 +23,11 @@ public class TileMapData : MonoBehaviour
         Instance = null;
     }
 
+    public void ResetTileList()
+    {
+        tileList = new List<TileScript>();
+    }
+
     public TileScript GetTile(int num)
     {
         return tileList[num];
@@ -50,7 +55,7 @@ public class TileMapData : MonoBehaviour
     {
         TileScript result = tileList[Random.Range(0, tileList.Count)];
 
-        if(result.Data.type == (TileType.Ocean | TileType.Lake | TileType.None)) // 오브젝트 놓는게 불가능한 지형인지 체크
+        if(result.Data.type != (TileType.Ocean | TileType.Lake | TileType.None)) // 오브젝트 놓는게 불가능한 지형인지 체크
         {
             if(result.Owner == null) // 주인 없는게 맞는지 체크
             {
@@ -58,6 +63,6 @@ public class TileMapData : MonoBehaviour
             }
         }
 
-        return GetRandTile();   
+        return GetRandTile();
     }
 }

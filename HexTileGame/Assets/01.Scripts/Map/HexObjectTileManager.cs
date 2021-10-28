@@ -18,7 +18,7 @@ public class HexObjectTileManager : LoadingObj
         finish = x => { };
     }
 
-    public void GenerateObjects(int width, int height, HexTilemapGenerator.GroundType groundType)
+    public void GenerateObjects(int size, HexTilemapGenerator.GroundType groundType)
     {
 
         switch (groundType)
@@ -36,51 +36,36 @@ public class HexObjectTileManager : LoadingObj
                 break;
         }
 
-        int objNum = 0;
+        List<TileScript> tiles = MainSceneManager.Instance.tileChecker.FindTilesInRange(null, size);
 
-        for (int i = 0; i < height; i++)
+        for (int i = 0; i < tiles.Count; i++)
         {
-            for (int j = 0; j < width; j++)
+            TileScript curTile = tiles[i];
+            MainSceneManager.Instance.fogOfWarManager.GenerateCloudOnTile(curTile);
+
+            GameObject randObj = objects[UnityEngine.Random.Range(1, objects.Length)];
+
+            if (randObj != null)
             {
-                TileScript curTile = TileMapData.Instance.GetTile(objNum);
-
-                PlayerScript player = MainSceneManager.Instance.GetPlayer();
-
-                if(!player.OwningTiles.Contains(curTile))
+                if (curTile.Data.type == TileType.Plain) // 오브젝트 배치 불가능한 지형인지 체크
                 {
-                    if (MainSceneManager.Instance.tileChecker.FindTilesInRange(curTile, 1).Find(x => x.Owner == player) == null)
+                    GameObject temp = Instantiate(randObj, curTile.transform);
+
+                    switch (temp.GetComponent<ObjScript>().objType)
                     {
-                        MainSceneManager.Instance.fogOfWarManager.GenerateCloudOnTile(curTile);
+                        case ObjType.Tree:
+                            curTile.Data.SetDataToForest();
+                            break;
+                        case ObjType.Mountain:
+                            curTile.Data.SetDataToMountain();
+                            break;
+                        case ObjType.Rock:
+                            curTile.Data.SetDataToRock();
+                            break;
+                        default:
+                            break;
                     }
                 }
-
-                GameObject randObj = objects[UnityEngine.Random.Range(1, objects.Length)];
-
-                if (randObj != null)
-                {
-                    if (curTile.Data.type == TileType.Plain) // 오브젝트 배치 불가능한 지형인지 체크
-                    {
-                        GameObject temp = Instantiate(randObj, curTile.transform);
-
-                        switch (temp.GetComponent<ObjScript>().objType)
-                        {
-                            case ObjType.Tree:
-                                curTile.Data.SetDataToForest();
-                                break;
-                            case ObjType.Mountain:
-                                curTile.Data.SetDataToMountain();
-                                break;
-                            case ObjType.Rock:
-                                curTile.Data.SetDataToRock();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                                        
-                }
-
-                objNum++;
 
             }
         }

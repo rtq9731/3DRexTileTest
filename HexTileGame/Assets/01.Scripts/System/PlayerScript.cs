@@ -11,8 +11,6 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     protected List<PlayerScript> contactPlayers = new List<PlayerScript>();
 
-    protected List<TileScript> tileInSight = new List<TileScript>();
-
     protected List<int> unlockedWarheadIdx = new List<int>();
     public List<int> UnlockedWarheadIdx
     {
@@ -55,6 +53,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public Action TurnFinishAction;
 
+    [SerializeField]
     protected List<TileScript> owningTiles = new List<TileScript>();
     public List<TileScript> OwningTiles
     {
@@ -128,6 +127,39 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
                 missileReadyToShoot.Add(x);
                 });
             };
+    }
+
+    public void ResetPlayer()
+    {
+        owningTiles = new List<TileScript>();
+
+        unlockedEngineIdx = new List<int>();
+        unlockedWarheadIdx = new List<int>();
+        unlockedBodyIdx = new List<int>();
+        researchedBodyResearch = new List<int>();
+        researchedEngineResearch = new List<int>();
+        missileReadyToShoot = new List<MissileData>();
+        missileInMaking = new List<MissileData>();
+        contactPlayers = new List<PlayerScript>();
+        
+
+        curResearchData = null;
+
+        isOut = false;
+        resouceTank = 0;
+
+        unlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작
+        unlockedWarheadIdx.Add(0);
+        unlockedBodyIdx.Add(0);
+
+        TurnFinishAction = () => { }; // 액션 초기화
+        TurnFinishAction += () => {
+            missileInMaking.ForEach(x => x.TurnForMissileReady--);
+            missileInMaking.FindAll(x => x.TurnForMissileReady <= 0).ForEach(x => {
+                missileInMaking.Remove(x);
+                missileReadyToShoot.Add(x);
+            });
+        };
     }
 
     protected void Start()
@@ -231,7 +263,13 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         {
             MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(tile);
             List<TileScript> tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, 1);
-            tilesInRange.ForEach(x => MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x));
+            tilesInRange.ForEach(x =>
+            {
+                if(x.transform.GetComponentInChildren<CloudObject>() != null)
+                {
+                    MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x);
+                }
+            });
 
             var otherPlayers = from item in tilesInRange
                                             where item.Owner != this && item.Owner != null

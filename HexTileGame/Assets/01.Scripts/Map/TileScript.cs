@@ -16,6 +16,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         get { return data; }
     }
 
+    [SerializeField]
     PlayerScript owner = null;
 
     public PlayerScript Owner
@@ -88,6 +89,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     private void DamageMoreTile(List<TileScript> tilesInMoreHitRange, int moreHitTileCnt, int damage)
     {
         tilesInMoreHitRange = GetTilesCanFire(tilesInMoreHitRange);
+
+        if(moreHitTileCnt < 1)
+        {
+            return;
+        }
 
         for (int i = 0; i < moreHitTileCnt; i++)
         {

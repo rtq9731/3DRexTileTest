@@ -13,6 +13,11 @@ public class CloudObject : MonoBehaviour
 
     public void RemoveCloud()
     {
+        if(cloud1.transform == null)
+        {
+            return;
+        }
+
         Sequence seq = DOTween.Sequence();
 
         seq.Append(cloud1.transform.DOMove(new Vector3(cloud1.transform.position.x - 0.25f, cloud1.transform.position.y, cloud1.transform.position.z - 0.25f), removeTime)).SetEase(Ease.OutQuart);
