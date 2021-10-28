@@ -22,6 +22,8 @@ public class HexTilemapGenerator : MonoBehaviour
 
     [SerializeField] GroundType type;
 
+    [SerializeField] StageChange stageChangePanel = null;
+
     [SerializeField] GameObject[] jungleGroundTileSet;
     [SerializeField] GameObject[] plainGroundTileSet;
     [SerializeField] GameObject[] MountainGroundTileSet;
@@ -74,7 +76,7 @@ public class HexTilemapGenerator : MonoBehaviour
         tileParent = Instantiate(parentObj, transform).transform;
 
         mapSize++;
-        GenerateTiles(mapSize);
+        StartCoroutine(ReGenerateTiles());
     }
 
     public void GenerateNewTileWihtNoExtension()
@@ -91,14 +93,16 @@ public class HexTilemapGenerator : MonoBehaviour
 
         Destroy(tileParent.gameObject);
         tileParent = Instantiate(parentObj, transform).transform;
-        
 
-        GenerateTiles(mapSize);
+        StartCoroutine(ReGenerateTiles());
     }
 
     IEnumerator ReGenerateTiles()
     {
-        yield return null;
+        stageChangePanel.CallStageChangePanel(0.75f);
+        yield return new WaitForSeconds(1);
+        GenerateTiles(mapSize);
+        stageChangePanel.RemoveStageChangePanel(0.75f);
     }
 
     private void GenerateTiles(int size)
