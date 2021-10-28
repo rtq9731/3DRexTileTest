@@ -10,7 +10,7 @@ public class UITopBar : MonoBehaviour
     [SerializeField] Text turnCntText;
     [SerializeField] Text missileText;
 
-    PlayerScript player;
+    PersonPlayer player;
 
     public void UpdateTexts()
     {

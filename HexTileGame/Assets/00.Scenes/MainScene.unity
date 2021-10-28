@@ -8261,10 +8261,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myName: 
-  playerColor: {r: 1, g: 1, b: 1, a: 1}
+  playerColor: {r: 0.4583063, g: 0, b: 1, a: 1}
   owningTiles: []
   playerName: COCONUT
-  color: {r: 1, g: 0, b: 0, a: 1}
+  color: {r: 0.45882356, g: 0, b: 1, a: 1}
 --- !u!1 &837855647
 GameObject:
   m_ObjectHideFlags: 0
@@ -12115,9 +12115,10 @@ MonoBehaviour:
   TileZInterval: 0.875
   TileXInterval: 1
   turnCnt: 0
+  mapSize: 3
   PlayerName: COCONUT
   AIPlayerCount: 3
-  player: {fileID: 835838797}
+  AIPlayers: []
 --- !u!114 &1113051653
 MonoBehaviour:
   m_ObjectHideFlags: 0

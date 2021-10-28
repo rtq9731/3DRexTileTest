@@ -163,10 +163,6 @@ public class PersonPlayer : PlayerScript
             }
         });
 
-        var otherPlayers = from item in tilesInRange
-                           where item.Owner != this && item.Owner != null
-                           select item.Owner;
-
         // 중복 안되게 하기 위함.
         owningTiles.Remove(tile);
         owningTiles.Add(tile);
@@ -184,10 +180,11 @@ public class PersonPlayer : PlayerScript
         unlockedWarheadIdx.Add(0);
         unlockedBodyIdx.Add(0);
 
+        MainSceneManager.Instance.SetPlayer(this);
+        MainSceneManager.Instance.uiTopBar.UpdateTexts();
         MainSceneManager.Instance.PlayerName = playerName;
         base.playerColor = color;
         base.myName = playerName;
-        base.Start();
     }
 
 }

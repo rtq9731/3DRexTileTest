@@ -59,12 +59,16 @@ public class TileMapData : MonoBehaviour
     public List<TileScript> GetEndTile(int size)
     {
         List<TileScript> result = new List<TileScript>();
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < size; i++) 
         {
-            result.Add(tileList.Find(x => 
-            x.Data.type != (TileType.Ocean | TileType.Lake | TileType.None)
-            && !result.Contains(x)
-            && MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Count == 3));
+            TileScript tmp = tileList.Find(x =>
+            !result.Contains(x)
+            && MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Count <= 3);
+
+            if(tmp != null)
+            {
+                result.Add(tmp);
+            }
         }
 
         return result;

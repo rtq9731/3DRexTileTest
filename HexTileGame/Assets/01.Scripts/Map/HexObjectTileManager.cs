@@ -36,7 +36,7 @@ public class HexObjectTileManager : LoadingObj
                 break;
         }
 
-        List<TileScript> tiles = MainSceneManager.Instance.tileChecker.FindTilesInRange(null, size);
+        List<TileScript> tiles = TileMapData.Instance.GetAllTiles();
 
         for (int i = 0; i < tiles.Count; i++)
         {

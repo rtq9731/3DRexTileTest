@@ -35,8 +35,6 @@ public class HexTilemapGenerator : MonoBehaviour
     [SerializeField] GameObject parentObj = null;
     [SerializeField] Transform tileParent = null;
 
-    int mapSize = 3;
-
     GameObject[] groundTiles;
 
     private void Start()
@@ -59,7 +57,7 @@ public class HexTilemapGenerator : MonoBehaviour
         TileXInterval = MainSceneManager.Instance.TileXInterval;
         TileZInterval = MainSceneManager.Instance.TileZInterval;
 
-        GenerateTiles(3);
+        GenerateTiles(MainSceneManager.Instance.mapSize);
     }
 
     public void GenerateNewTile()
@@ -77,7 +75,7 @@ public class HexTilemapGenerator : MonoBehaviour
         Destroy(tileParent.gameObject);
         tileParent = Instantiate(parentObj, transform).transform;
 
-        mapSize++;
+        MainSceneManager.Instance.mapSize++;
         StartCoroutine(ReGenerateTiles());
     }
 
@@ -103,7 +101,7 @@ public class HexTilemapGenerator : MonoBehaviour
     {
         stageChangePanel.CallStageChangePanel(0.75f);
         yield return new WaitForSeconds(1);
-        GenerateTiles(mapSize);
+        GenerateTiles(MainSceneManager.Instance.mapSize);
         stageChangePanel.RemoveStageChangePanel(0.75f);
     }
 
@@ -149,7 +147,7 @@ public class HexTilemapGenerator : MonoBehaviour
             });
         }
 
-        while(actionStack.Count >= 1)
+        while (actionStack.Count >= 1)
         {
             actionStack.Pop()();
         }

@@ -136,7 +136,7 @@ public class TileInfoScript : MonoBehaviour
 
         btnBuy.onClick.RemoveAllListeners();
         btnBuy.onClick.AddListener(() => {
-            tile.BuyTile(MainSceneManager.Instance.Players.Find(x => x.MyName == MainSceneManager.Instance.PlayerName));
+            tile.BuyTile(MainSceneManager.Instance.GetPlayer());
             btnBuy.onClick.RemoveAllListeners();
             });
     }

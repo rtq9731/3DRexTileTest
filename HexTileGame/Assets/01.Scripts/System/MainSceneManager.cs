@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -51,8 +52,6 @@ public class MainSceneManager : MonoBehaviour
         Instance = null;
     }
 
-     
-
     [Header("외부 참조용")]
     [SerializeField] public TileInfoScript InfoPanel;
     [SerializeField] public MissileManager missileManager;
@@ -69,6 +68,7 @@ public class MainSceneManager : MonoBehaviour
     public float TileZInterval = 0.875f;
     public float TileXInterval = 1f;
     public uint turnCnt = 0;
+    public int mapSize;
 
     [Header("About Player")]
     public string PlayerName = "COCONUT";
@@ -79,7 +79,12 @@ public class MainSceneManager : MonoBehaviour
 
     public List<AIPlayer> AIPlayers = new List<AIPlayer>();
 
-    [SerializeField] PersonPlayer player = null;
+    PersonPlayer player = null;
+
+    public void SetPlayer(PersonPlayer player)
+    {
+        this.player = player;
+    }
 
     public PersonPlayer GetPlayer()
     {
@@ -88,30 +93,43 @@ public class MainSceneManager : MonoBehaviour
 
     public void StartGame()
     {
-        TileMapData.Instance.GetAllTiles().ForEach(x => x.ChangeOwner(null));
 
-        foreach (var item in players)
+        foreach (var item in AIPlayers)
         {
-            if(item == player)
-            {
-                item.AddTile(TileMapData.Instance.GetTile(0));
-                fogOfWarManager.RemoveCloudOnTile(TileMapData.Instance.GetTile(0));
-                continue;
-            }
 
             if (AIPlayers.FindAll(x => x.OwningTiles.Count >= 1).Count >= AIPlayerCount)
             {
-                return;
+                break;
             }
 
             List<TileScript> tiles = TileMapData.Instance.GetEndTile(6);
             tiles = tiles.FindAll(x => x.Owner == null);
             item.gameObject.SetActive(true);
             item.AddTile(tiles[Random.Range(0, tiles.Count)]);
-        } 
+        }
+        // 초기에 구석자리 땅 주는 부분
+
+        var onlineAIPlayers = from result in AIPlayers
+                              where result.OwningTiles.Count >= 1
+                              select result;
+
+        foreach (var item in onlineAIPlayers)
+        {
+            Debug.Log(mapSize / 2);
+            tileChecker.FindTilesInRange(item.OwningTiles[0], mapSize / 2 + 1).ForEach(x =>
+            {
+                item.AddTile(x);
+                });
+        }
+        // 구석자리 땅이 모두 배분 된 후 나머지 땅을 AI들끼리 나눈다.
+
+        player.AddTile(TileMapData.Instance.GetTile(0));
+        fogOfWarManager.RemoveCloudOnTile(TileMapData.Instance.GetTile(0));
+        tileChecker.FindTilesInRange(player.OwningTiles[0], 1).ForEach(x => fogOfWarManager.RemoveCloudOnTile(x));
+        // 무조건 중앙땅은 플레이어꺼
     }
 
-    public void LoadedGame()
+    public void LoadGame()
     {
 
     }

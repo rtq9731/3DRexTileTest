@@ -22,7 +22,7 @@ public class PanelRightSide : MonoBehaviour
 
         if(player == null)
         {
-            player = MainSceneManager.Instance.Players.Find(x => x.MyName == MainSceneManager.Instance.PlayerName);
+            player = MainSceneManager.Instance.GetPlayer();
         }
 
         player.TurnFinish();

@@ -48,6 +48,9 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     protected void Awake()
     {
         TurnFinishAction = () => { }; // 액션 초기화
+
+        TurnFinishAction += () => { MainSceneManager.Instance.turnCnt++; };
+
         TurnFinishAction += () => {
             missileInMaking.ForEach(x => x.TurnForMissileReady--);
             missileInMaking.FindAll(x => x.TurnForMissileReady <= 0).ForEach(x => {
@@ -60,12 +63,6 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     public virtual void ResetPlayer()
     {
         owningTiles = new List<TileScript>();
-    }
-
-    protected void Start()
-    {
-        MainSceneManager.Instance.Players.Add(this);
-        MainSceneManager.Instance.uiTopBar.UpdateTexts();
     }
 
     public void AddResource(int resource)
