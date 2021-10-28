@@ -43,7 +43,7 @@ public class PanelMissileMaker : MonoBehaviour
         RefreshMissileInfoTexts();
     }
 
-    private void RefreshMissileInfoTexts()
+    public void RefreshMissileInfoTexts()
     {
         makeMissileInfo.InitPanelMissileInfo(missileBluePrint);
         textMissilesInMake.text = $"{ player.MissileInMaking.Count + player.MissileReadyToShoot.Count } / { player.OwningTiles.Count }";
@@ -74,7 +74,6 @@ public class PanelMissileMaker : MonoBehaviour
         textMissilesInMake.text = $"{ player.MissileInMaking.Count + player.MissileReadyToShoot.Count } / { player.OwningTiles.Count }";
         panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);
         RefreshMissileInfoTexts();
-
     }
 
     public void OnClickSelectpart(partType part)

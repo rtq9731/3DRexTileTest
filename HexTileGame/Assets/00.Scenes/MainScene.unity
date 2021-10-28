@@ -11663,6 +11663,7 @@ MonoBehaviour:
   effectPool: {fileID: 1113051656}
   researchInputPanel: {fileID: 702085520}
   curResearchPanel: {fileID: 2037103929}
+  missileMakerPanel: {fileID: 1642626840}
   TileZInterval: 0.875
   TileXInterval: 1
   turnCnt: 0

@@ -63,11 +63,14 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] public MissileEffectPool effectPool;
     [SerializeField] public PanelResearchInput researchInputPanel;
     [SerializeField] public PanelCurrentResearch curResearchPanel;
+    [SerializeField] public PanelMissileMaker missileMakerPanel;
 
+    [Header("About Tile")]
     public float TileZInterval = 0.875f;
     public float TileXInterval = 1f;
     public uint turnCnt = 0;
 
+    [Header("About Player")]
     public string PlayerName = "COCONUT";
 
     List<PlayerScript> players = new List<PlayerScript>();

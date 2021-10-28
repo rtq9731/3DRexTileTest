@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
+    public bool isOut = false;
+
     protected List<PlayerScript> contactPlayers = new List<PlayerScript>();
 
     protected List<TileScript> tileInSight = new List<TileScript>();
@@ -136,6 +138,15 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
         MainSceneManager.Instance.Players.Add(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
+
+        TurnFinishAction += () =>
+        {
+            if (owningTiles.Count < 1)
+            {
+                isOut = true;
+                MainSceneManager.Instance.Players.Remove(this);
+            }
+        };
 
         TurnFinishAction += () => contactPlayers.ForEach(x => x.owningTiles.ForEach(x => MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x)));
     }

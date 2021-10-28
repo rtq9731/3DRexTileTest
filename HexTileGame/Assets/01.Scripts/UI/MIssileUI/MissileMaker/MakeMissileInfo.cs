@@ -18,7 +18,7 @@ public class MakeMissileInfo : MonoBehaviour
         textEngine.text = $"장착된 엔진 : {MainSceneManager.Instance.GetEngineData(data.EngineTier).Name}";
         textBody.text = $"장착된 선체 : {MainSceneManager.Instance.GetMissileBodyData(data.BodyType).Name}";
         textMissileATK.text = $"미사일 공격력 : {data.WarHeadDamage}";
-        textMissileRange.text = $"미사일 사거리 : {data.MissileRange}";
+        textMissileRange.text = "미사일 사거리 : " + (data.CanMakeIt() ? data.MissileRange.ToString() : "무게 한도 초과!");
         textMissileTurn.text = $"미사일 생산에 필요한 턴  : {data.TurnForMissileReady}";
     }
 }

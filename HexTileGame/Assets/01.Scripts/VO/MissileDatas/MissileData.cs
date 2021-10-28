@@ -75,7 +75,15 @@ public class MissileData
 
             if (!CanMakeIt())
             {
-                PanelException.CallExecptionPanel("미사일의 무게가 초과하여 날아갈수 없습니다!\n제작 할 수 없을 것입니다!\n계속하시겠습니까?", () => { }, "계속", () => engineTier = tmp, "취소");
+                PanelException.CallExecptionPanel("미사일의 무게가 초과하여 날아갈수 없습니다!\n제작 할 수 없을 것입니다!\n계속하시겠습니까?",
+                    () => { },
+                    "계속",
+                    () =>
+                    {
+                        EngineTier = tmp;
+                        MainSceneManager.Instance.missileMakerPanel.RefreshMissileInfoTexts();
+                    },
+                    "취소");
             }
         }
     }
@@ -96,13 +104,25 @@ public class MissileData
 
             if(!CanMakeIt())
             {
-                PanelException.CallExecptionPanel("미사일의 무게가 초과하여 날아갈수 없습니다!\n제작 할 수 없을 것입니다!\n계속하시겠습니까?", () => { }, "계속", () => warheadType = tmp, "취소");
+                PanelException.CallExecptionPanel("미사일의 무게가 초과하여 날아갈수 없습니다!\n제작 할 수 없을 것입니다!\n계속하시겠습니까?", 
+                    () => { }, 
+                    "계속", 
+                    () =>
+                    {
+                        WarheadType = tmp;
+                        MainSceneManager.Instance.missileMakerPanel.RefreshMissileInfoTexts();
+                    }, 
+                    "취소");
             }
         }
     }
 
     public bool CanMakeIt()
     {
+#if UNITY_EDITOR
+        Debug.Log(MainSceneManager.Instance.GetEngineData(engineTier).Weight > MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
+#endif
+
         return MainSceneManager.Instance.GetEngineData(engineTier).Weight > MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
     }
 
