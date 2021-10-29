@@ -28,15 +28,6 @@ public class MissileData
     }
 
     [SerializeField]
-    int warHeadDamage;
-
-    public int WarHeadDamage
-    {
-        get { return warHeadDamage; }
-        set { warHeadDamage = value; }
-    }
-
-    [SerializeField]
     int turnForMissileReady;
     
     public int TurnForMissileReady
@@ -56,6 +47,7 @@ public class MissileData
             bodyType = value;
             UpdateRange(MainSceneManager.Instance.GetEngineData(engineTier).Weight, MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
             UpdateTurnForFinish(MainSceneManager.Instance.GetMissileBodyData(bodyType).Makingtime);
+            UpdatePrice();
         }
     }
 
@@ -72,6 +64,7 @@ public class MissileData
             engineTier = value;
             UpdateRange(MainSceneManager.Instance.GetEngineData(engineTier).Weight, MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
             UpdateTurnForFinish(MainSceneManager.Instance.GetEngineData(engineTier).Makingtime);
+            UpdatePrice();
 
             if (!CanMakeIt())
             {
@@ -98,11 +91,11 @@ public class MissileData
             MissileTypes.MissileWarheadType tmp = warheadType;
 
             warheadType = value;
-            warHeadDamage = MainSceneManager.Instance.GetWarheadData(warheadType).Atk;
             UpdateRange(MainSceneManager.Instance.GetEngineData(engineTier).Weight, MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
             UpdateTurnForFinish(MainSceneManager.Instance.GetWarheadData(warheadType).Makingtime);
+            UpdatePrice();
 
-            if(!CanMakeIt())
+            if (!CanMakeIt())
             {
                 PanelException.CallExecptionPanel("미사일의 무게가 초과하여 날아갈수 없습니다!\n제작 할 수 없을 것입니다!\n계속하시겠습니까?", 
                     () => { }, 
@@ -146,7 +139,7 @@ public class MissileData
         int bodyPrice = MainSceneManager.Instance.GetMissileBodyData(bodyType).Price;
         int enginePrice = MainSceneManager.Instance.GetEngineData(engineTier).Price;
 
-
+        missilePrice = warheadPrice + bodyPrice + enginePrice;
     }
 
     public MissileData(MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType, MissileTypes.MissileBody body)

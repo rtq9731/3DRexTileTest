@@ -35,13 +35,6 @@ public class SkillTreeNode
     }
 
     [SerializeField]
-    int researchResource = 0;
-    public int ResearchResource
-    {
-        get { return researchResource; }
-    }
-
-    [SerializeField]
     int[] requireResearches;
     public int[] RequireResearches
     {

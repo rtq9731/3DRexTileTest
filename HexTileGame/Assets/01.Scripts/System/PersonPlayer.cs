@@ -75,18 +75,18 @@ public class PersonPlayer : PlayerScript
 
     public override void ResetPlayer()
     {
-        base.ResetPlayer();
-
-        unlockedEngineIdx = new List<int>();
-        unlockedWarheadIdx = new List<int>();
-        unlockedBodyIdx = new List<int>();
-        researchedBodyResearch = new List<int>();
-        researchedEngineResearch = new List<int>();
-        missileReadyToShoot = new List<MissileData>();
-        missileInMaking = new List<MissileData>();
-
+        unlockedEngineIdx.Clear();
+        unlockedWarheadIdx.Clear();
+        unlockedBodyIdx.Clear();
+        researchedBodyResearch.Clear();
+        researchedEngineResearch.Clear();
+        missileReadyToShoot.Clear();
+        missileInMaking.Clear();
+        owningTiles.Clear();
 
         curResearchData = null;
+
+        Debug.Log(owningTiles.Count);
 
         resouceTank = 0;
 

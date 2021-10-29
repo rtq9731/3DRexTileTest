@@ -12,7 +12,6 @@ public class PanelResearchInput : MonoBehaviour
     [SerializeField] Text textResearchTime = null;
     [SerializeField] Text textWeight = null;
     [SerializeField] Text textDamage = null;
-    [SerializeField] Text textResource = null;
     [SerializeField] Text textResearchInfo = null;
 
     [Header("btns")]
@@ -90,7 +89,6 @@ public class PanelResearchInput : MonoBehaviour
         }
 
         textResearchTime.text = $"소요 시간 : {data.TrunForResearch} 턴";
-        textResource.text = $"연구에 소모되는 자원 : {data.ResearchResource}";
 
         btnOk.onClick.RemoveAllListeners();
         btnCancel.onClick.RemoveAllListeners();
@@ -109,7 +107,6 @@ public class PanelResearchInput : MonoBehaviour
         textResearchTime.gameObject.SetActive(true);
         textWeight.gameObject.SetActive(true);
         textDamage.gameObject.SetActive(true);
-        textResource.gameObject.SetActive(true);
         textResearchInfo.gameObject.SetActive(true);
     }
 }

@@ -62,7 +62,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public virtual void ResetPlayer()
     {
-        owningTiles = new List<TileScript>();
+        owningTiles.Clear();
     }
 
     public void AddResource(int resource)

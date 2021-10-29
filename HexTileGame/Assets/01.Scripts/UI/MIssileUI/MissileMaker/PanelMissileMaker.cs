@@ -96,7 +96,25 @@ public class PanelMissileMaker : MonoBehaviour
 
     public void OnClickMakeMissile()
     {
-        if(missileBluePrint.MissileRange > 0 && player.MissileInMaking.Count + player.MissileReadyToShoot.Count < player.OwningTiles.Count && missileBluePrint.CanMakeIt())
+        if(missileBluePrint.MissilePrice > player.ResourceTank)
+        {
+            PanelException.CallPopupPanl("현재 가지고 있는 자원이 부족합니다.", () => { });
+            return;
+        }
+
+        if (missileBluePrint.CanMakeIt())
+        {
+            PanelException.CallPopupPanl("엔진 수용량 초과로 미사일을 만들 수 없습니다.", () => { });
+            return;
+        }
+
+        if (player.MissileInMaking.Count + player.MissileReadyToShoot.Count > player.OwningTiles.Count)
+        {
+            PanelException.CallPopupPanl("현재 가지고 있는 격납고가 부족합니다.", () => { });
+            return;
+        }
+
+        if(missileBluePrint.MissileRange > 0)
         {
             player.MissileInMaking.Add(new MissileData(missileBluePrint.EngineTier, missileBluePrint.WarheadType, missileBluePrint.BodyType));
             panelMissileQueue.RefreshMissileQueue(player.MissileInMaking);

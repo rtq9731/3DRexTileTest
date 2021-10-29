@@ -15,7 +15,7 @@ public class PanelException : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.transform.parent.gameObject.SetActive(false);
+        UIStackManager.RemoveUIOnTop();
         instance = this;
     }
     private void OnDestroy()
@@ -23,8 +23,25 @@ public class PanelException : MonoBehaviour
         instance = null;
     }
 
+    public static void CallPopupPanl(object errorMsg, Action trueAct)
+    {
+        instance.btnOK.gameObject.SetActive(true);
+        instance.btnCancel.gameObject.SetActive(false);
+
+        instance.gameObject.transform.parent.gameObject.SetActive(true);
+        instance.textMsg.text = errorMsg.ToString();
+
+        instance.textBtnOk.text = "È®ÀÎ";
+        instance.btnOK.onClick.RemoveAllListeners();
+        trueAct += instance.OnClickRemovePanel;
+        instance.btnOK.onClick.AddListener(() => trueAct());
+    }
+
     public static void CallExecptionPanel(object errorMsg, Action trueAct, string trueMsg , Action falseAct, string falseMsg)
     {
+        instance.btnOK.gameObject.SetActive(true);
+        instance.btnCancel.gameObject.SetActive(true);
+
         instance.gameObject.transform.parent.gameObject.SetActive(true);
         instance.textMsg.text = errorMsg.ToString();
 
@@ -41,7 +58,7 @@ public class PanelException : MonoBehaviour
 
     private void OnClickRemovePanel()
     {
-        transform.parent.gameObject.SetActive(false);
+        UIStackManager.RemoveUIOnTop();
     }
 
 }
