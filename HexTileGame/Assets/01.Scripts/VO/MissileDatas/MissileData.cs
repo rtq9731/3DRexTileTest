@@ -140,6 +140,15 @@ public class MissileData
         }
     }
 
+    private void UpdatePrice()
+    {
+        int warheadPrice = MainSceneManager.Instance.GetWarheadData(warheadType).Price;
+        int bodyPrice = MainSceneManager.Instance.GetMissileBodyData(bodyType).Price;
+        int enginePrice = MainSceneManager.Instance.GetEngineData(engineTier).Price;
+
+
+    }
+
     public MissileData(MissileTypes.MissileEngineType engine, MissileTypes.MissileWarheadType warheadType, MissileTypes.MissileBody body)
     {
         this.engineTier = engine;

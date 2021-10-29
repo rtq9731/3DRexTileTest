@@ -29,6 +29,10 @@ public class BodyData
   public int Morerange { get {return morerange; } set { this.morerange = value;} }
   
   [SerializeField]
+  int price;
+  public int Price { get {return price; } set { this.price = value;} }
+  
+  [SerializeField]
   string info;
   public string Info { get {return info; } set { this.info = value;} }
   

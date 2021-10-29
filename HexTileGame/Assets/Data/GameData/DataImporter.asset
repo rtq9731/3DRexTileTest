@@ -30,12 +30,16 @@ MonoBehaviour:
     name: type
     isEnable: 0
     isArray: 0
-  - type: 0
+  - type: 3
     name: makingTime
     isEnable: 0
     isArray: 0
-  - type: 0
+  - type: 3
     name: moreRange
+    isEnable: 0
+    isArray: 0
+  - type: 0
+    name: price
     isEnable: 0
     isArray: 0
   - type: 1
