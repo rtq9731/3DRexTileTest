@@ -25,6 +25,10 @@ public class MissileEngineData
   public int Makingtime { get {return makingtime; } set { this.makingtime = value;} }
   
   [SerializeField]
+  int price;
+  public int Price { get {return price; } set { this.price = value;} }
+  
+  [SerializeField]
   int weight;
   public int Weight { get {return weight; } set { this.weight = value;} }
   

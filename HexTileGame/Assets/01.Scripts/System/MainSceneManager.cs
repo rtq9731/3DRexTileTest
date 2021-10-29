@@ -68,6 +68,7 @@ public class MainSceneManager : MonoBehaviour
     public float TileZInterval = 0.875f;
     public float TileXInterval = 1f;
     public uint turnCnt = 0;
+    public uint stageCount = 1;
     public int mapSize;
 
     [Header("About Player")]
@@ -94,7 +95,7 @@ public class MainSceneManager : MonoBehaviour
     public void StartGame()
     {
 
-        foreach (var item in AIPlayers)
+        foreach (var item in AIPlayers) // 초기에 구석자리 땅 주는 부분
         {
 
             if (AIPlayers.FindAll(x => x.OwningTiles.Count >= 1).Count >= AIPlayerCount)
@@ -107,13 +108,12 @@ public class MainSceneManager : MonoBehaviour
             item.gameObject.SetActive(true);
             item.AddTile(tiles[Random.Range(0, tiles.Count)]);
         }
-        // 초기에 구석자리 땅 주는 부분
 
         var onlineAIPlayers = from result in AIPlayers
                               where result.OwningTiles.Count >= 1
                               select result;
 
-        foreach (var item in onlineAIPlayers)
+        foreach (var item in onlineAIPlayers) // 구석자리 땅이 모두 배분 된 후 나머지 땅을 AI들끼리 나눈다.
         {
             Debug.Log(mapSize / 2);
             tileChecker.FindTilesInRange(item.OwningTiles[0], mapSize / 2 + 1).ForEach(x =>
@@ -121,12 +121,11 @@ public class MainSceneManager : MonoBehaviour
                 item.AddTile(x);
                 });
         }
-        // 구석자리 땅이 모두 배분 된 후 나머지 땅을 AI들끼리 나눈다.
 
-        player.AddTile(TileMapData.Instance.GetTile(0));
-        fogOfWarManager.RemoveCloudOnTile(TileMapData.Instance.GetTile(0));
+        player.AddTile(TileMapData.Instance.GetTile(0)); // 무조건 중앙땅은 플레이어꺼
+        fogOfWarManager.RemoveCloudOnTile(TileMapData.Instance.GetTile(0)); 
+
         tileChecker.FindTilesInRange(player.OwningTiles[0], 1).ForEach(x => fogOfWarManager.RemoveCloudOnTile(x));
-        // 무조건 중앙땅은 플레이어꺼
     }
 
     public void LoadGame()

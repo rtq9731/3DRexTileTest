@@ -30,11 +30,11 @@ MonoBehaviour:
     name: type
     isEnable: 0
     isArray: 0
-  - type: 3
+  - type: 0
     name: makingTime
     isEnable: 0
     isArray: 0
-  - type: 3
+  - type: 0
     name: moreRange
     isEnable: 0
     isArray: 0
