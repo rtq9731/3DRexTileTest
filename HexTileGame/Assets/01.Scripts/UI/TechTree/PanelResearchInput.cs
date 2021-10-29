@@ -95,8 +95,8 @@ public class PanelResearchInput : MonoBehaviour
 
         btnOk.onClick.AddListener(() =>
         {
-            callBack();
             UIStackManager.RemoveUIOnTop();
+            callBack();
         });
         btnCancel.onClick.AddListener(() => UIStackManager.RemoveUIOnTop());
     }

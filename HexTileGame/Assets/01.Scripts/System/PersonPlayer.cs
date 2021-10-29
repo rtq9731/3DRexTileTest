@@ -95,6 +95,9 @@ public class PersonPlayer : PlayerScript
         unlockedBodyIdx.Add(0);
 
         TurnFinishAction = () => { }; // 액션 초기화
+
+        TurnFinishAction += () => { MainSceneManager.Instance.turnCnt++; };
+
         TurnFinishAction += () => {
             missileInMaking.ForEach(x => x.TurnForMissileReady--);
             missileInMaking.FindAll(x => x.TurnForMissileReady <= 0).ForEach(x => {
@@ -183,8 +186,8 @@ public class PersonPlayer : PlayerScript
         MainSceneManager.Instance.SetPlayer(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
         MainSceneManager.Instance.PlayerName = playerName;
-        base.playerColor = color;
-        base.myName = playerName;
+        playerColor = color;
+        myName = playerName;
     }
 
 }

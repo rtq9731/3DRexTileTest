@@ -102,7 +102,7 @@ public class PanelMissileMaker : MonoBehaviour
             return;
         }
 
-        if (missileBluePrint.CanMakeIt())
+        if (!missileBluePrint.CanMakeIt())
         {
             PanelException.CallPopupPanl("엔진 수용량 초과로 미사일을 만들 수 없습니다.", () => { });
             return;

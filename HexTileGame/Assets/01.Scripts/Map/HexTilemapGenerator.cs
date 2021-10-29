@@ -105,6 +105,7 @@ public class HexTilemapGenerator : MonoBehaviour
         stageChangePanel.CallStageChangePanel(0.75f);
         yield return new WaitForSeconds(1);
         GenerateTiles(MainSceneManager.Instance.mapSize);
+        MainSceneManager.Instance.uiTopBar.UpdateTexts();
         stageChangePanel.RemoveStageChangePanel(0.75f);
     }
 
