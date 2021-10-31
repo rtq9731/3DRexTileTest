@@ -17,6 +17,7 @@ public class PanelPartSelector : MonoBehaviour
     [SerializeField] Image partIcon = null;
     [SerializeField] Text textPartName = null;
     [SerializeField] Text textPartATK = null;
+    [SerializeField] Text textPrice = null;
     [SerializeField] Text textMakeTurn = null;
     [SerializeField] Text textWeight = null;
     [SerializeField] Text textPartInfo = null;
@@ -60,6 +61,7 @@ public class PanelPartSelector : MonoBehaviour
         }
 
         textPartName.text = "선택된 부품 없음";
+        textPrice.text = "";
         textPartATK.text = "";
         textWeight.text = "";
         textMakeTurn.text = "";
@@ -79,6 +81,7 @@ public class PanelPartSelector : MonoBehaviour
 
         textPartName.text = warhead.Name;
         textPartATK.text = $"탄두의 공격력 : {warhead.Atk}";
+        textPrice.text = $"탄두의 가격 : {warhead.Price}";
         textWeight.text = $"탄두의 무게 : {warhead.Weight}";
         textMakeTurn.text = $"제작에 걸리는 시간 : {warhead.Makingtime} 턴";
         textPartInfo.text = warhead.Info;
@@ -96,6 +99,7 @@ public class PanelPartSelector : MonoBehaviour
         textPartATK.transform.parent.gameObject.SetActive(false);
 
         textPartName.text = engine.Name;
+        textPrice.text = $"엔진의 가격 : {engine.Price}";
         textMakeTurn.text = $"제작에 걸리는 시간 : {engine.Makingtime} 턴";
         textWeight.text = $"감당 가능한 무게 : {engine.Weight}";
         textPartInfo.text = engine.Info;
@@ -113,6 +117,7 @@ public class PanelPartSelector : MonoBehaviour
         textPartATK.transform.parent.gameObject.SetActive(false);
 
         textPartName.text = body.Name;
+        textPrice.text = $"선체의 가격 : {body.Price}";
         textMakeTurn.text = $"제작에 걸리는 시간 : {body.Makingtime} 턴";
         textWeight.text = $"추가 사거리 : {body.Morerange}";
         textPartInfo.text = body.Info;

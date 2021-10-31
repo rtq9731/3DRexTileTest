@@ -104,6 +104,10 @@ public class PlayerInput : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                panel.RemoveSimpleTileInfoPanel();
+            }
         }
     }
 
