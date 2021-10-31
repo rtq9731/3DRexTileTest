@@ -27,6 +27,14 @@ public class UIStackManager
         return UIStack.Peek();
     }
 
+    public static void Clear()
+    {
+        while(!IsUIStackEmpty())
+        {
+            RemoveUIOnTop();
+        }
+    }
+
     public static bool RemoveUIOnTop()
     {
         if (!IsUIStackEmpty())
