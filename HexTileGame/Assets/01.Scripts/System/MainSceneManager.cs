@@ -11,6 +11,13 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] MissileEngine missileEngine;
     [SerializeField] Body missileBody;
     [SerializeField] public TechTreeDatas techTreeDatas;
+    [SerializeField] int rerollCount = 1;
+
+    public bool CanReroll()
+    {
+        Debug.Log(rerollCount > 0);
+        return rerollCount > 0;
+    }
 
     public BodyData GetMissileBodyData(MissileTypes.MissileBody type)
     {
@@ -63,6 +70,7 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] public PanelResearchInput researchInputPanel;
     [SerializeField] public PanelCurrentResearch curResearchPanel;
     [SerializeField] public PanelMissileMaker missileMakerPanel;
+    [SerializeField] public HexTilemapGenerator tileGenerator;
 
     [Header("About Tile")]
     public float TileZInterval = 0.875f;
@@ -94,6 +102,7 @@ public class MainSceneManager : MonoBehaviour
 
     public void StartGame()
     {
+        AIPlayers = FindObjectsOfType<AIPlayer>().ToList();
 
         foreach (var item in AIPlayers) // 초기에 구석자리 땅 주는 부분
         {
@@ -112,6 +121,7 @@ public class MainSceneManager : MonoBehaviour
         var onlineAIPlayers = from result in AIPlayers
                               where result.OwningTiles.Count >= 1
                               select result;
+        Debug.Log(onlineAIPlayers.Count());
 
         foreach (var item in onlineAIPlayers) // 구석자리 땅이 모두 배분 된 후 나머지 땅을 AI들끼리 나눈다.
         {
@@ -126,6 +136,11 @@ public class MainSceneManager : MonoBehaviour
         fogOfWarManager.RemoveCloudOnTile(TileMapData.Instance.GetTile(0)); 
 
         tileChecker.FindTilesInRange(player.OwningTiles[0], 1).ForEach(x => fogOfWarManager.RemoveCloudOnTile(x));
+    }
+
+    public void ClearStage()
+    {
+
     }
 
     public void LoadGame()

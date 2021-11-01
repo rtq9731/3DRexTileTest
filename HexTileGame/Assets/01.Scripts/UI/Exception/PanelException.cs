@@ -21,7 +21,6 @@ public class PanelException : MonoBehaviour
     private void Start()
     {
         UIStackManager.Clear();
-        Debug.Log(UIStackManager.GetTopUI());
     }
 
     private void OnDestroy()

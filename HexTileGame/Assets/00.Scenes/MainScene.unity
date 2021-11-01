@@ -3454,7 +3454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &378986819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4201,7 +4201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &431363540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9989,11 +9989,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 3bb0c42d2eb2b8241b5f95cbcab894c1, type: 3}
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -10001,7 +10001,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\uB9F5 \uC7AC\uC0DD\uC131"
 --- !u!222 &932394564
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12181,6 +12181,7 @@ MonoBehaviour:
   missileEngine: {fileID: 11400000, guid: d77753ceea186c74da0d301864b56824, type: 2}
   missileBody: {fileID: 11400000, guid: 73f5b191551450a4f8cd5780bfd8f584, type: 2}
   techTreeDatas: {fileID: 1113051657}
+  rerollCount: 1
   InfoPanel: {fileID: 252962072}
   missileManager: {fileID: 1113051654}
   fogOfWarManager: {fileID: 1113051655}
@@ -12191,6 +12192,7 @@ MonoBehaviour:
   researchInputPanel: {fileID: 702085520}
   curResearchPanel: {fileID: 2037103929}
   missileMakerPanel: {fileID: 1642626840}
+  tileGenerator: {fileID: 1000656165}
   TileZInterval: 0.875
   TileXInterval: 1
   turnCnt: 0
@@ -17886,7 +17888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1653908746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21221,6 +21223,7 @@ GameObject:
   - component: {fileID: 1991555755}
   - component: {fileID: 1991555754}
   - component: {fileID: 1991555753}
+  - component: {fileID: 1991555756}
   m_Layer: 5
   m_Name: BtnReroll
   m_TagString: Untagged
@@ -21243,11 +21246,11 @@ RectTransform:
   m_Father: {fileID: 2078170048}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: 474.37964}
-  m_SizeDelta: {x: 182, y: 67.2407}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 185, y: 70}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1991555753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21291,19 +21294,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1991555754}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1000656165}
-        m_TargetAssemblyTypeName: HexTilemapGenerator, Assembly-CSharp
-        m_MethodName: GenerateNewTileWihtNoExtension
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1991555754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21342,6 +21333,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991555751}
   m_CullTransparentMesh: 1
+--- !u!114 &1991555756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991555751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e8005e200bfa642bb6de49a3ef2025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1993877764
 GameObject:
   m_ObjectHideFlags: 0

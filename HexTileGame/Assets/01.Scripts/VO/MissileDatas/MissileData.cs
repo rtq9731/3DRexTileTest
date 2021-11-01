@@ -115,7 +115,6 @@ public class MissileData
 #if UNITY_EDITOR
         Debug.Log(MainSceneManager.Instance.GetEngineData(engineTier).Weight >= MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
 #endif
-
         return MainSceneManager.Instance.GetEngineData(engineTier).Weight >= MainSceneManager.Instance.GetWarheadData(warheadType).Weight;
     }
 

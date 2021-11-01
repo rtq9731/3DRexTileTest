@@ -15,8 +15,15 @@ public class PlayerInput : MonoBehaviour
     bool isSimplePanelOn = false;
     bool isUIEmpty;
 
+    WaitForSeconds ws;
+
     TileData lastTileData;
     TileData nowData;
+
+    private void Start()
+    {
+        ws = new WaitForSeconds(0.3f);
+    }
 
     void Update()
     {
@@ -90,7 +97,7 @@ public class PlayerInput : MonoBehaviour
 
     IEnumerator GetNextData()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return ws;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
         {
             if (!EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
