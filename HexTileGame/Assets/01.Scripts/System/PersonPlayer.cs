@@ -158,6 +158,12 @@ public class PersonPlayer : PlayerScript
 
         MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(tile);
         List<TileScript> tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, 1);
+
+        if (tile.Data.type == TileType.Mountain)
+        {
+            tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, 2);
+        }
+
         tilesInRange.ForEach(x =>
         {
             if (x.transform.GetComponentInChildren<CloudObject>() != null)
