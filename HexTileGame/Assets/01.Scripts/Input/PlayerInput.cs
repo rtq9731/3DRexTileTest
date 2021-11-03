@@ -60,7 +60,7 @@ public class PlayerInput : MonoBehaviour
 
                 if (isTileHit)
                 {
-                    if(pointedTile != null && hit.transform.GetComponentInChildren<CloudObject>() == null) // 타일이고, 시야안에 있을 때
+                    if (pointedTile != null && hit.transform.GetComponentInChildren<CloudObject>() == null) // 타일이고, 시야안에 있을 때
                     {
                         TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
                     }
@@ -91,7 +91,12 @@ public class PlayerInput : MonoBehaviour
             {
                 cameraMoveScript.enabled = isUIEmpty;
             }
-        }    
+        }
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            panel.RemoveSimpleTileInfoPanel();
+        }
     }
 
 }
