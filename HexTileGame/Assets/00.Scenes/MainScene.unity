@@ -6784,6 +6784,7 @@ MonoBehaviour:
   shieldText: {fileID: 654318228}
   attackPowerText: {fileID: 370204487}
   productText: {fileID: 1559425526}
+  alphaOnTime: 0.3
 --- !u!1 &654318226
 GameObject:
   m_ObjectHideFlags: 0

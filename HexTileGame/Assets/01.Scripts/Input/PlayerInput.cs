@@ -18,7 +18,10 @@ public class PlayerInput : MonoBehaviour
     WaitForSeconds ws;
 
     TileData lastTileData;
+    float lastTileHitTime = 0f;
     TileData nowData;
+
+    float tileHitCheckInterval = 0f;
 
     private void Start()
     {
@@ -40,6 +43,14 @@ public class PlayerInput : MonoBehaviour
         {
             cameraMoveScript.enabled = isUIEmpty;
 
+            bool isTileHit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile);
+
+            TileScript pointedTile = null;
+            if (hit.transform != null)
+            {
+                pointedTile = hit.transform.GetComponent<TileScript>();
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (EventSystem.current.IsPointerOverGameObject())
@@ -47,39 +58,27 @@ public class PlayerInput : MonoBehaviour
                     return;
                 }
 
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
+                if (isTileHit)
                 {
-                    if(hit.transform.GetComponent<TileScript>() != null)
+                    if(pointedTile != null && hit.transform.GetComponentInChildren<CloudObject>() == null) // 타일이고, 시야안에 있을 때
                     {
-                        if(hit.transform.GetComponentInChildren<CloudObject>() == null)
-                        {
-                            TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
-                        }
+                        TileInfoScript.TurnOnTileInfoPanel(hit.transform.GetComponent<TileScript>());
                     }
                 }
             }
-
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
+            else // 마우스 입력이 없을 때
             {
-                if (hit.transform.GetComponent<TileScript>() == null || hit.transform.GetComponentInChildren<CloudObject>() != null)
+                if (isTileHit)
                 {
-                    return;
-                }
-
-                nowData = hit.transform.GetComponent<TileScript>().Data;
-                if (nowData != lastTileData)
-                {
-                    isSimplePanelOn = false;
-                    panel.RemoveSimpleTileInfoPanel();
-                    lastTileData = nowData;
-                }
-                else
-                {
-                    if (isSimplePanelOn)
-                        return;
-
-                    isSimplePanelOn = true;
-                    StartCoroutine(GetNextData());
+                    if (pointedTile != null && hit.transform.GetComponentInChildren<CloudObject>() == null && Time.time >= lastTileHitTime + tileHitCheckInterval) // 타일이고, 시야 안에 있을 때
+                    {
+                        lastTileHitTime = Time.time;
+                        panel.CallSimpleTileInfoPanel(pointedTile);
+                    }
+                    else
+                    {
+                        panel.RemoveSimpleTileInfoPanel();
+                    }
                 }
             }
         }
@@ -93,29 +92,6 @@ public class PlayerInput : MonoBehaviour
                 cameraMoveScript.enabled = isUIEmpty;
             }
         }    
-    }
-
-    IEnumerator GetNextData()
-    {
-        yield return ws;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
-        {
-            if (!EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
-            {
-                if (hit.transform.GetComponent<TileScript>() != null)
-                {
-                    lastTileData = hit.transform.GetComponent<TileScript>().Data;
-                    if (lastTileData == nowData)
-                    {
-                        panel.CallSimpleTileInfoPanel(hit.transform.GetComponent<TileScript>());
-                    }
-                }
-            }
-            else
-            {
-                panel.RemoveSimpleTileInfoPanel();
-            }
-        }
     }
 
 }

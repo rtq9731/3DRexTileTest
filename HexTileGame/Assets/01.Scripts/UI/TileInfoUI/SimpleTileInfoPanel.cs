@@ -13,29 +13,45 @@ public class SimpleTileInfoPanel : MonoBehaviour
     [SerializeField] Text shieldText;
     [SerializeField] Text attackPowerText;
     [SerializeField] Text productText;
+    [SerializeField] float alphaOnTime = 0.5f;
 
     private Image myImage = null;
 
+    TileScript lastSelectedTile = null;
+
+    private float onTime = 0f;
 
     public void CallSimpleTileInfoPanel(TileScript tile)
     {
-        if(myImage == null)
+        DOTween.Kill(myImage);
+        
+        if(tile != lastSelectedTile)
+        {
+            lastSelectedTile = tile;
+            onTime = 0f;
+        }
+
+        if(!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
+
+        gameObject.transform.position = Input.mousePosition;
+        gameObject.transform.position += new Vector3(4f, 0, 0);
+
+        onTime += Time.deltaTime;
+
+        if (myImage == null)
         {
             myImage = GetComponent<Image>();
         }
 
-        DOTween.Kill(myImage);
-        gameObject.transform.position = Input.mousePosition;
-        gameObject.transform.position += new Vector3(0.5f, 0, 0);
-        myImage.color = new Color(1, 1, 1, 0);
+        myImage.color = new Color(1, 1, 1, Mathf.Lerp(0f, 1f, onTime / alphaOnTime));
 
-        gameObject.SetActive(true);
+        string ownerName = tile.Owner != null ? tile.Owner.MyName : "None";
 
         TileData data = tile.Data;
 
-        myImage.DOFade(1, 0.3f).SetEase(Ease.OutQuad);
-
-        string ownerName = tile.Owner != null ? tile.Owner.MyName : "None";
         ownerText.text = $"소유자 : {ownerName}";
         groundTypeText.text = $"지형 : {data.type}";
         priceText.text = $"가격 : {data.Price}";
