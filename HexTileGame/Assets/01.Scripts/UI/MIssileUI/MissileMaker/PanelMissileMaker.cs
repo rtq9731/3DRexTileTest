@@ -108,7 +108,7 @@ public class PanelMissileMaker : MonoBehaviour
             return;
         }
 
-        if (player.MissileInMaking.Count + player.MissileReadyToShoot.Count > player.OwningTiles.Count)
+        if (player.MissileInMaking.Count + player.MissileReadyToShoot.Count >= player.OwningTiles.Count)
         {
             PanelException.CallPopupPanl("현재 가지고 있는 격납고가 부족합니다.", () => { });
             return;
