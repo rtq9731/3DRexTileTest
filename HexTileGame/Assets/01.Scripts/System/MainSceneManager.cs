@@ -125,7 +125,6 @@ public class MainSceneManager : MonoBehaviour
 
         foreach (var item in onlineAIPlayers) // 구석자리 땅이 모두 배분 된 후 나머지 땅을 AI들끼리 나눈다.
         {
-            Debug.Log(mapSize / 2);
             tileChecker.FindTilesInRange(item.OwningTiles[0], mapSize / 2 + 1).ForEach(x =>
             {
                 item.AddTile(x);

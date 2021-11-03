@@ -3454,7 +3454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &378986819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4201,7 +4201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &431363540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12200,7 +12200,7 @@ MonoBehaviour:
   stageCount: 1
   mapSize: 3
   PlayerName: COCONUT
-  AIPlayerCount: 6
+  AIPlayerCount: 3
   AIPlayers: []
 --- !u!114 &1113051653
 MonoBehaviour:
@@ -17889,7 +17889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1653908746
 MonoBehaviour:
   m_ObjectHideFlags: 0

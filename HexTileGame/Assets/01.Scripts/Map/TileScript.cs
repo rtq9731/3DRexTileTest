@@ -100,6 +100,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
 
             tilesInMoreHitRange.Remove(randTile); // 중복 타격을 막기 위함
+            Debug.Log(randTile.owner);
 
             randTile.Damage(damage);
         }
@@ -125,7 +126,9 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         List<TileScript> results = new List<TileScript>();
         tiles.FindAll(x =>
         {
-            if (x.owner == null || x.owner == this.owner || x.data.type == (TileType.Ocean | TileType.Lake))
+            if (x.owner == null || // 주인 있슴
+            x.owner == MainSceneManager.Instance.GetPlayer() || // 주인이 플레이어가 아님.
+            x.data.type == (TileType.Ocean | TileType.Lake)) // 강이나 호수 아님
             {
                 return false;
             }
@@ -189,15 +192,8 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
             if (this.owner == owner)
             {
-#if UNITY_EDITOR
-                Debug.Log("이미 주인인뎁쇼");
-#endif
                 return;
             }
-
-#if UNITY_EDITOR
-            Debug.Log($"{owner.name} 이 타일번호 {this.data.tileNum} 를! 구매합니다.");
-#endif
 
             ChangeOwner(owner);
             owner.AddResource(-data.Price);
