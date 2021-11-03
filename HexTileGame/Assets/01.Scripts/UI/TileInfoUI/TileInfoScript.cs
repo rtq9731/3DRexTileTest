@@ -45,12 +45,12 @@ public class TileInfoScript : MonoBehaviour
             case TileType.Forest:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/ForestIcon");
                 btnBuy.interactable = true;
-                info = "여러 나무들로 둘러싸인 지형입니다.\n사거리 - 1\n방어력 + 10";
+                info = "여러 나무들로 둘러싸인 지형입니다.\n방어력 + 10";
                 break;
             case TileType.DigSite:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/MineIcon");
                 btnBuy.interactable = true;
-                info = "광산이 위치한 타일입니다.\n사거리 - 1\n자원 + 1";
+                info = "광산이 위치한 타일입니다.\n자원 + 1";
                 break;
             case TileType.Plain:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/FieldIcon");
@@ -58,9 +58,9 @@ public class TileInfoScript : MonoBehaviour
                 info = "별다른 특징이 없는 평지 타일입니다.\n특이사항 없음";
                 break;
             case TileType.Mountain:
-                tileIcon.sprite = Resources.Load<Sprite>("TileIcon/MoutainIcon");
+                tileIcon.sprite = Resources.Load<Sprite>("TileIcon/MountainIcon");
                 btnBuy.interactable = true;
-                info = "산위에 올라갈 수 있는 언덕 타일입니다.\n사거리 + 1\n자원 - 1";
+                info = "산위에 올라갈 수 있는 언덕 타일입니다.\n시야 + 1\n자원 - 1";
                 break;
             default:
                 info = "어.. 이 지형은 있으면 안되는데?";
@@ -98,12 +98,12 @@ public class TileInfoScript : MonoBehaviour
             case TileType.Forest:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/ForestIcon");
                 btnBuy.interactable = true;
-                info = "여러 나무들로 둘러싸인 지형입니다.\n사거리 - 1\n방어력 + 10";
+                info = "여러 나무들로 둘러싸인 지형입니다.\n방어력 + 10";
                 break;
             case TileType.DigSite:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/MineIcon");
                 btnBuy.interactable = true;
-                info = "광산이 위치한 타일입니다.\n사거리 - 1\n자원 + 1";
+                info = "광산이 위치한 타일입니다.\n자원 + 1";
                 break;
             case TileType.Plain:
                 tileIcon.sprite = Resources.Load<Sprite>("TileIcon/FieldIcon");
@@ -111,9 +111,9 @@ public class TileInfoScript : MonoBehaviour
                 info = "별다른 특징이 없는 평지 타일입니다.\n특이사항 없음";
                 break;
             case TileType.Mountain:
-                tileIcon.sprite = Resources.Load<Sprite>("TileIcon/MoutainIcon");
+                tileIcon.sprite = Resources.Load<Sprite>("TileIcon/MountainIcon");
                 btnBuy.interactable = true;
-                info = "산위에 올라갈 수 있는 언덕 타일입니다.\n사거리 + 1\n자원 - 1";
+                info = "산위에 올라갈 수 있는 언덕 타일입니다.\n시야 + 1\n자원 - 1";
                 break;
             default:
                 info = "어.. 이 지형은 있으면 안되는데?";
