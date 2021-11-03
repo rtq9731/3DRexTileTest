@@ -86,8 +86,6 @@ public class PersonPlayer : PlayerScript
 
         curResearchData = null;
 
-        Debug.Log(owningTiles.Count);
-
         resouceTank = 0;
 
         unlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작

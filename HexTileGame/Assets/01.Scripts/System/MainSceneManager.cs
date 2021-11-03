@@ -15,7 +15,6 @@ public class MainSceneManager : MonoBehaviour
 
     public bool CanReroll()
     {
-        Debug.Log(rerollCount > 0);
         return rerollCount > 0;
     }
 
@@ -86,8 +85,6 @@ public class MainSceneManager : MonoBehaviour
     List<PlayerScript> players = new List<PlayerScript>();
     public List<PlayerScript> Players { get { return players; } set { players = value; } }
 
-    public List<AIPlayer> AIPlayers = new List<AIPlayer>();
-
     PersonPlayer player = null;
 
     public void SetPlayer(PersonPlayer player)
@@ -102,34 +99,7 @@ public class MainSceneManager : MonoBehaviour
 
     public void StartGame()
     {
-        AIPlayers = FindObjectsOfType<AIPlayer>().ToList();
-
-        foreach (var item in AIPlayers) // 초기에 구석자리 땅 주는 부분
-        {
-
-            if (AIPlayers.FindAll(x => x.OwningTiles.Count >= 1).Count >= AIPlayerCount)
-            {
-                break;
-            }
-
-            List<TileScript> tiles = TileMapData.Instance.GetEndTile(6);
-            tiles = tiles.FindAll(x => x.Owner == null);
-            item.gameObject.SetActive(true);
-            item.AddTile(tiles[Random.Range(0, tiles.Count)]);
-        }
-
-        var onlineAIPlayers = from result in AIPlayers
-                              where result.OwningTiles.Count >= 1
-                              select result;
-        Debug.Log(onlineAIPlayers.Count());
-
-        foreach (var item in onlineAIPlayers) // 구석자리 땅이 모두 배분 된 후 나머지 땅을 AI들끼리 나눈다.
-        {
-            tileChecker.FindTilesInRange(item.OwningTiles[0], mapSize / 2 + 1).ForEach(x =>
-            {
-                item.AddTile(x);
-                });
-        }
+        FindObjectOfType<AIManager>().StartStage(mapSize);
 
         player.AddTile(TileMapData.Instance.GetTile(0)); // 무조건 중앙땅은 플레이어꺼
         fogOfWarManager.RemoveCloudOnTile(TileMapData.Instance.GetTile(0)); 

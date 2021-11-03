@@ -90,8 +90,9 @@ public class HexTilemapGenerator : MonoBehaviour
         MainSceneManager.Instance.fogOfWarManager.ResetCloudList();
         TileMapData.Instance.ResetTileList();
 
+        AIManager.Instance.AIPlayers.ForEach(x => x.ResetPlayer());
+
         MainSceneManager.Instance.turnCnt = 0;
-        MainSceneManager.Instance.AIPlayers.ForEach(x => x.ResetPlayer());
         MainSceneManager.Instance.GetPlayer().ResetPlayer();
 
         Destroy(tileParent.gameObject);
