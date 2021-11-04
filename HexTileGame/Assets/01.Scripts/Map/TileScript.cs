@@ -182,10 +182,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void TurnFinish()
     {
-        owner.AddResource(data.Resource);
+        if(owner.GetType() == typeof(PersonPlayer))
+        (owner as PersonPlayer).AddResource(data.Resource);
     }
 
-    public void BuyTile(PlayerScript owner)
+    public void BuyTile(PersonPlayer owner)
     {
         if (owner.ResourceTank >= data.Price)
         {

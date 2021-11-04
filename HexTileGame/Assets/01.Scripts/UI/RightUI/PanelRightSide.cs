@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PanelRightSide : MonoBehaviour
 {
     [SerializeField] Button btnFinishTurn;
-    PlayerScript player = null;
+    PersonPlayer player = null;
 
     private void Start()
     {

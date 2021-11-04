@@ -18,7 +18,7 @@ public class PanelSelectMissile : MonoBehaviour
     private List<MissileData> waitingMissiles = new List<MissileData>();
     private List<MissileData> fireReadyMissiles = new List<MissileData>();
 
-    private PlayerScript player;
+    private PersonPlayer player;
 
     private List<GameObject> missilePanelPool = new List<GameObject>();
 

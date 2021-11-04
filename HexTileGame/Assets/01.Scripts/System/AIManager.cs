@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour
 {
-    [SerializeField] public int AIPlayerCount = 3;
+    [SerializeField] public int aiPlayerCount = 3;
 
-    public List<AIPlayer> AIPlayers = new List<AIPlayer>();
+    public List<AIPlayer> aiPlayers = new List<AIPlayer>();
 
     public static AIManager Instance = null;
 
@@ -22,16 +22,16 @@ public class AIManager : MonoBehaviour
 
     private void Start()
     {
-        AIPlayers = GetComponentsInChildren<AIPlayer>().ToList();
+        aiPlayers = GetComponentsInChildren<AIPlayer>().ToList();
     }
 
     public void StartStage(int mapSize)
     {
 
-        foreach (var item in AIPlayers) // 초기에 구석자리 땅 주는 부분
+        foreach (var item in aiPlayers) // 초기에 구석자리 땅 주는 부분
         {
 
-            if (AIPlayers.FindAll(x => x.OwningTiles.Count >= 1).Count >= AIPlayerCount)
+            if (aiPlayers.FindAll(x => x.OwningTiles.Count >= 1).Count >= aiPlayerCount)
             {
                 break;
             }
@@ -42,7 +42,7 @@ public class AIManager : MonoBehaviour
             item.AddTile(tiles[Random.Range(0, tiles.Count)]);
         }
 
-        var onlineAIPlayers = from result in AIPlayers
+        var onlineAIPlayers = from result in aiPlayers
                               where result.OwningTiles.Count >= 1
                               select result;
 

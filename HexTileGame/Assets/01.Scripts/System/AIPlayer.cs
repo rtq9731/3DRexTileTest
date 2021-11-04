@@ -29,13 +29,13 @@ public class AIPlayer : PlayerScript
 
         tile.ChangeOwner(this);
 
-        owningTiles.Remove(tile);
-        owningTiles.Add(tile);
+        data.OwningTiles.Remove(tile);
+        data.OwningTiles.Add(tile);
     }
 
     private void CheckIsDie()
     {
-        if(owningTiles.Count < 1)
+        if(data.OwningTiles.Count < 1)
         {
             isDead = true;
         }
@@ -43,7 +43,7 @@ public class AIPlayer : PlayerScript
 
     public void CheckOtherAIStat()
     {
-        if(AIManager.Instance.AIPlayers.Find(x => !x.isDead) == null)
+        if(AIManager.Instance.aiPlayers.Find(x => !x.isDead) == null)
         {
             // 스테이지 끝내는 메서드 필요함
         }

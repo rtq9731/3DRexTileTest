@@ -100,11 +100,7 @@ public class MainSceneManager : MonoBehaviour
     public void StartGame()
     {
         FindObjectOfType<AIManager>().StartStage(mapSize);
-
         player.AddTile(TileMapData.Instance.GetTile(0)); // ¹«Á¶°Ç Áß¾Ó¶¥Àº ÇÃ·¹ÀÌ¾î²¨
-        fogOfWarManager.RemoveCloudOnTile(TileMapData.Instance.GetTile(0)); 
-
-        tileChecker.FindTilesInRange(player.OwningTiles[0], 1).ForEach(x => fogOfWarManager.RemoveCloudOnTile(x));
     }
 
     public void ClearStage()

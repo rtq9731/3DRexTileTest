@@ -10,32 +10,98 @@ public class PersonPlayer : PlayerScript
     [SerializeField] string playerName;
     [SerializeField] Color color;
 
-    private SkillTreeNode curResearchData = null;
+    [SerializeField] new MainPlayerData playerData = new MainPlayerData();
+
+    
+    public List<MissileData> MissileInMaking
+    {
+        get { return playerData.MissileInMaking; }
+    }
+    public List<MissileData> MissileReadyToShoot
+    {
+        get { return playerData.MissileReadyToShoot; }
+    }
+    public int ResearchFinishTurn
+    {
+        get { return playerData.ResearchFinishTurn; }
+        set { playerData.ResearchFinishTurn = value; }
+    }
+    public List<int> UnlockedWarheadIdx
+    {
+        get { return playerData.UnlockedWarheadIdx; }
+    }
+    public List<int> UnlockedEngineIdx
+    {
+        get { return playerData.UnlockedEngineIdx; }
+    }
+    public List<int> UnlockedBodyIdx
+    {
+        get { return playerData.UnlockedBodyIdx; }
+    }
+    public List<int> ResearchedBodyResearch
+    {
+        get { return playerData.ResearchedBodyResearch; }
+    }
+    public List<int> ResearchedEngineResearch
+    {
+        get { return playerData.ResearchedEngineResearch; }
+    }
+    public int ResourceTank
+    {
+        get { return playerData.ResourceTank; }
+    }
+
+    private void Awake()
+    {
+        TurnFinishAction += () => { MainSceneManager.Instance.turnCnt++; };
+
+        TurnFinishAction += () => {
+            playerData.MissileInMaking.ForEach(x => x.TurnForMissileReady--);
+            playerData.MissileInMaking.FindAll(x => x.TurnForMissileReady <= 0).ForEach(x => {
+                playerData.MissileInMaking.Remove(x);
+                playerData.MissileReadyToShoot.Add(x);
+            });
+        };
+    }
+
+    private void Start()
+    {
+        playerData.UnlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작
+        playerData.UnlockedWarheadIdx.Add(0);
+        playerData.UnlockedBodyIdx.Add(0);
+
+        MainSceneManager.Instance.SetPlayer(this);
+        MainSceneManager.Instance.uiTopBar.UpdateTexts();
+        MainSceneManager.Instance.PlayerName = playerName;
+        playerColor = color;
+        myName = playerName;
+    }
+
     public SkillTreeNode CurResearchData
     {
-        get { return curResearchData; }
+        get { return playerData.CurResearchData; }
         set
         {
             switch (value.Type)
             {
                 case ResearchType.Warhead:
-                    if (unlockedEngineIdx.Contains(value.ResearchThingIdx))
+                    if (playerData.UnlockedEngineIdx.Contains(value.ResearchThingIdx))
                         return;
                     break;
                 case ResearchType.Engine:
-                    if (researchedEngineResearch.Contains(value.Idx) || unlockedEngineIdx.Contains(value.ResearchThingIdx))
+                    if (playerData.ResearchedEngineResearch.Contains(value.Idx) || playerData.UnlockedEngineIdx.Contains(value.ResearchThingIdx))
                         return;
                     break;
                 case ResearchType.Body:
-                    if (researchedBodyResearch.Contains(value.Idx) || unlockedBodyIdx.Contains(value.ResearchThingIdx))
+                    if (playerData.ResearchedBodyResearch.Contains(value.Idx) || playerData.UnlockedBodyIdx.Contains(value.ResearchThingIdx))
                         return;
                     break;
                 default:
                     break;
             }
 
-            curResearchData = value;
-            researchFinishTurn = curResearchData.TrunForResearch;
+            playerData.CurResearchData = value;
+            playerData.ResearchFinishTurn = playerData.CurResearchData.TrunForResearch;
 
             TurnFinishAction -= ResearchOnTurnFinish;
             TurnFinishAction += ResearchOnTurnFinish;
@@ -43,106 +109,69 @@ public class PersonPlayer : PlayerScript
         }
     }
 
-    private List<int> unlockedWarheadIdx = new List<int>();
-    public List<int> UnlockedWarheadIdx
-    {
-        get { return unlockedWarheadIdx; }
-    }
-
-    private List<int> unlockedEngineIdx = new List<int>();
-    public List<int> UnlockedEngineIdx
-    {
-        get { return unlockedEngineIdx; }
-    }
-
-    private List<int> unlockedBodyIdx = new List<int>();
-    public List<int> UnlockedBodyIdx
-    {
-        get { return unlockedBodyIdx; }
-    }
-
-    private List<int> researchedBodyResearch = new List<int>();
-    public List<int> ResearchedBodyResearch
-    {
-        get { return researchedBodyResearch; }
-    }
-
-    private List<int> researchedEngineResearch = new List<int>();
-    public List<int> ResearchedEngineResearch
-    {
-        get { return researchedEngineResearch; }
-    }
-
     public override void ResetPlayer()
     {
-        unlockedEngineIdx.Clear();
-        unlockedWarheadIdx.Clear();
-        unlockedBodyIdx.Clear();
-        researchedBodyResearch.Clear();
-        researchedEngineResearch.Clear();
-        missileReadyToShoot.Clear();
-        missileInMaking.Clear();
-        owningTiles.Clear();
+        playerData = new MainPlayerData();
 
-        curResearchData = null;
+        playerData.CurResearchData = null;
 
-        resouceTank = 0;
+        playerData.ResourceTank = 0;
 
-        unlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작
-        unlockedWarheadIdx.Add(0);
-        unlockedBodyIdx.Add(0);
+        playerData.UnlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작
+        playerData.UnlockedWarheadIdx.Add(0);
+        playerData.UnlockedBodyIdx.Add(0);
 
         TurnFinishAction = () => { }; // 액션 초기화
 
         TurnFinishAction += () => { MainSceneManager.Instance.turnCnt++; };
 
         TurnFinishAction += () => {
-            missileInMaking.ForEach(x => x.TurnForMissileReady--);
-            missileInMaking.FindAll(x => x.TurnForMissileReady <= 0).ForEach(x => {
-                missileInMaking.Remove(x);
-                missileReadyToShoot.Add(x);
+            playerData.MissileInMaking.ForEach(x => x.TurnForMissileReady--);
+            playerData.MissileInMaking.FindAll(x => x.TurnForMissileReady <= 0).ForEach(x => {
+                playerData.MissileInMaking.Remove(x);
+                playerData.MissileReadyToShoot.Add(x);
             });
         };
     }
 
     private void ResearchOnTurnFinish()
     {
-        if (curResearchData == null)
+        if (playerData.CurResearchData == null)
         {
             return;
         }
 
-        researchFinishTurn--;
-        if (researchFinishTurn <= 0)
+        playerData.ResearchFinishTurn--;
+        if (playerData.ResearchFinishTurn <= 0)
         {
-            switch (curResearchData.Type)
+            switch (playerData.CurResearchData.Type)
             {
 
                 case ResearchType.Warhead:
-                    unlockedWarheadIdx.Add(curResearchData.ResearchThingIdx);
+                    playerData.UnlockedWarheadIdx.Add(playerData.CurResearchData.ResearchThingIdx);
                     break;
                 case ResearchType.Engine:
 
-                    if (curResearchData.ResearchThingIdx != -1)
+                    if (playerData.CurResearchData.ResearchThingIdx != -1)
                     {
-                        unlockedEngineIdx.Add(curResearchData.ResearchThingIdx);
+                        playerData.UnlockedEngineIdx.Add(playerData.CurResearchData.ResearchThingIdx);
                     }
 
-                    ResearchedEngineResearch.Add(curResearchData.Idx);
+                    playerData.ResearchedEngineResearch.Add(playerData.CurResearchData.Idx);
                     break;
                 case ResearchType.Body:
-                    if (curResearchData.ResearchThingIdx != -1)
+                    if (playerData.CurResearchData.ResearchThingIdx != -1)
                     {
-                        unlockedBodyIdx.Add(curResearchData.ResearchThingIdx);
+                        playerData.UnlockedBodyIdx.Add(playerData.CurResearchData.ResearchThingIdx);
                     }
 
-                    ResearchedBodyResearch.Add(curResearchData.Idx);
+                    playerData.ResearchedBodyResearch.Add(playerData.CurResearchData.Idx);
                     break;
                 default:
                     break;
             }
 
-            curResearchData = null;
+            playerData.CurResearchData = null;
         }
         MainSceneManager.Instance.curResearchPanel.UpdateTexts(this);
     }
@@ -171,27 +200,22 @@ public class PersonPlayer : PlayerScript
         });
 
         // 중복 안되게 하기 위함.
-        owningTiles.Remove(tile);
-        owningTiles.Add(tile);
+        playerData.OwningTiles.Remove(tile);
+        playerData.OwningTiles.Add(tile);
     }
 
     public override void TurnFinish()
     {
         TurnFinishAction();
-        owningTiles.ForEach(x => x.TurnFinish());
+        playerData.OwningTiles.ForEach(x => x.TurnFinish());
     }
 
-    private void Start()
+    public void AddResource(int resource)
     {
-        unlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작
-        unlockedWarheadIdx.Add(0);
-        unlockedBodyIdx.Add(0);
-
-        MainSceneManager.Instance.SetPlayer(this);
+        playerData.ResourceTank += resource;
+        Debug.Log(resource);
+        Debug.Log(playerData.ResourceTank);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
-        MainSceneManager.Instance.PlayerName = playerName;
-        playerColor = color;
-        myName = playerName;
     }
 
 }

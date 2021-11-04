@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PanelMissileMaker : MonoBehaviour
 {
-    private PlayerScript player = null;
+    private PersonPlayer player = null;
 
     [SerializeField] PanelMissileQueue panelMissileQueue = null;
     [SerializeField] Button btnMakeMissile = null;

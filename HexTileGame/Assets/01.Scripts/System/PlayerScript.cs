@@ -10,6 +10,8 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
     [SerializeField] protected string myName = "NULL";
     public Color playerColor;
 
+    [SerializeField] protected CommonPlayerData data = new CommonPlayerData();
+
     public string MyName
     {
         get { return myName; }
@@ -17,58 +19,19 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public Action TurnFinishAction;
 
-    [SerializeField]
-    protected List<TileScript> owningTiles = new List<TileScript>();
     public List<TileScript> OwningTiles
     {
-        get { return owningTiles; }
+        get { return data.OwningTiles; }
     }
-
-    protected List<MissileData> missileInMaking = new List<MissileData>();
-    public  List<MissileData> MissileInMaking
-    {
-        get { return missileInMaking; }
-    }
-
-    protected List<MissileData> missileReadyToShoot = new List<MissileData>();
-    public List<MissileData> MissileReadyToShoot
-    {
-        get { return missileReadyToShoot; }
-    }
-
-    protected int researchFinishTurn = 0;
-    public int ResearchFinishTurn
-    {
-        get { return researchFinishTurn; }
-    }
-
-    protected int resouceTank = 0;
-    public int ResourceTank { get { return resouceTank; } }
 
     protected void Awake()
     {
         TurnFinishAction = () => { }; // 액션 초기화
-
-        TurnFinishAction += () => { MainSceneManager.Instance.turnCnt++; };
-
-        TurnFinishAction += () => {
-            missileInMaking.ForEach(x => x.TurnForMissileReady--);
-            missileInMaking.FindAll(x => x.TurnForMissileReady <= 0).ForEach(x => {
-                missileInMaking.Remove(x);
-                missileReadyToShoot.Add(x);
-                });
-            };
     }
 
     public virtual void ResetPlayer()
     {
-        owningTiles.Clear();
-    }
-
-    public void AddResource(int resource)
-    {
-        resouceTank += resource;
-        MainSceneManager.Instance.uiTopBar.UpdateTexts();
+        data.OwningTiles.Clear();
     }
 
     public virtual void TurnFinish()
@@ -84,7 +47,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         }
 
         // 중복 안되게 하기 위함.
-        owningTiles.Remove(tile);
-        owningTiles.Add(tile);
+        data.OwningTiles.Remove(tile);
+        data.OwningTiles.Add(tile);
     }
 }
