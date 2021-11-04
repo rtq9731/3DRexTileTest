@@ -19,7 +19,7 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public Action TurnFinishAction;
 
-    public List<TileScript> OwningTiles
+    public virtual List<TileScript> OwningTiles
     {
         get { return data.OwningTiles; }
     }
@@ -49,5 +49,10 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
         // 중복 안되게 하기 위함.
         data.OwningTiles.Remove(tile);
         data.OwningTiles.Add(tile);
+    }
+
+    public virtual void RemoveTile(TileScript tile)
+    {
+        data.OwningTiles.Remove(tile);
     }
 }

@@ -78,7 +78,7 @@ public class TechNode : MonoBehaviour
 
     private void ResearchStart()
     {
-        if (MainSceneManager.Instance.GetPlayer().CurResearchData != null)
+        if (MainSceneManager.Instance.GetPlayer().CurResearchData != null && MainSceneManager.Instance.GetPlayer().CurResearchData.Idx != -1)
         {
             PanelException.CallExecptionPanel("이미 연구중인 항목이 있습니다!\n진행 중인 연구가 초기화됩니다.", () => MainSceneManager.Instance.GetPlayer().CurResearchData = data, "계속 진행", () => { }, "취소");
             return;

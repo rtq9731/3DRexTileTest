@@ -6,6 +6,7 @@ using UnityEngine;
 public class CommonPlayerData
 {
     [SerializeField] protected List<TileScript> owningTiles = new List<TileScript>();
+    [SerializeField] protected bool isGameOver = false;
 
     public List<TileScript> OwningTiles
     {

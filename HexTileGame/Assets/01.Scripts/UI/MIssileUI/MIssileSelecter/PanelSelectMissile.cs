@@ -82,6 +82,8 @@ public class PanelSelectMissile : MonoBehaviour
                 }
             };
         }
+
+        missilePanelPool.ForEach(x => x.transform.localScale = Vector3.one);
     }
 
 

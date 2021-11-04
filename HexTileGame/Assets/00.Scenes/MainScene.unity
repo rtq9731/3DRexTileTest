@@ -3139,7 +3139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 3
   playerColor: {r: 0.8352941, g: 0.043137256, b: 0.043137256, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &326710274
 Transform:
   m_ObjectHideFlags: 0
@@ -3390,7 +3391,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 5
   playerColor: {r: 0.8352941, g: 0.33333334, b: 0.043137256, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &378986820
 Transform:
   m_ObjectHideFlags: 0
@@ -3583,7 +3585,7 @@ Transform:
   m_Children:
   - {fileID: 190617378}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &385465011
 MonoBehaviour:
@@ -4137,7 +4139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 6
   playerColor: {r: 0.101960786, g: 0.29411766, b: 0.8235294, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &431363541
 Transform:
   m_ObjectHideFlags: 0
@@ -4293,7 +4296,7 @@ Transform:
   m_Children:
   - {fileID: 547343272}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &450822181
 GameObject:
@@ -5090,7 +5093,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 2
   playerColor: {r: 0.9372549, g: 0.8392157, b: 0.2, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &530711614
 Transform:
   m_ObjectHideFlags: 0
@@ -5849,7 +5853,7 @@ Transform:
   - {fileID: 378986820}
   - {fileID: 431363541}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &601673374
 MonoBehaviour:
@@ -5863,6 +5867,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40d83161f00ee8c40bd23a4b3da42ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiPlayerCount: 3
+  aiPlayers: []
 --- !u!1 &606875477
 GameObject:
   m_ObjectHideFlags: 0
@@ -8225,7 +8231,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &835838797
 MonoBehaviour:
@@ -8241,9 +8247,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: 
   playerColor: {r: 0.4583063, g: 0, b: 1, a: 1}
-  owningTiles: []
+  data:
+    owningTiles: []
   playerName: COCONUT
   color: {r: 0.45882356, g: 0, b: 1, a: 1}
+  playerData:
+    owningTiles: []
+    missileInMaking: []
+    missileReadyToShoot: []
+    researchFinishTurn: 0
+    unlockedWarheadIdx: 
+    unlockedEngineIdx: 
+    unlockedBodyIdx: 
+    researchedBodyResearch: 
+    researchedEngineResearch: 
+    curResearchData:
+      type: 0
+      researchThingIdx: 0
+      idx: -1
+      turnForResearch: 0
+      requireResearches: 
+      researchInfo: 
+    resourceTank: 0
 --- !u!1 &837855647
 GameObject:
   m_ObjectHideFlags: 0
@@ -10543,7 +10568,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &974116145
 MonoBehaviour:
@@ -12063,7 +12088,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1113051652
 MonoBehaviour:
@@ -12097,10 +12122,9 @@ MonoBehaviour:
   TileXInterval: 1
   turnCnt: 0
   stageCount: 1
-  mapSize: 3
+  mapSize: 2
   PlayerName: COCONUT
   AIPlayerCount: 3
-  AIPlayers: []
 --- !u!114 &1113051653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17104,7 +17128,7 @@ Transform:
   m_Children:
   - {fileID: 892071010}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!1001 &1580199955
 PrefabInstance:
@@ -17803,7 +17827,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 4
   playerColor: {r: 0.70980394, g: 0.20392157, b: 0.8352941, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &1653908747
 Transform:
   m_ObjectHideFlags: 0
@@ -19968,7 +19993,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 1
   playerColor: {r: 0.39215687, g: 0.7294118, b: 0.6509804, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!1 &1859868436
 GameObject:
   m_ObjectHideFlags: 0
@@ -21095,7 +21121,7 @@ Transform:
   m_Children:
   - {fileID: 289956263}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &1987251590
 MonoBehaviour:
@@ -21565,7 +21591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2026698772
 RectTransform:
   m_ObjectHideFlags: 0

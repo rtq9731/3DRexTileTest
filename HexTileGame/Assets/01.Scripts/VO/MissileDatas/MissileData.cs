@@ -145,5 +145,6 @@ public class MissileData
         this.bodyType = body;
         EngineTier = engine;
         WarheadType = warheadType;
+        BodyType = bodyType;
     }
 }

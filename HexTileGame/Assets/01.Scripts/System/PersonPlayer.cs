@@ -50,6 +50,10 @@ public class PersonPlayer : PlayerScript
     {
         get { return playerData.ResourceTank; }
     }
+    public override List<TileScript> OwningTiles
+    {
+        get { return playerData.OwningTiles; }
+    }
 
     private void Awake()
     {
@@ -79,7 +83,11 @@ public class PersonPlayer : PlayerScript
 
     public SkillTreeNode CurResearchData
     {
-        get { return playerData.CurResearchData; }
+        get 
+        {
+            Debug.Log(playerData.CurResearchData);
+            return playerData.CurResearchData; 
+        }
         set
         {
             switch (value.Type)
