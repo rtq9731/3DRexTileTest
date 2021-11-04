@@ -5,16 +5,37 @@ using UnityEngine;
 public class MissileManager: MonoBehaviour
 {
     [SerializeField] GameObject missilePrefab = null;
-    GameObject missileObj;
+
+    Queue<GameObject> missileObjPool = new Queue<GameObject>();
 
     int missileHeight = 3;
 
     float timer = 0f;
-    private void Awake()
+
+    private GameObject GetMissileObj()
     {
-        missileObj = Instantiate(missilePrefab);
-        missileObj.SetActive(false);
+        GameObject result = null;
+        if(missileObjPool.Count < 1)
+        {
+            result = Instantiate(missilePrefab, transform);
+            missileObjPool.Enqueue(result);
+        }
+        else
+        {
+            if(missileObjPool.Peek().activeSelf)
+            {
+                result = Instantiate(missilePrefab, transform);
+                missileObjPool.Enqueue(result);
+            }
+            else
+            {
+                result = missileObjPool.Dequeue();
+                missileObjPool.Enqueue(result);
+            }
+        }
+        return result;
     }
+
 
     public void fireMissileFromStartToTarget(TileScript start, MissileData missile, TileScript target, out GameObject missileObj)
     {
@@ -22,7 +43,7 @@ public class MissileManager: MonoBehaviour
         Vector3 midPoint = new Vector3((start.transform.position.x + target.transform.position.x) / 2, missileHeight, (start.transform.position.z + target.transform.position.z) / 2);
         // 두 벡터 사이의 중점을 구함 ( 높이는 따로 지정 )
 
-        missileObj = this.missileObj;
+        missileObj = GetMissileObj();
 
         Vector3 startPoint = start.transform.position;
         startPoint.y += 0.5f; // 미사일이 땅에서 나오면 안되니까.

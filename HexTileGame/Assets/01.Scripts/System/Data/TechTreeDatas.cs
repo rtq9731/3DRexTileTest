@@ -12,6 +12,8 @@ public class TechTreeDatas : MonoBehaviour
 
     private List<SkillTreeNode> dataList = new List<SkillTreeNode>();
 
+    MainPlayerData data = new MainPlayerData();
+
     private string dataString = "";
 
     public void LoadData()

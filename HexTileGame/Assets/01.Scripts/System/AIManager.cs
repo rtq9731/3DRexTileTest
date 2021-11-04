@@ -55,8 +55,18 @@ public class AIManager : MonoBehaviour
         }
     }
 
+    public void AIFireMissile()
+    {
+        
+    }
+
     public void GetNewStage()
     {
 
     }
+}
+
+enum EnemyGrade
+{
+
 }
