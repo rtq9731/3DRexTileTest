@@ -3139,7 +3139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 3
   playerColor: {r: 0.8352941, g: 0.043137256, b: 0.043137256, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &326710274
 Transform:
   m_ObjectHideFlags: 0
@@ -3469,7 +3470,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 5
   playerColor: {r: 0.8352941, g: 0.33333334, b: 0.043137256, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &378986820
 Transform:
   m_ObjectHideFlags: 0
@@ -4216,7 +4218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 6
   playerColor: {r: 0.101960786, g: 0.29411766, b: 0.8235294, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &431363541
 Transform:
   m_ObjectHideFlags: 0
@@ -5169,7 +5172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 2
   playerColor: {r: 0.9372549, g: 0.8392157, b: 0.2, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &530711614
 Transform:
   m_ObjectHideFlags: 0
@@ -6780,10 +6784,9 @@ MonoBehaviour:
   ownerText: {fileID: 1235033532}
   groundTypeText: {fileID: 1859868438}
   priceText: {fileID: 168718871}
-  rangeText: {fileID: 572173420}
   shieldText: {fileID: 654318228}
-  attackPowerText: {fileID: 370204487}
   productText: {fileID: 1559425526}
+  alphaOnTime: 0.5
 --- !u!1 &654318226
 GameObject:
   m_ObjectHideFlags: 0
@@ -8341,9 +8344,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: 
   playerColor: {r: 0.4583063, g: 0, b: 1, a: 1}
-  owningTiles: []
+  data:
+    owningTiles: []
   playerName: COCONUT
   color: {r: 0.45882356, g: 0, b: 1, a: 1}
+  playerData:
+    owningTiles: []
+    missileInMaking: []
+    missileReadyToShoot: []
+    researchFinishTurn: 0
+    unlockedWarheadIdx: 
+    unlockedEngineIdx: 
+    unlockedBodyIdx: 
+    researchedBodyResearch: 
+    researchedEngineResearch: 
+    curResearchData:
+      type: 0
+      researchThingIdx: 0
+      idx: -1
+      turnForResearch: 0
+      requireResearches: 
+      researchInfo: 
+    resourceTank: 0
 --- !u!1 &837855647
 GameObject:
   m_ObjectHideFlags: 0
@@ -9963,11 +9985,11 @@ RectTransform:
   m_Father: {fileID: 1991555752}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 185, y: 70}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &932394563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9981,7 +10003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9995,7 +10017,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -12200,7 +12222,6 @@ MonoBehaviour:
   mapSize: 3
   PlayerName: COCONUT
   AIPlayerCount: 6
-  AIPlayers: []
 --- !u!114 &1113051653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17903,7 +17924,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 4
   playerColor: {r: 0.70980394, g: 0.20392157, b: 0.8352941, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!4 &1653908747
 Transform:
   m_ObjectHideFlags: 0
@@ -20068,7 +20090,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: AI 1
   playerColor: {r: 0.39215687, g: 0.7294118, b: 0.6509804, a: 0}
-  owningTiles: []
+  data:
+    owningTiles: []
 --- !u!1 &1859868436
 GameObject:
   m_ObjectHideFlags: 0
@@ -21315,8 +21338,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f86e64a36a09b804ea022a640dda5557, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
