@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class MainSceneManager : MonoBehaviour
@@ -73,11 +74,12 @@ public class MainSceneManager : MonoBehaviour
     public uint stageCount = 1;
     public int mapSize;
 
+    public bool isRerolled = false;
+
     private HexTilemapGenerator tilemapGenerator;
 
     [Header("About Player")]
     public string PlayerName = "COCONUT";
-    public int AIPlayerCount = 3;
 
     List<PlayerScript> players = new List<PlayerScript>();
     public List<PlayerScript> Players { get { return players; } set { players = value; } }
@@ -101,8 +103,10 @@ public class MainSceneManager : MonoBehaviour
 
     public void StartGame()
     {
+        isRerolled = false;
         FindObjectOfType<AIManager>().StartStage(mapSize);
         player.AddTile(TileMapData.Instance.GetTile(0)); // ¹«Á¶°Ç Áß¾Ó¶¥Àº ÇÃ·¹ÀÌ¾î²¨
+        player.TurnFinishAction += CheckStageClear;
     }
 
     public void ClearStage()
@@ -119,12 +123,20 @@ public class MainSceneManager : MonoBehaviour
         AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
 
         turnCnt = 0;
-        GetPlayer().ResetPlayer();
+        player.ResetPlayer();
         tilemapGenerator.GenerateNewTile();
     }
 
-    public void RerollStage()
+    public void RerollStage(Button btnReroll)
     {
+        if(isRerolled)
+        {
+            return;
+        }
+
+        isRerolled = true;
+        btnReroll.gameObject.SetActive(false);
+
         DOTween.CompleteAll();
         while (!UIStackManager.IsUIStackEmpty())
         {
@@ -137,8 +149,16 @@ public class MainSceneManager : MonoBehaviour
         AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
 
         turnCnt = 0;
-        GetPlayer().ResetPlayer();
+        player.ResetPlayer();
         tilemapGenerator.GenerateNewTileWihtNoExtension();
+    }
+
+    private void CheckStageClear()
+    {
+        if(AIManager.Instance.aiPlayers.Find(x => x.OwningTiles.Count > 1) == null)
+        {
+            ClearStage();
+        }
     }
 
     public void LoadGame()

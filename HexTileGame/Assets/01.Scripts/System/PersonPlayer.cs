@@ -12,7 +12,6 @@ public class PersonPlayer : PlayerScript
 
     [SerializeField] new MainPlayerData playerData = new MainPlayerData();
 
-    
     public List<MissileData> MissileInMaking
     {
         get { return playerData.MissileInMaking; }

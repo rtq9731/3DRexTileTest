@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class MainPlayerData : CommonPlayerData
 {
+    [SerializeField] private int turnCnt = 0;
     [SerializeField] private List<MissileData> missileInMaking = new List<MissileData>();
     [SerializeField] private List<MissileData> missileReadyToShoot = new List<MissileData>();
 
@@ -17,6 +18,12 @@ public class MainPlayerData : CommonPlayerData
     [SerializeField] private List<int> researchedEngineResearch = new List<int>();
     [SerializeField] private SkillTreeNode curResearchData = null;
     [SerializeField] private int resourceTank = 0;
+
+    public int TurnCnt
+    {
+        get { return turnCnt; }
+        set { turnCnt = value; }
+    }
 
     public int ResourceTank
     {
