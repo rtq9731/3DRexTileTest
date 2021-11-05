@@ -62,20 +62,6 @@ public class HexTilemapGenerator : MonoBehaviour
 
     public void GenerateNewTile()
     {
-        DOTween.CompleteAll();
-        while(!UIStackManager.IsUIStackEmpty())
-        {
-            UIStackManager.RemoveUIOnTopWithNoTime();
-        }
-
-        MainSceneManager.Instance.fogOfWarManager.ResetCloudList();
-        TileMapData.Instance.ResetTileList();
-
-        AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
-
-        MainSceneManager.Instance.turnCnt = 0;
-        MainSceneManager.Instance.GetPlayer().ResetPlayer();
-
         Destroy(tileParent.gameObject);
         tileParent = Instantiate(parentObj, transform).transform;
 
@@ -85,20 +71,6 @@ public class HexTilemapGenerator : MonoBehaviour
 
     public void GenerateNewTileWihtNoExtension()
     {
-        DOTween.CompleteAll();
-        while (!UIStackManager.IsUIStackEmpty())
-        {
-            UIStackManager.RemoveUIOnTopWithNoTime();
-        }
-
-        MainSceneManager.Instance.fogOfWarManager.ResetCloudList();
-        TileMapData.Instance.ResetTileList();
-
-        AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
-
-        MainSceneManager.Instance.turnCnt = 0;
-        MainSceneManager.Instance.GetPlayer().ResetPlayer();
-
         Destroy(tileParent.gameObject);
         tileParent = Instantiate(parentObj, transform).transform;
 
@@ -111,6 +83,7 @@ public class HexTilemapGenerator : MonoBehaviour
         yield return new WaitForSeconds(1);
         GenerateTiles(MainSceneManager.Instance.mapSize);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
+        yield return new WaitForSeconds(1);
         stageChangePanel.RemoveStageChangePanel(0.75f);
     }
 

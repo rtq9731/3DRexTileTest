@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MainSceneManager : MonoBehaviour
 {
@@ -11,12 +12,6 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] MissileEngine missileEngine;
     [SerializeField] Body missileBody;
     [SerializeField] public TechTreeDatas techTreeDatas;
-    [SerializeField] int rerollCount = 1;
-
-    public bool CanReroll()
-    {
-        return rerollCount > 0;
-    }
 
     public BodyData GetMissileBodyData(MissileTypes.MissileBody type)
     {
@@ -78,6 +73,8 @@ public class MainSceneManager : MonoBehaviour
     public uint stageCount = 1;
     public int mapSize;
 
+    private HexTilemapGenerator tilemapGenerator;
+
     [Header("About Player")]
     public string PlayerName = "COCONUT";
     public int AIPlayerCount = 3;
@@ -86,6 +83,11 @@ public class MainSceneManager : MonoBehaviour
     public List<PlayerScript> Players { get { return players; } set { players = value; } }
 
     PersonPlayer player = null;
+
+    private void Start()
+    {
+        tilemapGenerator = FindObjectOfType<HexTilemapGenerator>();
+    }
 
     public void SetPlayer(PersonPlayer player)
     {
@@ -105,7 +107,38 @@ public class MainSceneManager : MonoBehaviour
 
     public void ClearStage()
     {
+        DOTween.CompleteAll();
+        while (!UIStackManager.IsUIStackEmpty())
+        {
+            UIStackManager.RemoveUIOnTopWithNoTime();
+        }
 
+        fogOfWarManager.ResetCloudList();
+        TileMapData.Instance.ResetTileList();
+
+        AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
+
+        turnCnt = 0;
+        GetPlayer().ResetPlayer();
+        tilemapGenerator.GenerateNewTile();
+    }
+
+    public void RerollStage()
+    {
+        DOTween.CompleteAll();
+        while (!UIStackManager.IsUIStackEmpty())
+        {
+            UIStackManager.RemoveUIOnTopWithNoTime();
+        }
+
+        fogOfWarManager.ResetCloudList();
+        TileMapData.Instance.ResetTileList();
+
+        AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
+
+        turnCnt = 0;
+        GetPlayer().ResetPlayer();
+        tilemapGenerator.GenerateNewTileWihtNoExtension();
     }
 
     public void LoadGame()

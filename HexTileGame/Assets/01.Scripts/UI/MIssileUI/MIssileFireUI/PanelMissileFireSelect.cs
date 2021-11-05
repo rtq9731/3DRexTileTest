@@ -85,7 +85,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                 text.text = "미사일의 출발 지점을 정해주세요.\n만약 근처에 적 타일이 없다면\n자동으로 취소됩니다.";
                 break;
             case InputState.SelectTargetTile:
-                text.text = "타격 지점을 지정해주세요!\n초록색 : 타격 가능 지점\n빨간색 : 타격 불가능 지점\n파란색 : 출발 지점";
+                text.text = "타격 지점을 지정해주세요!\n초록색 : 타격 가능 지점\n빨간색 : 타격 불가능 지점";
                 break;
             case InputState.Finish:
                 UIStackManager.RemoveUIOnTop();

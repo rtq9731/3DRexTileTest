@@ -12,19 +12,7 @@ public class BtnReroll : MonoBehaviour
     private void Start()
     {
         btnReroll = GetComponent<Button>();
-        btnReroll.onClick.AddListener(OnClickReroll);
 
-        btnReroll.gameObject.GetComponent<RectTransform>().DOAnchorPosY(-32f, 0.3f);
-    }
-
-    public void OnClickReroll()
-    {
-        if (!MainSceneManager.Instance.CanReroll())
-        {
-            btnReroll.onClick.RemoveAllListeners();
-            return;
-        }
-
-        MainSceneManager.Instance.tileGenerator.GenerateNewTileWihtNoExtension();
+        MainSceneManager.Instance.GetPlayer().TurnFinishAction += MainSceneManager.Instance.RerollStage;
     }
 }

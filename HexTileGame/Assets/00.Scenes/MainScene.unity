@@ -406,7 +406,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\uD0C0\uACA9 \uC9C0\uC810\uC744 \uC9C0\uC815\uD574\uC8FC\uC138\uC694!\n\uCD08\uB85D\uC0C9
     : \uD0C0\uACA9 \uAC00\uB2A5 \uC9C0\uC810\n\uBE68\uAC04\uC0C9 : \uD0C0\uACA9 \uBD88\uAC00\uB2A5
-    \uC9C0\uC810\n\uB178\uB780\uC0C9 : \uCD9C\uBC1C \uC9C0\uC810"
+    \uC9C0\uC810"
 --- !u!222 &28445300
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5960,8 +5960,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -2000, y: 0}
-  m_SizeDelta: {x: 2000, y: 1080}
+  m_AnchoredPosition: {x: -960, y: 0}
+  m_SizeDelta: {x: 960, y: 1080}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &691932890
 MonoBehaviour:
@@ -5983,7 +5983,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f57dafbf569d184458b5cba1f9037e29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9945,7 +9945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  stageChangePanel: {fileID: 0}
+  stageChangePanel: {fileID: 833698659}
   jungleGroundTileSet:
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
   - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
@@ -16755,8 +16755,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 2000, y: 0}
-  m_SizeDelta: {x: 2000, y: 1080}
+  m_AnchoredPosition: {x: 960, y: 0}
+  m_SizeDelta: {x: 960, y: 1080}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1624494952
 MonoBehaviour:
@@ -16778,7 +16778,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 88c80dabab2df3a439610b24c7f406f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18939,10 +18939,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   text: {fileID: 28445299}
-  vcamLookMissile: {fileID: 0}
-  vcamSelectFire: {fileID: 0}
-  mainInput: {fileID: 0}
-  vcamMain: {fileID: 0}
+  vcamLookMissile: {fileID: 447459995}
+  vcamSelectFire: {fileID: 1987251587}
+  mainInput: {fileID: 963194229}
+  vcamMain: {fileID: 385465008}
 --- !u!222 &1838899833
 CanvasRenderer:
   m_ObjectHideFlags: 0
