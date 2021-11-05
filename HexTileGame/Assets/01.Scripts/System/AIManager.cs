@@ -29,6 +29,7 @@ public class AIManager : MonoBehaviour
 
     public void StartStage(int mapSize)
     {
+        curTurnCnt = 0;
 
         MainSceneManager.Instance.GetPlayer().TurnFinishAction += CheckAndAttackPlayer;
         foreach (var item in aiPlayers) // 초기에 구석자리 땅 주는 부분
@@ -51,7 +52,7 @@ public class AIManager : MonoBehaviour
 
         foreach (var item in onlineAIPlayers) // 구석자리 땅이 모두 배분 된 후 나머지 땅을 AI들끼리 나눈다.
         {
-            MainSceneManager.Instance.tileChecker.FindTilesInRange(item.OwningTiles[0], mapSize / 2 + 1).ForEach(x =>
+            MainSceneManager.Instance.tileChecker.FindTilesInRange(item.OwningTiles[0], mapSize - 1).ForEach(x =>
             {
                 item.AddTile(x);
             });
@@ -72,51 +73,69 @@ public class AIManager : MonoBehaviour
     {
         curTurnCnt++;
         Debug.Log(curTurnCnt);
-        if (curTurnCnt >= 20)
+        if (curTurnCnt <= 20)
         {
-            if(curTurnCnt % 20 == 0)
+            if (curTurnCnt % 20 == 0)
             {
-                AttackRandomTile();
+                AttackRandomTileByEachAI();
             }
         }
-        else if(curTurnCnt > 40)
+        else
         {
-            if(curTurnCnt % 10 == 0)
+            if (curTurnCnt % 5 == 0)
             {
-                AttackRandomTile();
-            }
-        }
-        else if(curTurnCnt > 60)
-        {
-            if(curTurnCnt % 5 == 0)
-            {
-                AttackRandomTile();
+                AttackRandomTileByEachAI();
             }
         }
     }
 
-    private void AttackRandomTile()
+    private void AttackRandomTileByEachAI()
     {
-        var attackableAI = aiPlayers.FindAll(x => x.OwningTiles.Find(x => MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Find(x => x.Owner == MainSceneManager.Instance.GetPlayer()) != null) != null);
+        List<AIPlayer> attackableAI = new List<AIPlayer>();
+
+        List<AIPlayer> onlineAI = aiPlayers.FindAll(x => x.OwningTiles.Count >= 1);
+        foreach (var item in onlineAI)
+        {
+            Debug.Log(item.MyName);
+
+            if(item.CanAttack(out List<TileScript> attackableTiles))
+            {
+                attackableAI.Add(item);
+            }
+        }
+
+        Debug.Log(attackableAI.Count);
+
         foreach (var item in attackableAI)
         {
-            List<TileScript> attackableTiles = new List<TileScript>();
 
-            foreach (var itemTile in item.OwningTiles)
+            if (item.OwningTiles.Count >= 3)
             {
-                MainSceneManager.Instance.tileChecker.FindTilesInRange(itemTile, 1).FindAll(x => x.Owner == MainSceneManager.Instance.GetPlayer()).ForEach(x => attackableTiles.Add(x));
+                for (int i = 0; i < item.OwningTiles.Count / 3; i++)
+                {
+                    aiRandAttack(item);
+                }
             }
-
-            attackableTiles = attackableTiles.Distinct().ToList();
-
-            MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(item.OwningTiles[0], 
-                new MissileData(MissileTypes.MissileEngineType.commonEngine, MissileTypes.MissileWarheadType.CommonTypeWarhead, MissileTypes.MissileBody.Orign), 
-                attackableTiles[Random.Range(0, attackableTiles.Count)], out GameObject missileObj);
+            else
+            {
+                aiRandAttack(item);
+            }
         }
     }
-}
 
-enum EnemyGrade
-{
+    private void aiRandAttack(AIPlayer ai)
+    {
+        List<TileScript> attackableTiles = new List<TileScript>();
 
+        foreach (var itemTile in ai.OwningTiles)
+        {
+            MainSceneManager.Instance.tileChecker.FindTilesInRange(itemTile, 1).FindAll(x => x.Owner == MainSceneManager.Instance.GetPlayer()).ForEach(x => attackableTiles.Add(x));
+        }
+
+        attackableTiles = attackableTiles.Distinct().ToList();
+
+        MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(ai.OwningTiles[0],
+            new MissileData(MissileTypes.MissileEngineType.commonEngine, MissileTypes.MissileWarheadType.CommonTypeWarhead, MissileTypes.MissileBody.Orign),
+            attackableTiles[Random.Range(0, attackableTiles.Count)], out GameObject missileObj);
+    }
 }

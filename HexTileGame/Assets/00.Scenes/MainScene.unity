@@ -3141,6 +3141,7 @@ MonoBehaviour:
   playerColor: {r: 0.8352941, g: 0.043137256, b: 0.043137256, a: 0}
   data:
     owningTiles: []
+    isGameOver: 0
 --- !u!4 &326710274
 Transform:
   m_ObjectHideFlags: 0
@@ -3393,6 +3394,7 @@ MonoBehaviour:
   playerColor: {r: 0.8352941, g: 0.33333334, b: 0.043137256, a: 0}
   data:
     owningTiles: []
+    isGameOver: 0
 --- !u!4 &378986820
 Transform:
   m_ObjectHideFlags: 0
@@ -3613,7 +3615,7 @@ GameObject:
   - component: {fileID: 390978956}
   - component: {fileID: 390978955}
   m_Layer: 5
-  m_Name: ImageTemp
+  m_Name: RightImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3635,8 +3637,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 2000, y: 0}
-  m_SizeDelta: {x: 2000, y: 1080}
+  m_AnchoredPosition: {x: 961, y: 0}
+  m_SizeDelta: {x: 961, y: 1080}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &390978955
 MonoBehaviour:
@@ -3658,7 +3660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 88c80dabab2df3a439610b24c7f406f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4141,6 +4143,7 @@ MonoBehaviour:
   playerColor: {r: 0.101960786, g: 0.29411766, b: 0.8235294, a: 0}
   data:
     owningTiles: []
+    isGameOver: 0
 --- !u!4 &431363541
 Transform:
   m_ObjectHideFlags: 0
@@ -5095,6 +5098,7 @@ MonoBehaviour:
   playerColor: {r: 0.9372549, g: 0.8392157, b: 0.2, a: 0}
   data:
     owningTiles: []
+    isGameOver: 0
 --- !u!4 &530711614
 Transform:
   m_ObjectHideFlags: 0
@@ -5548,7 +5552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &587652675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5634,7 +5638,7 @@ GameObject:
   - component: {fileID: 600654423}
   - component: {fileID: 600654422}
   m_Layer: 5
-  m_Name: ImageTemp
+  m_Name: LeftImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5656,8 +5660,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -2000, y: 0}
-  m_SizeDelta: {x: 2000, y: 1080}
+  m_AnchoredPosition: {x: -961, y: 0}
+  m_SizeDelta: {x: 961, y: 1080}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &600654422
 MonoBehaviour:
@@ -5679,7 +5683,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f57dafbf569d184458b5cba1f9037e29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8249,10 +8253,12 @@ MonoBehaviour:
   playerColor: {r: 0.4583063, g: 0, b: 1, a: 1}
   data:
     owningTiles: []
+    isGameOver: 0
   playerName: COCONUT
   color: {r: 0.45882356, g: 0, b: 1, a: 1}
   playerData:
     owningTiles: []
+    isGameOver: 0
     missileInMaking: []
     missileReadyToShoot: []
     researchFinishTurn: 0
@@ -12122,7 +12128,7 @@ MonoBehaviour:
   TileXInterval: 1
   turnCnt: 0
   stageCount: 1
-  mapSize: 2
+  mapSize: 3
   PlayerName: COCONUT
   AIPlayerCount: 3
 --- !u!114 &1113051653
@@ -17829,6 +17835,7 @@ MonoBehaviour:
   playerColor: {r: 0.70980394, g: 0.20392157, b: 0.8352941, a: 0}
   data:
     owningTiles: []
+    isGameOver: 0
 --- !u!4 &1653908747
 Transform:
   m_ObjectHideFlags: 0
@@ -19995,6 +20002,7 @@ MonoBehaviour:
   playerColor: {r: 0.39215687, g: 0.7294118, b: 0.6509804, a: 0}
   data:
     owningTiles: []
+    isGameOver: 0
 --- !u!1 &1859868436
 GameObject:
   m_ObjectHideFlags: 0

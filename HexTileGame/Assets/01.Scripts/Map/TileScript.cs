@@ -174,7 +174,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             }
 
             if(owner != null)
-            owner.OwningTiles.Remove(this);
+            owner.RemoveTile(this);
         }
 
         owner = newOwner;
@@ -182,6 +182,12 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void TurnFinish()
     {
+        Debug.Log(owner);
+        if(owner == null)
+        {
+            return;
+        }
+
         if(owner.GetType() == typeof(PersonPlayer))
         (owner as PersonPlayer).AddResource(data.Resource);
     }

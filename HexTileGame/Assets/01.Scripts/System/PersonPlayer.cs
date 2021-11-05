@@ -221,9 +221,12 @@ public class PersonPlayer : PlayerScript
     public void AddResource(int resource)
     {
         playerData.ResourceTank += resource;
-        Debug.Log(resource);
-        Debug.Log(playerData.ResourceTank);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
+    }
+
+    public override void RemoveTile(TileScript tile)
+    {
+        playerData.OwningTiles.Remove(tile);
     }
 
 }

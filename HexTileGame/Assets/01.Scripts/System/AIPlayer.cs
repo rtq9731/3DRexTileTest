@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,7 @@ public class AIPlayer : PlayerScript
 
     private void Start()
     {
-        MainSceneManager.Instance.Players.Add(this);
         TurnFinishAction += CheckIsDie;
-        TurnFinishAction += CheckOtherAIStat;
     }
 
     public override void AddTile(TileScript tile)
@@ -41,11 +40,16 @@ public class AIPlayer : PlayerScript
         }
     }
 
-    public void CheckOtherAIStat()
+    public bool CanAttack(out List<TileScript> attackAbleTiles)
     {
-        if(AIManager.Instance.aiPlayers.Find(x => !x.isDead) == null)
+        List<TileScript> tiles = new List<TileScript>();
+        foreach (var item in OwningTiles)
         {
-            // 스테이지 끝내는 메서드 필요함
+            MainSceneManager.Instance.tileChecker.FindTilesInRange(item, 1).ForEach(x => tiles.Add(x));
         }
+
+        attackAbleTiles = tiles.Distinct().ToList().FindAll(x => x.Owner == MainSceneManager.Instance.GetPlayer());
+
+        return attackAbleTiles.Count >= 1 ? true : false;
     }
 }

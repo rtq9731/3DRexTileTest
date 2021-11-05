@@ -18,8 +18,8 @@ public class StageChange : MonoBehaviour
         originLeftWingPos = leftWing.anchoredPosition;
         originRightWingPos = rightWing.anchoredPosition;
 
-        leftWing.DOAnchorPosX(0, duration);
-        rightWing.DOAnchorPosX(0, duration);  
+        leftWing.DOAnchorPosX(0, duration).SetEase(Ease.OutBounce);
+        rightWing.DOAnchorPosX(0, duration).SetEase(Ease.OutBounce);  
     }
 
     public void RemoveStageChangePanel(float duration)
