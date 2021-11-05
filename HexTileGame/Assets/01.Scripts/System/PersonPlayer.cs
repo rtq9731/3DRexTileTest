@@ -85,7 +85,6 @@ public class PersonPlayer : PlayerScript
     {
         get 
         {
-            Debug.Log(playerData.CurResearchData);
             return playerData.CurResearchData; 
         }
         set
