@@ -7641,6 +7641,7 @@ MonoBehaviour:
   playerData:
     owningTiles: []
     isGameOver: 0
+    turnCnt: 0
     missileInMaking: []
     missileReadyToShoot: []
     researchFinishTurn: 0
@@ -12433,7 +12434,8 @@ MonoBehaviour:
   TileXInterval: 1
   turnCnt: 0
   stageCount: 1
-  mapSize: 3
+  mapSize: 2
+  isRerolled: 0
   PlayerName: COCONUT
 --- !u!4 &1250035068
 Transform:

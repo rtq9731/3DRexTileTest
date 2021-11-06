@@ -77,6 +77,7 @@ public class MainSceneManager : MonoBehaviour
     public bool isRerolled = false;
 
     private HexTilemapGenerator tilemapGenerator;
+    private BtnReroll btnReroll = null;
 
     [Header("About Player")]
     public string PlayerName = "COCONUT";
@@ -106,6 +107,14 @@ public class MainSceneManager : MonoBehaviour
         isRerolled = false;
         FindObjectOfType<AIManager>().StartStage(mapSize);
         player.AddTile(TileMapData.Instance.GetTile(0)); // ¹«Á¶°Ç Áß¾Ó¶¥Àº ÇÃ·¹ÀÌ¾î²¨
+
+        if(btnReroll == null)
+        {
+            btnReroll = FindObjectOfType<BtnReroll>();
+        }
+
+        btnReroll.ActiveReroll();
+        player.TurnFinishAction += btnReroll.RemoveReroll;
         player.TurnFinishAction += CheckStageClear;
     }
 
@@ -127,7 +136,7 @@ public class MainSceneManager : MonoBehaviour
         tilemapGenerator.GenerateNewTile();
     }
 
-    public void RerollStage(Button btnReroll)
+    public void RerollStage()
     {
         if(isRerolled)
         {
@@ -135,9 +144,8 @@ public class MainSceneManager : MonoBehaviour
         }
 
         isRerolled = true;
-        btnReroll.gameObject.SetActive(false);
+        btnReroll.RemoveReroll();
 
-        DOTween.CompleteAll();
         while (!UIStackManager.IsUIStackEmpty())
         {
             UIStackManager.RemoveUIOnTopWithNoTime();
