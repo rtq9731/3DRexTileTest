@@ -5168,7 +5168,7 @@ MonoBehaviour:
   textMakeTurn: {fileID: 1062400713}
   textWeight: {fileID: 691424932}
   textPartInfo: {fileID: 765755968}
-  player: {fileID: 0}
+  player: {fileID: 835838797}
 --- !u!1 &601673372
 GameObject:
   m_ObjectHideFlags: 0

@@ -182,7 +182,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void TurnFinish()
     {
-        Debug.Log(owner);
         if(owner == null)
         {
             return;
