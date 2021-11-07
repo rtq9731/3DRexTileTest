@@ -78,12 +78,41 @@ public class TechNode : MonoBehaviour
 
     private void ResearchStart()
     {
-        if (MainSceneManager.Instance.GetPlayer().CurResearchData != null && MainSceneManager.Instance.GetPlayer().CurResearchData.Idx != -1)
+        PersonPlayer player = MainSceneManager.Instance.GetPlayer();
+
+        switch (data.Type)
         {
-            PanelException.CallExecptionPanel("이미 연구중인 항목이 있습니다!\n진행 중인 연구가 초기화됩니다.", () => MainSceneManager.Instance.GetPlayer().CurResearchData = data, "계속 진행", () => { }, "취소");
+            case ResearchType.Warhead:
+                if (player.UnlockedWarheadIdx.Contains(data.ResearchThingIdx))
+                {
+                    PanelException.CallPopupPanl("이미 연구가 끝난 탄두 연구입니다!", () => { });
+                    return;
+                }
+                break;
+            case ResearchType.Engine:
+                if (player.ResearchedEngineResearch.Contains(data.Idx))
+                {
+                    PanelException.CallPopupPanl("이미 연구가 끝난 엔진 연구입니다!", () => { });
+                    return;
+                }
+                break;
+            case ResearchType.Body:
+                if (player.ResearchedBodyResearch.Contains(data.Idx))
+                {
+                    PanelException.CallPopupPanl("이미 연구가 끝난 선체 연구입니다!", () => { });
+                    return;
+                }
+                break;
+            default:
+                break;
+        }
+
+        if (player.CurResearchData != null && player.CurResearchData.Idx != -1)
+        {
+            PanelException.CallExecptionPanel("이미 연구중인 항목이 있습니다!\n진행 중인 연구가 초기화됩니다.", () => player.CurResearchData = data, "계속 진행", () => { }, "취소");
             return;
         }
 
-        MainSceneManager.Instance.GetPlayer().CurResearchData = data;
+        player.CurResearchData = data;
     }
 }
