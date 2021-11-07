@@ -37,7 +37,7 @@ public class HexTilemapGenerator : MonoBehaviour
 
     GameObject[] groundTiles;
 
-    private void Start()
+    public void GenerateNewMap()
     {
         switch (type)
         {
@@ -58,6 +58,11 @@ public class HexTilemapGenerator : MonoBehaviour
         TileZInterval = MainSceneManager.Instance.TileZInterval;
 
         GenerateTiles(MainSceneManager.Instance.mapSize);
+    }
+
+    public void GenerateLoadedMap()
+    {
+
     }
 
     public void GenerateNewTile()
@@ -135,6 +140,11 @@ public class HexTilemapGenerator : MonoBehaviour
         }
 
         GetComponent<HexObjectTileManager>().GenerateObjects(size, type);
+    }
+
+    private void LoadMap()
+    {
+        List<TileScript> tiles = TileMapData.Instance.GetAllTiles();
     }
 
 }

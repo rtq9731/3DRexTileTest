@@ -90,6 +90,14 @@ public class MainSceneManager : MonoBehaviour
     private void Start()
     {
         tilemapGenerator = FindObjectOfType<HexTilemapGenerator>();
+
+        if(GameManager.Instance.isLoadData)
+        {
+            tilemapGenerator.GenerateLoadedMap();
+            return;
+        }
+
+        tilemapGenerator.GenerateNewMap();
     }
 
     public void SetPlayer(PersonPlayer player)
@@ -163,7 +171,7 @@ public class MainSceneManager : MonoBehaviour
 
     private void CheckStageClear()
     {
-        if(AIManager.Instance.aiPlayers.Find(x => x.OwningTiles.Count > 1) == null)
+        if(AIManager.Instance.aiPlayers.Find(x => x.OwningTiles.Count >= 1) == null)
         {
             ClearStage();
         }

@@ -3,23 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class AIManager : MonoBehaviour
 {
     [SerializeField] public int aiPlayerCount = 3;
 
     public List<AIPlayer> aiPlayers = new List<AIPlayer>();
 
-    public static AIManager Instance = null;
+    private static AIManager instance = null;
 
-    private int curTurnCnt = 0;
+    [SerializeField] private int curTurnCnt = 0;
+
+    public static AIManager Instance
+    {
+        get { return instance; }
+    }
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
     private void OnDestroy()
     {
-        Instance = null;
+        instance = null;
     }
 
     private void Start()
@@ -57,16 +63,6 @@ public class AIManager : MonoBehaviour
                 item.AddTile(x);
             });
         }
-    }
-
-    public void AIFireMissile()
-    {
-        
-    }
-
-    public void GetNewStage()
-    {
-
     }
 
     public void CheckAndAttackPlayer()
@@ -129,6 +125,11 @@ public class AIManager : MonoBehaviour
 
         foreach (var itemTile in ai.OwningTiles)
         {
+            if(itemTile.IsInEffect()) // 지속형 탄두의 영향 하인가?
+            {
+                return;
+            }
+
             MainSceneManager.Instance.tileChecker.FindTilesInRange(itemTile, 1).FindAll(x => x.Owner == MainSceneManager.Instance.GetPlayer()).ForEach(x => attackableTiles.Add(x));
         }
 

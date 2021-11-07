@@ -5,11 +5,13 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
+[Serializable]
 public class TileScript : MonoBehaviour, ITurnFinishObj
 {
     [SerializeField] TileData data;
-
-    List<TileEffectClass> turnFinishEffects = new List<TileEffectClass>();
+    [SerializeField] bool isInEffect = false;
+    [SerializeField] int resourceLossTurn = 0;
+    [SerializeField] int resourceLoss = 0;
 
     public TileData Data
     {
@@ -62,16 +64,16 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
                 DamageMoreTile(tilesInMoreHitRange, 4, MainSceneManager.Instance.GetWarheadData(warhead).Atk);
                 break;
             case MissileTypes.MissileWarheadType.ContinuousTypeWarhead1:
-                turnFinishEffects.Add(new TileEffectClass(() => this.data.Resource = data.MaxResource - 1, 2, () => this.data.Resource = this.data.MaxResource));
+                ResourceLoss(1, 2);
                 break;
             case MissileTypes.MissileWarheadType.ContinuousTypeWarhead2:
-                turnFinishEffects.Add(new TileEffectClass(() => this.data.Resource = data.MaxResource - 3, 3, () => this.data.Resource = this.data.MaxResource));
+                ResourceLoss(3, 3);
                 break;
             case MissileTypes.MissileWarheadType.MoreWideTypeWarhead:
                 DamageMoreTile(tilesInMoreHitRange, 6, MainSceneManager.Instance.GetWarheadData(warhead).Atk);
                 break;
             case MissileTypes.MissileWarheadType.WideContinuousTypeWarhead:
-                turnFinishEffects.Add(new TileEffectClass(() => this.data.Resource = data.MaxResource - 3, 3, () => this.data.Resource = this.data.MaxResource));
+                ResourceLoss(3, 3);
                 EffectMoreTile(tilesInMoreHitRange, 3, 2, 3);
                 break;
             case MissileTypes.MissileWarheadType.WideDamageTypeWarhead:
@@ -106,7 +108,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         }
     }
 
-    private void EffectMoreTile(List<TileScript> tilesInMoreHitRange, int moreHitTileCnt, int resouceLoss, int turnForFinish)
+    private void EffectMoreTile(List<TileScript> tilesInMoreHitRange, int moreHitTileCnt, int resourceLoss, int turnForFinish)
     {
         tilesInMoreHitRange = GetTilesCanFire(tilesInMoreHitRange);
 
@@ -117,8 +119,14 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
             tilesInMoreHitRange.Remove(randTile); // 중복 효과 적용을 막기 위함
 
-            randTile.turnFinishEffects.Add(new TileEffectClass(() => tilesInMoreHitRange[a].data.Resource = data.MaxResource - resouceLoss, turnForFinish, () => tilesInMoreHitRange[a].data.Resource = this.data.MaxResource));
+            ResourceLoss(resourceLoss, turnForFinish);
         }
+    }
+
+    private void ResourceLoss(int resourceLoss, int turn)
+    {
+        this.resourceLoss = resourceLoss;
+        this.resourceLossTurn = turn;
     }
 
     private List<TileScript> GetTilesCanFire(List<TileScript> tiles)
@@ -187,8 +195,13 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             return;
         }
 
+        if(resourceLossTurn <= 0)
+        {
+            resourceLoss = 0;
+        }
+
         if(owner.GetType() == typeof(PersonPlayer))
-        (owner as PersonPlayer).AddResource(data.Resource);
+        (owner as PersonPlayer).AddResource(data.Resource - resourceLoss);
     }
 
     public void BuyTile(PersonPlayer owner)
@@ -246,6 +259,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             default:
                 break;
         }
+    }
+
+    public bool IsInEffect()
+    {
+        return isInEffect;
     }
 
 }

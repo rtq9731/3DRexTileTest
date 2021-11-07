@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Serializable]
 public class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
     [SerializeField] protected string myName = "NULL";
@@ -21,7 +21,10 @@ public class PlayerScript : MonoBehaviour, ITurnFinishObj
 
     public virtual List<TileScript> OwningTiles
     {
-        get { return data.OwningTiles; }
+        get 
+        { 
+            return data.OwningTiles; 
+        }
     }
 
     protected void Awake()

@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class TileEffectClass : MonoBehaviour, ITurnFinishObj
 {
+    [SerializeField]
     int turnforEnd = 0;
     Action turnFinishAct = () => { };
-    Action finishEffectAction = () => { };
+    Action finishEffectAct = () => { };
 
     public void TurnFinish()
     {
@@ -17,8 +19,8 @@ public class TileEffectClass : MonoBehaviour, ITurnFinishObj
         if (turnforEnd <= 0)
         {
             turnFinishAct = () => { };
-            finishEffectAction();
-            finishEffectAction = () => { }; // 전부 초기화
+            finishEffectAct();
+            finishEffectAct = () => { }; // 전부 초기화
         }
     }
 
@@ -31,7 +33,7 @@ public class TileEffectClass : MonoBehaviour, ITurnFinishObj
     public TileEffectClass(Action turnFinishAction, int turn, Action finishEffectAction)
     {
         turnforEnd = 0;
-        finishEffectAction += finishEffectAction;
+        finishEffectAct += finishEffectAction;
         turnFinishAct += turnFinishAction;
     }
 }

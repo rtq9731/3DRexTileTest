@@ -2,25 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class TileMapData : MonoBehaviour
 {
-    public static TileMapData Instance;
+    private static TileMapData instance;
 
+    [SerializeField]
     private List<TileScript> tileList = new List<TileScript>();
 
     private void Awake()
     {
-        if(Instance != null)
+        if(instance != null)
         {
             Destroy(this);
             return;
         }
 
-        Instance = this;
+        instance = this;
     }
+
     private void OnDestroy()
     {
-        Instance = null;
+        instance = null;
+    }
+
+    public static TileMapData Instance
+    {
+        get { return instance; }
     }
 
     public void ResetTileList()

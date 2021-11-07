@@ -3,13 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class AIPlayer : PlayerScript
 {
-    private bool isDead = false;
-    public bool IsDead
-    {
-        get { return isDead; }
-    }
+    [SerializeField] bool isDead = false;
 
     private void Start()
     {

@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public bool isLoadData = false;
 
     public void SaveData()
     {
-
+        TileMapData.Instance.GetAllTiles();
     }
 
     public void LoadData()

@@ -10,11 +10,11 @@ public class TileData
 
     Vector3 position = Vector3.zero;
 
-    int maxShield = 100;
-    int price = 20;
-    int shield = 100;
-    int maxResource = 3;
-    int resource = 3;
+    [SerializeField] int maxShield = 100;
+    [SerializeField] int price = 20;
+    [SerializeField] int shield = 100;
+    [SerializeField] int maxResource = 3;
+    [SerializeField] int resource = 3;
 
     public int MaxShield { get { return maxShield; } set { maxShield = value; } }
     public int Price { get { return price; } set { price = value; } }

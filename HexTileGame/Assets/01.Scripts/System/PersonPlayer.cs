@@ -4,13 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PersonPlayer : PlayerScript
 {
     [Header("플레이어 정보 입력")]
     [SerializeField] string playerName;
     [SerializeField] Color color;
 
-    [SerializeField] new MainPlayerData playerData = new MainPlayerData();
+    [SerializeField] MainPlayerData playerData = new MainPlayerData();
 
     public List<MissileData> MissileInMaking
     {
