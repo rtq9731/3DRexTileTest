@@ -85,21 +85,21 @@ public class TechNode : MonoBehaviour
             case ResearchType.Warhead:
                 if (player.UnlockedWarheadIdx.Contains(data.ResearchThingIdx))
                 {
-                    PanelException.CallPopupPanl("이미 연구가 끝난 탄두 연구입니다!", () => { });
+                    PanelException.CallPopupPanl("이미 끝난 탄두 연구입니다!", () => { });
                     return;
                 }
                 break;
             case ResearchType.Engine:
                 if (player.ResearchedEngineResearch.Contains(data.Idx))
                 {
-                    PanelException.CallPopupPanl("이미 연구가 끝난 엔진 연구입니다!", () => { });
+                    PanelException.CallPopupPanl("이미 끝난 엔진 연구입니다!", () => { });
                     return;
                 }
                 break;
             case ResearchType.Body:
                 if (player.ResearchedBodyResearch.Contains(data.Idx))
                 {
-                    PanelException.CallPopupPanl("이미 연구가 끝난 선체 연구입니다!", () => { });
+                    PanelException.CallPopupPanl("이미 끝난 선체 연구입니다!", () => { });
                     return;
                 }
                 break;

@@ -9,19 +9,21 @@ public class UITopExtension : MonoBehaviour
     [SerializeField] Button btnFireMissile;
     [SerializeField] Button btnReserchMissile;
     [SerializeField] Button btnMakeMissile;
+    [SerializeField] Button btnMenu;
 
     [Header("연결 되는 패널")]
     [SerializeField] GameObject panelFireMissile;
     [SerializeField] GameObject panelReserchMissile;
     [SerializeField] GameObject panelMakeMissile;
+    [SerializeField] GameObject panelMenu;
 
     private void Awake()
     {
         btnFireMissile.onClick.AddListener(() =>
         {
-            if(UIStackManager.IsUIStackEmpty())
+            if (UIStackManager.IsUIStackEmpty())
                 panelFireMissile.SetActive(true);
-            });
+        });
 
         btnReserchMissile.onClick.AddListener(() => 
         {
@@ -33,6 +35,12 @@ public class UITopExtension : MonoBehaviour
         {
             if (UIStackManager.IsUIStackEmpty())
                 panelMakeMissile.SetActive(true);
+        });
+
+        btnMenu.onClick.AddListener(() =>
+        {
+            if (UIStackManager.IsUIStackEmpty())
+                panelMenu.SetActive(true);
         });
     }
 }
