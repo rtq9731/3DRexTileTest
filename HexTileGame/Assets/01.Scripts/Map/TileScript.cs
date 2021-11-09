@@ -117,7 +117,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             int a = i;
             TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
 
-            tilesInMoreHitRange.Remove(randTile); // 중복 효과 적용을 막기 위함
+            tilesInMoreHitRange.Remove(randTile); // 이미 적용된 타일을 치움 ( 중복 효과 적용을 막기 위함 )
 
             ResourceLoss(resourceLoss, turnForFinish);
         }
