@@ -23,7 +23,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void SaveData()
     {
-        TileMapData.Instance.GetAllTiles();
 
     }
 
