@@ -8,8 +8,7 @@ public class TileData
     public TileType type = TileType.None;
     public int tileNum = -1;
 
-    Vector3 position = Vector3.zero;
-
+    [SerializeField] Vector3 position = Vector3.zero;
     [SerializeField] int maxShield = 100;
     [SerializeField] int price = 20;
     [SerializeField] int shield = 100;
@@ -56,7 +55,15 @@ public class TileData
 
     private void SetDataToPlain() // 지형 초기화용 함수
     {
+        type = TileType.Plain;
+        price = 20;
         resource = 3;
+        maxShield = 100;
         shield = 100;
+    }
+
+    public TileData()
+    {
+        SetDataToPlain();
     }
 }

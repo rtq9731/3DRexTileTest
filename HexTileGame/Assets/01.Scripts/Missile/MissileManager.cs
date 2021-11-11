@@ -39,7 +39,6 @@ public class MissileManager: MonoBehaviour
 
     public void fireMissileFromStartToTarget(TileScript start, MissileData missile, TileScript target, out GameObject missileObj)
     {
-
         Vector3 midPoint = new Vector3((start.transform.position.x + target.transform.position.x) / 2, missileHeight, (start.transform.position.z + target.transform.position.z) / 2);
         // 두 벡터 사이의 중점을 구함 ( 높이는 따로 지정 )
 
@@ -61,13 +60,20 @@ public class MissileManager: MonoBehaviour
 
     IEnumerator FireCoroutine(Vector3 startPoint, Vector3 midPoint, Vector3 targetPoint, GameObject missileObj, TileScript targetTile, MissileData missileData)
     {
+        Vector3 beforePos = missileObj.transform.position;
         while (missileObj.transform.position != targetPoint)
         {
             timer += Time.deltaTime * 0.5f;
             Vector3 p1 = Vector3.Lerp(startPoint, midPoint, timer);
             Vector3 p2 = Vector3.Lerp(midPoint, targetPoint, timer);
             missileObj.transform.position = Vector3.Lerp(p1, p2, timer);
+
             yield return null;
+
+            Vector3 delta = missileObj.transform.position - beforePos;
+            Debug.Log(delta);
+            missileObj.transform.rotation = Quaternion.LookRotation(delta.normalized);
+            beforePos = missileObj.transform.position;
         }
 
         

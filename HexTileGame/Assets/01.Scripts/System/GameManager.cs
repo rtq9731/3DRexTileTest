@@ -28,13 +28,22 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void LoadData()
     {
+
+    }
+
+    public FileInfo[] GetAllSaveFiles()
+    {
         if (Directory.Exists(filePath))
         {
             DirectoryInfo di = new DirectoryInfo(filePath);
 
+            return di.GetFiles();
+        }
+        else
+        {
+            return null;
         }
     }
-
 
 }
     

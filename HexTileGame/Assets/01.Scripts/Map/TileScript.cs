@@ -8,14 +8,15 @@ using DG.Tweening;
 [Serializable]
 public class TileScript : MonoBehaviour, ITurnFinishObj
 {
-    [SerializeField] TileData data;
-    [SerializeField] bool isInEffect = false;
-    [SerializeField] int resourceLossTurn = 0;
-    [SerializeField] int resourceLoss = 0;
+    [SerializeField] [HideInInspector] TileData data = new TileData();
+    [SerializeField] [HideInInspector] bool isInEffect = false;
+    [SerializeField] [HideInInspector] int resourceLossTurn = 0;
+    [SerializeField] [HideInInspector] int resourceLoss = 0;
 
     public TileData Data
     {
         get { return data; }
+        set { data = value; }
     }
 
     [SerializeField]
@@ -30,17 +31,21 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     {
         DoMissileHitAct(warhead, this);
         data.Shield -= MainSceneManager.Instance.GetWarheadData(warhead).Atk;
-        
-        if(data.Shield <= 0)
+
+        if (data.Shield <= 0)
         {
             ChangeOwner(null);
             data.Shield = data.MaxShield;
         }
     }
+
     public void Damage(int damage)
     {
-        if (this.data.type == (TileType.Lake | TileType.Lake))
+        if (this.data.type == (TileType.Lake | TileType.Lake) || owner == null)
             return;
+
+        Debug.Log(owner.MyName + " " + damage);
+        Debug.Log(data.tileNum);
 
         data.Shield -= damage;
         MainSceneManager.Instance.effectPool.PlayEffectOnTile(this);
@@ -48,7 +53,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         if (data.Shield <= 0)
         {
             ChangeOwner(null);
-            data.Shield = data.MaxShield;
         }
     }
 
@@ -92,19 +96,26 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     {
         tilesInMoreHitRange = GetTilesCanFire(tilesInMoreHitRange);
 
-        if(moreHitTileCnt < 1)
+        if(tilesInMoreHitRange.Count < 1)
         {
             return;
         }
 
         for (int i = 0; i < moreHitTileCnt; i++)
         {
+
+            if(tilesInMoreHitRange.Count <= 1)
+            {
+                return;
+            }
+
             TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
 
             tilesInMoreHitRange.Remove(randTile); // 중복 타격을 막기 위함
             Debug.Log(randTile.owner);
 
             randTile.Damage(damage);
+
         }
     }
 
@@ -168,7 +179,9 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
                 }
             }
             owner = newOwner;
-            newOwner.AddTile(this);
+
+            owner.AddTile(this);
+            owner.TurnFinishAction += TurnFinish;
         }
         else if(newOwner == null)
         {
@@ -182,10 +195,14 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             }
 
             if(owner != null)
-            owner.RemoveTile(this);
+            {
+                owner.TurnFinishAction -= TurnFinish;
+                owner.RemoveTile(this);
+            }
         }
 
         owner = newOwner;
+        data.Shield = data.MaxShield;
     }
 
     public void TurnFinish()
@@ -245,25 +262,9 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         tileVcam.SetActive(false);
         transform.DOMove(data.Position, 0.3f);
     }
-    
-    public void SetType(ObjType objType)
-    {
-        switch (objType)
-        {
-            case ObjType.Tree:
-                break;
-            case ObjType.Mountain:
-                break;
-            case ObjType.Rock:
-                break;
-            default:
-                break;
-        }
-    }
 
     public bool IsInEffect()
     {
         return isInEffect;
     }
-
 }

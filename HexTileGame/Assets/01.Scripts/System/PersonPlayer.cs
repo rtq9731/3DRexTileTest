@@ -214,7 +214,6 @@ public class PersonPlayer : PlayerScript
     public override void TurnFinish()
     {
         TurnFinishAction();
-        playerData.OwningTiles.ForEach(x => x.TurnFinish());
     }
 
     public void AddResource(int resource)

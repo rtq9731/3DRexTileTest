@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class TileMapData : MonoBehaviour
 {
     private static TileMapData instance;
@@ -29,6 +28,11 @@ public class TileMapData : MonoBehaviour
     public static TileMapData Instance
     {
         get { return instance; }
+    }
+
+    public void SetTileList(List<TileScript> list)
+    {
+        tileList = list;
     }
 
     public void ResetTileList()

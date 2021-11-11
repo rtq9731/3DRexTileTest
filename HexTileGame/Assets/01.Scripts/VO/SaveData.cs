@@ -5,5 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData : MonoBehaviour
 {
+    List<TileScript> tiles = new List<TileScript>();
+
 
 }

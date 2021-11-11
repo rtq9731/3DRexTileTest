@@ -70,7 +70,6 @@ public class HexTilemapGenerator : MonoBehaviour
         Destroy(tileParent.gameObject);
         tileParent = Instantiate(parentObj, transform).transform;
 
-        MainSceneManager.Instance.mapSize++;
         StartCoroutine(ReGenerateTiles());
     }
 
@@ -111,6 +110,8 @@ public class HexTilemapGenerator : MonoBehaviour
             }
 
             TileScript tempScirpt = temp.GetComponent<TileScript>();
+            tempScirpt.Data = new TileData();
+            CheckGroundType(tempScirpt);
             TileMapData.Instance.SetTileData(tempScirpt);
             tempScirpt.SetPosition(tilePos[cnt]);
             tempScirpt.Data.tileNum = cnt;
@@ -140,6 +141,24 @@ public class HexTilemapGenerator : MonoBehaviour
         }
 
         GetComponent<HexObjectTileManager>().GenerateObjects(size, type);
+    }
+
+    private void CheckGroundType(TileScript obj)
+    {
+        string objName = obj.gameObject.name;
+        Debug.Log(objName);
+        if (objName.Contains("Lake"))
+        {
+            obj.Data.type = TileType.Lake;
+        }
+        else if(objName.Contains("Ocean"))
+        {
+            obj.Data.type = TileType.Ocean;
+        }
+        else if(objName.Contains("DigSite"))
+        {
+            obj.Data.type = TileType.DigSite;
+        }
     }
 
     private void LoadMap()

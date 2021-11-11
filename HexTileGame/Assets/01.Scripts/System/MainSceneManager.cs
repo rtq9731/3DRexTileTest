@@ -82,9 +82,6 @@ public class MainSceneManager : MonoBehaviour
     [Header("About Player")]
     public string PlayerName = "COCONUT";
 
-    List<PlayerScript> players = new List<PlayerScript>();
-    public List<PlayerScript> Players { get { return players; } set { players = value; } }
-
     PersonPlayer player = null;
 
     private void Start()
@@ -140,6 +137,13 @@ public class MainSceneManager : MonoBehaviour
         AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
 
         turnCnt = 0;
+        
+        if(stageCount % 2 == 0 && AIManager.Instance.aiPlayerCount < 6) // 짝수 번째 스테이지 일때 && AI가 6개 밑일 때
+        {
+            AIManager.Instance.aiPlayerCount++;
+        }
+        mapSize++;
+
         player.ResetPlayer();
         tilemapGenerator.GenerateNewTile();
     }

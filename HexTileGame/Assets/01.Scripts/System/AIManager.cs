@@ -68,7 +68,6 @@ public class AIManager : MonoBehaviour
     public void CheckAndAttackPlayer()
     {
         curTurnCnt++;
-        Debug.Log(curTurnCnt);
         if (curTurnCnt <= 20)
         {
             if (curTurnCnt % 20 == 0)
@@ -92,7 +91,7 @@ public class AIManager : MonoBehaviour
         List<AIPlayer> onlineAI = aiPlayers.FindAll(x => x.OwningTiles.Count >= 1);
         foreach (var item in onlineAI)
         {
-            Debug.Log(item.MyName);
+            Debug.Log(item.MyName); 
 
             if(item.CanAttack(out List<TileScript> attackableTiles))
             {
@@ -109,17 +108,17 @@ public class AIManager : MonoBehaviour
             {
                 for (int i = 0; i < item.OwningTiles.Count / 3; i++)
                 {
-                    aiRandAttack(item);
+                    AIRandAttack(item);
                 }
             }
             else
             {
-                aiRandAttack(item);
+                AIRandAttack(item);
             }
         }
     }
 
-    private void aiRandAttack(AIPlayer ai)
+    private void AIRandAttack(AIPlayer ai)
     {
         List<TileScript> attackableTiles = new List<TileScript>();
 

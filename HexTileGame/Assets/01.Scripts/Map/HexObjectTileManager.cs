@@ -65,6 +65,11 @@ public class HexObjectTileManager : LoadingObj
                         default:
                             break;
                     }
+
+                    if(curTile.Data.Price != 20)
+                    {
+                        Debug.Log(curTile.Data.type + " " + curTile.Data.Price);
+                    }
                 }
 
             }
