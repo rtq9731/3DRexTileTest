@@ -14,12 +14,18 @@ public class TileData
     [SerializeField] int shield = 100;
     [SerializeField] int maxResource = 3;
     [SerializeField] int resource = 3;
+    [SerializeField] int resourceLossTurn = 0;
+    [SerializeField] int resourceLoss = 0;
+    [SerializeField] bool isInEffect = false;
 
     public int MaxShield { get { return maxShield; } set { maxShield = value; } }
     public int Price { get { return price; } set { price = value; } }
     public int Shield { get { return shield; } set { shield = value; } }
     public int MaxResource { get { return maxResource; } set { maxResource = value; } }
     public int Resource { get { return resource; } set { resource = value; } }
+    public int ResourceLossTurn { get { return resourceLossTurn; } set { resourceLossTurn = value; } }
+    public int ResourceLoss { get { return resourceLoss; } set { resourceLoss = value; } }
+    public bool IsInEffect { get { return isInEffect; } set { isInEffect = value; } }
 
     public Vector3 Position { get { return position; } set { position = value; } }
 

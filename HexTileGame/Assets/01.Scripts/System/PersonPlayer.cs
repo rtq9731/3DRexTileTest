@@ -3,15 +3,10 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[System.Serializable]
+ 
 public class PersonPlayer : PlayerScript
 {
-    [Header("플레이어 정보 입력")]
-    [SerializeField] string playerName;
-    [SerializeField] Color color;
-
-    [SerializeField] MainPlayerData playerData = new MainPlayerData();
+    MainPlayerData playerData = new MainPlayerData();
 
     public List<MissileData> MissileInMaking
     {
@@ -76,9 +71,9 @@ public class PersonPlayer : PlayerScript
 
         MainSceneManager.Instance.SetPlayer(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
-        MainSceneManager.Instance.PlayerName = playerName;
-        playerColor = color;
-        myName = playerName;
+        MainSceneManager.Instance.PlayerName = playerData.PlayerName;
+        playerColor = playerData.playerColor;
+        myName = playerData.PlayerName;
     }
 
     public SkillTreeNode CurResearchData

@@ -6,13 +6,13 @@ using UnityEngine;
 [System.Serializable]
 public class AIManager : MonoBehaviour
 {
-    [SerializeField] public int aiPlayerCount = 3;
+    public int aiPlayerCount = 3;
 
     public List<AIPlayer> aiPlayers = new List<AIPlayer>();
 
     private static AIManager instance = null;
 
-    [SerializeField] private int curTurnCnt = 0;
+    private int curTurnCnt = 0;
 
     public static AIManager Instance
     {

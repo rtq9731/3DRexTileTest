@@ -5,13 +5,9 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
-[Serializable]
 public class TileScript : MonoBehaviour, ITurnFinishObj
 {
-    [SerializeField] [HideInInspector] TileData data = new TileData();
-    [SerializeField] [HideInInspector] bool isInEffect = false;
-    [SerializeField] [HideInInspector] int resourceLossTurn = 0;
-    [SerializeField] [HideInInspector] int resourceLoss = 0;
+    TileData data = new TileData();
 
     public TileData Data
     {
@@ -136,8 +132,8 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     private void ResourceLoss(int resourceLoss, int turn)
     {
-        this.resourceLoss = resourceLoss;
-        this.resourceLossTurn = turn;
+        this.data.ResourceLoss = resourceLoss;
+        this.data.ResourceLossTurn = turn;
     }
 
     private List<TileScript> GetTilesCanFire(List<TileScript> tiles)
@@ -212,13 +208,13 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             return;
         }
 
-        if(resourceLossTurn <= 0)
+        if(data.ResourceLossTurn <= 0)
         {
-            resourceLoss = 0;
+            data.ResourceLoss = 0;
         }
 
         if(owner.GetType() == typeof(PersonPlayer))
-        (owner as PersonPlayer).AddResource(data.Resource - resourceLoss);
+        (owner as PersonPlayer).AddResource(data.Resource - data.ResourceLoss);
     }
 
     public void BuyTile(PersonPlayer owner)
@@ -265,6 +261,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public bool IsInEffect()
     {
-        return isInEffect;
+        return data.IsInEffect;
     }
 }

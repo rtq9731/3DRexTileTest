@@ -37,7 +37,11 @@ public class GameManager : MonoSingleton<GameManager>
         {
             DirectoryInfo di = new DirectoryInfo(filePath);
 
-            return di.GetFiles();
+            var selectedFiles = from item in di.GetFiles()
+                                where item.Name.Contains(".sav")
+                                select item;
+
+            return selectedFiles.ToArray();
         }
         else
         {

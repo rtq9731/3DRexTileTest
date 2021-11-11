@@ -13,6 +13,7 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] MissileEngine missileEngine;
     [SerializeField] Body missileBody;
     [SerializeField] public TechTreeDatas techTreeDatas;
+   
 
     public BodyData GetMissileBodyData(MissileTypes.MissileBody type)
     {
@@ -72,7 +73,7 @@ public class MainSceneManager : MonoBehaviour
     public float TileXInterval = 1f;
     public uint turnCnt = 0;
     public uint stageCount = 1;
-    public int mapSize;
+    public int mapSize = 3;
 
     public bool isRerolled = false;
 
