@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    public List<TileScript> tiles = new List<TileScript>();
+    public List<TileData> tiles = new List<TileData>();
     public MainPlayerData playerData = null;
     public CommonPlayerData[] aiPlayers = null;
 
@@ -14,4 +14,15 @@ public class SaveData
     public int mapSize = 3;
 
     public bool isRerolled = false;
+
+    public SaveData(List<TileData> tiles, MainPlayerData playerData, CommonPlayerData[] aiPlayers, uint turnCnt, uint stageCount, int mapSize, bool isRerolled)
+    {
+        this.tiles = tiles;
+        this.playerData = playerData;
+        this.aiPlayers = aiPlayers;
+        this.turnCnt = turnCnt;
+        this.stageCount = stageCount;
+        this.mapSize = mapSize;
+        this.isRerolled = isRerolled;
+    }
 }
