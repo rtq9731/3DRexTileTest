@@ -122,6 +122,7 @@ public class MainSceneManager : MonoBehaviour
         btnReroll.ActiveReroll();
         player.TurnFinishAction += btnReroll.RemoveReroll;
         player.TurnFinishAction += CheckStageClear;
+        GameManager.Instance.SaveData();
     }
 
     public void ClearStage()
