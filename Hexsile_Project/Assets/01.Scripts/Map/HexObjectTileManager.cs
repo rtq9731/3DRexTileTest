@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexObjectTileManager : LoadingObj
+public class HexObjectTileManager : MonoBehaviour
 {
 
     [SerializeField] GameObject[] jungleGroundObjSet;
@@ -11,12 +11,6 @@ public class HexObjectTileManager : LoadingObj
     [SerializeField] GameObject[] MountainGroundObjSet;
 
     GameObject[] objects;
-
-    private void Awake()
-    {
-        start = x => { };
-        finish = x => { };
-    }
 
     public void GenerateObjects(int size, HexTilemapGenerator.GroundType groundType)
     {

@@ -8,8 +8,8 @@ public class SaveData : ISerializationCallbackReceiver
 {
     DateTime saveTime = DateTime.Now;
 
-    public List<TileData> tiles = new List<TileData>();
     public MainPlayerData playerData = null;
+    public TileData[] tiles = null;
     public CommonPlayerData[] aiPlayers = null;
 
     public uint turnCnt = 0;
@@ -18,7 +18,7 @@ public class SaveData : ISerializationCallbackReceiver
 
     public bool isRerolled = false;
 
-    public SaveData(List<TileData> tiles, MainPlayerData playerData, CommonPlayerData[] aiPlayers, uint turnCnt, uint stageCount, int mapSize, bool isRerolled)
+    public SaveData(TileData[] tiles, MainPlayerData playerData, CommonPlayerData[] aiPlayers, uint turnCnt, uint stageCount, int mapSize, bool isRerolled)
     {
         this.tiles = tiles;
         this.playerData = playerData;

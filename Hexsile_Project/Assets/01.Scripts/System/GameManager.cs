@@ -23,7 +23,12 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void SaveData()
     {
+        JsonUtility.ToJson(new SaveData(TileMapData.Instance.GetAllTilesData(), MainSceneManager.Instance.GetPlayer().PlayerData, AIManager.Instance.GetAIDatas(), MainSceneManager.Instance.turnCnt, MainSceneManager.Instance.stageCount, MainSceneManager.Instance.mapSize, MainSceneManager.Instance.isRerolled));
+        
+        using (StreamWriter sw = new StreamWriter(filePath))
+        {
 
+        }
     }
 
     public void LoadData()

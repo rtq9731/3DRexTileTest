@@ -13,6 +13,11 @@ public class AIPlayer : PlayerScript
         TurnFinishAction += CheckIsDie;
     }
 
+    public CommonPlayerData Data
+    {
+        get { return data; }
+    }
+
     public override void AddTile(TileScript tile)
     {
         if (tile.Owner == MainSceneManager.Instance.GetPlayer() ||

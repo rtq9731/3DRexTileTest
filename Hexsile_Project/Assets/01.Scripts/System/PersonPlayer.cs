@@ -8,6 +8,11 @@ public class PersonPlayer : PlayerScript
 {
     [SerializeField] MainPlayerData playerData = new MainPlayerData();
 
+    public MainPlayerData PlayerData
+    {
+        get { return playerData; }
+    }
+
     public List<MissileData> MissileInMaking
     {
         get { return playerData.MissileInMaking; }

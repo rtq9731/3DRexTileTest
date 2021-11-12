@@ -59,6 +59,13 @@ public class TileMapData : MonoBehaviour
     {
         return tileList;
     }
+    public TileData[] GetAllTilesData()
+    {
+        List<TileData> tileDatas = new List<TileData>();
+        tileList.ForEach(x => tileDatas.Add(x.Data));
+
+        return tileDatas.ToArray();
+    }
 
     public void ResetColorAllTile()
     {

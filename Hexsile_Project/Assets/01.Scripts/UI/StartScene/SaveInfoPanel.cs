@@ -18,6 +18,7 @@ public class SaveInfoPanel : MonoBehaviour
         textPlayerName.text = $"플레이어 : {data.playerData.PlayerName}";
         textStage.text = $"스테이지 : {data.stageCount}";
         textTurn.text = $"진행된 턴 : {data.turnCnt}";
+        this.infoPanel = infoPanel;
     }
 
 }

@@ -33,6 +33,13 @@ public class AIManager : MonoBehaviour
         aiPlayers = GetComponentsInChildren<AIPlayer>().ToList();
     }
 
+    public CommonPlayerData[] GetAIDatas()
+    {
+        List<CommonPlayerData> datas = new List<CommonPlayerData>();
+        aiPlayers.ForEach(x => datas.Add(x.Data));
+        return datas.ToArray();
+    }
+
     public void StartStage(int mapSize)
     {
         curTurnCnt = 0;
