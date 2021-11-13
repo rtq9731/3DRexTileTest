@@ -166,13 +166,14 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     {
         if(newOwner != null && newOwner != owner)
         {
-            GetComponent<MeshRenderer>().material.color = newOwner.playerColor;
-            foreach (var item in transform.GetComponentsInChildren<MeshRenderer>())
+            Color tileColor = Color.white;
+
+            tileColor = newOwner != MainSceneManager.Instance.GetPlayer() ? (newOwner as AIPlayer).Data.PlayerColor : tileColor = (newOwner as PersonPlayer).PlayerData.PlayerColor;
+
+            GetComponent<MeshRenderer>().material.color = tileColor; // 타일에 적용
+            foreach (var item in transform.GetComponentsInChildren<MeshRenderer>()) // 타일 위에 있는 모든 오브젝트에 색깔 적용
             {
-                if(item.transform.parent.GetComponent<CloudObject>() == null)
-                {
-                    item.material.color = newOwner.playerColor;
-                }
+                item.GetComponent<MeshRenderer>().material.color = tileColor;
             }
             owner = newOwner;
 
