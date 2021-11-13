@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AIPlayer : PlayerScript
 {
-    [SerializeField] AIData data;
+    [SerializeField] AIData data = new AIData();
 
     private void Start()
     {
@@ -16,6 +16,10 @@ public class AIPlayer : PlayerScript
     {
         get { return data; }
     }
+
+    public override List<TileScript> OwningTiles => data.OwningTiles;
+
+    public override string MyName => data.PlayerName;
 
     public override void AddTile(TileScript tile)
     {

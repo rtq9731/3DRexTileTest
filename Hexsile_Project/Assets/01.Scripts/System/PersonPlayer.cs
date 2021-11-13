@@ -12,7 +12,6 @@ public class PersonPlayer : PlayerScript
     {
         get { return playerData; }
     }
-
     public List<MissileData> MissileInMaking
     {
         get { return playerData.MissileInMaking; }
@@ -54,11 +53,13 @@ public class PersonPlayer : PlayerScript
     {
         get { return playerData.OwningTiles; }
     }
+    public override string MyName
+    {
+        get { return playerData.PlayerName; }
+    }
 
     private void Awake()
     {
-        myName = playerData.PlayerName;
-
         TurnFinishAction += () => { MainSceneManager.Instance.turnCnt++; };
 
         TurnFinishAction += () => {

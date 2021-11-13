@@ -6,31 +6,26 @@ using UnityEngine;
 
 public abstract class PlayerScript : MonoBehaviour, ITurnFinishObj
 {
-    protected string myName = "NULL";
-
-    public string MyName
+    public abstract string MyName
     {
-        get { return myName; }
+        get;
+    }
+    public abstract List<TileScript> OwningTiles
+    {
+        get;
     }
 
     public Action TurnFinishAction;
+
     public abstract void ResetPlayer();
     public abstract void AddTile(TileScript tile);
     public abstract void RemoveTile(TileScript tile);
 
-    public virtual List<TileScript> OwningTiles
-    {
-        get 
-        { 
-            return null; 
-        }
-    }
 
     protected void Awake()
     {
         TurnFinishAction = () => { }; // 액션 초기화
     }
-
 
     public virtual void TurnFinish()
     {
