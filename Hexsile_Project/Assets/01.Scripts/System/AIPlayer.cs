@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class AIPlayer : PlayerScript
 {
-    [SerializeField] bool isDead = false;
+    [SerializeField] AIData data;
 
     private void Start()
     {
@@ -38,7 +37,7 @@ public class AIPlayer : PlayerScript
     {
         if(data.OwningTiles.Count < 1)
         {
-            isDead = true;
+            data.IsGameOver = true;
         }
     }
 
@@ -53,5 +52,15 @@ public class AIPlayer : PlayerScript
         attackAbleTiles = tiles.Distinct().ToList().FindAll(x => x.Owner == MainSceneManager.Instance.GetPlayer());
 
         return attackAbleTiles.Count >= 1 ? true : false;
+    }
+
+    public override void ResetPlayer()
+    {
+        data.OwningTiles.Clear();
+    }
+
+    public override void RemoveTile(TileScript tile)
+    {
+        data.OwningTiles.Remove(tile);
     }
 }

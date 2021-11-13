@@ -57,7 +57,6 @@ public class PersonPlayer : PlayerScript
 
     private void Awake()
     {
-        playerColor = playerData.PlayerColor;
         myName = playerData.PlayerName;
 
         TurnFinishAction += () => { MainSceneManager.Instance.turnCnt++; };
