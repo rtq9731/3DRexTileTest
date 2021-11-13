@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData : ISerializationCallbackReceiver
 {
-    DateTime saveTime = DateTime.Now;
+    public DateTime saveTime = DateTime.Now;
 
     public MainPlayerData playerData = null;
     public TileData[] tiles = null;

@@ -14,7 +14,6 @@ public class HexObjectTileManager : MonoBehaviour
 
     public void GenerateObjects(int size, HexTilemapGenerator.GroundType groundType)
     {
-
         switch (groundType)
         {   
             case HexTilemapGenerator.GroundType.Jungle:

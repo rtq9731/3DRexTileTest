@@ -2689,11 +2689,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerColor: {r: 0.8352941, g: 0.043137256, b: 0.043137256, a: 0}
   data:
-    owningTiles: []
     isGameOver: 0
-    playerName: None
-    color: {r: 1, g: 1, b: 1, a: 1}
-  isDead: 0
+    playerName: AI 3
+    color: {r: 0.8352942, g: 0.043137256, b: 0.043137256, a: 1}
 --- !u!4 &326710274
 Transform:
   m_ObjectHideFlags: 0
@@ -3105,11 +3103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerColor: {r: 0.8352941, g: 0.33333334, b: 0.043137256, a: 0}
   data:
-    owningTiles: []
     isGameOver: 0
-    playerName: None
-    color: {r: 1, g: 1, b: 1, a: 1}
-  isDead: 0
+    playerName: AI 5
+    color: {r: 0.8352942, g: 0.33333334, b: 0.043137256, a: 1}
 --- !u!4 &378986820
 Transform:
   m_ObjectHideFlags: 0
@@ -3691,13 +3687,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5c08529b732674db954c73a1750bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerColor: {r: 0.101960786, g: 0.29411766, b: 0.8235294, a: 0}
+  playerColor: {r: 0.101960786, g: 0.29411766, b: 0.8235294, a: 1}
   data:
-    owningTiles: []
     isGameOver: 0
-    playerName: None
-    color: {r: 1, g: 1, b: 1, a: 1}
-  isDead: 0
+    playerName: AI 6
+    color: {r: 0.10196079, g: 0.29411766, b: 0.8235295, a: 1}
 --- !u!4 &431363541
 Transform:
   m_ObjectHideFlags: 0
@@ -4696,11 +4690,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerColor: {r: 0.9372549, g: 0.8392157, b: 0.2, a: 0}
   data:
-    owningTiles: []
     isGameOver: 0
-    playerName: None
-    color: {r: 1, g: 1, b: 1, a: 1}
-  isDead: 0
+    playerName: AI 2
+    color: {r: 0.93725497, g: 0.83921576, b: 0.20000002, a: 1}
 --- !u!4 &530711614
 Transform:
   m_ObjectHideFlags: 0
@@ -7523,12 +7515,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerColor: {r: 0.4583063, g: 0, b: 1, a: 1}
   data:
-    owningTiles: []
     isGameOver: 0
     playerName: COCONUT
     color: {r: 0.45882356, g: 0, b: 1, a: 1}
   playerData:
-    owningTiles: []
     isGameOver: 0
     playerName: COCONUT
     color: {r: 0.45882356, g: 0, b: 1, a: 1}
@@ -17047,11 +17037,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerColor: {r: 0.70980394, g: 0.20392157, b: 0.8352941, a: 0}
   data:
-    owningTiles: []
     isGameOver: 0
-    playerName: None
+    playerName: AI 4
     color: {r: 1, g: 1, b: 1, a: 1}
-  isDead: 0
 --- !u!4 &1653908747
 Transform:
   m_ObjectHideFlags: 0
@@ -19287,13 +19275,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5c08529b732674db954c73a1750bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerColor: {r: 0.39215687, g: 0.7294118, b: 0.6509804, a: 0}
+  playerColor: {r: 0.504717, g: 1, b: 0.88481796, a: 1}
   data:
-    owningTiles: []
     isGameOver: 0
-    playerName: None
-    color: {r: 1, g: 1, b: 1, a: 1}
-  isDead: 0
+    playerName: AI 1
+    color: {r: 0.5058824, g: 1, b: 0.8862746, a: 1}
 --- !u!1 &1859834637
 GameObject:
   m_ObjectHideFlags: 0

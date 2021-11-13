@@ -52,6 +52,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     }
 
+    public SaveData FileToData(FileInfo file)
+    {
+        return JsonUtility.FromJson<SaveData>(file.OpenText().ReadToEnd());
+    }
+
     public FileInfo[] GetAllSaveFiles()
     {
         if (Directory.Exists(filePath))
@@ -59,7 +64,7 @@ public class GameManager : MonoSingleton<GameManager>
             DirectoryInfo di = new DirectoryInfo(filePath);
 
             var selectedFiles = from item in di.GetFiles()
-                                where item.Name.Contains(".sav")
+                                where item.Extension == saveFileNameExtension
                                 select item;
 
             return selectedFiles.ToArray();
