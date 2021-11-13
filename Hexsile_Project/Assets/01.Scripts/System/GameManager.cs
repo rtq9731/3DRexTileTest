@@ -32,15 +32,16 @@ public class GameManager : MonoSingleton<GameManager>
             MainSceneManager.Instance.stageCount,
             MainSceneManager.Instance.mapSize, 
             MainSceneManager.Instance.isRerolled));
-        
-        string saveFilePath = filePath + "/" + MainSceneManager.Instance.PlayerName + "_" + System.DateTime.Now + saveFileNameExtension;
 
-        if (!File.Exists(saveFilePath))
+        string saveFileName = MainSceneManager.Instance.PlayerName + "_" + System.DateTime.Now.ToString("yyyy_mmm_dd") + saveFileNameExtension;
+        string saveFilePath = filePath + "/" ;
+
+        if (!Directory.Exists(saveFilePath))
         {
-            File.Create(saveFilePath);
+            Directory.CreateDirectory(saveFilePath);
         }
 
-        using (StreamWriter sw = new StreamWriter(new FileStream(saveFilePath, FileMode.CreateNew)))
+        using (StreamWriter sw = new StreamWriter(new FileStream(saveFilePath + saveFileName, FileMode.OpenOrCreate)))
         {
             sw.Write(dataString);
         }
