@@ -60,9 +60,20 @@ public class HexTilemapGenerator : MonoBehaviour
         GenerateTiles(MainSceneManager.Instance.mapSize);
     }
 
-    public void GenerateLoadedMap()
+    public void GenerateLoadedMap(int size, List<TileScript> Tiles)
     {
+        List<Vector3> tilePos = MainSceneManager.Instance.tileChecker.MakeTilesPos(size);
 
+        foreach (var item in Tiles)
+        {
+            GameObject temp = Instantiate(groundTiles[0], item.Data.Position, Quaternion.Euler(Vector3.zero), tileParent);
+            TileScript tempScirpt = temp.GetComponent<TileScript>();
+        }
+
+        while (actionStack.Count >= 1)
+        {
+            actionStack.Pop()();
+        }
     }
 
     public void GenerateNewTile()
@@ -140,7 +151,7 @@ public class HexTilemapGenerator : MonoBehaviour
             actionStack.Pop()();
         }
 
-        GetComponent<HexObjectTileManager>().GenerateObjects(size, type);
+        GetComponent<HexObjectTileManager>().GenerateObjects(type);
     }
 
     private void CheckGroundType(TileScript obj)
@@ -159,11 +170,6 @@ public class HexTilemapGenerator : MonoBehaviour
         {
             obj.Data.type = TileType.DigSite;
         }
-    }
-
-    private void LoadMap()
-    {
-        List<TileScript> tiles = TileMapData.Instance.GetAllTiles();
     }
 
 }

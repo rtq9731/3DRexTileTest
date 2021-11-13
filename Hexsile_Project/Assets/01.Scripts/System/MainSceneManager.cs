@@ -89,9 +89,9 @@ public class MainSceneManager : MonoBehaviour
     {
         tilemapGenerator = FindObjectOfType<HexTilemapGenerator>();
 
-        if(GameManager.Instance.isLoadData)
+        if(GameManager.Instance.LoadData() != null)
         {
-            tilemapGenerator.GenerateLoadedMap();
+            tilemapGenerator.GenerateLoadedMap(mapSize);
             return;
         }
 

@@ -10,7 +10,7 @@ public class GameManager : MonoSingleton<GameManager>
     string filePath = "";
     string saveFileNameExtension = ".sav";
 
-    public bool isLoadData = false;
+    SaveData curSaveFile = null;
 
     private void Awake()
     {
@@ -47,9 +47,9 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    public void LoadData()
+    public SaveData LoadData()
     {
-
+        return curSaveFile;
     }
 
     public SaveData FileToData(FileInfo file)
