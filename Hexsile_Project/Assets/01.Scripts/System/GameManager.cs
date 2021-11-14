@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public string playerName = "DefaultPlayer";
+    public Color playerColor = Color.white;
+
     string filePath = "";
     string saveFileNameExtension = ".sav";
 
@@ -19,7 +22,15 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void GameStart()
     {
+        UIStackManager.Clear();
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void GameStartWithLoad(SaveData data)
+    {
+        curSaveFile = data; 
+
+        GameStart();
     }
 
     public void SaveData()
@@ -33,7 +44,7 @@ public class GameManager : MonoSingleton<GameManager>
             MainSceneManager.Instance.mapSize, 
             MainSceneManager.Instance.isRerolled));
 
-        string saveFileName = MainSceneManager.Instance.PlayerName + "_" + System.DateTime.Now.ToString("yyyy_mmm_dd") + saveFileNameExtension;
+        string saveFileName = MainSceneManager.Instance.PlayerName + "_" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + saveFileNameExtension;
         string saveFilePath = filePath + "/" ;
 
         if (!Directory.Exists(saveFilePath))
@@ -41,7 +52,8 @@ public class GameManager : MonoSingleton<GameManager>
             Directory.CreateDirectory(saveFilePath);
         }
 
-        using (StreamWriter sw = new StreamWriter(new FileStream(saveFilePath + saveFileName, FileMode.OpenOrCreate)))
+        Debug.Log(saveFilePath + saveFileName);
+        using (StreamWriter sw = File.CreateText(saveFilePath + saveFileName))
         {
             sw.Write(dataString);
         }

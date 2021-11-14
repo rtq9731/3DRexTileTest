@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +37,16 @@ public class HexTilemapGenerator : MonoBehaviour
     [SerializeField] Transform tileParent = null;
 
     GameObject[] groundTiles;
+    List<GameObject> groundTileList = new List<GameObject>();
+
+    public void Awake()
+    {
+        for (int i = 0; i < plainGroundTileSet.Length; i++)
+        {
+            groundTileList.Add(plainGroundTileSet[i]);
+        }
+        groundTileList.Distinct();
+    }
 
     public void GenerateNewMap()
     {
@@ -60,20 +71,43 @@ public class HexTilemapGenerator : MonoBehaviour
         GenerateTiles(MainSceneManager.Instance.mapSize);
     }
 
-    public void GenerateLoadedMap(int size, List<TileScript> Tiles)
+    public void GenerateLoadedMap(List<TileData> Tiles)
     {
-        List<Vector3> tilePos = MainSceneManager.Instance.tileChecker.MakeTilesPos(size);
-
         foreach (var item in Tiles)
         {
-            GameObject temp = Instantiate(groundTiles[0], item.Data.Position, Quaternion.Euler(Vector3.zero), tileParent);
+            GameObject tile = null;
+            switch (item.type)
+            {
+                default:
+                    break;
+
+                case TileType.Ocean:
+                    tile = groundTileList.Find(x => x.GetComponent<TilePrefabScript>().prefabType == TilePrefabType.Ocean);
+                    return;
+
+                case TileType.Lake:
+                    tile = groundTileList.Find(x => x.GetComponent<TilePrefabScript>().prefabType == TilePrefabType.Lake);
+                    break;
+
+                case TileType.DigSite:
+                    tile = groundTileList.Find(x => x.GetComponent<TilePrefabScript>().prefabType == TilePrefabType.digSite);
+                    break;
+
+                case TileType.Forest:
+                case TileType.Plain:
+                case TileType.Mountain:
+                    tile = groundTileList.Find(x => x.GetComponent<TilePrefabScript>().prefabType == TilePrefabType.Plain);
+                    break;
+            }
+
+            GameObject temp = Instantiate(tile, item.Position, Quaternion.Euler(Vector3.zero), tileParent);
             TileScript tempScirpt = temp.GetComponent<TileScript>();
+            tempScirpt.Data = item;
+
+            TileMapData.Instance.SetTileData(tempScirpt);
         }
 
-        while (actionStack.Count >= 1)
-        {
-            actionStack.Pop()();
-        }
+        GetComponent<HexObjectTileManager>().LoadAllTileObj();
     }
 
     public void GenerateNewTile()
@@ -122,10 +156,35 @@ public class HexTilemapGenerator : MonoBehaviour
 
             TileScript tempScirpt = temp.GetComponent<TileScript>();
             tempScirpt.Data = new TileData();
-            CheckGroundType(tempScirpt);
-            TileMapData.Instance.SetTileData(tempScirpt);
+            CheckGroundType(temp.GetComponent<TilePrefabScript>());
+
+            switch (tempScirpt.Data.type)
+            {
+                case TileType.Ocean:
+                    tempScirpt.Data.SetDataToOcean();
+                    break;
+                case TileType.Lake:
+                    tempScirpt.Data.SetDataToLake();
+                    break;
+                case TileType.Forest:
+                    tempScirpt.Data.SetDataToForest();
+                    break;
+                case TileType.DigSite:
+                    tempScirpt.Data.SetDataToDigSite();
+                    break;
+                case TileType.Mountain:
+                    tempScirpt.Data.SetDataToMountain();
+                    break;
+
+                case TileType.None:
+                case TileType.Plain:
+                default:
+                    break;
+            }
+
             tempScirpt.SetPosition(tilePos[cnt]);
             tempScirpt.Data.tileNum = cnt;
+            TileMapData.Instance.SetTileData(tempScirpt);
 
             Tiles.Add(tempScirpt);
         }
@@ -154,21 +213,26 @@ public class HexTilemapGenerator : MonoBehaviour
         GetComponent<HexObjectTileManager>().GenerateObjects(type);
     }
 
-    private void CheckGroundType(TileScript obj)
+    private void CheckGroundType(TilePrefabScript tilePrefab)
     {
-        string objName = obj.gameObject.name;
-        Debug.Log(objName);
-        if (objName.Contains("Lake"))
+        TileScript tile = tilePrefab.GetComponent<TileScript>();
+        switch (tilePrefab.prefabType)
         {
-            obj.Data.type = TileType.Lake;
-        }
-        else if(objName.Contains("Ocean"))
-        {
-            obj.Data.type = TileType.Ocean;
-        }
-        else if(objName.Contains("DigSite"))
-        {
-            obj.Data.type = TileType.DigSite;
+            case TilePrefabType.digSite:
+                tile.Data.type = TileType.DigSite;
+                break;
+
+            case TilePrefabType.Ocean:
+                tile.Data.type = TileType.Ocean;
+                break;
+
+            case TilePrefabType.Lake:
+                tile.Data.type = TileType.Lake;
+                break;
+
+            case TilePrefabType.Plain:
+            default:
+                break;
         }
     }
 

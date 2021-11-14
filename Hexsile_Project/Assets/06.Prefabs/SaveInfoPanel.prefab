@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btnPlayInfo: {fileID: 7539373104095867455}
+  textSaveDate: {fileID: 7539373104512854993}
   textPlayerName: {fileID: 7539373105252119094}
   textStage: {fileID: 7539373103862916195}
   textTurn: {fileID: 7539373105660852835}

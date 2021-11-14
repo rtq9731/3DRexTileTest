@@ -59,6 +59,25 @@ public class TileData
         shield = maxShield;
     }
 
+    public void SetDataToOcean()
+    {
+        SetDataToPlain();
+        type = TileType.Ocean;
+        price = 0;
+        resource = 0;
+        maxShield = 0;
+        shield = 0;
+    }
+    public void SetDataToLake()
+    {
+        SetDataToPlain();
+        type = TileType.Lake;
+        price = 0;
+        resource = 0;
+        maxShield = 0;
+        shield = 0;
+    }
+
     private void SetDataToPlain() // 지형 초기화용 함수
     {
         type = TileType.Plain;

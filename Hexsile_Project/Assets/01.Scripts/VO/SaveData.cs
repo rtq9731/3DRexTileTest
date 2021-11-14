@@ -7,10 +7,11 @@ using UnityEngine;
 public class SaveData : ISerializationCallbackReceiver
 {
     public DateTime saveTime = DateTime.Now;
+    public string saveTimeString = "";
 
     public MainPlayerData playerData = null;
     public TileData[] tiles = null;
-    public CommonPlayerData[] aiPlayers = null;
+    public AIData[] aiPlayers = null;
 
     public uint turnCnt = 0;
     public uint stageCount = 1;
@@ -18,7 +19,7 @@ public class SaveData : ISerializationCallbackReceiver
 
     public bool isRerolled = false;
 
-    public SaveData(TileData[] tiles, MainPlayerData playerData, CommonPlayerData[] aiPlayers, uint turnCnt, uint stageCount, int mapSize, bool isRerolled)
+    public SaveData(TileData[] tiles, MainPlayerData playerData, AIData[] aiPlayers, uint turnCnt, uint stageCount, int mapSize, bool isRerolled)
     {
         this.tiles = tiles;
         this.playerData = playerData;
@@ -27,15 +28,16 @@ public class SaveData : ISerializationCallbackReceiver
         this.stageCount = stageCount;
         this.mapSize = mapSize;
         this.isRerolled = isRerolled;
-    }
-
-    public void OnAfterDeserialize()
-    {
-
+        saveTime = System.DateTime.Now;
     }
 
     public void OnBeforeSerialize()
     {
-        saveTime = DateTime.Now;
+        saveTimeString = System.DateTime.Now.ToString();
+    }
+
+    public void OnAfterDeserialize()
+    {
+        saveTime = DateTime.Parse(saveTimeString);
     }
 }

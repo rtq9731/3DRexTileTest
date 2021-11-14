@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class AIPlayer : PlayerScript
 {
-    [SerializeField] AIData data = new AIData();
+    AIData data = new AIData();
 
     private void Start()
     {
         TurnFinishAction += CheckIsDie;
     }
 
-    public CommonPlayerData Data
+    public AIData Data
     {
-        get { return data; }
+        get { return data; } set { data = value; }
     }
 
     public override List<TileScript> OwningTiles => data.OwningTiles;

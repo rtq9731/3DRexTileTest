@@ -91,7 +91,7 @@ public class MainSceneManager : MonoBehaviour
 
         if(GameManager.Instance.LoadData() != null)
         {
-            tilemapGenerator.GenerateLoadedMap(mapSize);
+            tilemapGenerator.GenerateLoadedMap(GameManager.Instance.LoadData().tiles.ToList());
             return;
         }
 
@@ -108,10 +108,36 @@ public class MainSceneManager : MonoBehaviour
         return player;
     }
 
-    public void StartGame()
+    public void StartLoadedGame()
     {
+        SaveData curSave = GameManager.Instance.LoadData();
+
+        player.PlayerData = curSave.playerData;
+        TileMapData.Instance.GetAllTiles().FindAll(x => player.PlayerData.TileNums.Contains(x.Data.tileNum)).ForEach(x => player.AddTile(x)); // 플레이어 땅 돌려주기
+        AIManager.Instance.LoadStage(curSave); // AI들 땅 다시 주기
+
+        mapSize = curSave.mapSize;
+        stageCount = curSave.stageCount;
+
+        if (btnReroll == null)
+        {
+            btnReroll = FindObjectOfType<BtnReroll>();
+        }
+
+        isRerolled = curSave.isRerolled;
+        if (!isRerolled)
+        {
+            btnReroll.ActiveReroll();
+            player.TurnFinishAction += btnReroll.RemoveReroll;
+        }
+
+        player.TurnFinishAction += CheckStageClear;
+    }
+
+    public void StartGame()
+    { 
         isRerolled = false;
-        FindObjectOfType<AIManager>().StartStage(mapSize);
+        AIManager.Instance.StartStage(mapSize);
         player.AddTile(TileMapData.Instance.GetTile(0)); // 무조건 중앙땅은 플레이어꺼
 
         if(btnReroll == null)

@@ -21,10 +21,6 @@ public class TechTreeDatas : MonoBehaviour
         dataString = Resources.Load("Data/ResearchData").ToString();
         JsonUtility.FromJsonOverwrite(dataString, this);
 
-#if UNITY_EDITOR
-        Debug.Log("불러온 데이터 : \n" + dataString);   
-#endif
-
         for (int i = 0; i < skillTreeNodes.Length; i++)
         {
             dataList.Add(skillTreeNodes[i]);

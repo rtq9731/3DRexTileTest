@@ -71,6 +71,9 @@ public class TileMapData : MonoBehaviour
     {
         foreach (var item in tileList)
         {
+            if (item.Owner == null)
+                return;
+
             if (item.Owner != MainSceneManager.Instance.GetPlayer())
             {
                 item.GetComponent<MeshRenderer>().material.color = (item.Owner as AIPlayer).Data.PlayerColor;

@@ -12,9 +12,10 @@ public class HexObjectTileManager : MonoBehaviour
     [SerializeField] GameObject[] MountainGroundObjSet;
 
     GameObject[] objects;
+    List<ObjScript> objs = new List<ObjScript>();
     public void LoadAllTileObj()
     {
-        List<ObjScript> objs = new List<ObjScript>();
+        objs = new List<ObjScript>();
 
         foreach (var item in plainGroundObjSet)
         {
@@ -23,6 +24,8 @@ public class HexObjectTileManager : MonoBehaviour
 
         objs.Distinct();
         TileMapData.Instance.GetAllTiles().FindAll(x => x.Data.type != (TileType.Plain | TileType.Ocean | TileType.Lake)).ForEach(x => MakeObjOnTile(x, x.Data.type));
+
+        MainSceneManager.Instance.StartLoadedGame();
     }
 
     public void GenerateObjects(HexTilemapGenerator.GroundType groundType)
@@ -86,6 +89,22 @@ public class HexObjectTileManager : MonoBehaviour
 
     private void MakeObjOnTile(TileScript curTile, TileType type)
     {
-
+        switch (type)
+        {
+            case TileType.None:
+            case TileType.Ocean:
+            case TileType.Lake:
+            case TileType.Plain:
+            case TileType.DigSite:
+                break;
+            case TileType.Forest:
+                MakeObjOnTile(curTile, objs.Find(x => x.objType == ObjType.Tree).gameObject);
+                break;
+            case TileType.Mountain:
+                MakeObjOnTile(curTile, objs.Find(x => x.objType == ObjType.Mountain).gameObject);
+                break;
+            default:
+                break;
+        }
     }
 }

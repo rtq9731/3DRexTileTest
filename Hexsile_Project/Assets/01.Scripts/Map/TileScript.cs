@@ -173,7 +173,10 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             GetComponent<MeshRenderer>().material.color = tileColor; // 타일에 적용
             foreach (var item in transform.GetComponentsInChildren<MeshRenderer>()) // 타일 위에 있는 모든 오브젝트에 색깔 적용
             {
-                item.GetComponent<MeshRenderer>().material.color = tileColor;
+                if(item.GetComponent<CloudObject>() != null)
+                {
+                    item.GetComponent<MeshRenderer>().material.color = tileColor;
+                }
             }
             owner = newOwner;
 

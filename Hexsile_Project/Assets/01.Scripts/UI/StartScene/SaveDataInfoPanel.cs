@@ -29,8 +29,10 @@ public class SaveDataInfoPanel : MonoBehaviour
         textPlayerName.text = data.playerData.PlayerName;
         textPlayerResource.text = $"현재 가진 자원 : {data.playerData.ResourceTank}";
         textFireableMissiles.text = $"발사 가능한 미사일 수 : {data.playerData.MissileReadyToShoot.Count}";
-        textSaveDateTime.text = $"저장된 시각 : {data.saveTime.ToString("yyyy-MM-dd")}";
+        textSaveDateTime.text = $"저장된 시각 : {data.saveTime.ToString("yyyy-MM-dd HH:mm")}";
         textStage.text = $"스테이지 : {data.stageCount}";
         playerColorImage.color = data.playerData.PlayerColor;
+
+        btnLoad.onClick.AddListener(() => GameManager.Instance.GameStartWithLoad(data));
     }
 }

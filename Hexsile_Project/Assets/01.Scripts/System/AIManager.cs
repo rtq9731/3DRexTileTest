@@ -6,13 +6,15 @@ using UnityEngine;
 [System.Serializable]
 public class AIManager : MonoBehaviour
 {
+    [SerializeField] Color[] aiColorSet = null;
+
     public int aiPlayerCount = 3;
 
     public List<AIPlayer> aiPlayers = new List<AIPlayer>();
 
     private static AIManager instance = null;
 
-    private int curTurnCnt = 0;
+    private uint curTurnCnt = 0;
 
     public static AIManager Instance
     {
@@ -22,28 +24,57 @@ public class AIManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        aiPlayers = GetComponentsInChildren<AIPlayer>().ToList();
+        InitAllAI();
     }
     private void OnDestroy()
     {
         instance = null;
     }
-
-    private void Start()
+    public AIData[] GetAIDatas()
     {
-        aiPlayers = GetComponentsInChildren<AIPlayer>().ToList();
-    }
-
-    public CommonPlayerData[] GetAIDatas()
-    {
-        List<CommonPlayerData> datas = new List<CommonPlayerData>();
+        List<AIData> datas = new List<AIData>();
         aiPlayers.ForEach(x => datas.Add(x.Data));
         return datas.ToArray();
+    }
+
+    public void InitAllAI()
+    {
+        List<Color> aiColorSetList = aiColorSet.ToList();
+        for (int i = 0; i < aiPlayers.Count; i++)
+        {
+            aiPlayers[i].Data.PlayerName = $"AI {i + 1}";
+            aiPlayers[i].Data.PlayerColor = aiColorSetList[Random.Range(0, aiColorSetList.Count)];
+            aiColorSetList.Remove(aiPlayers[i].Data.PlayerColor);
+        }
+    }
+
+    public void LoadAllAI(SaveData curSave)
+    {
+        for (int i = 0; i < curSave.aiPlayers.Length; i++)
+        {
+            aiPlayers[i].Data = curSave.aiPlayers[i];
+        }
+    }
+
+    public void LoadStage(SaveData curSave)
+    {
+        curTurnCnt = curSave.turnCnt;
+        LoadAllAI(curSave);
+
+        foreach (var item in aiPlayers)
+        {
+            TileMapData.Instance.GetAllTiles().FindAll(x => item.Data.TileNums.Contains(x.Data.tileNum)).ForEach(x => item.AddTile(x));
+        }
+
+        MainSceneManager.Instance.GetPlayer().TurnFinishAction += CheckAndAttackPlayer;
     }
 
     public void StartStage(int mapSize)
     {
         curTurnCnt = 0;
 
+        InitAllAI();
         MainSceneManager.Instance.GetPlayer().TurnFinishAction += CheckAndAttackPlayer;
         foreach (var item in aiPlayers) // 초기에 구석자리 땅 주는 부분
         {

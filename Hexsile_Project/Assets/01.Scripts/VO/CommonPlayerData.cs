@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class CommonPlayerData
+public abstract class CommonPlayerData : ISerializationCallbackReceiver
 {
     protected List<TileScript> owningTiles = new List<TileScript>();
 
+    [SerializeField] protected int[] tileNums = null;
     [SerializeField] protected bool isGameOver = false;
-    [SerializeField] string playerName = "None";
-    [SerializeField] Color color = Color.white;
+    [SerializeField] protected string playerName = "None";
+    [SerializeField] protected Color color = Color.white;
 
+    public int[] TileNums
+    {
+        get { return tileNums; }
+    }
     public List<TileScript> OwningTiles
     {
         get { return owningTiles; }
@@ -25,10 +30,22 @@ public abstract class CommonPlayerData
     }
     public string PlayerName
     {
-        get { return playerName; }
+        get { return playerName; } set { playerName = value; }
     }
     public Color PlayerColor
     {
-        get { return color; }
+        get { return color; } set { color = value;}
+    }
+
+    public void OnBeforeSerialize()
+    {
+        List<int> list = new List<int>();
+        owningTiles.ForEach(x => list.Add(x.Data.tileNum));
+        tileNums = list.ToArray();
+    }
+
+    public void OnAfterDeserialize()
+    {
+
     }
 }

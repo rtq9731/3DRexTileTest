@@ -6,11 +6,11 @@ using UnityEngine;
  
 public class PersonPlayer : PlayerScript
 {
-    [SerializeField] MainPlayerData playerData = new MainPlayerData();
+    MainPlayerData playerData = new MainPlayerData();
 
     public MainPlayerData PlayerData
     {
-        get { return playerData; }
+        get { return playerData; } set { playerData = value; }
     }
     public List<MissileData> MissileInMaking
     {
