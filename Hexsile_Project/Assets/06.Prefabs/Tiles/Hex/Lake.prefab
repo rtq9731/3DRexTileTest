@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23016261883482142}
   - component: {fileID: 64667402985176610}
   - component: {fileID: -3999591988256375908}
+  - component: {fileID: -6594082463574513328}
   m_Layer: 6
   m_Name: Lake
   m_TagString: Untagged
@@ -109,12 +110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181cb0d1b337252428f9f036d057073a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    type: 2
-    position: {x: 0, y: 0, z: 0}
-    range: 0
-    price: 0
-    shield: 0
-    resource: 0
-    attackPower: 0
-  mat: {fileID: 2100000, guid: cf051fba995609b459f0eb4baf4bb478, type: 2}
+  owner: {fileID: 0}
+--- !u!114 &-6594082463574513328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520068213326888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602d018220f0dde4ab38783f9d6d3ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabType: 3

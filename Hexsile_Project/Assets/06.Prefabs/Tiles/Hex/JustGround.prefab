@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23057092651682868}
   - component: {fileID: 64734788724731850}
   - component: {fileID: 5020591891836770575}
+  - component: {fileID: 3706758795088080060}
   m_Layer: 6
   m_Name: JustGround
   m_TagString: Untagged
@@ -109,12 +110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181cb0d1b337252428f9f036d057073a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    type: 5
-    position: {x: 0, y: 0, z: 0}
-    range: 3
-    price: 5
-    shield: 1
-    resource: 3
-    attackPower: 0
-  mat: {fileID: 2100000, guid: cf051fba995609b459f0eb4baf4bb478, type: 2}
+  owner: {fileID: 0}
+--- !u!114 &3706758795088080060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027144338041134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602d018220f0dde4ab38783f9d6d3ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabType: 1
