@@ -71,17 +71,22 @@ public class TileMapData : MonoBehaviour
     {
         foreach (var item in tileList)
         {
-            if (item.Owner == null)
-                return;
-
-            if (item.Owner != MainSceneManager.Instance.GetPlayer())
+            if (item.Owner != null)
             {
-                item.GetComponent<MeshRenderer>().material.color = (item.Owner as AIPlayer).Data.PlayerColor;
+                if (item.Owner != MainSceneManager.Instance.GetPlayer())
+                {
+                    item.GetComponent<TilePrefabScript>().meshBoder.material.color = (item.Owner as AIPlayer).Data.PlayerColor;
+                }
+                else
+                {
+                    item.GetComponent<TilePrefabScript>().meshBoder.material.color = (item.Owner as PersonPlayer).PlayerData.PlayerColor;
+                }
             }
             else
             {
-                item.GetComponent<MeshRenderer>().material.color = (item.Owner as PersonPlayer).PlayerData.PlayerColor;
+                item.GetComponent<TilePrefabScript>().meshBoder.material.color = Color.white;
             }
+
         }
     }
 
