@@ -31,6 +31,9 @@ public class SaveDataInfoPanel : MonoBehaviour
         playerColorImage.color = Color.white;
 
         btnDelete.gameObject.SetActive(false);
+
+        btnLoad.onClick.RemoveAllListeners();
+        btnDelete.onClick.RemoveAllListeners();
     }
 
     public void UpdateSaveDataInfo(SaveData data)

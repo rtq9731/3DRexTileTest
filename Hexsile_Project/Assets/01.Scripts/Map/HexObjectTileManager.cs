@@ -7,9 +7,9 @@ using UnityEngine;
 public class HexObjectTileManager : MonoBehaviour
 {
 
-    [SerializeField] GameObject[] jungleGroundObjSet;
-    [SerializeField] GameObject[] plainGroundObjSet;
-    [SerializeField] GameObject[] MountainGroundObjSet;
+    [SerializeField] GameObject[] jungleGroundObjSet = null;
+    [SerializeField] GameObject[] plainGroundObjSet = null;
+    [SerializeField] GameObject[] MountainGroundObjSet = null;
 
     GameObject[] objects;
     List<ObjScript> objs = new List<ObjScript>();
@@ -17,8 +17,10 @@ public class HexObjectTileManager : MonoBehaviour
     {
         objs = new List<ObjScript>();
 
+        Debug.Log(plainGroundObjSet.Length);
         foreach (var item in plainGroundObjSet)
         {
+            if(item != null)
             objs.Add(item.GetComponent<ObjScript>());
         }
 
@@ -60,35 +62,37 @@ public class HexObjectTileManager : MonoBehaviour
 
     private void MakeObjOnTile(TileScript curTile, GameObject randObj)
     {
+        Debug.Log(randObj);
         MainSceneManager.Instance.fogOfWarManager.GenerateCloudOnTile(curTile);
 
         if (randObj != null)
         {
-            if (curTile.Data.type == TileType.Plain) // 오브젝트 배치 불가능한 지형인지 체크
+            GameObject temp = Instantiate(randObj, curTile.transform);
+
+
+            if (curTile.Data.type == TileType.Plain)
+                return;
+
+            switch (temp.GetComponent<ObjScript>().objType)
             {
-                GameObject temp = Instantiate(randObj, curTile.transform);
-
-                switch (temp.GetComponent<ObjScript>().objType)
-                {
-                    case ObjType.Tree:
-                        curTile.Data.SetDataToForest();
-                        break;
-                    case ObjType.Mountain:
-                        curTile.Data.SetDataToMountain();
-                        break;
-                    case ObjType.Rock:
-                        curTile.Data.SetDataToRock();
-                        break;
-                    default:
-                        break;
-                }
+                case ObjType.Tree:
+                    curTile.Data.SetDataToForest();
+                    break;
+                case ObjType.Mountain:
+                    curTile.Data.SetDataToMountain();
+                    break;
+                case ObjType.Rock:
+                    curTile.Data.SetDataToRock();
+                    break;
+                default:
+                    break;
             }
-
         }
     }
 
     private void MakeObjOnTile(TileScript curTile, TileType type)
     {
+        Debug.Log(type);
         switch (type)
         {
             case TileType.None:
@@ -96,6 +100,7 @@ public class HexObjectTileManager : MonoBehaviour
             case TileType.Lake:
             case TileType.Plain:
             case TileType.DigSite:
+                MakeObjOnTile(curTile, null);
                 break;
             case TileType.Forest:
                 MakeObjOnTile(curTile, objs.Find(x => x.objType == ObjType.Tree).gameObject);

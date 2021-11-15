@@ -109,7 +109,7 @@ public class PersonPlayer : PlayerScript
             playerData.CurResearchData = value;
             playerData.ResearchFinishTurn = playerData.CurResearchData.TrunForResearch;
 
-            TurnFinishAction -= ResearchOnTurnFinish;
+            TurnFinishAction -= ResearchOnTurnFinish; // 원래 있던 연구 액션 삭제
             TurnFinishAction += ResearchOnTurnFinish;
             MainSceneManager.Instance.curResearchPanel.UpdateTexts(this);
         }
@@ -118,10 +118,6 @@ public class PersonPlayer : PlayerScript
     public override void ResetPlayer()
     {
         playerData = new MainPlayerData();
-
-        playerData.CurResearchData = null;
-
-        playerData.ResourceTank = 0;
 
         playerData.UnlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작
         playerData.UnlockedWarheadIdx.Add(0);
@@ -137,6 +133,16 @@ public class PersonPlayer : PlayerScript
                 playerData.MissileInMaking.Remove(x);
                 playerData.MissileReadyToShoot.Add(x);
             });
+        };
+
+        TurnFinishAction += () =>
+        {
+            if (CheckGameOver())
+            {
+                playerData.IsGameOver = true;
+                TurnFinishAction = () => { };
+            }
+
         };
     }
 
@@ -208,6 +214,11 @@ public class PersonPlayer : PlayerScript
         // 중복 안되게 하기 위함.
         playerData.OwningTiles.Remove(tile);
         playerData.OwningTiles.Add(tile);
+    }
+
+    private bool CheckGameOver()
+    {
+        return playerData.OwningTiles.Count < 1;
     }
 
     public override void TurnFinish()

@@ -61,10 +61,16 @@ public class AIPlayer : PlayerScript
     public override void ResetPlayer()
     {
         data.OwningTiles.Clear();
+        data.IsGameOver = false;
     }
 
     public override void RemoveTile(TileScript tile)
     {
         data.OwningTiles.Remove(tile);
+
+        if(OwningTiles.Count < 1)
+        {
+            data.IsGameOver = true;
+        }
     }
 }

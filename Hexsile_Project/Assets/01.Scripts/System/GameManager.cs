@@ -36,7 +36,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void StartLoadedGame(SaveData data)
     {
-        curSaveFile = data; 
+        curSaveFile = data;
+        playerColor = data.playerData.PlayerColor;
+        playerName = data.playerData.PlayerName;
 
         GameStart();
     }
@@ -60,7 +62,6 @@ public class GameManager : MonoSingleton<GameManager>
             Directory.CreateDirectory(saveFilePath);
         }
 
-        Debug.Log(saveFilePath + saveFileName);
         using (StreamWriter sw = File.CreateText(saveFilePath + saveFileName))
         {
             sw.Write(dataString);

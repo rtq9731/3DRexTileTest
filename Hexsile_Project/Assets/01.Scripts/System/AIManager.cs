@@ -128,15 +128,11 @@ public class AIManager : MonoBehaviour
         List<AIPlayer> onlineAI = aiPlayers.FindAll(x => x.OwningTiles.Count >= 1);
         foreach (var item in onlineAI)
         {
-            Debug.Log(item.MyName); 
-
             if(item.CanAttack(out List<TileScript> attackableTiles))
             {
                 attackableAI.Add(item);
             }
         }
-
-        Debug.Log(attackableAI.Count);
 
         foreach (var item in attackableAI)
         {

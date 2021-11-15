@@ -114,7 +114,6 @@ public class PanelMissileFireSelect : MonoBehaviour
 
                             startedTile = tile;
                             tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
-                            tile.GetComponent<MeshRenderer>().material.color = Color.yellow;
 
                             vcamSelectFire.transform.position = vcamMain.transform.position;
 
@@ -171,8 +170,6 @@ public class PanelMissileFireSelect : MonoBehaviour
     private void FireReady(MissileData missile)
     {
         TileMapData.Instance.ResetColorAllTile();
-        
-        startedTile.GetComponent<MeshRenderer>().material.color = Color.blue;
 
         SetCanFireTile(startedTile, missile);
         SetCantFireTile();
@@ -191,7 +188,10 @@ public class PanelMissileFireSelect : MonoBehaviour
         tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(startedTile, missile.MissileRange);
         tilesInRange.ForEach(x =>
         {
-            x.GetComponent<MeshRenderer>().material.color = Color.green;
+            MeshRenderer boderMesh = x.GetComponent<TilePrefabScript>().meshBoder;
+
+            if(boderMesh != null)
+                boderMesh.material.color = Color.green;
         });
     }
 
@@ -207,7 +207,10 @@ public class PanelMissileFireSelect : MonoBehaviour
 
         foreach (var item in tilesCantFire)
         {
-            item.GetComponent<MeshRenderer>().material.color = Color.red;
+            MeshRenderer boderMesh = item.GetComponent<TilePrefabScript>().meshBoder;
+
+            if (boderMesh != null)
+                boderMesh.material.color = Color.red;
         }
     }
 

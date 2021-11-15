@@ -19,7 +19,10 @@ public class FogOfWarManager : MonoBehaviour
 
     public void RemoveCloudOnTile(TileScript tile)
     {
-        cloudList.Find(x => x.transform.parent == tile.transform).RemoveCloud();
+        CloudObject cloud = cloudList.Find(x => x.transform.parent == tile.transform);
+
+        if(cloud != null)
+        cloud.RemoveCloud();
     }
 
     public void RemoveCloudWithNotime(TileScript tile)

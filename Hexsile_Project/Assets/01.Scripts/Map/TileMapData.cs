@@ -71,20 +71,25 @@ public class TileMapData : MonoBehaviour
     {
         foreach (var item in tileList)
         {
+            MeshRenderer borderMesh = item.GetComponent<TilePrefabScript>().meshBoder;
+
+            if (borderMesh == null)
+                continue;
+
             if (item.Owner != null)
             {
                 if (item.Owner != MainSceneManager.Instance.GetPlayer())
                 {
-                    item.GetComponent<TilePrefabScript>().meshBoder.material.color = (item.Owner as AIPlayer).Data.PlayerColor;
+                    borderMesh.material.color = (item.Owner as AIPlayer).Data.PlayerColor;
                 }
                 else
                 {
-                    item.GetComponent<TilePrefabScript>().meshBoder.material.color = (item.Owner as PersonPlayer).PlayerData.PlayerColor;
+                    borderMesh.material.color = (item.Owner as PersonPlayer).PlayerData.PlayerColor;
                 }
             }
             else
             {
-                item.GetComponent<TilePrefabScript>().meshBoder.material.color = Color.white;
+                borderMesh.material.color = Color.white;
             }
 
         }

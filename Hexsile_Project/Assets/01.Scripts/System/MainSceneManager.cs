@@ -13,8 +13,7 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] MissileEngine missileEngine;
     [SerializeField] Body missileBody;
     [SerializeField] public TechTreeDatas techTreeDatas;
-   
-
+    
     public BodyData GetMissileBodyData(MissileTypes.MissileBody type)
     {
         return missileBody.dataList.Find(x => x.TYPE == type);
@@ -89,6 +88,7 @@ public class MainSceneManager : MonoBehaviour
 
         if(GameManager.Instance.LoadData() != null)
         {
+            Debug.Log(GameManager.Instance.LoadData().tiles.Length);
             tilemapGenerator.GenerateLoadedMap(GameManager.Instance.LoadData().tiles.ToList());
             return;
         }
@@ -96,11 +96,18 @@ public class MainSceneManager : MonoBehaviour
         tilemapGenerator.GenerateNewMap();
     }
 
+    /// <summary>
+    /// 플레이어를 전달 받습니다
+    /// </summary>
+    /// <returns>플레이어 스크립트</returns>
     public PersonPlayer GetPlayer()
     {
         return player;
     }
 
+    /// <summary>
+    /// 저장되었던 게임을 로드해줍니다.
+    /// </summary>
     public void StartLoadedGame()
     {
         SaveData curSave = GameManager.Instance.LoadData();
@@ -130,6 +137,9 @@ public class MainSceneManager : MonoBehaviour
         player.TurnFinishAction += CheckStageClear;
     }
 
+    /// <summary>
+    /// 스테이지를 시작합니다
+    /// </summary>
     public void StartGame()
     { 
         isRerolled = false;
@@ -151,6 +161,9 @@ public class MainSceneManager : MonoBehaviour
         GameManager.Instance.SaveData();
     }
 
+    /// <summary>
+    /// 스테이지를 클리어하고 다음 스테이지로 넘어갑니다
+    /// </summary>
     public void ClearStage()
     {
         DOTween.CompleteAll();
@@ -176,6 +189,9 @@ public class MainSceneManager : MonoBehaviour
         tilemapGenerator.GenerateNewTile();
     }
 
+    /// <summary>
+    /// 새로운 맵을 생성합니다.
+    /// </summary>
     public void RerollStage()
     {
         if(isRerolled)
@@ -201,16 +217,14 @@ public class MainSceneManager : MonoBehaviour
         tilemapGenerator.GenerateNewTileWihtNoExtension();
     }
 
+    /// <summary>
+    /// 스테이지 클리어를 체크합니다
+    /// </summary>
     private void CheckStageClear()
     {
-        if(AIManager.Instance.aiPlayers.Find(x => x.OwningTiles.Count >= 1) == null)
+        if (AIManager.Instance.aiPlayers.Find(x => x.Data.IsGameOver == false) == null)
         {
             ClearStage();
         }
-    }
-
-    public void LoadGame()
-    {
-
     }
 }
