@@ -15,7 +15,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         set { data = value; }
     }
 
-    [SerializeField]
     PlayerScript owner = null;
 
     public PlayerScript Owner
@@ -164,20 +163,12 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void ChangeOwner(PlayerScript newOwner)
     {
-        if(newOwner != null && newOwner != owner)
+        Color tileColor = Color.white;
+        if (newOwner != null && newOwner != owner)
         {
-            Color tileColor = Color.white;
-
             tileColor = newOwner != MainSceneManager.Instance.GetPlayer() ? (newOwner as AIPlayer).Data.PlayerColor : tileColor = (newOwner as PersonPlayer).PlayerData.PlayerColor;
 
-            GetComponent<MeshRenderer>().material.color = tileColor; // 타일에 적용
-            foreach (var item in transform.GetComponentsInChildren<MeshRenderer>()) // 타일 위에 있는 모든 오브젝트에 색깔 적용
-            {
-                if(item.GetComponent<CloudObject>() != null)
-                {
-                    item.GetComponent<MeshRenderer>().material.color = tileColor;
-                }
-            }
+            GetComponent<TilePrefabScript>().meshBoder.material.color = tileColor;
             owner = newOwner;
 
             owner.AddTile(this);
@@ -185,16 +176,9 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         }
         else if(newOwner == null)
         {
-            GetComponent<MeshRenderer>().material.color = Color.white;
-            foreach (var item in transform.GetComponentsInChildren<MeshRenderer>())
-            {
-                if (item.transform.parent.GetComponent<CloudObject>() == null)
-                {
-                    item.material.color = Color.white;
-                }
-            }
+            GetComponent<TilePrefabScript>().meshBoder.material.color = tileColor;
 
-            if(owner != null)
+            if (owner != null)
             {
                 owner.TurnFinishAction -= TurnFinish;
                 owner.RemoveTile(this);
