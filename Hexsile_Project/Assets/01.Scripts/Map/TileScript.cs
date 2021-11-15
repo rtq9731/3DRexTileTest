@@ -168,7 +168,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         {
             tileColor = newOwner != MainSceneManager.Instance.GetPlayer() ? (newOwner as AIPlayer).Data.PlayerColor : tileColor = (newOwner as PersonPlayer).PlayerData.PlayerColor;
 
-            GetComponent<TilePrefabScript>().meshBoder.material.color = tileColor;
+            MeshRenderer meshBoder = GetComponent<TilePrefabScript>().meshBoder;
+            if (meshBoder != null)
+            {
+                meshBoder.material.color = tileColor;
+            }
             owner = newOwner;
 
             owner.AddTile(this);
@@ -176,7 +180,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         }
         else if(newOwner == null)
         {
-            GetComponent<TilePrefabScript>().meshBoder.material.color = tileColor;
+            MeshRenderer meshBoder = GetComponent<TilePrefabScript>().meshBoder;
+            if (meshBoder != null)
+            {
+                meshBoder.material.color = tileColor;
+            }
 
             if (owner != null)
             {

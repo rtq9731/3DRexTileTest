@@ -9753,6 +9753,12 @@ MonoBehaviour:
   beachTile: {fileID: 1829116461306768, guid: cd4f2cbde7d033f45a5d96afb77a69e1, type: 3}
   parentObj: {fileID: 710715399032445410, guid: 85452bd7d87778e41a6165c41bf9578e, type: 3}
   tileParent: {fileID: 692211082}
+  groundTileList:
+  - {fileID: 1712155488500880, guid: 70c29577d2da5454bb823df8d1deaada, type: 3}
+  - {fileID: 1794535936301100, guid: 92b694c77a8f5d64eb88d747e08f1905, type: 3}
+  - {fileID: 1027144338041134, guid: 8d65fe10dbb32e34aa703943ab85d9c0, type: 3}
+  - {fileID: 1520068213326888, guid: c953bec8bbbdb12418233e9c77e0fa19, type: 3}
+  - {fileID: 1829116461306768, guid: f0fef356fed66e040b878c11289f26f2, type: 3}
 --- !u!4 &1000656166
 Transform:
   m_ObjectHideFlags: 0
@@ -12000,6 +12006,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileImpactEffectPrefab: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 3}
+  followMissileEffectPrefab: {fileID: 210635551836637225, guid: 4002d99a432a09b40a713927c68001ca, type: 3}
+  followEffectOriginPos: {x: 0, y: 0, z: -1.25}
 --- !u!114 &1250035064
 MonoBehaviour:
   m_ObjectHideFlags: 0

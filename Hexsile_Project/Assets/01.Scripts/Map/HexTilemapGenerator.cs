@@ -37,16 +37,7 @@ public class HexTilemapGenerator : MonoBehaviour
     [SerializeField] Transform tileParent = null;
 
     GameObject[] groundTiles;
-    List<GameObject> groundTileList = new List<GameObject>();
-
-    public void Awake()
-    {
-        for (int i = 0; i < plainGroundTileSet.Length; i++)
-        {
-            groundTileList.Add(plainGroundTileSet[i]);
-        }
-        groundTileList.Distinct();
-    }
+    [SerializeField] List<GameObject> groundTileList = new List<GameObject>();
 
     public void GenerateNewMap()
     {
@@ -83,7 +74,7 @@ public class HexTilemapGenerator : MonoBehaviour
 
                 case TileType.Ocean:
                     tile = groundTileList.Find(x => x.GetComponent<TilePrefabScript>().prefabType == TilePrefabType.Ocean);
-                    return;
+                    break;
 
                 case TileType.Lake:
                     tile = groundTileList.Find(x => x.GetComponent<TilePrefabScript>().prefabType == TilePrefabType.Lake);

@@ -88,7 +88,6 @@ public class MainSceneManager : MonoBehaviour
 
         if(GameManager.Instance.LoadData() != null)
         {
-            Debug.Log(GameManager.Instance.LoadData().tiles.Length);
             tilemapGenerator.GenerateLoadedMap(GameManager.Instance.LoadData().tiles.ToList());
             return;
         }
@@ -121,6 +120,8 @@ public class MainSceneManager : MonoBehaviour
 
         mapSize = curSave.mapSize;
         stageCount = curSave.stageCount;
+        turnCnt = curSave.turnCnt;
+        uiTopBar.UpdateTexts();
 
         if (btnReroll == null)
         {

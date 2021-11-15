@@ -49,10 +49,12 @@ public class MissileManager: MonoBehaviour
         Vector3 targetPoint = target.transform.position;
         targetPoint.y += 0.5f;
 
-        missileObj.SetActive(true);
-
+        MainSceneManager.Instance.effectPool.PlayFollowMissileEffect(missileObj.transform);
         missileObj.transform.position = startPoint;
         missileObj.transform.rotation = Quaternion.LookRotation(midPoint);
+
+        missileObj.SetActive(true);
+
         missileFires.Add(new MissileFire { targetPos = targetPoint, startPos = startPoint, midPos = midPoint, missileData = missile, missileObj = missileObj, targetTile = target });
     }
 
@@ -65,6 +67,14 @@ public class MissileManager: MonoBehaviour
             {
                 Vector3 beforePos = item.missileObj.transform.position;
 
+                if (Vector3.Distance(item.missileObj.transform.position, item.targetPos) <= 0.01)
+                {
+                    item.targetTile.Damage(item.missileData.WarheadType);
+                    MainSceneManager.Instance.effectPool.PlayEffectOnTile(item.targetTile);
+                    item.missileObj.SetActive(false);
+                    willRemove.Add(item);
+                }
+
                 item.timer += Time.deltaTime * 0.5f;
                 Vector3 p1 = Vector3.Lerp(item.startPos, item.midPos, item.timer);
                 Vector3 p2 = Vector3.Lerp(item.midPos, item.targetPos, item.timer);
@@ -74,13 +84,6 @@ public class MissileManager: MonoBehaviour
                 item.missileObj.transform.rotation = Quaternion.LookRotation(delta.normalized);
                 beforePos = item.missileObj.transform.position;
 
-                if (Vector3.Distance(item.missileObj.transform.position, item.targetPos) <= 0.01)
-                {
-                    item.targetTile.Damage(item.missileData.WarheadType);
-                    MainSceneManager.Instance.effectPool.PlayEffectOnTile(item.targetTile);
-                    item.missileObj.SetActive(false);
-                    willRemove.Add(item);
-                }
             }
 
             if(willRemove.Count > 0)

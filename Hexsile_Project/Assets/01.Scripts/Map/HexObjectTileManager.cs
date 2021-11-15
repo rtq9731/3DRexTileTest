@@ -62,7 +62,6 @@ public class HexObjectTileManager : MonoBehaviour
 
     private void MakeObjOnTile(TileScript curTile, GameObject randObj)
     {
-        Debug.Log(randObj);
         MainSceneManager.Instance.fogOfWarManager.GenerateCloudOnTile(curTile);
 
         if (randObj != null)
