@@ -6,8 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public class AIManager : MonoBehaviour
 {
-    [SerializeField] Color[] aiColorSet = null;
-
     public int aiPlayerCount = 3;
 
     public List<AIPlayer> aiPlayers = new List<AIPlayer>();
@@ -25,12 +23,13 @@ public class AIManager : MonoBehaviour
     {
         instance = this;
         aiPlayers = GetComponentsInChildren<AIPlayer>().ToList();
-        InitAllAI();
     }
+
     private void OnDestroy()
     {
         instance = null;
     }
+
     public AIData[] GetAIDatas()
     {
         List<AIData> datas = new List<AIData>();
@@ -40,7 +39,7 @@ public class AIManager : MonoBehaviour
 
     public void InitAllAI()
     {
-        List<Color> aiColorSetList = aiColorSet.ToList();
+        List<Color> aiColorSetList = GameManager.Instance.colorSet.ToList().FindAll(x => x != MainSceneManager.Instance.GetPlayer().PlayerData.PlayerColor);
         for (int i = 0; i < aiPlayers.Count; i++)
         {
             aiPlayers[i].Data.PlayerName = $"AI {i + 1}";

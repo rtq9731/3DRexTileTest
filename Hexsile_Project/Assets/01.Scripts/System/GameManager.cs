@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public string playerName = "DefaultPlayer";
+    public string playerName = "Player";
     public Color playerColor = Color.white;
+    public Color[] colorSet;
 
     string filePath = "";
     string saveFileNameExtension = ".sav";
@@ -26,7 +27,14 @@ public class GameManager : MonoSingleton<GameManager>
         SceneManager.LoadScene("MainScene");
     }
 
-    public void GameStartWithLoad(SaveData data)
+    public void StartNewGame(string playerName, Color playerColor)
+    {
+        this.playerColor = playerColor;
+        this.playerName = playerName;
+        GameStart();
+    }
+
+    public void StartLoadedGame(SaveData data)
     {
         curSaveFile = data; 
 
@@ -44,7 +52,7 @@ public class GameManager : MonoSingleton<GameManager>
             MainSceneManager.Instance.mapSize, 
             MainSceneManager.Instance.isRerolled));
 
-        string saveFileName = MainSceneManager.Instance.PlayerName + "_" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + saveFileNameExtension;
+        string saveFileName = MainSceneManager.Instance.GetPlayer().MyName + "_" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + saveFileNameExtension;
         string saveFilePath = filePath + "/" ;
 
         if (!Directory.Exists(saveFilePath))
@@ -57,6 +65,17 @@ public class GameManager : MonoSingleton<GameManager>
         {
             sw.Write(dataString);
         }
+    }
+
+    public void DeleteFile(SaveData save)
+    {
+        DirectoryInfo di = new DirectoryInfo(filePath);
+
+        var selectedFiles = from item in di.GetFiles()
+                            where item.Extension == saveFileNameExtension
+                            select item;
+
+        selectedFiles.ToList().Find(x => x.Name.Contains(save.saveTime.ToString("yyyy_MM_dd_HH_mm_ss"))).Delete();
     }
 
     public SaveData LoadData()

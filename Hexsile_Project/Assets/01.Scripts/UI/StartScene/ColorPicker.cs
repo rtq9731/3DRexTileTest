@@ -1,18 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ColorPicker : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] public Color[] colorSet;
+
+    [SerializeField] Button btnLeft;
+    [SerializeField] Button btnRight;
+    [SerializeField] Text sampleText;
+
+    int colorNum = 0;
+
+    private void Start()
     {
-        
+        GameManager.Instance.colorSet = colorSet;
+        sampleText.color = colorSet[colorNum];
+        sampleText.text = $"»ö»ó »ùÇÃ {colorNum + 1}";
+
+        btnLeft.onClick.AddListener(() =>
+        {
+            SetColor(-1);
+        });
+
+        btnRight.onClick.AddListener(() =>
+        {
+            SetColor(1);
+        });
+
+        GameManager.Instance.colorSet = colorSet;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetColor(int num)
     {
-        
+        colorNum += num;
+        colorNum = Mathf.Clamp(colorNum, 0, colorSet.Length - 1);
+
+        sampleText.color = colorSet[colorNum];
+        sampleText.text = $"»ö»ó »ùÇÃ {colorNum + 1}";
+    }
+
+    public Color GetColor()
+    {
+        return colorSet[colorNum];
     }
 }

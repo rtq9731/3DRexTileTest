@@ -81,9 +81,7 @@ public class MainSceneManager : MonoBehaviour
     private BtnReroll btnReroll = null;
 
     [Header("About Player")]
-    public string PlayerName = "COCONUT";
-
-    PersonPlayer player = null;
+    [SerializeField] PersonPlayer player = null;
 
     private void Start()
     {
@@ -98,11 +96,6 @@ public class MainSceneManager : MonoBehaviour
         tilemapGenerator.GenerateNewMap();
     }
 
-    public void SetPlayer(PersonPlayer player)
-    {
-        this.player = player;
-    }
-
     public PersonPlayer GetPlayer()
     {
         return player;
@@ -113,6 +106,9 @@ public class MainSceneManager : MonoBehaviour
         SaveData curSave = GameManager.Instance.LoadData();
 
         player.PlayerData = curSave.playerData;
+        player.PlayerData.PlayerName = GameManager.Instance.playerName;
+        player.PlayerData.PlayerColor = GameManager.Instance.playerColor;
+
         TileMapData.Instance.GetAllTiles().FindAll(x => player.PlayerData.TileNums.Contains(x.Data.tileNum)).ForEach(x => player.AddTile(x)); // 플레이어 땅 돌려주기
         AIManager.Instance.LoadStage(curSave); // AI들 땅 다시 주기
 
@@ -137,6 +133,10 @@ public class MainSceneManager : MonoBehaviour
     public void StartGame()
     { 
         isRerolled = false;
+
+        player.PlayerData.PlayerName = GameManager.Instance.playerName;
+        player.PlayerData.PlayerColor = GameManager.Instance.playerColor;
+
         AIManager.Instance.StartStage(mapSize);
         player.AddTile(TileMapData.Instance.GetTile(0)); // 무조건 중앙땅은 플레이어꺼
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TilePrefabScript : MonoBehaviour
 {
     [SerializeField] public TilePrefabType prefabType;
+    [SerializeField] public MeshRenderer meshBoder = null;
 }
 
 public enum TilePrefabType

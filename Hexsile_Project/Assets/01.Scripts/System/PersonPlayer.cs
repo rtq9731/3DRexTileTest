@@ -77,9 +77,7 @@ public class PersonPlayer : PlayerScript
         playerData.UnlockedWarheadIdx.Add(0);
         playerData.UnlockedBodyIdx.Add(0);
 
-        MainSceneManager.Instance.SetPlayer(this);
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
-        MainSceneManager.Instance.PlayerName = playerData.PlayerName;
     }
 
     public SkillTreeNode CurResearchData

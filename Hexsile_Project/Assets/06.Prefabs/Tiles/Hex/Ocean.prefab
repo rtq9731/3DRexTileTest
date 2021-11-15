@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181cb0d1b337252428f9f036d057073a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
 --- !u!114 &2028097494986159155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,3 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabType: 2
+  meshBoder: {fileID: 0}

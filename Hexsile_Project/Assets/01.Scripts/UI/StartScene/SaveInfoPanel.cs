@@ -12,14 +12,15 @@ public class SaveInfoPanel : MonoBehaviour
     [SerializeField] Text textTurn = null;
 
     SaveDataInfoPanel infoPanel = null;
+    public SaveData data;
     
     public void InitInfoPanel(SaveData data)
     {
-        Debug.Log(data.saveTime);
         textSaveDate.text = data.saveTime.ToString("yyyy-MM-dd");
         textPlayerName.text = $"플레이어 : {data.playerData.PlayerName}";
         textStage.text = $"스테이지 : {data.stageCount}";
         textTurn.text = $"진행된 턴 : {data.turnCnt}";
+        this.data = data;
         this.infoPanel = FindObjectOfType<SaveDataInfoPanel>();
 
         btnPlayInfo.onClick.AddListener(() => infoPanel.UpdateSaveDataInfo(data));
