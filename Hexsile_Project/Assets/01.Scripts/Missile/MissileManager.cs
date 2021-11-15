@@ -10,8 +10,6 @@ public class MissileManager: MonoBehaviour
 
     int missileHeight = 3;
 
-    float timer = 0f;
-
     List<MissileFire> missileFires = new List<MissileFire>();
 
     private GameObject GetMissileObj()
@@ -53,8 +51,6 @@ public class MissileManager: MonoBehaviour
 
         missileObj.SetActive(true);
 
-        timer = 0f;
-
         missileObj.transform.position = startPoint;
         missileObj.transform.rotation = Quaternion.LookRotation(midPoint);
         missileFires.Add(new MissileFire { targetPos = targetPoint, startPos = startPoint, midPos = midPoint, missileData = missile, missileObj = missileObj, targetTile = target });
@@ -65,14 +61,14 @@ public class MissileManager: MonoBehaviour
         if(missileFires.Count > 0)
         {
             List<MissileFire> willRemove = new List<MissileFire>();
-            timer += Time.deltaTime * 0.5f;
             foreach (var item in missileFires)
             {
                 Vector3 beforePos = item.missileObj.transform.position;
 
-                Vector3 p1 = Vector3.Lerp(item.startPos, item.midPos, timer);
-                Vector3 p2 = Vector3.Lerp(item.midPos, item.targetPos, timer);
-                item.missileObj.transform.position = Vector3.Lerp(p1, p2, timer);
+                item.timer += Time.deltaTime * 0.5f;
+                Vector3 p1 = Vector3.Lerp(item.startPos, item.midPos, item.timer);
+                Vector3 p2 = Vector3.Lerp(item.midPos, item.targetPos, item.timer);
+                item.missileObj.transform.position = Vector3.Lerp(p1, p2, item.timer);
 
                 Vector3 delta = item.missileObj.transform.position - beforePos;
                 item.missileObj.transform.rotation = Quaternion.LookRotation(delta.normalized);
@@ -102,24 +98,15 @@ public class MissileManager: MonoBehaviour
         public Vector3 startPos = Vector3.zero;
         public Vector3 midPos = Vector3.zero;
         public Vector3 targetPos = Vector3.zero;
+        public float timer = 0f;
 
         public GameObject missileObj = null;
         public TileScript targetTile = null;
         public MissileData missileData = null;
 
-
-        public bool CheckIsOverMidPoint()
-        {
-            Vector2 startPos2D = new Vector2(startPos.x, startPos.z);
-            Vector2 midPos2D = new Vector2(midPos.x, midPos.z);
-            Vector2 missilePos2D = new Vector2(missileObj.transform.position.x, missileObj.transform.position.z);
-
-            return Vector2.Distance(startPos2D, midPos2D) < Vector2.Distance(startPos2D, missilePos2D);
-        }
-
         public MissileFire()
         {
-
+            timer = 0f;
         }
     }
 }

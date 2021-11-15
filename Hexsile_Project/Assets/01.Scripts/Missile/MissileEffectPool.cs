@@ -7,7 +7,7 @@ public class MissileEffectPool : MonoBehaviour
 {
     [SerializeField] GameObject missileImpactEffectPrefab = null;
 
-    float particleLifeTime = 2f;
+    float particleLifeTime = 5f;
 
     Queue<ParticleSystem> missileImpactEffectPool = new Queue<ParticleSystem>();
 
