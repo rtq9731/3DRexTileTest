@@ -233,6 +233,7 @@ public class PanelMissileFireSelect : MonoBehaviour
 
         fireMissiles.Remove(missile);
         MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(startedTile, missile, target, out GameObject missileObj);
+        vcamLookMissile.gameObject.SetActive(true);
         vcamLookMissile.m_LookAt = missileObj.transform;
 
         StartCoroutine(LookMissileUntailImpact(missileObj));

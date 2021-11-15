@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 617d9be015db68348a623b01ea51a8c5, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 0c31f62d1a159384fad5c88786103b34, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.371074, g: 0.62253124, b: 0.69996655, a: 1}
+  m_IndirectSpecularColor: {r: 0.37574077, g: 0.6143975, b: 0.86685455, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5000,13 +5000,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40d83161f00ee8c40bd23a4b3da42ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiColorSet:
-  - {r: 0.39215687, g: 0.7294118, b: 0.6509804, a: 1}
-  - {r: 0.9372549, g: 0.8392157, b: 0.2, a: 1}
-  - {r: 0.8352941, g: 0.043137256, b: 0.043137256, a: 1}
-  - {r: 0.70980394, g: 0.20392157, b: 0.8352941, a: 1}
-  - {r: 0.8352941, g: 0.33333334, b: 0.043137256, a: 1}
-  - {r: 0.101960786, g: 0.29411766, b: 0.8235294, a: 1}
   aiPlayerCount: 3
   aiPlayers: []
 --- !u!1 &609759041
@@ -7420,28 +7413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3258f0e5bb63f479ad28fa7384e378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData:
-    tileNums: 
-    isGameOver: 0
-    playerName: COCONUT
-    color: {r: 0.45882356, g: 0, b: 1, a: 1}
-    turnCnt: 0
-    missileInMaking: []
-    missileReadyToShoot: []
-    researchFinishTurn: 0
-    unlockedWarheadIdx: 
-    unlockedEngineIdx: 
-    unlockedBodyIdx: 
-    researchedBodyResearch: 
-    researchedEngineResearch: 
-    curResearchData:
-      type: 0
-      researchThingIdx: 0
-      idx: -1
-      turnForResearch: 0
-      requireResearches: 
-      researchInfo: 
-    resourceTank: 0
 --- !u!1 &837855647
 GameObject:
   m_ObjectHideFlags: 0
@@ -12101,7 +12072,7 @@ MonoBehaviour:
   stageCount: 1
   mapSize: 2
   isRerolled: 0
-  PlayerName: COCONUT
+  player: {fileID: 835838797}
 --- !u!4 &1250035068
 Transform:
   m_ObjectHideFlags: 0
