@@ -185,11 +185,9 @@ public class HexTilemapGenerator : MonoBehaviour
             tempScirpt.SetPosition(tilePos[cnt]);
             tempScirpt.Data.tileNum = cnt;
             TileMapData.Instance.SetTileData(tempScirpt);
-
-            Tiles.Add(tempScirpt);
         }
 
-        List<TileScript> endTiles = Tiles.FindAll(x => MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Count == 3);
+        List<TileScript> endTiles = TileMapData.Instance.GetAllTiles().FindAll(x => MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Count == 3);
         foreach (var item in endTiles)
         {
             actionStack.Push(() =>
