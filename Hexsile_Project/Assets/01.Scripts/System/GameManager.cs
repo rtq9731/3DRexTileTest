@@ -43,6 +43,11 @@ public class GameManager : MonoSingleton<GameManager>
         GameStart();
     }
 
+    public void GoMainMenu()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+
     public void SaveData()
     {
         string dataString = JsonUtility.ToJson(
@@ -52,7 +57,8 @@ public class GameManager : MonoSingleton<GameManager>
             MainSceneManager.Instance.turnCnt, 
             MainSceneManager.Instance.stageCount,
             MainSceneManager.Instance.mapSize, 
-            MainSceneManager.Instance.isRerolled));
+            MainSceneManager.Instance.isRerolled,
+            AIManager.Instance.aiPlayerCount));
 
         string saveFileName = MainSceneManager.Instance.GetPlayer().MyName + "_" + System.DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + saveFileNameExtension;
         string saveFilePath = filePath + "/" ;

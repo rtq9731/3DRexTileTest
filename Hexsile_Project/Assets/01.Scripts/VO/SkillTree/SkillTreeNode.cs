@@ -29,7 +29,7 @@ public class SkillTreeNode
 
     [SerializeField]
     int turnForResearch = 0;
-    public int TrunForResearch
+    public int TurnForResearch
     {
         get { return turnForResearch; }
     }

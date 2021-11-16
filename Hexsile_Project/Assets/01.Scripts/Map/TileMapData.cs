@@ -6,8 +6,7 @@ public class TileMapData : MonoBehaviour
 {
     private static TileMapData instance;
 
-    [SerializeField]
-    private List<TileScript> tileList = new List<TileScript>();
+    [SerializeField] private List<TileScript> tileList = new List<TileScript>();
 
     private void Awake()
     {
@@ -103,6 +102,8 @@ public class TileMapData : MonoBehaviour
             TileScript tmp = tileList.Find(x =>
             !result.Contains(x)
             && MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Count <= 3);
+
+            Debug.Log(tmp.gameObject.GetInstanceID());
 
             if(tmp != null)
             {

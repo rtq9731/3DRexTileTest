@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ColorPicker : MonoBehaviour
 {
-    [SerializeField] public Color[] colorSet;
 
     [SerializeField] Button btnLeft;
     [SerializeField] Button btnRight;
@@ -15,8 +14,7 @@ public class ColorPicker : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.colorSet = colorSet;
-        sampleText.color = colorSet[colorNum];
+        sampleText.color = GameManager.Instance.colorSet[colorNum];
         sampleText.text = $"»ö»ó »ùÇÃ {colorNum + 1}";
 
         btnLeft.onClick.AddListener(() =>
@@ -28,21 +26,19 @@ public class ColorPicker : MonoBehaviour
         {
             SetColor(1);
         });
-
-        GameManager.Instance.colorSet = colorSet;
     }
 
     public void SetColor(int num)
     {
         colorNum += num;
-        colorNum = Mathf.Clamp(colorNum, 0, colorSet.Length - 1);
+        colorNum = Mathf.Clamp(colorNum, 0, GameManager.Instance.colorSet.Length - 1);
 
-        sampleText.color = colorSet[colorNum];
+        sampleText.color = GameManager.Instance.colorSet[colorNum];
         sampleText.text = $"»ö»ó »ùÇÃ {colorNum + 1}";
     }
 
     public Color GetColor()
     {
-        return colorSet[colorNum];
+        return GameManager.Instance.colorSet[colorNum];
     }
 }

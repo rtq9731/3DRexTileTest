@@ -23,7 +23,7 @@ public class PanelResearchInput : MonoBehaviour
     /// </summary>
     /// <param name="data"></param>
     /// <param name="callBack">사용자의 입력을 돌려줍니다</param>
-    public void InitPanelInput(SkillTreeNode data, Action callBack, Sprite icon)
+    public void InitPanelInput(SkillTreeNode data, Action<Sprite> callBack, Sprite icon)
     {
         researchIcon.sprite = icon;
         gameObject.SetActive(true);
@@ -41,7 +41,6 @@ public class PanelResearchInput : MonoBehaviour
             case ResearchType.Engine:
                 if (data.ResearchInfo.Contains("단계")) // 만약 진짜 엔진 연구면
                 {
-                    Debug.Log(data.ResearchThingIdx);
                     MissileEngineData engineData = MainSceneManager.Instance.GetEngineDataByIdx(data.ResearchThingIdx);
                     textResearchName.text = engineData.Name;
                     textWeight.text = $"감당 가능한 무게 : {engineData.Weight}";
@@ -88,7 +87,7 @@ public class PanelResearchInput : MonoBehaviour
                 break;
         }
 
-        textResearchTime.text = $"소요 시간 : {data.TrunForResearch} 턴";
+        textResearchTime.text = $"소요 시간 : {data.TurnForResearch} 턴";
 
         btnOk.onClick.RemoveAllListeners();
         btnCancel.onClick.RemoveAllListeners();
@@ -96,7 +95,7 @@ public class PanelResearchInput : MonoBehaviour
         btnOk.onClick.AddListener(() =>
         {
             UIStackManager.RemoveUIOnTop();
-            callBack();
+            callBack(icon);
         });
         btnCancel.onClick.AddListener(() => UIStackManager.RemoveUIOnTop());
     }

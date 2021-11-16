@@ -37,7 +37,7 @@ public class HexTilemapGenerator : MonoBehaviour
     GameObject[] groundTiles;
     [SerializeField] List<GameObject> groundTileList = new List<GameObject>();
 
-    public void GenerateNewMap()
+    private void Awake()
     {
         switch (type)
         {
@@ -53,7 +53,10 @@ public class HexTilemapGenerator : MonoBehaviour
             default:
                 break;
         }
+    }
 
+    public void GenerateNewMap()
+    {
         TileXInterval = MainSceneManager.Instance.TileXInterval;
         TileZInterval = MainSceneManager.Instance.TileZInterval;
 
@@ -185,8 +188,11 @@ public class HexTilemapGenerator : MonoBehaviour
             tempScirpt.SetPosition(item.Data.Position);
             tempScirpt.Data.tileNum = item.Data.tileNum;
 
+            Debug.Log(TileMapData.Instance.GetAllTiles().Count);
             TileMapData.Instance.RemoveTileOnList(item);
             Destroy(item.gameObject);
+            Destroy(item);
+            Debug.Log(TileMapData.Instance.GetAllTiles().Count);
         } // 구석자리 타일은 무조건 배치 가능한 타일로 바꿔준다.
 
         GetComponent<HexObjectTileManager>().GenerateObjects(type);

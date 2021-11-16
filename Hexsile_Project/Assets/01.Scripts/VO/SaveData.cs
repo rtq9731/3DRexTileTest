@@ -16,10 +16,11 @@ public class SaveData : ISerializationCallbackReceiver
     public uint turnCnt = 0;
     public uint stageCount = 1;
     public int mapSize = 3;
+    public int aiPlayerCount = 0;
 
     public bool isRerolled = false;
 
-    public SaveData(TileData[] tiles, MainPlayerData playerData, AIData[] aiPlayers, uint turnCnt, uint stageCount, int mapSize, bool isRerolled)
+    public SaveData(TileData[] tiles, MainPlayerData playerData, AIData[] aiPlayers, uint turnCnt, uint stageCount, int mapSize, bool isRerolled, int aiPlayerCount)
     {
         this.tiles = tiles;
         this.playerData = playerData;
@@ -28,6 +29,7 @@ public class SaveData : ISerializationCallbackReceiver
         this.stageCount = stageCount;
         this.mapSize = mapSize;
         this.isRerolled = isRerolled;
+        this.aiPlayerCount = aiPlayerCount;
         saveTime = System.DateTime.Now;
     }
 

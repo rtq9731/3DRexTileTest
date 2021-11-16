@@ -13,13 +13,13 @@ public abstract class PlayerScript : MonoBehaviour, ITurnFinishObj
     public abstract List<TileScript> OwningTiles
     {
         get;
+        set;
     }
 
     public Action TurnFinishAction;
 
     public abstract void ResetPlayer();
     public abstract void AddTile(TileScript tile);
-    public abstract void RemoveTile(TileScript tile);
 
 
     protected void Awake()

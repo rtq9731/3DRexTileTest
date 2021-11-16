@@ -76,7 +76,7 @@ public class TechNode : MonoBehaviour
         MainSceneManager.Instance.researchInputPanel.InitPanelInput(data, ResearchStart, icon.sprite);
     }
 
-    private void ResearchStart()
+    private void ResearchStart(Sprite icon)
     {
         PersonPlayer player = MainSceneManager.Instance.GetPlayer();
 
@@ -109,10 +109,19 @@ public class TechNode : MonoBehaviour
 
         if (player.CurResearchData != null && player.CurResearchData.Idx != -1)
         {
-            PanelException.CallExecptionPanel("이미 연구중인 항목이 있습니다!\n진행 중인 연구가 초기화됩니다.", () => player.CurResearchData = data, "계속 진행", () => { }, "취소");
+            PanelException.CallExecptionPanel("이미 연구중인 항목이 있습니다!\n진행 중인 연구가 초기화됩니다.",
+                () => 
+                { 
+                    player.CurResearchData = data;
+                    MainSceneManager.Instance.curResearchPanel.SetTexts(data, icon);
+                }, 
+                "계속 진행", 
+                () => 
+                { }, "취소");
             return;
         }
 
         player.CurResearchData = data;
+        MainSceneManager.Instance.curResearchPanel.SetTexts(data, icon);
     }
 }

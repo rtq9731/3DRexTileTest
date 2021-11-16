@@ -9,6 +9,8 @@ public class PanelCurrentResearch : MonoBehaviour
     [SerializeField] Text textResearchName = null;
     [SerializeField] Text textResearchComplete = null;
     [SerializeField] Text textNowResearchStatus = null;
+    [SerializeField] Image researchIcon = null;
+    [SerializeField] Sprite noneSprite = null;
 
     Toggle myToggle = null;
     RectTransform rectTr = null;
@@ -26,23 +28,33 @@ public class PanelCurrentResearch : MonoBehaviour
     }
     private void Start()
     {
-        UpdateTexts(null);
+        UpdateTextsToNull();
     }
 
-    public void UpdateTexts(PersonPlayer player)
+    public void UpdateTextsToNull()
     {
-        if(player == null || player.CurResearchData == null)
-        {
-            textResearchName.text = "현재 연구중 : 연구중인 항목 없음.";
-            textResearchComplete.text = "연구 완료까지 : 없음";
-            textNowResearchStatus.text = "현재 연구중인 항목 없음";
-            return;
-        }
+        researchIcon.sprite = noneSprite;
+        textResearchName.text = "현재 연구중 : 연구중인 항목 없음.";
+        textResearchComplete.text = "연구 완료까지 : 없음";
+        textNowResearchStatus.text = "현재 연구중인 항목 없음";
+        return;
+    }
 
-        textResearchName.text = $"현재 연구중 : {player.CurResearchData.ResearchInfo}";
-        textResearchComplete.text = $"연구 완료까지 {player.ResearchFinishTurn} 턴";
-        textNowResearchStatus.text = $"현재 연구중인 항목이 {player.ResearchFinishTurn} 턴 후 완료";
-        
+    public void UpdateTexts(SkillTreeNode skill)
+    {
+        textResearchName.text = $"현재 연구중 : {skill.ResearchInfo}";
+        textResearchComplete.text = $"연구 완료까지 {MainSceneManager.Instance.GetPlayer().ResearchFinishTurn} 턴";
+        textNowResearchStatus.text = $"현재 연구중인 항목이 {MainSceneManager.Instance.GetPlayer().ResearchFinishTurn} 턴 후 완료";
+    }
+
+    public void SetTexts(SkillTreeNode skill, Sprite icon = null)
+    {
+        researchIcon.sprite = icon;
+
+        Debug.Log(skill.TurnForResearch + " " + skill.ResearchInfo);
+        textResearchName.text = $"현재 연구중 : {skill.ResearchInfo}";
+        textResearchComplete.text = $"연구 완료까지 {MainSceneManager.Instance.GetPlayer().ResearchFinishTurn} 턴";
+        textNowResearchStatus.text = $"현재 연구중인 항목이 {MainSceneManager.Instance.GetPlayer().ResearchFinishTurn} 턴 후 완료";
     }
 
     public void OnToggleValueChanged(bool isOn)

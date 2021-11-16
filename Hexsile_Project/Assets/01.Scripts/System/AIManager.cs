@@ -42,6 +42,7 @@ public class AIManager : MonoBehaviour
         List<Color> aiColorSetList = GameManager.Instance.colorSet.ToList().FindAll(x => x != MainSceneManager.Instance.GetPlayer().PlayerData.PlayerColor);
         for (int i = 0; i < aiPlayers.Count; i++)
         {
+            aiPlayers[i].Data = new AIData();
             aiPlayers[i].Data.PlayerName = $"AI {i + 1}";
             aiPlayers[i].Data.PlayerColor = aiColorSetList[Random.Range(0, aiColorSetList.Count)];
             aiColorSetList.Remove(aiPlayers[i].Data.PlayerColor);
@@ -66,6 +67,12 @@ public class AIManager : MonoBehaviour
             TileMapData.Instance.GetAllTiles().FindAll(x => item.Data.TileNums.Contains(x.Data.tileNum)).ForEach(x => item.AddTile(x));
         }
 
+        var onlineAIPlayers = from result in aiPlayers
+                              where result.OwningTiles.Count >= 1
+                              select result;
+
+        aiPlayers.FindAll(x => !onlineAIPlayers.Contains(x)).ForEach(x => x.Data.IsGameOver = true);
+
         MainSceneManager.Instance.GetPlayer().TurnFinishAction += CheckAndAttackPlayer;
     }
 
@@ -85,7 +92,6 @@ public class AIManager : MonoBehaviour
 
             List<TileScript> tiles = TileMapData.Instance.GetEndTile(6);
             tiles = tiles.FindAll(x => x.Owner == null);
-            item.gameObject.SetActive(true);
             item.AddTile(tiles[Random.Range(0, tiles.Count)]);
         }
 
@@ -99,6 +105,9 @@ public class AIManager : MonoBehaviour
         {
             MainSceneManager.Instance.tileChecker.FindTilesInRange(item.OwningTiles[0], mapSize - 1).ForEach(x =>
             {
+                if (x.Owner != null)
+                    return;
+
                 item.AddTile(x);
             });
         }
@@ -161,7 +170,7 @@ public class AIManager : MonoBehaviour
         {
             if(itemTile.IsInEffect()) // 지속형 탄두의 영향 하인가?
             {
-                return;
+                continue;
             }
 
             MainSceneManager.Instance.tileChecker.FindTilesInRange(itemTile, 1).FindAll(x => x.Owner == MainSceneManager.Instance.GetPlayer()).ForEach(x => attackableTiles.Add(x));
@@ -169,7 +178,7 @@ public class AIManager : MonoBehaviour
 
         attackableTiles = attackableTiles.Distinct().ToList();
 
-        MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(ai.OwningTiles[0],
+        MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(ai.OwningTiles.Find(x => x.Owner == ai),
             new MissileData(MissileTypes.MissileEngineType.commonEngine, MissileTypes.MissileWarheadType.CommonTypeWarhead, MissileTypes.MissileBody.Orign),
             attackableTiles[Random.Range(0, attackableTiles.Count)], out GameObject missileObj);
     }

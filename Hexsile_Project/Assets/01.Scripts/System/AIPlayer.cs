@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AIPlayer : PlayerScript
 {
-    AIData data = new AIData();
+    [SerializeField] AIData data = new AIData();
 
     private void Start()
     {
@@ -17,7 +17,10 @@ public class AIPlayer : PlayerScript
         get { return data; } set { data = value; }
     }
 
-    public override List<TileScript> OwningTiles => data.OwningTiles;
+    public override List<TileScript> OwningTiles {
+        get { return data.OwningTiles; } 
+        set { data.OwningTiles = value; }
+    }
 
     public override string MyName => data.PlayerName;
 
@@ -32,14 +35,12 @@ public class AIPlayer : PlayerScript
         }
 
         tile.ChangeOwner(this);
-
-        data.OwningTiles.Remove(tile);
-        data.OwningTiles.Add(tile);
     }
 
     private void CheckIsDie()
     {
-        if(data.OwningTiles.Count < 1)
+        data.OwningTiles = data.OwningTiles.Where(item => item != null).ToList();
+        if (data.OwningTiles.Count < 1)
         {
             data.IsGameOver = true;
         }
@@ -60,17 +61,6 @@ public class AIPlayer : PlayerScript
 
     public override void ResetPlayer()
     {
-        data.OwningTiles.Clear();
-        data.IsGameOver = false;
-    }
-
-    public override void RemoveTile(TileScript tile)
-    {
-        data.OwningTiles.Remove(tile);
-
-        if(OwningTiles.Count < 1)
-        {
-            data.IsGameOver = true;
-        }
+        data = new AIData();
     }
 }

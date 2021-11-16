@@ -39,7 +39,7 @@ public class PanelMissileFireSelect : MonoBehaviour
             }
         }
 
-        if(TileMapData.Instance != null)
+        if (TileMapData.Instance != null)
         {
             TileMapData.Instance.ResetColorAllTile();
         }
@@ -63,6 +63,8 @@ public class PanelMissileFireSelect : MonoBehaviour
         {
             startedTile.transform.position = startedTile.Data.Position;
         }
+
+        MainSceneManager.Instance.uiTopBar.UpdateTexts();
     }
 
     private void Update()
@@ -236,6 +238,8 @@ public class PanelMissileFireSelect : MonoBehaviour
 
         fireMissiles.Remove(missile);
         MainSceneManager.Instance.missileManager.fireMissileFromStartToTarget(startedTile, missile, target, out GameObject missileObj);
+        vcamLookMissile.transform.rotation = vcamSelectFire.transform.rotation;
+        vcamLookMissile.transform.position = vcamSelectFire.transform.position;
         vcamLookMissile.gameObject.SetActive(true);
         vcamLookMissile.m_LookAt = missileObj.transform;
 

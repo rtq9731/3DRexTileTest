@@ -17,7 +17,6 @@ public class HexObjectTileManager : MonoBehaviour
     {
         objs = new List<ObjScript>();
 
-        Debug.Log(plainGroundObjSet.Length);
         foreach (var item in plainGroundObjSet)
         {
             if(item != null)
@@ -25,7 +24,7 @@ public class HexObjectTileManager : MonoBehaviour
         }
 
         objs.Distinct();
-        TileMapData.Instance.GetAllTiles().FindAll(x => x.Data.type != (TileType.Plain | TileType.Ocean | TileType.Lake)).ForEach(x => MakeObjOnTile(x, x.Data.type));
+        TileMapData.Instance.GetAllTiles().FindAll(x => x.Data.type != (TileType.Plain | TileType.Ocean | TileType.Lake)).ForEach(x => MakeObjOnTile(x));
 
         MainSceneManager.Instance.StartLoadedGame();
     }
@@ -89,10 +88,9 @@ public class HexObjectTileManager : MonoBehaviour
         }
     }
 
-    private void MakeObjOnTile(TileScript curTile, TileType type)
+    private void MakeObjOnTile(TileScript curTile)
     {
-        Debug.Log(type);
-        switch (type)
+        switch (curTile.Data.type)
         {
             case TileType.None:
             case TileType.Ocean:

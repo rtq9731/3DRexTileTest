@@ -62,6 +62,7 @@ public class MissileData
             MissileTypes.MissileEngineType tmp = engineTier;
 
             engineTier = value;
+
             UpdateRange(MainSceneManager.Instance.GetEngineData(engineTier).Weight, MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
             UpdateTurnForFinish(MainSceneManager.Instance.GetEngineData(engineTier).Makingtime);
             UpdatePrice();
@@ -91,6 +92,7 @@ public class MissileData
             MissileTypes.MissileWarheadType tmp = warheadType;
 
             warheadType = value;
+
             UpdateRange(MainSceneManager.Instance.GetEngineData(engineTier).Weight, MainSceneManager.Instance.GetWarheadData(warheadType).Weight);
             UpdateTurnForFinish(MainSceneManager.Instance.GetWarheadData(warheadType).Makingtime);
             UpdatePrice();

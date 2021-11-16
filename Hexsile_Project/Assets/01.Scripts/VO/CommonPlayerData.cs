@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public abstract class CommonPlayerData : ISerializationCallbackReceiver
 {
-    protected List<TileScript> owningTiles = new List<TileScript>();
+    [SerializeField] protected List<TileScript> owningTiles = new List<TileScript>();
 
     [SerializeField] protected int[] tileNums = null;
     [SerializeField] protected bool isGameOver = false;
@@ -18,7 +18,7 @@ public abstract class CommonPlayerData : ISerializationCallbackReceiver
     }
     public List<TileScript> OwningTiles
     {
-        get { return owningTiles; }
+        get { return owningTiles; } set { owningTiles = value; }
     }
     public bool IsGameOver
     {

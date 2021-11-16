@@ -109,7 +109,7 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public void StartLoadedGame()
     {
-        SaveData curSave = GameManager.Instance.LoadData();
+        SaveData curSave = GameManager.Instance.LoadData(); 
 
         player.PlayerData = curSave.playerData;
         player.PlayerData.PlayerName = GameManager.Instance.playerName;
@@ -121,7 +121,7 @@ public class MainSceneManager : MonoBehaviour
         mapSize = curSave.mapSize;
         stageCount = curSave.stageCount;
         turnCnt = curSave.turnCnt;
-        uiTopBar.UpdateTexts();
+        AIManager.Instance.aiPlayerCount = curSave.aiPlayerCount;
 
         if (btnReroll == null)
         {
@@ -129,20 +129,22 @@ public class MainSceneManager : MonoBehaviour
         }
 
         isRerolled = curSave.isRerolled;
-        if (!isRerolled)
+        if (!isRerolled && turnCnt < 1)
         {
             btnReroll.ActiveReroll();
             player.TurnFinishAction += btnReroll.RemoveReroll;
         }
 
         player.TurnFinishAction += CheckStageClear;
+
+        uiTopBar.UpdateTexts();
     }
 
     /// <summary>
     /// 스테이지를 시작합니다
     /// </summary>
     public void StartGame()
-    { 
+    {
         isRerolled = false;
 
         player.PlayerData.PlayerName = GameManager.Instance.playerName;
@@ -160,6 +162,8 @@ public class MainSceneManager : MonoBehaviour
         player.TurnFinishAction += btnReroll.RemoveReroll;
         player.TurnFinishAction += CheckStageClear;
         GameManager.Instance.SaveData();
+
+        uiTopBar.UpdateTexts();
     }
 
     /// <summary>
@@ -182,9 +186,10 @@ public class MainSceneManager : MonoBehaviour
         
         if(stageCount % 2 == 0 && AIManager.Instance.aiPlayerCount < 6) // 짝수 번째 스테이지 일때 && AI가 6개 밑일 때
         {
-            AIManager.Instance.aiPlayerCount++;
+            AIManager.Instance.aiPlayerCount = 3 + (int)stageCount / 2;
         }
         mapSize++;
+        stageCount++;
 
         player.ResetPlayer();
         tilemapGenerator.GenerateNewTile();
@@ -223,10 +228,8 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private void CheckStageClear()
     {
-        AIManager.Instance.aiPlayers.ForEach(x => Debug.Log(x.Data.IsGameOver));
-        if (AIManager.Instance.aiPlayers.Find(x => x.Data.IsGameOver == false) == null)
+        if (AIManager.Instance.aiPlayers.Find(x => !x.Data.IsGameOver) == null)
         {
-            
             ClearStage();
         }
     }

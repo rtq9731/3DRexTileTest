@@ -6,6 +6,7 @@ using UnityEngine;
  
 public class PersonPlayer : PlayerScript
 {
+    [SerializeField] GameOverPanel gameOver;
     MainPlayerData playerData = new MainPlayerData();
 
     public MainPlayerData PlayerData
@@ -52,6 +53,7 @@ public class PersonPlayer : PlayerScript
     public override List<TileScript> OwningTiles
     {
         get { return playerData.OwningTiles; }
+        set { playerData.OwningTiles = value; }
     }
     public override string MyName
     {
@@ -107,11 +109,10 @@ public class PersonPlayer : PlayerScript
             }
 
             playerData.CurResearchData = value;
-            playerData.ResearchFinishTurn = playerData.CurResearchData.TrunForResearch;
+            playerData.ResearchFinishTurn = playerData.CurResearchData.TurnForResearch;
 
             TurnFinishAction -= ResearchOnTurnFinish; // 원래 있던 연구 액션 삭제
             TurnFinishAction += ResearchOnTurnFinish;
-            MainSceneManager.Instance.curResearchPanel.UpdateTexts(this);
         }
     }
 
@@ -140,6 +141,7 @@ public class PersonPlayer : PlayerScript
             if (CheckGameOver())
             {
                 playerData.IsGameOver = true;
+                gameOver.gameObject.SetActive(true);
                 TurnFinishAction = () => { };
             }
 
@@ -154,6 +156,7 @@ public class PersonPlayer : PlayerScript
         }
 
         playerData.ResearchFinishTurn--;
+        MainSceneManager.Instance.curResearchPanel.UpdateTexts(CurResearchData);
         if (playerData.ResearchFinishTurn <= 0)
         {
             switch (playerData.CurResearchData.Type)
@@ -183,9 +186,9 @@ public class PersonPlayer : PlayerScript
                     break;
             }
 
+            MainSceneManager.Instance.curResearchPanel.UpdateTextsToNull();
             playerData.CurResearchData = null;
         }
-        MainSceneManager.Instance.curResearchPanel.UpdateTexts(this);
     }
 
     public override void AddTile(TileScript tile)
@@ -203,17 +206,7 @@ public class PersonPlayer : PlayerScript
             tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, 2);
         }
 
-        tilesInRange.ForEach(x =>
-        {
-            if (x.transform.GetComponentInChildren<CloudObject>() != null)
-            {
-                MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x);
-            }
-        });
-
-        // 중복 안되게 하기 위함.
-        playerData.OwningTiles.Remove(tile);
-        playerData.OwningTiles.Add(tile);
+        tilesInRange.ForEach(x => MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(x));
     }
 
     private bool CheckGameOver()
@@ -230,11 +223,6 @@ public class PersonPlayer : PlayerScript
     {
         playerData.ResourceTank += resource;
         MainSceneManager.Instance.uiTopBar.UpdateTexts();
-    }
-
-    public override void RemoveTile(TileScript tile)
-    {
-        playerData.OwningTiles.Remove(tile);
     }
 
 }

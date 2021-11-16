@@ -13,6 +13,5 @@ public class ExitPanel : MonoBehaviour
     {
         btnExit.onClick.AddListener(Application.Quit);
         btnSave.onClick.AddListener(GameManager.Instance.SaveData);
-        //btnLoad.onClick.AddListener(GameManager.Instance.LoadData);
     }
 }

@@ -39,9 +39,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         if (this.data.type == (TileType.Lake | TileType.Lake) || owner == null)
             return;
 
-        Debug.Log(owner.MyName + " " + damage);
-        Debug.Log(data.tileNum);
-
         data.Shield -= damage;
         MainSceneManager.Instance.effectPool.PlayEffectOnTile(this);
 
@@ -99,7 +96,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         for (int i = 0; i < moreHitTileCnt; i++)
         {
 
-            if(tilesInMoreHitRange.Count <= 1)
+            if(tilesInMoreHitRange.Count < 1)
             {
                 return;
             }
@@ -163,11 +160,17 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
     public void ChangeOwner(PlayerScript newOwner)
     {
+        if (owner != null)
+        {
+            owner.TurnFinishAction -= TurnFinish;
+        }
+
         Color tileColor = Color.white;
         if (newOwner != null && newOwner != owner)
         {
-            tileColor = newOwner != MainSceneManager.Instance.GetPlayer() ? (newOwner as AIPlayer).Data.PlayerColor : tileColor = (newOwner as PersonPlayer).PlayerData.PlayerColor;
+            tileColor = newOwner != MainSceneManager.Instance.GetPlayer() ? (newOwner as AIPlayer).Data.PlayerColor : (newOwner as PersonPlayer).PlayerData.PlayerColor;
 
+            Debug.Log(tileColor);
             MeshRenderer meshBoder = GetComponent<TilePrefabScript>().meshBoder;
             if (meshBoder != null)
             {
@@ -175,23 +178,20 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             }
             owner = newOwner;
 
-            owner.AddTile(this);
+            owner.OwningTiles.Add(this);
             owner.TurnFinishAction += TurnFinish;
         }
         else if(newOwner == null)
         {
+            owner.OwningTiles.Remove(this);
             MeshRenderer meshBoder = GetComponent<TilePrefabScript>().meshBoder;
             if (meshBoder != null)
             {
                 meshBoder.material.color = tileColor;
             }
 
-            if (owner != null)
-            {
-                owner.TurnFinishAction -= TurnFinish;
-                owner.RemoveTile(this);
-            }
         }
+
 
         owner = newOwner;
         data.Shield = data.MaxShield;
@@ -223,7 +223,7 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
                 return;
             }
 
-            ChangeOwner(owner);
+            owner.AddTile(this);
             owner.AddResource(-data.Price);
             MainSceneManager.Instance.InfoPanel.RefreshTexts(this);
         }

@@ -26,5 +26,6 @@ public class PanelRightSide : MonoBehaviour
         }
 
         player.TurnFinish();
+        AIManager.Instance.aiPlayers.ForEach(x => x.TurnFinish());
     }
 }
