@@ -223,8 +223,10 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private void CheckStageClear()
     {
+        AIManager.Instance.aiPlayers.ForEach(x => Debug.Log(x.Data.IsGameOver));
         if (AIManager.Instance.aiPlayers.Find(x => x.Data.IsGameOver == false) == null)
         {
+            
             ClearStage();
         }
     }

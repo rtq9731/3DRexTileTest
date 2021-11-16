@@ -93,6 +93,8 @@ public class AIManager : MonoBehaviour
                               where result.OwningTiles.Count >= 1
                               select result;
 
+        aiPlayers.FindAll(x => !onlineAIPlayers.Contains(x)).ForEach(x => x.Data.IsGameOver = true);
+
         foreach (var item in onlineAIPlayers) // 구석자리 땅이 모두 배분 된 후 나머지 땅을 AI들끼리 나눈다.
         {
             MainSceneManager.Instance.tileChecker.FindTilesInRange(item.OwningTiles[0], mapSize - 1).ForEach(x =>

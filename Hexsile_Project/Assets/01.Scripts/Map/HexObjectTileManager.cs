@@ -69,7 +69,7 @@ public class HexObjectTileManager : MonoBehaviour
             GameObject temp = Instantiate(randObj, curTile.transform);
 
 
-            if (curTile.Data.type == TileType.Plain)
+            if (curTile.Data.type != TileType.Plain)
                 return;
 
             switch (temp.GetComponent<ObjScript>().objType)

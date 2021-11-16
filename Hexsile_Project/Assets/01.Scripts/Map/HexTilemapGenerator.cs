@@ -7,8 +7,6 @@ using DG.Tweening;
 
 public class HexTilemapGenerator : MonoBehaviour
 {
-    Stack<Action> actionStack = new Stack<Action>();
-
     public enum GroundType
     {
         None,
@@ -181,23 +179,15 @@ public class HexTilemapGenerator : MonoBehaviour
         List<TileScript> endTiles = TileMapData.Instance.GetAllTiles().FindAll(x => MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Count == 3);
         foreach (var item in endTiles)
         {
-            actionStack.Push(() =>
-            {
-                GameObject temp = Instantiate(groundTiles[0], item.Data.Position, Quaternion.Euler(Vector3.zero), tileParent);
-                TileScript tempScirpt = temp.GetComponent<TileScript>();
-                TileMapData.Instance.SetTileData(tempScirpt);
-                tempScirpt.SetPosition(item.Data.Position);
-                tempScirpt.Data.tileNum = item.Data.tileNum;
+            GameObject temp = Instantiate(groundTiles[0], item.Data.Position, Quaternion.Euler(Vector3.zero), tileParent);
+            TileScript tempScirpt = temp.GetComponent<TileScript>();
+            TileMapData.Instance.SetTileData(tempScirpt);
+            tempScirpt.SetPosition(item.Data.Position);
+            tempScirpt.Data.tileNum = item.Data.tileNum;
 
-                TileMapData.Instance.RemoveTileOnList(item);
-                Destroy(item.gameObject);
-            });
-        }
-
-        while (actionStack.Count >= 1)
-        {
-            actionStack.Pop()();
-        }
+            TileMapData.Instance.RemoveTileOnList(item);
+            Destroy(item.gameObject);
+        } // 구석자리 타일은 무조건 배치 가능한 타일로 바꿔준다.
 
         GetComponent<HexObjectTileManager>().GenerateObjects(type);
     }
