@@ -24,7 +24,6 @@ public class PanelPartinfo : MonoBehaviour
     public void InitPanelPartInfo(MissileEngineData engine)
     {
         textName.text = engine.Name;
-        partSelector.InitPartText(engine);
 
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(() =>
