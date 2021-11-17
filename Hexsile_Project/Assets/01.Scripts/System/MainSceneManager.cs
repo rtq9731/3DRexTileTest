@@ -129,6 +129,7 @@ public class MainSceneManager : MonoBehaviour
             btnReroll = FindObjectOfType<BtnReroll>();
         }
 
+        Debug.Log(curSave.isRerolled);
         if (!isRerolled && turnCnt < 1)
         {
             btnReroll.ActiveReroll();
@@ -148,8 +149,6 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        isRerolled = false;
-
         AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
         player.ResetPlayer();
 
