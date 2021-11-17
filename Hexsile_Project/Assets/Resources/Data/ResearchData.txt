@@ -213,7 +213,7 @@
       "researchThingIdx": 4,
       "idx": 26,
       "turnForResearch": 8,
-      "requireResearches": [21, 22],
+      "requireResearches": [24, 25],
       "researchInfo": "엔진 4단계 연구"
     },
     {
