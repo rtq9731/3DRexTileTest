@@ -103,8 +103,6 @@ public class TileMapData : MonoBehaviour
             !result.Contains(x)
             && MainSceneManager.Instance.tileChecker.FindTilesInRange(x, 1).Count <= 3);
 
-            Debug.Log(tmp.gameObject.GetInstanceID());
-
             if(tmp != null)
             {
                 result.Add(tmp);
