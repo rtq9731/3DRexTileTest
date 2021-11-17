@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,20 @@ public class NewGamePanel : MonoBehaviour
 
     private void Start()
     {
-        btnNewGame.onClick.AddListener(() => GameManager.Instance.StartNewGame(playerNameInput.text != null ? playerNameInput.text : "Player", GetComponentInChildren<ColorPicker>().GetColor()));
+        btnNewGame.onClick.AddListener(() =>
+        {
+            foreach (var item in GameManager.Instance.GetAllSaveFiles())
+            {
+                if(item.Name.Contains(playerNameInput.text))
+                {
+                    playerNameInput.text = "";
+                    playerNameInput.placeholder.GetComponent<Text>().text = "! 이미 존재하는 이름입니다 !";
+                    playerNameInput.placeholder.GetComponent<Text>().color = Color.red;
+                    return;
+                }
+            }
+
+            GameManager.Instance.StartNewGame(playerNameInput.text != "" ? playerNameInput.text : "Player", GetComponentInChildren<ColorPicker>().GetColor());
+        });
     }
 }
