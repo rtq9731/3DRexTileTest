@@ -17,6 +17,7 @@ public class BtnReroll : MonoBehaviour
     public void ActiveReroll()
     {
         btnReroll.interactable = true;
+        gameObject.SetActive(true);
         GetComponent<RectTransform>().DOAnchorPosY(-40, 0.5f);
     }
 

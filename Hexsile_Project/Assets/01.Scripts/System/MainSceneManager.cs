@@ -193,6 +193,7 @@ public class MainSceneManager : MonoBehaviour
         stageCount++;
 
         turnCnt = 0;
+        isRerolled = false;
 
         tilemapGenerator.GenerateNewTile();
     }
