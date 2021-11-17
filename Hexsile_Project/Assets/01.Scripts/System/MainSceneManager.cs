@@ -163,7 +163,16 @@ public class MainSceneManager : MonoBehaviour
             btnReroll = FindObjectOfType<BtnReroll>();
         }
 
-        btnReroll.ActiveReroll();
+        if (!isRerolled && turnCnt < 1)
+        {
+            btnReroll.ActiveReroll();
+            player.TurnFinishAction += btnReroll.RemoveReroll;
+        }
+        else
+        {
+            btnReroll.RemoveReroll();
+        }
+
         player.TurnFinishAction += btnReroll.RemoveReroll;
         GameManager.Instance.SaveData();
 
