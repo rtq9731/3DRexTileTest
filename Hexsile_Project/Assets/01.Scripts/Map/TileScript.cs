@@ -187,7 +187,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             if (owner != MainSceneManager.Instance.GetPlayer()) // 만약 AI라면
             {
                 (owner as AIPlayer).CheckIsDie();
-                Debug.Log((owner as AIPlayer).Data.PlayerName + " " + (owner as AIPlayer).Data.IsGameOver);
             }
 
             owner = newOwner;

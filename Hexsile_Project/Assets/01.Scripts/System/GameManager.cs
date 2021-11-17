@@ -32,6 +32,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         this.playerColor = playerColor;
         this.playerName = playerName;
+        curSaveFile = null;
+
         GameStart();
     }
 

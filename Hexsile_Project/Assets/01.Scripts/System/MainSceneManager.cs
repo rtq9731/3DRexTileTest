@@ -115,14 +115,14 @@ public class MainSceneManager : MonoBehaviour
         player.PlayerData.PlayerName = GameManager.Instance.playerName;
         player.PlayerData.PlayerColor = GameManager.Instance.playerColor;
 
-        AIManager.Instance.LoadStage(curSave); // AI들 땅 다시 주기
-        TileMapData.Instance.GetAllTiles().FindAll(x => player.PlayerData.TileNums.Contains(x.Data.tileNum)).ForEach(x => player.AddTile(x)); // 플레이어 땅 돌려주기
-
         mapSize = curSave.mapSize;
         stageCount = curSave.stageCount;
         turnCnt = curSave.turnCnt;
-        AIManager.Instance.aiPlayerCount = curSave.aiPlayerCount;
         isRerolled = curSave.isRerolled;
+        AIManager.Instance.aiPlayerCount = curSave.aiPlayerCount;
+
+        AIManager.Instance.LoadStage(curSave); // AI들 땅 다시 주기
+        TileMapData.Instance.GetAllTiles().FindAll(x => player.PlayerData.TileNums.Contains(x.Data.tileNum)).ForEach(x => player.AddTile(x)); // 플레이어 땅 돌려주기
 
         if (btnReroll == null)
         {
