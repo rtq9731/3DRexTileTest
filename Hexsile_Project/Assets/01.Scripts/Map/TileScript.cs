@@ -185,7 +185,12 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             owner.OwningTiles.Remove(this);
 
             if (owner != MainSceneManager.Instance.GetPlayer()) // 만약 AI라면
+            {
                 (owner as AIPlayer).CheckIsDie();
+                Debug.Log((owner as AIPlayer).Data.PlayerName + " " + (owner as AIPlayer).Data.IsGameOver);
+            }
+
+            owner = newOwner;
 
             MeshRenderer meshBoder = GetComponent<TilePrefabScript>().meshBoder;
             if (meshBoder != null)
@@ -195,8 +200,6 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
 
         }
 
-
-        owner = newOwner;
         data.Shield = data.MaxShield;
     }
 

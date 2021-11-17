@@ -57,5 +57,6 @@ public class AIPlayer : PlayerScript
     public override void ResetPlayer()
     {
         data = new AIData();
+        TurnFinishAction = () => { };
     }
 }

@@ -140,6 +140,7 @@ public class MainSceneManager : MonoBehaviour
         }
 
         uiTopBar.UpdateTexts();
+        player.TurnFinishAction += CheckStageClear;
     }
 
     /// <summary>
@@ -230,6 +231,7 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public void CheckStageClear()
     {
+        Debug.Log(AIManager.Instance.aiPlayers.Find(x => !x.Data.IsGameOver));
         if (AIManager.Instance.aiPlayers.Find(x => !x.Data.IsGameOver) == null)
         {
             ClearStage();
