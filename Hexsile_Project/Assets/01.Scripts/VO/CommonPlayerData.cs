@@ -39,6 +39,11 @@ public abstract class CommonPlayerData : ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
+        if(owningTiles.Count < 1)
+        {
+            tileNums = new int[] { };
+        }
+
         List<int> list = new List<int>();
         owningTiles.ForEach(x => list.Add(x.Data.tileNum));
         tileNums = list.ToArray();
