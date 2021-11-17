@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class ExitPanel : MonoBehaviour
 {
     [SerializeField] Button btnSave;
-    [SerializeField] Button btnLoad;
+    [SerializeField] Button btnMenu;
     [SerializeField] Button btnExit;
 
     private void Start()
     {
-        btnExit.onClick.AddListener(Application.Quit);
         btnSave.onClick.AddListener(GameManager.Instance.SaveData);
+        btnMenu.onClick.AddListener(GameManager.Instance.GoMainMenu);
+        btnExit.onClick.AddListener(Application.Quit);
     }
 }
