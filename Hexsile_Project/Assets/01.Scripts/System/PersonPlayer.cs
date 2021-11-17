@@ -120,6 +120,7 @@ public class PersonPlayer : PlayerScript
     {
         playerData = new MainPlayerData();
 
+        playerData.ResourceTank = 0;
         playerData.UnlockedEngineIdx.Add(0); // 기본 연구는 완료 후 시작
         playerData.UnlockedWarheadIdx.Add(0);
         playerData.UnlockedBodyIdx.Add(0);

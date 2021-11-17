@@ -135,9 +135,9 @@ public class MainSceneManager : MonoBehaviour
             player.TurnFinishAction += btnReroll.RemoveReroll;
         }
 
-        player.TurnFinishAction += CheckStageClear;
 
         uiTopBar.UpdateTexts();
+        player.TurnFinishAction += CheckStageClear;
     }
 
     /// <summary>
@@ -146,6 +146,11 @@ public class MainSceneManager : MonoBehaviour
     public void StartGame()
     {
         isRerolled = false;
+
+        AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
+        player.ResetPlayer();
+
+        turnCnt = 0;
 
         player.PlayerData.PlayerName = GameManager.Instance.playerName;
         player.PlayerData.PlayerColor = GameManager.Instance.playerColor;
@@ -160,10 +165,10 @@ public class MainSceneManager : MonoBehaviour
 
         btnReroll.ActiveReroll();
         player.TurnFinishAction += btnReroll.RemoveReroll;
-        player.TurnFinishAction += CheckStageClear;
         GameManager.Instance.SaveData();
 
         uiTopBar.UpdateTexts();
+        player.TurnFinishAction += CheckStageClear;
     }
 
     /// <summary>
@@ -177,21 +182,16 @@ public class MainSceneManager : MonoBehaviour
             UIStackManager.RemoveUIOnTopWithNoTime();
         }
 
-        fogOfWarManager.ResetCloudList();
         TileMapData.Instance.ResetTileList();
+        fogOfWarManager.ResetCloudList();
 
-        AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
-
-        turnCnt = 0;
-        
-        if(stageCount % 2 == 0 && AIManager.Instance.aiPlayerCount < 6) // 짝수 번째 스테이지 일때 && AI가 6개 밑일 때
+        if (stageCount % 2 == 0 && AIManager.Instance.aiPlayerCount < 6) // 짝수 번째 스테이지 일때 && AI가 6개 밑일 때
         {
             AIManager.Instance.aiPlayerCount = 3 + (int)stageCount / 2;
         }
         mapSize++;
         stageCount++;
 
-        player.ResetPlayer();
         tilemapGenerator.GenerateNewTile();
     }
 

@@ -7,7 +7,7 @@ public class AIPlayer : PlayerScript
 {
     [SerializeField] AIData data = new AIData();
 
-    private void Start()
+    private void Awake()
     {
         TurnFinishAction += CheckIsDie;
     }
