@@ -7,8 +7,13 @@ public class GameOverPanel : MonoBehaviour
 {
     [SerializeField] Button btnMainMenu = null;
 
-    private void Start()
+    private void Awake()
     {
         btnMainMenu.onClick.AddListener(GameManager.Instance.GoMainMenu);
+    }
+
+    public void CallGameOverPanel()
+    {
+        transform.parent.gameObject.SetActive(true);
     }
 }

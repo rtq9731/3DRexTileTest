@@ -8,6 +8,7 @@ public class PanelPartSelector : MonoBehaviour
     [SerializeField] Transform unlockedPartParent = null;
     [SerializeField] GameObject infoPanelPrefab = null;
     [SerializeField] Button btnOk = null;
+    [SerializeField] Sprite noneSprite = null;
 
     public PanelMissileMaker panelMissileMaker;
 
@@ -60,6 +61,7 @@ public class PanelPartSelector : MonoBehaviour
                 break;
         }
 
+        partIcon.sprite = noneSprite;
         textPartName.text = "선택된 부품 없음";
         textPrice.text = "";
         textPartATK.text = "";
@@ -76,6 +78,8 @@ public class PanelPartSelector : MonoBehaviour
             transform.parent.gameObject.SetActive(false);
             btnOk.onClick.RemoveAllListeners();
         });
+        partIcon.sprite = MainSceneManager.Instance.GetWarheadSprite(warhead.TYPE);
+        Debug.Log(MainSceneManager.Instance.GetWarheadSprite(warhead.TYPE));
 
         textPartATK.transform.parent.gameObject.SetActive(true);
 
@@ -95,6 +99,8 @@ public class PanelPartSelector : MonoBehaviour
             transform.parent.gameObject.SetActive(false);
             btnOk.onClick.RemoveAllListeners();
         });
+        partIcon.sprite = MainSceneManager.Instance.GetEngineSprite(engine.TYPE);
+        Debug.Log(MainSceneManager.Instance.GetEngineSprite(engine.TYPE));
 
         textPartATK.transform.parent.gameObject.SetActive(false);
 
@@ -113,6 +119,8 @@ public class PanelPartSelector : MonoBehaviour
             transform.parent.gameObject.SetActive(false);
             btnOk.onClick.RemoveAllListeners();
         });
+        partIcon.sprite = MainSceneManager.Instance.GetBodySprite(body.TYPE);
+        Debug.Log(MainSceneManager.Instance.GetBodySprite(body.TYPE));
 
         textPartATK.transform.parent.gameObject.SetActive(false);
 

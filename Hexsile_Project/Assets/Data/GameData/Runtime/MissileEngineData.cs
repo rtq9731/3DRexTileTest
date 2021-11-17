@@ -35,5 +35,6 @@ public class MissileEngineData
   [SerializeField]
   string info;
   public string Info { get {return info; } set { this.info = value;} }
-  
+
+  public Sprite mySprite;
 }

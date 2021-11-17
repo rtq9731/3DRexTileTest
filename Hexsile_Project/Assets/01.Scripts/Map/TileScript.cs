@@ -115,8 +115,18 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
     {
         tilesInMoreHitRange = GetTilesCanFire(tilesInMoreHitRange);
 
+        if (tilesInMoreHitRange.Count < 1)
+        {
+            return;
+        }
+
         for (int i = 0; i < moreHitTileCnt; i++)
         {
+            if (tilesInMoreHitRange.Count < 1)
+            {
+                return;
+            }
+
             int a = i;
             TileScript randTile = tilesInMoreHitRange[UnityEngine.Random.Range(0, tilesInMoreHitRange.Count)];
 

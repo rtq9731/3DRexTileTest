@@ -19,6 +19,11 @@ public class MainSceneManager : MonoBehaviour
         return missileBody.dataList.Find(x => x.TYPE == type);
     }
 
+    public Sprite GetBodySprite(MissileTypes.MissileBody type)
+    {
+        return missileBody.dataList.Find(x => x.TYPE == type).mySprite;
+    }
+
     public BodyData GetMissileBodyByIdx(int idx)
     {
         return missileBody.dataArray[idx];
@@ -29,6 +34,11 @@ public class MainSceneManager : MonoBehaviour
         return missileWarhead.dataList.Find(x => x.TYPE == type);
     }
 
+    public Sprite GetWarheadSprite(MissileTypes.MissileWarheadType type)
+    {
+        return missileWarhead.dataList.Find(x => x.TYPE == type).mySprite;
+    }
+
     public MissileWarheadData GetWarheadByIdx(int idx)
     {
         return missileWarhead.dataArray[idx];
@@ -37,6 +47,11 @@ public class MainSceneManager : MonoBehaviour
     public MissileEngineData GetEngineData(MissileTypes.MissileEngineType type)
     {
         return missileEngine.dataList.Find(x => x.TYPE == type);
+    }
+
+    public Sprite GetEngineSprite(MissileTypes.MissileEngineType type)
+    {
+        return missileEngine.dataList.Find(x => x.TYPE == type).mySprite;
     }
 
     public MissileEngineData GetEngineDataByIdx(int idx)
@@ -66,6 +81,10 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] public PanelCurrentResearch curResearchPanel;
     [SerializeField] public PanelMissileMaker missileMakerPanel;
     [SerializeField] public HexTilemapGenerator tileGenerator;
+    [SerializeField] public StageClearPanel stageClearPanel;
+    [SerializeField] public GameOverPanel gameOverPanel;
+
+    public NoticeAttackPanel noticeAttackPanel = null;
 
     [Header("About Tile")]
     public float TileZInterval = 0.875f;
@@ -84,6 +103,7 @@ public class MainSceneManager : MonoBehaviour
 
     private void Start()
     {
+        noticeAttackPanel = FindObjectOfType<NoticeAttackPanel>();
         tilemapGenerator = FindObjectOfType<HexTilemapGenerator>();
 
         if(GameManager.Instance.LoadData() != null)
@@ -129,7 +149,6 @@ public class MainSceneManager : MonoBehaviour
             btnReroll = FindObjectOfType<BtnReroll>();
         }
 
-        Debug.Log(curSave.isRerolled);
         if (!isRerolled && turnCnt < 1)
         {
             btnReroll.ActiveReroll();
@@ -177,6 +196,7 @@ public class MainSceneManager : MonoBehaviour
         GameManager.Instance.SaveData();
 
         uiTopBar.UpdateTexts();
+        noticeAttackPanel.Refresh(AIManager.Instance.CheckAttackTurn());
         player.TurnFinishAction += CheckStageClear;
     }
 
@@ -240,7 +260,6 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public void CheckStageClear()
     {
-        Debug.Log(AIManager.Instance.aiPlayers.Find(x => !x.Data.IsGameOver));
         if (AIManager.Instance.aiPlayers.Find(x => !x.Data.IsGameOver) == null)
         {
             ClearStage();

@@ -113,9 +113,37 @@ public class AIManager : MonoBehaviour
         }
     }
 
+    public string CheckAttackTurn()
+    {
+        if (0 == curTurnCnt)
+        {
+            return $"AI가 20 턴 뒤에 공격할 예정입니다.";
+        }
+
+        if (0 < curTurnCnt && curTurnCnt <= 20)
+        {
+            if (curTurnCnt % 20 == 0)
+            {
+                return "다른 세력들이 공격합니다!!";
+            }
+
+            return $"AI가 {20 - curTurnCnt % 20} 턴 뒤에 공격할 예정입니다.";
+        }
+        else
+        {
+            if (curTurnCnt % 5 == 0)
+            {
+                return "다른 세력들이 공격합니다!!";
+            }
+
+            return $"AI가 {5 - curTurnCnt % 5} 턴 뒤에 공격할 예정입니다.";
+        }
+    }
+
     public void CheckAndAttackPlayer()
     {
         curTurnCnt++;
+        MainSceneManager.Instance.noticeAttackPanel.Refresh(CheckAttackTurn());
         if (curTurnCnt <= 20)
         {
             if (curTurnCnt % 20 == 0)
@@ -165,6 +193,7 @@ public class AIManager : MonoBehaviour
     private void AIRandAttack(AIPlayer ai)
     {
         List<TileScript> attackableTiles = new List<TileScript>();
+        ai.Data.OwningTiles = ai.Data.OwningTiles.Where(item => item != null).ToList();
 
         foreach (var itemTile in ai.OwningTiles)
         {

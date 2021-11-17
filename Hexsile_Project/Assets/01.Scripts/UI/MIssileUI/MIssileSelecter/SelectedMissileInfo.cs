@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SelectedMissileInfo : MonoBehaviour
 {
     [SerializeField] Image image;
+    [SerializeField] Sprite noneSprite = null;
     [SerializeField] Text textMissileWarheadType;
     [SerializeField] Text textMissileRange;
     [SerializeField] Text textInfoWarheadName;
@@ -18,6 +19,7 @@ public class SelectedMissileInfo : MonoBehaviour
 
     private void RefreshTextsToNull()
     {
+        image.sprite = noneSprite;
         textMissileWarheadType.text = "선택된 미사일 없음";
         textMissileRange.text = "";
         textInfoWarheadName.text = "";
@@ -26,6 +28,8 @@ public class SelectedMissileInfo : MonoBehaviour
 
     public void RefreshTexts(MissileData data)
     {
+        image.sprite = MainSceneManager.Instance.GetWarheadSprite(data.WarheadType);
+
         MissileWarheadData warheadData = MainSceneManager.Instance.GetWarheadData(data.WarheadType);
         textMissileWarheadType.text = $"장착된 미사일 탄두 : {warheadData.Name}";
         textMissileRange.text = $"미사일의 사거리 : { data.MissileRange }";

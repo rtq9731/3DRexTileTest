@@ -144,9 +144,7 @@ public class PersonPlayer : PlayerScript
         {
             if (CheckGameOver())
             {
-                playerData.IsGameOver = true;
-                gameOver.gameObject.SetActive(true);
-                TurnFinishAction = () => { };
+                MainSceneManager.Instance.gameOverPanel.CallGameOverPanel();
             }
 
         };

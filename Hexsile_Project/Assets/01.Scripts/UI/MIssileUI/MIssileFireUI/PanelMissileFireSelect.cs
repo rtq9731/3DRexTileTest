@@ -16,6 +16,8 @@ public class PanelMissileFireSelect : MonoBehaviour
     [SerializeField] PlayerInput mainInput = null;
     [SerializeField] GameObject vcamMain = null; // 둘 전부 처음에 비활성화, 꺼질때 활성화
 
+    [SerializeField] FireMissileInfo missileInfo;
+
     RaycastHit hit;
 
     InputState state = InputState.None;
@@ -154,6 +156,8 @@ public class PanelMissileFireSelect : MonoBehaviour
     {
         state = InputState.SelectStartTile;
 
+        missileInfo.UpdateFireMissileInfoToNull();
+
         tilesInRange = new List<TileScript>();
 
         this.fireMissiles = fireMissiles;
@@ -173,6 +177,7 @@ public class PanelMissileFireSelect : MonoBehaviour
     {
         TileMapData.Instance.ResetColorAllTile();
 
+        missileInfo.UpdateFireMissileInfo(missile.WarheadType);
         SetCanFireTile(startedTile, missile);
         SetCantFireTile();
 

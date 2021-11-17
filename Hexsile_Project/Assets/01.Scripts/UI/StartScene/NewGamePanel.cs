@@ -9,18 +9,21 @@ public class NewGamePanel : MonoBehaviour
     [SerializeField] Button btnNewGame;
     [SerializeField] InputField playerNameInput;
 
-    private void Start()
+    private void Awake()
     {
         btnNewGame.onClick.AddListener(() =>
         {
-            foreach (var item in GameManager.Instance.GetAllSaveFiles())
+            if(GameManager.Instance.GetAllSaveFiles() != null)
             {
-                if(item.Name.Contains(playerNameInput.text))
+                foreach (var item in GameManager.Instance.GetAllSaveFiles())
                 {
-                    playerNameInput.text = "";
-                    playerNameInput.placeholder.GetComponent<Text>().text = "! 이미 존재하는 이름입니다 !";
-                    playerNameInput.placeholder.GetComponent<Text>().color = Color.red;
-                    return;
+                    if (item.Name.Split('_')[0] == playerNameInput.text)
+                    {
+                        playerNameInput.text = "";
+                        playerNameInput.placeholder.GetComponent<Text>().text = "! 이미 존재하는 이름입니다 !";
+                        playerNameInput.placeholder.GetComponent<Text>().color = Color.red;
+                        return;
+                    }
                 }
             }
 
