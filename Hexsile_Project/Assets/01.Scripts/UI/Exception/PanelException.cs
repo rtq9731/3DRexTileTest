@@ -20,7 +20,7 @@ public class PanelException : MonoBehaviour
 
     private void Start()
     {
-        UIStackManager.Clear();
+        transform.parent.gameObject.SetActive(false);
     }
 
     private void OnDestroy()

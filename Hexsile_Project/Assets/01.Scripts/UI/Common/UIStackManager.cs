@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class UIStackManager
 {
     static Stack<GameObject> UIStack = new Stack<GameObject>();
+
+    public static void ClearUIStack()
+    {
+        SceneManager.sceneLoaded += (x, y) => UIStack = new Stack<GameObject>();
+    }
 
     public static void AddUIToStack(GameObject item)
     {

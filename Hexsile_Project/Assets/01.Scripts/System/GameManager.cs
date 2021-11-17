@@ -19,6 +19,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         filePath = Application.dataPath + "/Saves";
+        UIStackManager.ClearUIStack();
     }
 
     public void GameStart()
