@@ -19,12 +19,16 @@ public class HexObjectTileManager : MonoBehaviour
 
         foreach (var item in plainGroundObjSet)
         {
-            if(item != null)
-            objs.Add(item.GetComponent<ObjScript>());
+            if (item != null)
+                objs.Add(item.GetComponent<ObjScript>());
         }
 
         objs.Distinct();
-        TileMapData.Instance.GetAllTiles().FindAll(x => x.Data.type != (TileType.Plain | TileType.Ocean | TileType.Lake)).ForEach(x => MakeObjOnTile(x));
+        TileMapData.Instance.GetAllTiles().FindAll(x =>
+        x.Data.type != TileType.Plain ||
+        x.Data.type != TileType.Ocean ||
+        x.Data.type != TileType.Lake).
+        ForEach(x => LoadObjOnTile(x));
 
         MainSceneManager.Instance.StartLoadedGame();
     }
@@ -32,14 +36,14 @@ public class HexObjectTileManager : MonoBehaviour
     public void GenerateObjects(HexTilemapGenerator.GroundType groundType)
     {
         switch (groundType)
-        {   
+        {
             case HexTilemapGenerator.GroundType.Jungle:
                 objects = jungleGroundObjSet;
                 break;
             case HexTilemapGenerator.GroundType.Plain:
                 objects = plainGroundObjSet;
                 break;
-            case HexTilemapGenerator.GroundType.Mountain:   
+            case HexTilemapGenerator.GroundType.Mountain:
                 objects = MountainGroundObjSet;
                 break;
             default:
@@ -87,22 +91,22 @@ public class HexObjectTileManager : MonoBehaviour
         }
     }
 
-    private void MakeObjOnTile(TileScript curTile)
+    private void LoadObjOnTile(TileScript tile)
     {
-        switch (curTile.Data.type)
+        switch (tile.Data.type)
         {
             case TileType.None:
             case TileType.Ocean:
             case TileType.Lake:
             case TileType.Plain:
             case TileType.DigSite:
-                MakeObjOnTile(curTile, null);
+                MakeObjOnTile(tile, null);
                 break;
             case TileType.Forest:
-                MakeObjOnTile(curTile, objs.Find(x => x.objType == ObjType.Tree).gameObject);
+                Instantiate(objs.Find(x => x.objType == ObjType.Tree).gameObject, tile.transform);
                 break;
             case TileType.Mountain:
-                MakeObjOnTile(curTile, objs.Find(x => x.objType == ObjType.Mountain).gameObject);
+                Instantiate(objs.Find(x => x.objType == ObjType.Mountain).gameObject, tile.transform);
                 break;
             default:
                 break;

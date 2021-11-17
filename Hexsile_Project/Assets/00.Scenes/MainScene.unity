@@ -17879,7 +17879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btnSave: {fileID: 1065626697}
-  btnMenu: {fileID: 0}
+  btnMenu: {fileID: 222174337}
   btnExit: {fileID: 1517333593}
 --- !u!1 &1697139065
 GameObject:

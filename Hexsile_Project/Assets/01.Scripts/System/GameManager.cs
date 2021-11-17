@@ -45,7 +45,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void GoMainMenu()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("StartScene");
     }
 
     public void SaveData()
