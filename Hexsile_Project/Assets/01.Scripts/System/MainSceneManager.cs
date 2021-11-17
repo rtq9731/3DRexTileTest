@@ -115,29 +115,31 @@ public class MainSceneManager : MonoBehaviour
         player.PlayerData.PlayerName = GameManager.Instance.playerName;
         player.PlayerData.PlayerColor = GameManager.Instance.playerColor;
 
-        TileMapData.Instance.GetAllTiles().FindAll(x => player.PlayerData.TileNums.Contains(x.Data.tileNum)).ForEach(x => player.AddTile(x)); // 플레이어 땅 돌려주기
         AIManager.Instance.LoadStage(curSave); // AI들 땅 다시 주기
+        TileMapData.Instance.GetAllTiles().FindAll(x => player.PlayerData.TileNums.Contains(x.Data.tileNum)).ForEach(x => player.AddTile(x)); // 플레이어 땅 돌려주기
 
         mapSize = curSave.mapSize;
         stageCount = curSave.stageCount;
         turnCnt = curSave.turnCnt;
         AIManager.Instance.aiPlayerCount = curSave.aiPlayerCount;
+        isRerolled = curSave.isRerolled;
 
         if (btnReroll == null)
         {
             btnReroll = FindObjectOfType<BtnReroll>();
         }
 
-        isRerolled = curSave.isRerolled;
         if (!isRerolled && turnCnt < 1)
         {
             btnReroll.ActiveReroll();
             player.TurnFinishAction += btnReroll.RemoveReroll;
         }
-
+        else
+        {
+            btnReroll.RemoveReroll();
+        }
 
         uiTopBar.UpdateTexts();
-        player.TurnFinishAction += CheckStageClear;
     }
 
     /// <summary>
@@ -150,15 +152,13 @@ public class MainSceneManager : MonoBehaviour
         AIManager.Instance.aiPlayers.ForEach(x => x.ResetPlayer());
         player.ResetPlayer();
 
-        turnCnt = 0;
-
         player.PlayerData.PlayerName = GameManager.Instance.playerName;
         player.PlayerData.PlayerColor = GameManager.Instance.playerColor;
 
         AIManager.Instance.StartStage(mapSize);
         player.AddTile(TileMapData.Instance.GetTile(0)); // 무조건 중앙땅은 플레이어꺼
 
-        if(btnReroll == null)
+        if (btnReroll == null)
         {
             btnReroll = FindObjectOfType<BtnReroll>();
         }
@@ -191,6 +191,8 @@ public class MainSceneManager : MonoBehaviour
         }
         mapSize++;
         stageCount++;
+
+        turnCnt = 0;
 
         tilemapGenerator.GenerateNewTile();
     }
@@ -226,7 +228,7 @@ public class MainSceneManager : MonoBehaviour
     /// <summary>
     /// 스테이지 클리어를 체크합니다
     /// </summary>
-    private void CheckStageClear()
+    public void CheckStageClear()
     {
         if (AIManager.Instance.aiPlayers.Find(x => !x.Data.IsGameOver) == null)
         {

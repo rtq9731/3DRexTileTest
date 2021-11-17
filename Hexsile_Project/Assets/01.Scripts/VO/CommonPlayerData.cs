@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,11 +40,12 @@ public abstract class CommonPlayerData : ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
-        if(owningTiles.Count < 1)
+        if (owningTiles.Count < 1 || owningTiles == null)
         {
             tileNums = new int[] { };
         }
 
+        owningTiles = owningTiles.Where(item => item != null).ToList();
         List<int> list = new List<int>();
         owningTiles.ForEach(x => list.Add(x.Data.tileNum));
         tileNums = list.ToArray();

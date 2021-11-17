@@ -7,11 +7,6 @@ public class AIPlayer : PlayerScript
 {
     [SerializeField] AIData data = new AIData();
 
-    private void Awake()
-    {
-        TurnFinishAction += CheckIsDie;
-    }
-
     public AIData Data
     {
         get { return data; } set { data = value; }
@@ -37,7 +32,7 @@ public class AIPlayer : PlayerScript
         tile.ChangeOwner(this);
     }
 
-    private void CheckIsDie()
+    public void CheckIsDie()
     {
         data.OwningTiles = data.OwningTiles.Where(item => item != null).ToList();
         if (data.OwningTiles.Count < 1)

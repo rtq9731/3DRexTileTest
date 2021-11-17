@@ -115,7 +115,10 @@ public class PersonPlayer : PlayerScript
             TurnFinishAction += ResearchOnTurnFinish;
         }
     }
-
+    
+    /// <summary>
+    /// 플레이어에 있는 TurnFinishAction 초기화 및 데이터 초기화
+    /// </summary>
     public override void ResetPlayer()
     {
         playerData = new MainPlayerData();

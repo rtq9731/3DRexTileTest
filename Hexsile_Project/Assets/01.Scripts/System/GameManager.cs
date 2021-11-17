@@ -73,6 +73,9 @@ public class GameManager : MonoSingleton<GameManager>
         {
             sw.Write(dataString);
         }
+
+        if(FindObjectOfType<TextNoticeSave>())
+            FindObjectOfType<TextNoticeSave>().Saved();
     }
 
     public void DeleteFile(SaveData save)

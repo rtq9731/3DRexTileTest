@@ -93,6 +93,8 @@ public class HexObjectTileManager : MonoBehaviour
 
     private void LoadObjOnTile(TileScript tile)
     {
+
+        MainSceneManager.Instance.fogOfWarManager.GenerateCloudOnTile(tile);
         switch (tile.Data.type)
         {
             case TileType.None:
@@ -100,7 +102,6 @@ public class HexObjectTileManager : MonoBehaviour
             case TileType.Lake:
             case TileType.Plain:
             case TileType.DigSite:
-                MakeObjOnTile(tile, null);
                 break;
             case TileType.Forest:
                 Instantiate(objs.Find(x => x.objType == ObjType.Tree).gameObject, tile.transform);
