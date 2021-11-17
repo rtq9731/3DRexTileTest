@@ -200,6 +200,7 @@ public class PersonPlayer : PlayerScript
             tile.ChangeOwner(this);
         }
 
+        OwningTiles = OwningTiles.Distinct().ToList();
         MainSceneManager.Instance.fogOfWarManager.RemoveCloudOnTile(tile);
         List<TileScript> tilesInRange = MainSceneManager.Instance.tileChecker.FindTilesInRange(tile, 1);
 

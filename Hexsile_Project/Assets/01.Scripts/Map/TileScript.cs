@@ -187,8 +187,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
             }
             owner = newOwner;
 
-            owner.OwningTiles.Add(this);
-            owner.TurnFinishAction += TurnFinish;
+            if(!owner.OwningTiles.Contains(this))
+            {
+                owner.OwningTiles.Add(this);
+                owner.TurnFinishAction += TurnFinish;
+            }
         }
         else if(newOwner == null)
         {

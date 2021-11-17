@@ -160,6 +160,7 @@ public class MainSceneManager : MonoBehaviour
         }
 
         uiTopBar.UpdateTexts();
+        noticeAttackPanel.Refresh(AIManager.Instance.CheckAttackTurn());
         player.TurnFinishAction += CheckStageClear;
     }
 
