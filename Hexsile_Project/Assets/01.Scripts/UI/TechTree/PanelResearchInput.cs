@@ -32,7 +32,7 @@ public class PanelResearchInput : MonoBehaviour
         switch (data.Type)
         {
             case ResearchType.Warhead:
-                MissileWarheadData warheadData = MainSceneManager.Instance.GetWarheadByIdx(data.ResearchThingIdx);
+                MissileWarheadData warheadData = MainSceneManager.Instance.GetWarheadByIdx(data.Idx);
                 textResearchName.text = warheadData.Name;
                 textWeight.text = $"ÅºµÎ ¹«°Ô : {warheadData.Weight}";
                 textDamage.text = $"ÅºµÎ °ø°Ý·Â : {warheadData.Atk}";

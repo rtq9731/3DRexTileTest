@@ -83,7 +83,7 @@ public class TechNode : MonoBehaviour
         switch (data.Type)
         {
             case ResearchType.Warhead:
-                if (player.UnlockedWarheadIdx.Contains(data.ResearchThingIdx))
+                if (player.UnlockedWarheadIdx.Contains(data.Idx))
                 {
                     PanelException.CallPopupPanl("이미 끝난 탄두 연구입니다!", () => { });
                     return;
@@ -122,6 +122,6 @@ public class TechNode : MonoBehaviour
         }
 
         player.CurResearchData = data;
-        MainSceneManager.Instance.curResearchPanel.SetTexts(data, icon);
+        MainSceneManager.Instance.curResearchPanel.SetTexts(player.CurResearchData, icon);
     }
 }

@@ -93,7 +93,7 @@ public class PersonPlayer : PlayerScript
             switch (value.Type)
             {
                 case ResearchType.Warhead:
-                    if (playerData.UnlockedEngineIdx.Contains(value.ResearchThingIdx))
+                    if (playerData.UnlockedWarheadIdx.Contains(value.Idx))
                         return;
                     break;
                 case ResearchType.Engine:

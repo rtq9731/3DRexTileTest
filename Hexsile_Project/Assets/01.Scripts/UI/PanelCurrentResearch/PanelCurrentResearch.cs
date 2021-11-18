@@ -51,7 +51,6 @@ public class PanelCurrentResearch : MonoBehaviour
     {
         researchIcon.sprite = icon;
 
-        Debug.Log(skill.TurnForResearch + " " + skill.ResearchInfo);
         textResearchName.text = $"현재 연구중 : {skill.ResearchInfo}";
         textResearchComplete.text = $"연구 완료까지 {MainSceneManager.Instance.GetPlayer().ResearchFinishTurn} 턴";
         textNowResearchStatus.text = $"현재 연구중인 항목이 {MainSceneManager.Instance.GetPlayer().ResearchFinishTurn} 턴 후 완료";
