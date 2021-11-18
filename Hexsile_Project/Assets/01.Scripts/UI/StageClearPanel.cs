@@ -24,6 +24,6 @@ public class StageClearPanel : MonoBehaviour
 
         transform.parent.gameObject.SetActive(true);
         btnNextStage.onClick.AddListener(() => callBack());
-        btnNextStage.onClick.AddListener(() => gameObject.SetActive(false));
+        btnNextStage.onClick.AddListener(() => transform.parent.gameObject.SetActive(false));
     }
 }
