@@ -9,7 +9,7 @@ using Cinemachine;
 public class PanelMissileFireSelect : MonoBehaviour
 {
     [SerializeField] LayerMask whereIsTile;
-    [SerializeField] Text text; 
+    [SerializeField] Text text;
     [SerializeField] CinemachineVirtualCamera vcamLookMissile = null;
     [SerializeField] GameObject vcamSelectFire = null;
 
@@ -32,12 +32,12 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     private void OnDisable()
     {
-        if(fireMissiles.Count >= 1)
+        if (fireMissiles.Count >= 1)
         {
             foreach (var item in fireMissiles)
             {
                 if (!MainSceneManager.Instance.GetPlayer().MissileReadyToShoot.Contains(item))
-                MainSceneManager.Instance.GetPlayer().MissileReadyToShoot.Add(item);
+                    MainSceneManager.Instance.GetPlayer().MissileReadyToShoot.Add(item);
             }
         }
 
@@ -46,7 +46,7 @@ public class PanelMissileFireSelect : MonoBehaviour
             TileMapData.Instance.ResetColorAllTile();
         }
 
-        if(vcamSelectFire != null)
+        if (vcamSelectFire != null)
         {
             vcamSelectFire.gameObject.SetActive(false);
         }
@@ -56,12 +56,12 @@ public class PanelMissileFireSelect : MonoBehaviour
             vcamMain.SetActive(true);
         }
 
-        if(mainInput != null)
+        if (mainInput != null)
         {
             mainInput.enabled = true;
         }
 
-        if(startedTile != null)
+        if (startedTile != null)
         {
             startedTile.transform.position = startedTile.Data.Position;
         }
@@ -71,15 +71,16 @@ public class PanelMissileFireSelect : MonoBehaviour
 
     private void Update()
     {
-        if(bStopGetInput)
+        if (bStopGetInput)
         {
             return;
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             UIStackManager.RemoveUIOnTop();
         }
+
 
         switch (state)
         {
@@ -98,7 +99,7 @@ public class PanelMissileFireSelect : MonoBehaviour
                 break;
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Camera.main.farClipPlane, whereIsTile))
             {
@@ -115,7 +116,6 @@ public class PanelMissileFireSelect : MonoBehaviour
                                 UIStackManager.RemoveUIOnTop();
                                 return;
                             }
-
                             startedTile = tile;
                             tile.transform.DOMoveY(tile.transform.position.y + 0.3f, 0.5f);
 
@@ -128,9 +128,6 @@ public class PanelMissileFireSelect : MonoBehaviour
                             {
                                 SetTargetAndFire(fireMissiles[0], tile);
                             }
-                            break;
-                        case InputState.Finish:
-                            UIStackManager.RemoveUIOnTop();
                             break;
                         default:
                             break;
@@ -281,6 +278,16 @@ public class PanelMissileFireSelect : MonoBehaviour
         vcamLookMissile.transform.position = vcamSelectFire.transform.position;
 
         vcamSelectFire.GetComponent<CameraMove>().enabled = true;
+
+        if (state == InputState.SelectTargetTile) // 다음 공격 타일을 선택하기전, 정말 미사일을 쏠 수 있는지 판단 및 미사일 정보 새로고침
+        {
+            if (MainSceneManager.Instance.tileChecker.FindTilesInRange(startedTile, fireMissiles[0].MissileRange).Find(x => isTileCanFire(x)) == null)
+            {
+                state = InputState.Finish;
+            }
+
+            missileInfo.UpdateFireMissileInfo(fireMissiles[0].WarheadType);
+        }
     }
 
     enum InputState
