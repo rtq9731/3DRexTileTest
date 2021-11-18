@@ -195,6 +195,11 @@ public class TileScript : MonoBehaviour, ITurnFinishObj
         }
         else if(newOwner == null)
         {
+            if (owner == null)
+            {
+                return;
+            }
+
             owner.OwningTiles.Remove(this);
 
             if (owner != MainSceneManager.Instance.GetPlayer()) // 만약 AI라면

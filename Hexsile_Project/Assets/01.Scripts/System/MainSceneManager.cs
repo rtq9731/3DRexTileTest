@@ -225,7 +225,7 @@ public class MainSceneManager : MonoBehaviour
         turnCnt = 0;
         isRerolled = false;
 
-        tilemapGenerator.GenerateNewTile();
+        tilemapGenerator.GenerateNewTileOnClear();
     }
 
     /// <summary>
