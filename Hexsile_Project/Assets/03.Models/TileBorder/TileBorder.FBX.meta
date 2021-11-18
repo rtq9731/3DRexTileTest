@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a599c2fe0c2adc74d8729a28575a6e78
+guid: 805001811660d1a4aa30036f59f3d854
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -13,7 +13,7 @@ ModelImporter:
       name: HexagonsShared
     second: {fileID: 2100000, guid: 029ffff663bcaf64cbb2c02c3c27ea3e, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
